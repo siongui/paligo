@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-const localeDir = "../common/locale"
+const localeDir = "locale"
 const htmlTemplateDir = "theme/template"
 const tipitakaURL = "http://tipitaka.sutta.org/"
 
