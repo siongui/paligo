@@ -9,6 +9,8 @@ import (
 const localeDir = "locale"
 const htmlTemplateDir = "theme/template"
 const tipitakaURL = "http://tipitaka.sutta.org/"
+const bookCSV = "data/dictionary/dict-books.csv"
+const outBookJSON = "website/bookIdAndInfos.json"
 
 func main() {
 	action := flag.String("action", "", "What kind of action?")
@@ -43,5 +45,9 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
+	}
+
+	if *action == "parsebooks" {
+		dicutil.ParseDictionayBookCSV(bookCSV, outBookJSON)
 	}
 }

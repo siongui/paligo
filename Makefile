@@ -18,8 +18,6 @@ LOCALE_DIR=../common/locale
 DATA_REPO_DIR=$(CURDIR)/data
 DICTIONARY_DATA_DIR=$(DATA_REPO_DIR)/dictionary
 
-BOOK_JSON_PATH=$(WEBSITE_DIR)/bookIdAndInfos.json
-
 
 devserver: fmt html js scss
 	@# http://stackoverflow.com/a/5947779
@@ -61,10 +59,6 @@ symlink:
 	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
 	@go run setup/dicsetup.go -action=symlink -isdev=true
 
-blobgo:
-	@echo "\033[92mGenerating blob data to be used in client-side/browser ...\033[0m"
-	@go run setup/setuppath.go setup/createblob.go -input=$(BOOK_JSON_PATH)
-
 succinct_trie:
 	@echo "\033[92mBuilding Succinct Trie ...\033[0m"
 	@go run setup/setuppath.go setup/buildSuccinctTrie.go -input=$(WEBSITE_JSON_DIR)
@@ -79,7 +73,7 @@ parsewords: dir
 
 parsebooks: dir
 	@echo "\033[92mParse Dictionary Books Information ...\033[0m"
-	@go run setup/setuplib.go setup/parsebooks.go -dic=$(DICTIONARY_DATA_DIR) -output=$(BOOK_JSON_PATH)
+	@go run setup/dicsetup.go -action=parsebooks
 
 dir:
 	@echo "\033[92mCreate website directory if not exists ...\033[0m"
