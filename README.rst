@@ -38,7 +38,6 @@ Set Up Development Environment
    - Go_
    -  GopherJS_
    - `go-libsass`_
-   - gojianfan_
    - `go-succinct-trie`_
    - `go-online-pali-ime`_
    - `gopherjs-i18n`_
@@ -113,7 +112,6 @@ References
 .. _UNLICENSE: http://unlicense.org/
 .. _GopherJS: http://www.gopherjs.org/
 .. _go-libsass: https://github.com/wellington/go-libsass
-.. _gojianfan: https://github.com/siongui/gojianfan
 .. _go-succinct-trie: https://github.com/siongui/go-succinct-data-structure-trie
 .. _go-online-pali-ime: https://github.com/siongui/go-online-input-method-pali
 .. _gopherjs-i18n: https://github.com/siongui/gopherjs-i18n

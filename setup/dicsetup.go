@@ -10,7 +10,10 @@ const localeDir = "locale"
 const htmlTemplateDir = "theme/template"
 const tipitakaURL = "http://tipitaka.sutta.org/"
 const bookCSV = "data/dictionary/dict-books.csv"
+const wordCSV1 = "data/dictionary/dict_words_1.csv"
+const wordCSV2 = "data/dictionary/dict_words_2.csv"
 const outBookJSON = "website/bookIdAndInfos.json"
+const wordJsonDir = "website/json/"
 
 func main() {
 	action := flag.String("action", "", "What kind of action?")
@@ -49,5 +52,9 @@ func main() {
 
 	if *action == "parsebooks" {
 		dicutil.ParseDictionayBookCSV(bookCSV, outBookJSON)
+	}
+
+	if *action == "parsewords" {
+		dicutil.ParseDictionayWordCSV(wordCSV1, wordCSV2, wordJsonDir)
 	}
 }

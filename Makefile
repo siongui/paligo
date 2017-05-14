@@ -69,7 +69,7 @@ po2json:
 
 parsewords: dir
 	@echo "\033[92mParse Dictionary Words ...\033[0m"
-	@go run setup/setuplib.go setup/parsewords.go -dic=$(DICTIONARY_DATA_DIR) -outputdir=$(WEBSITE_JSON_DIR)
+	@go run setup/dicsetup.go -action=parsewords
 
 parsebooks: dir
 	@echo "\033[92mParse Dictionary Books Information ...\033[0m"
@@ -90,7 +90,7 @@ clone_pali_data:
 	@git clone https://github.com/siongui/data.git $(DATA_REPO_DIR) --depth=1
 
 
-install: lib_pali lib_gojianfan lib_go_libsass lib_succinct_trie lib_ime_pali lib_gopherjs_i18n lib_gopherjs lib_gopherjs_input_suggest
+install: lib_pali lib_go_libsass lib_succinct_trie lib_ime_pali lib_gopherjs_i18n lib_gopherjs lib_gopherjs_input_suggest
 
 
 lib_gopherjs:
@@ -100,10 +100,6 @@ lib_gopherjs:
 lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
 	go get -u github.com/siongui/gopalilib/dicutil
-
-lib_gojianfan:
-	@echo "\033[92mInstalling gojianfan (Traditional and Simplified Chinese Conversion) ...\033[0m"
-	go get -u github.com/siongui/gojianfan
 
 lib_go_libsass: lib_normalize_css
 	@echo "\033[92mInstalling libsass and its Go binding ...\033[0m"
