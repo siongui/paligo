@@ -12,7 +12,6 @@ const websiteDir = "website"
 const localeDir = "locale"
 const poDomain = "messages"
 const htmlTemplateDir = "theme/template"
-const tipitakaURL = "http://tipitaka.sutta.org/"
 
 const bookCSV = "data/dictionary/dict-books.csv"
 const wordCSV1 = "data/dictionary/dict_words_1.csv"
@@ -36,7 +35,7 @@ func main() {
 		if *isdev {
 			sroot = "website"
 		}
-		err := dicutil.SymlinkToRootIndexHtml("website/json", sroot)
+		err := dicutil.SymlinkToRootIndexHtml(wordJsonDir, sroot)
 		if err != nil {
 			panic(err)
 		}
