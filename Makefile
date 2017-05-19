@@ -13,7 +13,7 @@ WEBSITE_DIR=website
 WEBSITE_JSON_DIR=$(WEBSITE_DIR)/json
 PRODUCTION_GITHUB_REPO=github.com/siongui/pali-dictionary
 PRODUCTION_DIR=src/$(PRODUCTION_GITHUB_REPO)
-LOCALE_DIR=../common/locale
+LOCALE_DIR=locale
 
 DATA_REPO_DIR=$(CURDIR)/data
 DICTIONARY_DATA_DIR=$(DATA_REPO_DIR)/dictionary
@@ -65,7 +65,7 @@ succinct_trie:
 
 po2json:
 	@echo "\033[92mConverting PO files to JSON (to be used in client-side/browser) ...\033[0m"
-	@go run setup/setuppath.go setup/po2json.go
+	@go run setup/dicsetup.go -action=po2json
 
 parsewords: dir
 	@echo "\033[92mParse Dictionary Words ...\033[0m"

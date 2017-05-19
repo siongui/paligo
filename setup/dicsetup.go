@@ -2,18 +2,29 @@ package main
 
 import (
 	"flag"
-	"github.com/siongui/gopalilib/dicutil"
 	"os"
+
+	"github.com/siongui/gopalilib/dicutil"
+	"github.com/siongui/gopherjs-i18n/tool"
 )
 
+const websiteDir = "website"
 const localeDir = "locale"
+const poDomain = "messages"
 const htmlTemplateDir = "theme/template"
 const tipitakaURL = "http://tipitaka.sutta.org/"
+
 const bookCSV = "data/dictionary/dict-books.csv"
 const wordCSV1 = "data/dictionary/dict_words_1.csv"
 const wordCSV2 = "data/dictionary/dict_words_2.csv"
-const outBookJSON = "website/bookIdAndInfos.json"
-const wordJsonDir = "website/json/"
+
+const outBookJSON = websiteDir + "/bookIdAndInfos.json"
+const wordJsonDir = websiteDir + "/json/"
+
+//const trieDataPath = WebsiteDir + "/strie.txt"
+//const trieNodeCountPath = WebsiteDir + "/strie_node_count.txt"
+//const rankDirectoryDataPath = WebsiteDir + "/rd.txt"
+const poJsonPath = websiteDir + "/po.json"
 
 func main() {
 	action := flag.String("action", "", "What kind of action?")
@@ -56,5 +67,9 @@ func main() {
 
 	if *action == "parsewords" {
 		dicutil.ParseDictionayWordCSV(wordCSV1, wordCSV2, wordJsonDir)
+	}
+
+	if *action == "po2json" {
+		po2json.PO2JSON(poDomain, localeDir, poJsonPath)
 	}
 }
