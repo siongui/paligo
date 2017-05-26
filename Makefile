@@ -5,7 +5,7 @@ export GOROOT=$(realpath ../go)
 export GOPATH=$(realpath .)
 export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 
-GO_VERSION=1.8
+GO_VERSION=1.8.3
 
 SCSS_DIR=theme/styling
 SCSS_PATH=$(SCSS_DIR)/style.scss
@@ -159,8 +159,8 @@ update_ubuntu:
 
 download_go:
 	@echo "\033[92mDownloading and Installing Go ...\033[0m"
-	@cd ../../ ; wget https://storage.googleapis.com/golang/go$(GO_VERSION).linux-amd64.tar.gz
-	@cd ../../ ; tar xvzf go$(GO_VERSION).linux-amd64.tar.gz
+	@cd ../ ; wget https://storage.googleapis.com/golang/go$(GO_VERSION).linux-amd64.tar.gz
+	@cd ../ ; tar xvzf go$(GO_VERSION).linux-amd64.tar.gz
 
 clone_production_github_repo:
 	@echo "\033[92mClone $(PRODUCTION_GITHUB_REPO) ...\033[0m"

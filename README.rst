@@ -8,7 +8,7 @@ language.
 Development Environment:
 
   - `Ubuntu 17.04`_
-  - `Go 1.8.1`_
+  - `Go 1.8.3`_
 
 
 Set Up Development Environment
@@ -105,7 +105,7 @@ References
 .. _Pāli Tipiṭaka: http://tipitaka.sutta.org/
 .. _Go: https://golang.org/
 .. _Ubuntu 17.04: http://releases.ubuntu.com/17.04/
-.. _Go 1.8.1: https://golang.org/dl/
+.. _Go 1.8.3: https://golang.org/dl/
 .. _git clone: https://www.google.com/search?q=git+clone
 .. _pali repository: https://github.com/siongui/pali
 .. _data repository: https://github.com/siongui/data
