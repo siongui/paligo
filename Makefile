@@ -55,25 +55,25 @@ html:
 	@# Google Search: shell stdout to file
 	@go run setup/dicsetup.go -action=html -isdev=true > $(WEBSITE_DIR)/index.html
 
-symlink:
-	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
-	@go run setup/dicsetup.go -action=symlink -isdev=true
-
-succinct_trie:
-	@echo "\033[92mBuilding Succinct Trie ...\033[0m"
-	@go run setup/setuppath.go setup/buildSuccinctTrie.go -input=$(WEBSITE_JSON_DIR)
-
-po2json:
-	@echo "\033[92mConverting PO files to JSON (to be used in client-side/browser) ...\033[0m"
-	@go run setup/dicsetup.go -action=po2json
+parsebooks: dir
+	@echo "\033[92mParse Dictionary Books Information ...\033[0m"
+	@go run setup/dicsetup.go -action=parsebooks
 
 parsewords: dir
 	@echo "\033[92mParse Dictionary Words ...\033[0m"
 	@go run setup/dicsetup.go -action=parsewords
 
-parsebooks: dir
-	@echo "\033[92mParse Dictionary Books Information ...\033[0m"
-	@go run setup/dicsetup.go -action=parsebooks
+po2json:
+	@echo "\033[92mConverting PO files to JSON (to be used in client-side/browser) ...\033[0m"
+	@go run setup/dicsetup.go -action=po2json
+
+succinct_trie:
+	@echo "\033[92mBuilding Succinct Trie ...\033[0m"
+	@go run setup/dicsetup.go -action=triebuild
+
+symlink:
+	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
+	@go run setup/dicsetup.go -action=symlink -isdev=true
 
 dir:
 	@echo "\033[92mCreate website directory if not exists ...\033[0m"
@@ -90,7 +90,7 @@ clone_pali_data:
 	@git clone https://github.com/siongui/data.git $(DATA_REPO_DIR) --depth=1
 
 
-install: lib_pali lib_go_libsass lib_succinct_trie lib_ime_pali lib_gopherjs_i18n lib_gopherjs lib_gopherjs_input_suggest
+install: lib_pali lib_go_libsass lib_ime_pali lib_gopherjs_i18n lib_gopherjs lib_gopherjs_input_suggest
 
 
 lib_gopherjs:
@@ -108,10 +108,6 @@ lib_go_libsass: lib_normalize_css
 lib_normalize_css:
 	@echo "\033[92mInstalling Normalize.css ...\033[0m"
 	@[ -e $(SCSS_DIR)/_normalize500.scss ] || wget -O $(SCSS_DIR)/_normalize500.scss https://necolas.github.io/normalize.css/5.0.0/normalize.css
-
-lib_succinct_trie:
-	@echo "\033[92mInstalling Go Succinct Trie library ...\033[0m"
-	go get -u github.com/siongui/go-succinct-data-structure-trie
 
 lib_ime_pali:
 	@echo "\033[92mInstalling Online Go Pāli IME ...\033[0m"
