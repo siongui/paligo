@@ -12,7 +12,7 @@ install:
 script:
   - mkdir -p ${WEBSITE_DIR}
   - go run setup/dicsetup.go -action=html -isdev=true > ${WEBSITE_DIR}/index.html
-  - wget -O $(SCSS_DIR)/_normalize500.scss https://necolas.github.io/normalize.css/5.0.0/normalize.css
+  - wget -O ${SCSS_DIR}/_normalize500.scss https://necolas.github.io/normalize.css/5.0.0/normalize.css
   - go run setup/scss.go -scsspath=${SCSS_PATH} -scssdir=${SCSS_DIR} -csspath=${WEBSITE_DIR}/style.css
   - gopherjs build gopherjs/*.go -o ${WEBSITE_DIR}/pali.js
 env:
