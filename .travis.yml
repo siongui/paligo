@@ -10,7 +10,7 @@ install:
   - go get github.com/siongui/paliDataVFS
   - go get github.com/gopherjs/gopherjs
 script:
-  - mkdir -p $(WEBSITE_DIR)
+  - mkdir -p ${WEBSITE_DIR}
   - go run setup/dicsetup.go -action=html -isdev=true > ${WEBSITE_DIR}/index.html
   - go run setup/scss.go -scsspath=${SCSS_PATH} -scssdir=${SCSS_DIR} -csspath=${WEBSITE_DIR}/style.css
   - gopherjs build gopherjs/*.go -o ${WEBSITE_DIR}/pali.js
@@ -18,4 +18,4 @@ env:
   global:
     - WEBSITE_DIR=website
     - SCSS_DIR=theme/styling
-    - SCSS_PATH=$(SCSS_DIR)/style.scss
+    - SCSS_PATH=${SCSS_DIR}/style.scss
