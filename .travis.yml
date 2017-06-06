@@ -15,6 +15,7 @@ script:
   - go run setup/scss.go -scsspath=$(SCSS_PATH) -scssdir=$(SCSS_DIR) -csspath=$(WEBSITE_DIR)/style.css
   - gopherjs build gopherjs/*.go -o $(WEBSITE_DIR)/pali.js
 env:
-  - WEBSITE_DIR=website
-  - SCSS_DIR=theme/styling
-  - SCSS_PATH=$(SCSS_DIR)/style.scss
+  global:
+    - WEBSITE_DIR=website
+    - SCSS_DIR=theme/styling
+    - SCSS_PATH=$(SCSS_DIR)/style.scss
