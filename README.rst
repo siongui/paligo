@@ -2,6 +2,9 @@
 `Pāli Dictionary`_ and `Pāli Tipiṭaka`_
 =======================================
 
+.. image:: https://travis-ci.org/siongui/paligo.png?branch=master
+    :target: https://travis-ci.org/siongui/paligo
+
 Re-implementation of `Pāli Dictionary`_ and `Pāli Tipiṭaka`_ in Go_ programming
 language.
 
