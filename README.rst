@@ -40,12 +40,13 @@ Set Up Development Environment
 2. Update Ubuntu and install following packages:
 
    - Go_
-   -  GopherJS_
+   - gopalilib_
    - `go-libsass`_
    - `go-online-pali-ime`_
    - `gopherjs-i18n`_
    - `gopherjs-input-suggest`_
-   - gopalilib_
+   - paliDataVFS_
+   -  GopherJS_
 
    |
 
@@ -135,3 +136,4 @@ References
 .. _gopherjs-i18n: https://github.com/siongui/gopherjs-i18n
 .. _gopherjs-input-suggest: https://github.com/siongui/gopherjs-input-suggest
 .. _gopalilib: https://github.com/siongui/gopalilib
+.. _paliDataVFS: https://github.com/siongui/paliDataVFS
