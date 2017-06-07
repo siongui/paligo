@@ -90,7 +90,7 @@ clone_pali_data:
 	@git clone https://github.com/siongui/data.git $(DATA_REPO_DIR) --depth=1
 
 
-install: lib_pali lib_go_libsass lib_ime_pali lib_gopherjs_i18n lib_gopherjs lib_gopherjs_input_suggest
+install: lib_pali lib_go_libsass lib_ime_pali lib_gopherjs_i18n lib_gopherjs_input_suggest lib_paliDataVFS lib_gopherjs
 
 
 lib_gopherjs:
