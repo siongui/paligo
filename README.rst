@@ -13,6 +13,8 @@ Development Environment:
   - `Ubuntu 17.04`_
   - `Go 1.8.3`_
 
+Re-implementation of `Pāli Dictionary`_ is almost finished. `Pāli Tipiṭaka`_ not
+yet.
 
 Set Up Development Environment
 ++++++++++++++++++++++++++++++
@@ -60,20 +62,6 @@ Set Up Development Environment
 
    .. code-block:: bash
 
-     # optional: parse dictionary books
-     $ make parsebooks
-
-     $ make parsewords
-
-     # optional: convert po files to json
-     $ make po2json
-
-     # optional: build succinct trie
-     $ make succinct_trie
-
-     # optional: create blob
-     $ make blobgo
-
      $ make po2mo
      $ make html
      $ make scss
@@ -85,6 +73,36 @@ Set Up Development Environment
    .. code-block:: bash
 
      $ make devserver
+
+
+Deploy to GitHub Pages
+++++++++++++++++++++++
+
+See
+
+- `.travis.yml <.travis.yml>`_
+- `GitHub Pages Deployment - Travis CI <https://docs.travis-ci.com/user/deployment/pages/>`_
+
+
+Offline Data Processing (Optional)
+++++++++++++++++++++++++++++++++++
+
+.. code-block:: bash
+
+  # optional: parse dictionary books
+  $ make parsebooks
+
+  $ make parsewords
+
+  # optional: convert po files to json
+  $ make po2json
+
+  # optional: build succinct trie
+  $ make succinct_trie
+
+  # optional: create VFS (embed data in front-end Go code)
+  $ make lib_fileb0x
+  $ make vfsbuild
 
 
 UNLICENSE
