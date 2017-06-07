@@ -28,13 +28,12 @@ Set Up Development Environment
      $ mkdir ~/dev
      # enter workspace
      $ cd ~/dev
-     # git clone pali repository
-     $ git clone https://github.com/siongui/pali.git --depth=1
+     # git clone paligo repository
+     $ git clone https://github.com/siongui/paligo.git --depth=1
      # or clone with full depth
-     #$ git clone https://github.com/siongui/pali.git
-     # enter directory of Go implementation
-     $ cd ~/dev/pali/go
+     #$ git clone https://github.com/siongui/paligo.git
      # git clone data repository
+     $ cd ~/dev/paligo
      $ make clone_pali_data
 
 
@@ -52,7 +51,7 @@ Set Up Development Environment
 
    .. code-block:: bash
 
-     $ cd ~/dev/pali/go
+     $ cd ~/dev/paligo
      $ make update_ubuntu
      $ make download_go
      $ make install
