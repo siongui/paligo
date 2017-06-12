@@ -4,3 +4,4 @@ pkg/
 src/
 website/
 theme/styling/_normalize500.scss
+*.mo

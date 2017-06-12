@@ -63,6 +63,7 @@ Set Up Development Environment
    .. code-block:: bash
 
      $ make po2mo
+     $ make dir
      $ make html
      $ make scss
      $ make js
