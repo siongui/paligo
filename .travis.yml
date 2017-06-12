@@ -9,3 +9,12 @@ script:
   - make html
   - make scss
   - make js
+  - make cname
+deploy:
+  provider: pages
+  repo: siongui/pali-dictionary
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: website
+  on:
+    branch: master

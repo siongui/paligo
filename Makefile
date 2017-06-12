@@ -26,27 +26,17 @@ devserver: fmt html js scss
 	@echo "\033[92mDevelopment Server Running ...\033[0m"
 	@go run server.go
 
-production: clone_production_github_repo
-	@echo "\033[92mGit checkout gh-pages ...\033[0m"
-	cd $(PRODUCTION_DIR); git checkout gh-pages; rm -rf *
-	@echo "\033[92mGenerating HTML ...\033[0m"
-	@go run setup/dicsetup.go -action=html > $(PRODUCTION_DIR)/index.html
-	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
-	@go run setup/dicsetup.go -action=symlink
-	@echo "\033[92mGenerating JavaScript ...\033[0m"
-	gopherjs build gopherjs/*.go -m -o $(PRODUCTION_DIR)/pali.js
-	@echo "\033[92mGenerating CSS ...\033[0m"
-	@go run setup/scss.go -scsspath=$(SCSS_PATH) -scssdir=$(SCSS_DIR) -csspath=$(PRODUCTION_DIR)/style.css
+cname:
 	@echo "\033[92mCreate CNAME for GitHub Pages custom domain ...\033[0m"
-	@echo "dictionary.online-dhamma.net" > $(PRODUCTION_DIR)/CNAME
-	@echo "\033[92mPush to Remote Repo ...\033[0m"
-	@# Google Search: makefile change directory
-	@# http://stackoverflow.com/questions/1789594/how-to-write-cd-command-in-makefile
-	cd $(PRODUCTION_DIR); git add .; git commit -m "update site"; git push
+	@echo "dictionary.online-dhamma.net" > $(WEBSITE_DIR)/CNAME
 
 js:
 	@echo "\033[92mGenerating JavaScript ...\033[0m"
+ifdef TRAVIS
+	@gopherjs build gopherjs/*.go -m -o $(WEBSITE_DIR)/pali.js
+else
 	@gopherjs build gopherjs/*.go -o $(WEBSITE_DIR)/pali.js
+endif
 
 scss:
 	@echo "\033[92mGenerating CSS ...\033[0m"
@@ -55,7 +45,12 @@ scss:
 html:
 	@echo "\033[92mGenerating HTML ...\033[0m"
 	@# Google Search: shell stdout to file
+ifdef TRAVIS
+	@go run setup/dicsetup.go -action=html > $(WEBSITE_DIR)/index.html
+else
 	@go run setup/dicsetup.go -action=html -isdev=true > $(WEBSITE_DIR)/index.html
+endif
+
 
 parsebooks: dir
 	@echo "\033[92mParse Dictionary Books Information ...\033[0m"
@@ -75,7 +70,7 @@ succinct_trie:
 
 symlink:
 	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
-	@go run setup/dicsetup.go -action=symlink -isdev=true
+	@go run setup/dicsetup.go -action=symlink
 
 dir:
 	@echo "\033[92mCreate website directory if not exists ...\033[0m"
@@ -158,8 +153,3 @@ download_go:
 	@echo "\033[92mDownloading and Installing Go ...\033[0m"
 	@cd ../ ; wget https://storage.googleapis.com/golang/go$(GO_VERSION).linux-amd64.tar.gz
 	@cd ../ ; tar xvzf go$(GO_VERSION).linux-amd64.tar.gz
-
-clone_production_github_repo:
-	@echo "\033[92mClone $(PRODUCTION_GITHUB_REPO) ...\033[0m"
-	rm -rf $(PRODUCTION_DIR)
-	git clone https://$(PRODUCTION_GITHUB_REPO).git $(PRODUCTION_DIR) --depth=1

@@ -32,11 +32,7 @@ func main() {
 	flag.Parse()
 
 	if *action == "symlink" {
-		sroot := "src/github.com/siongui/pali-dictionary"
-		if *isdev {
-			sroot = "website"
-		}
-		err := dicutil.SymlinkToRootIndexHtml(wordJsonDir, sroot)
+		err := dicutil.SymlinkToRootIndexHtml(wordJsonDir, websiteDir)
 		if err != nil {
 			panic(err)
 		}
