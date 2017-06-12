@@ -1,9 +1,11 @@
 # cannot use relative path in GOROOT, otherwise 6g not found. For example,
 #   export GOROOT=../go  (=> 6g not found)
 # it is also not allowed to use relative path in GOPATH
-export GOROOT=$(realpath ../go)
-export GOPATH=$(realpath .)
-export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
+ifndef TRAVIS
+	export GOROOT=$(realpath ../go)
+	export GOPATH=$(realpath .)
+	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
+endif
 
 GO_VERSION=1.8.3
 
@@ -92,11 +94,6 @@ clone_pali_data:
 
 install: lib_pali lib_go_libsass lib_ime_pali lib_gopherjs_i18n lib_gopherjs_input_suggest lib_paliDataVFS lib_gopherjs
 
-
-lib_gopherjs:
-	@echo "\033[92mInstalling GopherJS ...\033[0m"
-	go get -u github.com/gopherjs/gopherjs
-
 lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
 	go get -u github.com/siongui/gopalilib/dicutil
@@ -117,10 +114,6 @@ lib_gopherjs_i18n:
 	@echo "\033[92mInstalling GopherJS gettext library (online/client-side)...\033[0m"
 	go get -u github.com/siongui/gopherjs-i18n
 
-lib_fileb0x:
-	@echo "\033[92mInstalling tool for Making VFS in Code ...\033[0m"
-	go get -u github.com/UnnoTed/fileb0x
-
 lib_paliDataVFS:
 	@echo "\033[92mInstalling VFS for fullstack Go ...\033[0m"
 	go get -u github.com/siongui/paliDataVFS
@@ -128,6 +121,14 @@ lib_paliDataVFS:
 lib_gopherjs_input_suggest:
 	@echo "\033[92mInstalling GopherJS input suggest library ...\033[0m"
 	go get -u github.com/siongui/gopherjs-input-suggest
+
+lib_gopherjs:
+	@echo "\033[92mInstalling GopherJS ...\033[0m"
+	go get -u github.com/gopherjs/gopherjs
+
+lib_fileb0x:
+	@echo "\033[92mInstalling tool for Making VFS in Code ...\033[0m"
+	go get -u github.com/UnnoTed/fileb0x
 
 vfsbuild:
 	@echo "\033[92mBuilding VFS (paliDataVFS) package ...\033[0m"

@@ -2,31 +2,10 @@ language: go
 go:
   - 1.8.3
 install:
-  - go get github.com/siongui/gopalilib/dicutil
-  - go get github.com/wellington/go-libsass
-  - go get github.com/siongui/go-online-input-method-pali
-  - go get github.com/siongui/gopherjs-i18n
-  - go get github.com/siongui/gopherjs-input-suggest
-  - go get github.com/siongui/paliDataVFS
-  - go get github.com/gopherjs/gopherjs
+  - make install
 script:
-  - echo -e "\033[92mmsgfmt PO to MO ...\033[0m"
-  - msgfmt ${LOCALE_DIR}/zh_TW/LC_MESSAGES/messages.po -o ${LOCALE_DIR}/zh_TW/LC_MESSAGES/messages.mo
-  - msgfmt ${LOCALE_DIR}/vi_VN/LC_MESSAGES/messages.po -o ${LOCALE_DIR}/vi_VN/LC_MESSAGES/messages.mo
-  - msgfmt ${LOCALE_DIR}/fr_FR/LC_MESSAGES/messages.po -o ${LOCALE_DIR}/fr_FR/LC_MESSAGES/messages.mo
-  - echo -e "\033[92mCreate website directory if not exists ...\033[0m"
-  - mkdir -p ${WEBSITE_DIR}
-  - echo -e "\033[92mGenerating HTML ...\033[0m"
-  - go run setup/dicsetup.go -action=html -isdev=true > ${WEBSITE_DIR}/index.html
-  - echo -e "\033[92mFetching Normalize.css ...\033[0m"
-  - wget -O ${SCSS_DIR}/_normalize500.scss https://necolas.github.io/normalize.css/5.0.0/normalize.css
-  - echo -e "\033[92mGenerating CSS ...\033[0m"
-  - go run setup/scss.go -scsspath=${SCSS_PATH} -scssdir=${SCSS_DIR} -csspath=${WEBSITE_DIR}/style.css
-  - echo -e "\033[92mGenerating JavaScript ...\033[0m"
-  - gopherjs build gopherjs/*.go -o ${WEBSITE_DIR}/pali.js
-env:
-  global:
-    - WEBSITE_DIR=website
-    - SCSS_DIR=theme/styling
-    - SCSS_PATH=${SCSS_DIR}/style.scss
-    - LOCALE_DIR=locale
+  - make po2mo
+  - make dir
+  - make html
+  - make scss
+  - make js

@@ -82,6 +82,7 @@ See
 
 - `.travis.yml <.travis.yml>`_
 - `GitHub Pages Deployment - Travis CI <https://docs.travis-ci.com/user/deployment/pages/>`_
+- `Environment Variables - Travis CI <https://docs.travis-ci.com/user/environment-variables/>`_
 
 
 Offline Data Processing (Optional)
