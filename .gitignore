@@ -3,5 +3,5 @@ bin/
 pkg/
 src/
 website/
-theme/styling/_normalize500.scss
+theme/styling/_normalize700.scss
 *.mo

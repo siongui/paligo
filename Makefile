@@ -7,7 +7,7 @@ ifndef TRAVIS
 	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 endif
 
-GO_VERSION=1.8.3
+GO_VERSION=1.9.2
 
 SCSS_DIR=theme/styling
 SCSS_PATH=$(SCSS_DIR)/style.scss
@@ -99,7 +99,7 @@ lib_go_libsass: lib_normalize_css
 
 lib_normalize_css:
 	@echo "\033[92mInstalling Normalize.css ...\033[0m"
-	@[ -e $(SCSS_DIR)/_normalize500.scss ] || wget -O $(SCSS_DIR)/_normalize500.scss https://necolas.github.io/normalize.css/5.0.0/normalize.css
+	@[ -e $(SCSS_DIR)/_normalize700.scss ] || wget -O $(SCSS_DIR)/_normalize700.scss https://necolas.github.io/normalize.css/7.0.0/normalize.css
 
 lib_ime_pali:
 	@echo "\033[92mInstalling Online Go Pāli IME ...\033[0m"

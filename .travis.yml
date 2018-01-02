@@ -1,6 +1,6 @@
 language: go
 go:
-  - 1.8.3
+  - 1.9.2
 install:
   - make install
 script:
@@ -10,6 +10,7 @@ script:
   - make scss
   - make js
   - make cname
+  - make symlink
 deploy:
   provider: pages
   repo: siongui/pali-dictionary
