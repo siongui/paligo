@@ -13,8 +13,9 @@
   {{template "navbar" .}}
   {{template "setting" .}}
 <div class="container">
+  <div class="loader">{{gettext "Loading"}}</div>
   <input id="word" type="text" autofocus="autofocus" tabindex="1"
-         placeholder="{{gettext "Input Pāli Word"}}">
+         placeholder="{{gettext "Input Pāli Word"}}" class="invisible">
   <div id="main-content"></div>
   {{template "ime" .}}
 </div>

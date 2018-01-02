@@ -71,10 +71,18 @@ func main() {
 	input := Document.GetElementById("word")
 	input.AddEventListener("keyup", handleInputKeyUp)
 	Document.AddEventListener("keyup", func(e Event) {
+		// TAB: keyCode = 9
 		if e.KeyCode() == 9 {
 			if !input.IsFocused() {
 				input.Focus()
 			}
 		}
+	})
+
+	// Hide loader and show input element while website is fully loaded.
+	Window.Call("addEventListener", "load", func(e Event) {
+		l := Document.QuerySelector(".loader")
+		l.ClassList().Add("invisible")
+		input.ClassList().Remove("invisible")
 	})
 }
