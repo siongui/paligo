@@ -40,10 +40,10 @@ func main() {
 
 	if *action == "html" {
 		data := dicutil.TemplateData{
-			SiteUrl:     "http://dictionary.online-dhamma.net",
+			SiteUrl:     "https://dictionary.online-dhamma.net",
 			TipitakaURL: "http://tipitaka.online-dhamma.net",
 			OgImage:     "https://upload.wikimedia.org/wikipedia/commons/d/df/Dharma_Wheel.svg",
-			OgUrl:       "http://dictionary.online-dhamma.net/",
+			OgUrl:       "https://dictionary.online-dhamma.net/",
 			OgLocale:    "en_US",
 		}
 

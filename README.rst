@@ -10,8 +10,9 @@ language.
 
 Development Environment:
 
-  - `Ubuntu 17.04`_
-  - `Go 1.8.3`_
+  - `Ubuntu 18.04`_
+  - `Go 1.10.2`_
+  - `GopherJS 1.10-4`_
 
 Re-implementation of `Pāli Dictionary`_ is almost finished. `Pāli Tipiṭaka`_ not
 yet.
@@ -126,8 +127,9 @@ References
 .. _Pāli Dictionary: https://siongui.github.io/pali-dictionary/
 .. _Pāli Tipiṭaka: http://tipitaka.sutta.org/
 .. _Go: https://golang.org/
-.. _Ubuntu 17.04: http://releases.ubuntu.com/17.04/
-.. _Go 1.8.3: https://golang.org/dl/
+.. _Ubuntu 18.04: http://releases.ubuntu.com/18.04/
+.. _Go 1.10.2: https://golang.org/dl/
+.. _GopherJS 1.10-4: https://github.com/gopherjs/gopherjs/commit/8dffc02ea1cb8398bb73f30424697c60fcf8d4c5
 .. _git clone: https://www.google.com/search?q=git+clone
 .. _pali repository: https://github.com/siongui/pali
 .. _data repository: https://github.com/siongui/data
