@@ -1,6 +1,8 @@
 package main
 
 import (
+	"strings"
+
 	imepali "github.com/siongui/go-online-input-method-pali"
 	bits "github.com/siongui/go-succinct-data-structure-trie"
 	. "github.com/siongui/godom"
@@ -32,7 +34,9 @@ func handleInputKeyUp(e Event) {
 	switch keycode := e.KeyCode(); keycode {
 	case 13:
 		// user press enter key
-		w := e.Target().Value()
+		raw := e.Target().Value()
+		raw = strings.TrimSpace(raw)
+		w := strings.ToLower(raw)
 		e.Target().Blur()
 		go httpGetWordJson(w)
 	default:
