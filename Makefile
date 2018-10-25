@@ -7,7 +7,7 @@ ifndef TRAVIS
 	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 endif
 
-GO_VERSION=1.9.2
+GO_VERSION=1.11.1
 
 SCSS_DIR=theme/styling
 SCSS_PATH=$(SCSS_DIR)/style.scss
