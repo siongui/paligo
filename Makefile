@@ -2,12 +2,12 @@
 #   export GOROOT=../go  (=> 6g not found)
 # it is also not allowed to use relative path in GOPATH
 ifndef TRAVIS
-	export GOROOT=$(realpath ../go)
+	export GOROOT=$(realpath ../go1.12.9)
 	export GOPATH=$(realpath .)
 	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 endif
 
-GO_VERSION=1.11.1
+GO_VERSION=1.12.9
 
 SCSS_DIR=theme/styling
 SCSS_PATH=$(SCSS_DIR)/style.scss
