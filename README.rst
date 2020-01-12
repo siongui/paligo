@@ -129,7 +129,6 @@ References
 .. _Go: https://golang.org/
 .. _Ubuntu 19.10: http://releases.ubuntu.com/19.10/
 .. _Go 1.12.9: https://golang.org/dl/
-.. _GopherJS: https://github.com/gopherjs/gopherjs/commit/9d188e94fb998051e72e8726cd5f7d168658e529
 .. _git clone: https://www.google.com/search?q=git+clone
 .. _pali repository: https://github.com/siongui/pali
 .. _data repository: https://github.com/siongui/data
