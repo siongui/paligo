@@ -2,6 +2,10 @@ package main
 
 import (
 	"flag"
+	"io/ioutil"
+	"os"
+	"path"
+	"strings"
 
 	"github.com/siongui/goef"
 	"github.com/siongui/gopalilib/dicutil"
@@ -32,7 +36,22 @@ func main() {
 	}
 
 	if *action == "buildvfs" {
-		err := goef.GenerateGoPackagePlainTextWithMaxFileSize("gopaliwordvfs", wordJsonDir, vfsDir, 31000000)
+		files, err := ioutil.ReadDir(wordJsonDir)
+		if err != nil {
+			panic(err)
+		}
+
+		for _, file := range files {
+			if strings.HasSuffix(file.Name(), ".json") {
+				oldpath := path.Join(wordJsonDir, file.Name())
+				newpath := path.Join(wordJsonDir, file.Name()[0:len(file.Name())-5])
+				err = os.Rename(oldpath, newpath)
+				if err != nil {
+					panic(err)
+				}
+			}
+		}
+		err = goef.GenerateGoPackagePlainTextWithMaxFileSize("gopaliwordvfs", wordJsonDir, vfsDir, 31000000)
 		if err != nil {
 			panic(err)
 		}

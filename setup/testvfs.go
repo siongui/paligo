@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	b, err := vfs.ReadFile("sacca.json")
+	b, err := vfs.ReadFile("sacca")
 	if err != nil {
 		panic(err)
 	}
