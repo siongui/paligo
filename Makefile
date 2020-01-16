@@ -99,7 +99,7 @@ lib_go_libsass: lib_normalize_css
 
 lib_normalize_css:
 	@echo "\033[92mInstalling Normalize.css ...\033[0m"
-	@[ -e $(SCSS_DIR)/_normalize700.scss ] || wget -O $(SCSS_DIR)/_normalize700.scss https://necolas.github.io/normalize.css/7.0.0/normalize.css
+	@[ -e $(SCSS_DIR)/_normalize801.scss ] || wget -O $(SCSS_DIR)/_normalize801.scss https://necolas.github.io/normalize.css/8.0.1/normalize.css
 
 lib_ime_pali:
 	@echo "\033[92mInstalling Online Go Pāli IME ...\033[0m"
