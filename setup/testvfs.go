@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"path"
 
 	vfs "github.com/siongui/gopaliwordvfs"
@@ -18,6 +19,7 @@ func main() {
 		panic(err)
 	}
 
+	total := 0
 	for i, file := range files {
 		bVfs, err := vfs.ReadFile(file.Name())
 		if err != nil {
@@ -34,5 +36,21 @@ func main() {
 		}
 
 		fmt.Println(i, file.Name(), "ok")
+		total++
+	}
+
+	filenames := vfs.MapKeys()
+	if len(filenames) == total {
+		fmt.Println("total number of json file correct")
+	} else {
+		panic("total number of json files not correct")
+	}
+	for _, filename := range filenames {
+		p := path.Join(wordJsonDir, filename)
+		if _, err := os.Stat(p); err == nil {
+			fmt.Println(p, "exist")
+		} else {
+			panic(p)
+		}
 	}
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path"
@@ -41,6 +42,7 @@ func main() {
 			panic(err)
 		}
 
+		i := 0
 		for _, file := range files {
 			if strings.HasSuffix(file.Name(), ".json") {
 				oldpath := path.Join(wordJsonDir, file.Name())
@@ -49,7 +51,11 @@ func main() {
 				if err != nil {
 					panic(err)
 				}
+				fmt.Println(i, "convert", oldpath, "to", newpath)
+			} else {
+				fmt.Println(i, "unchanged", file.Name())
 			}
+			i++
 		}
 		err = goef.GenerateGoPackagePlainTextWithMaxFileSize("gopaliwordvfs", wordJsonDir, vfsDir, 31000000)
 		if err != nil {
