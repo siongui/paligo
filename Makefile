@@ -70,6 +70,7 @@ succinct_trie:
 
 symlink:
 	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
+	@echo "" > $(WEBSITE_DIR)/.nojekyll
 	@go run setup/dicsetup.go -action=symlink
 
 dir:
