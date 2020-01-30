@@ -32,7 +32,7 @@ func main() {
 	flag.Parse()
 
 	if *action == "symlink" {
-		err := dicutil.SymlinkToRootIndexHtml(wordJsonDir, websiteDir)
+		err := dicutil.SymlinkToRootIndexHtml(websiteDir)
 		if err != nil {
 			panic(err)
 		}
