@@ -95,7 +95,7 @@ clone_pali_data:
 	@git clone https://github.com/siongui/data.git $(DATA_REPO_DIR) --depth=1
 
 
-install: lib_pali lib_go_libsass lib_ime_pali lib_gopherjs_i18n lib_gopherjs_input_suggest lib_paliDataVFS lib_gopherjs install_gettext
+install: lib_pali lib_go_libsass lib_ime_pali lib_gopherjs_i18n lib_gopherjs_input_suggest lib_paliDataVFS lib_gopherjs
 
 lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
@@ -128,10 +128,6 @@ lib_gopherjs_input_suggest:
 lib_gopherjs:
 	@echo "\033[92mInstalling GopherJS ...\033[0m"
 	go get -u github.com/gopherjs/gopherjs
-
-install_gettext:
-	@echo "\033[92mInstalling GNU Internationalization utilities ...\033[0m"
-	sudo apt-get -y install gettext
 
 twpo2cn:
 	@echo "\033[92mConverting zh_TW PO files to zh_CN ...\033[0m"

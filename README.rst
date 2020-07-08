@@ -41,7 +41,7 @@ Set Up Development Environment
      $ make clone_pali_data
 
 
-2. Update Ubuntu and install following packages:
+2. Update Ubuntu and install necessary packages:
 
    - Go_
    - gopalilib_
@@ -60,6 +60,7 @@ Set Up Development Environment
      $ make update_ubuntu
      $ make download_go
      $ make install
+     $ sudo apt-get install gettext
 
 
 3. Set up data of this project:
