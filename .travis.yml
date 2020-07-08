@@ -1,6 +1,11 @@
+dist: bionic
 language: go
 go:
-  - 1.12.9
+  - 1.12.17
+addons:
+  apt:
+    packages:
+    - gettext
 install:
   - make install
 script:

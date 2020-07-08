@@ -2,7 +2,7 @@
 `Pāli Dictionary`_ and `Pāli Tipiṭaka`_
 =======================================
 
-.. image:: https://travis-ci.org/siongui/paligo.png?branch=master
+.. image:: https://travis-ci.org/siongui/paligo.svg?branch=master
     :target: https://travis-ci.org/siongui/paligo
 
 Re-implementation of `Pāli Dictionary`_ and `Pāli Tipiṭaka`_ in Go_ programming
@@ -10,8 +10,8 @@ language.
 
 Development Environment:
 
-  - `Ubuntu 19.10`_
-  - `Go 1.12.9`_
+  - `Ubuntu 20.04`_
+  - `Go 1.12.17`_
   - GopherJS_
 
 Re-implementation of `Pāli Dictionary`_ is almost finished. `Pāli Tipiṭaka`_ not
@@ -104,8 +104,8 @@ Offline Data Processing (Optional)
   $ make succinct_trie
 
   # optional: create VFS (embed data in front-end Go code)
-  $ make lib_fileb0x
-  $ make vfsbuild
+  #TODO: doc to build all pali words package using goef
+  #TODO: doc to embed data except pali words
 
 
 UNLICENSE
@@ -127,8 +127,8 @@ References
 .. _Pāli Dictionary: https://siongui.github.io/pali-dictionary/
 .. _Pāli Tipiṭaka: http://tipitaka.sutta.org/
 .. _Go: https://golang.org/
-.. _Ubuntu 19.10: http://releases.ubuntu.com/19.10/
-.. _Go 1.12.9: https://golang.org/dl/
+.. _Ubuntu 20.04: https://releases.ubuntu.com/20.04/
+.. _Go 1.12.17: https://golang.org/dl/
 .. _git clone: https://www.google.com/search?q=git+clone
 .. _pali repository: https://github.com/siongui/pali
 .. _data repository: https://github.com/siongui/data

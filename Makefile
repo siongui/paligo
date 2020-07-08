@@ -1,13 +1,12 @@
 # cannot use relative path in GOROOT, otherwise 6g not found. For example,
 #   export GOROOT=../go  (=> 6g not found)
 # it is also not allowed to use relative path in GOPATH
+GO_VERSION=1.12.17
 ifndef TRAVIS
-	export GOROOT=$(realpath ../go1.12.9)
+	export GOROOT=$(realpath ../go$(GO_VERSION))
 	export GOPATH=$(realpath .)
 	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 endif
-
-GO_VERSION=1.12.9
 
 SCSS_DIR=theme/styling
 SCSS_PATH=$(SCSS_DIR)/style.scss
@@ -88,7 +87,7 @@ clone_pali_data:
 	@git clone https://github.com/siongui/data.git $(DATA_REPO_DIR) --depth=1
 
 
-install: lib_pali lib_go_libsass lib_ime_pali lib_gopherjs_i18n lib_gopherjs_input_suggest lib_paliDataVFS lib_gopherjs
+install: lib_pali lib_go_libsass lib_ime_pali lib_gopherjs_i18n lib_gopherjs_input_suggest lib_paliDataVFS lib_gopherjs install_gettext
 
 lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
@@ -122,13 +121,9 @@ lib_gopherjs:
 	@echo "\033[92mInstalling GopherJS ...\033[0m"
 	go get -u github.com/gopherjs/gopherjs
 
-lib_fileb0x:
-	@echo "\033[92mInstalling tool for Making VFS in Code ...\033[0m"
-	go get -u github.com/UnnoTed/fileb0x
-
-vfsbuild:
-	@echo "\033[92mBuilding VFS (paliDataVFS) package ...\033[0m"
-	fileb0x vfsb0x.yaml
+install_gettext:
+	@echo "\033[92mInstalling GNU Internationalization utilities ...\033[0m"
+	sudo apt-get -y install gettext
 
 twpo2cn:
 	@echo "\033[92mConverting zh_TW PO files to zh_CN ...\033[0m"
@@ -152,5 +147,6 @@ update_ubuntu:
 
 download_go:
 	@echo "\033[92mDownloading and Installing Go ...\033[0m"
-	@cd ../ ; wget https://storage.googleapis.com/golang/go$(GO_VERSION).linux-amd64.tar.gz
-	@cd ../ ; tar xvzf go$(GO_VERSION).linux-amd64.tar.gz
+	@#cd ../ ; wget https://storage.googleapis.com/golang/go$(GO_VERSION).linux-amd64.tar.gz
+	@#cd ../ ; wget https://golang.org/dl/go$(GO_VERSION).linux-amd64.tar.gz
+	@cd ../ ; mkdir go$(GO_VERSION) ; tar -C go$(GO_VERSION) -xvzf go$(GO_VERSION).linux-amd64.tar.gz ; mv go$(GO_VERSION)/go/* go$(GO_VERSION)/
