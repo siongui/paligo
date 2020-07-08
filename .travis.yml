@@ -5,6 +5,11 @@ go:
 addons:
   apt:
     packages:
+    - wget
+    - make
+    - git
+    - gcc
+    - g++
     - gettext
 install:
   - make install

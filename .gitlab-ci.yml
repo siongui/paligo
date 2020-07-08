@@ -20,7 +20,7 @@ pages:
   - make html
   - make scss
   - make js
-  #- make symlink
+  - make symlink
   - mv website/ public/
   - "echo -e 'User-agent: *\nDisallow: /' > public/robots.txt"
   artifacts:

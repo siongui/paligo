@@ -9,6 +9,7 @@ ifdef_any_of = $(filter-out undefined,$(foreach v,$(1),$(origin $(v))))
 
 GO_VERSION=1.12.17
 ifndef TRAVIS
+	# set environment variables on local machine or GitLab CI
 	export GOROOT=$(realpath ./go)
 	export GOPATH=$(realpath .)
 	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)

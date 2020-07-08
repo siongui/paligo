@@ -24,6 +24,14 @@ Set Up Development Environment
 ++++++++++++++++++++++++++++++
 
 
+1. Update Ubuntu and install packages for development:
+
+   .. code-block:: bash
+
+     $ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
+     $ sudo apt-get install wget make git gcc g++ gettext
+
+
 1. `git clone`_ the `pali repository`_ and `data repository`_:
 
    .. code-block:: bash
@@ -41,7 +49,7 @@ Set Up Development Environment
      $ make clone_pali_data
 
 
-2. Update Ubuntu and install necessary packages:
+2. Install necessary packages:
 
    - Go_
    - gopalilib_
@@ -57,10 +65,8 @@ Set Up Development Environment
    .. code-block:: bash
 
      $ cd ~/dev/paligo
-     $ make update_ubuntu
      $ make download_go
      $ make install
-     $ sudo apt-get install gettext
 
 
 3. Set up data of this project:
