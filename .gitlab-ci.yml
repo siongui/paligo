@@ -7,7 +7,7 @@ pages:
   script:
   # https://stackoverflow.com/a/58072486
   - apt-get update
-  - apt-get install -y wget
+  - apt-get install -y wget make
   - make clone_pali_data
   - make download_go
   - make install
