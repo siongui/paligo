@@ -51,12 +51,7 @@ scss:
 html:
 	@echo "\033[92mGenerating HTML ...\033[0m"
 	@# Google Search: shell stdout to file
-# ifdef TRAVIS || GITLAB_CI
-ifneq ($(call ifdef_any_of,TRAVIS GITLAB_CI),)
 	@go run setup/dicsetup.go -action=html > $(WEBSITE_DIR)/index.html
-else
-	@go run setup/dicsetup.go -action=html -isdev=true > $(WEBSITE_DIR)/index.html
-endif
 
 
 parsebooks: dir

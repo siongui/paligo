@@ -28,7 +28,6 @@ const poJsonPath = websiteDir + "/po.json"
 
 func main() {
 	action := flag.String("action", "", "What kind of action?")
-	isdev := flag.Bool("isdev", false, "Is development?")
 	flag.Parse()
 
 	if *action == "symlink" {
@@ -40,15 +39,20 @@ func main() {
 
 	if *action == "html" {
 		data := dicutil.TemplateData{
-			SiteUrl:     "https://dictionary.online-dhamma.net",
+			SiteUrl:     "",
 			TipitakaURL: "http://tipitaka.online-dhamma.net",
 			OgImage:     "https://upload.wikimedia.org/wikipedia/commons/d/df/Dharma_Wheel.svg",
 			OgUrl:       "https://dictionary.online-dhamma.net/",
 			OgLocale:    "en_US",
 		}
 
-		if *isdev {
-			data.SiteUrl = ""
+		_, travis := os.LookupEnv("TRAVIS")
+		if travis {
+			data.SiteUrl = "https://dictionary.online-dhamma.net"
+		}
+		_, gitlab := os.LookupEnv("GITLAB_CI")
+		if gitlab {
+			data.SiteUrl = "https://siongui.gitlab.io/pali-dictionary"
 		}
 
 		err := dicutil.CreateHTML(os.Stdout, "index.html", &data, localeDir, htmlTemplateDir)
