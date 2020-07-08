@@ -5,6 +5,9 @@
 .. image:: https://travis-ci.org/siongui/paligo.svg?branch=master
     :target: https://travis-ci.org/siongui/paligo
 
+.. image:: https://gitlab.com/siongui/pali-dictionary/badges/master/pipeline.svg
+    :target: https://gitlab.com/siongui/pali-dictionary/-/commits/master
+
 Re-implementation of `Pāli Dictionary`_ and `Pāli Tipiṭaka`_ in Go_ programming
 language.
 

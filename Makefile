@@ -1,9 +1,15 @@
 # cannot use relative path in GOROOT, otherwise 6g not found. For example,
 #   export GOROOT=../go  (=> 6g not found)
 # it is also not allowed to use relative path in GOPATH
+
+# Complex conditions check in Makefile
+# https://stackoverflow.com/a/5586785
+ifndef_any_of = $(filter undefined,$(foreach v,$(1),$(origin $(v))))
+ifdef_any_of = $(filter-out undefined,$(foreach v,$(1),$(origin $(v))))
+
 GO_VERSION=1.12.17
 ifndef TRAVIS
-	export GOROOT=$(realpath ../go$(GO_VERSION))
+	export GOROOT=$(realpath ./go)
 	export GOPATH=$(realpath .)
 	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 endif
@@ -31,7 +37,8 @@ cname:
 
 js:
 	@echo "\033[92mGenerating JavaScript ...\033[0m"
-ifdef TRAVIS
+# ifdef TRAVIS || GITLAB_CI
+ifneq ($(call ifdef_any_of,TRAVIS GITLAB_CI),)
 	@gopherjs build gopherjs/*.go -m -o $(WEBSITE_DIR)/pali.js
 else
 	@gopherjs build gopherjs/*.go -o $(WEBSITE_DIR)/pali.js
@@ -44,7 +51,8 @@ scss:
 html:
 	@echo "\033[92mGenerating HTML ...\033[0m"
 	@# Google Search: shell stdout to file
-ifdef TRAVIS
+# ifdef TRAVIS || GITLAB_CI
+ifneq ($(call ifdef_any_of,TRAVIS GITLAB_CI),)
 	@go run setup/dicsetup.go -action=html > $(WEBSITE_DIR)/index.html
 else
 	@go run setup/dicsetup.go -action=html -isdev=true > $(WEBSITE_DIR)/index.html
@@ -138,8 +146,8 @@ po2mo:
 
 clean:
 	@echo "\033[92mClean Repo ...\033[0m"
-	@#rm -rf bin pkg src data website
-	rm -rf bin pkg src website
+	@#rm -rf bin pkg src data $(WEBSITE_DIR)
+	rm -rf bin pkg src $(WEBSITE_DIR)
 
 update_ubuntu:
 	@echo "\033[92mUpdating Ubuntu ...\033[0m"
@@ -147,6 +155,7 @@ update_ubuntu:
 
 download_go:
 	@echo "\033[92mDownloading and Installing Go ...\033[0m"
-	@#cd ../ ; wget https://storage.googleapis.com/golang/go$(GO_VERSION).linux-amd64.tar.gz
-	@cd ../ ; wget https://golang.org/dl/go$(GO_VERSION).linux-amd64.tar.gz
-	@cd ../ ; mkdir go$(GO_VERSION) ; tar -C go$(GO_VERSION) -xvzf go$(GO_VERSION).linux-amd64.tar.gz ; mv go$(GO_VERSION)/go/* go$(GO_VERSION)/
+	@#wget https://storage.googleapis.com/golang/go$(GO_VERSION).linux-amd64.tar.gz
+	@wget https://golang.org/dl/go$(GO_VERSION).linux-amd64.tar.gz
+	@tar -xvzf go$(GO_VERSION).linux-amd64.tar.gz
+	@rm go$(GO_VERSION).linux-amd64.tar.gz

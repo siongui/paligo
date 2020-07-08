@@ -5,3 +5,4 @@ src/
 website/
 theme/styling/_normalize801.scss
 *.mo
+go/
