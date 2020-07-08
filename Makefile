@@ -148,5 +148,5 @@ update_ubuntu:
 download_go:
 	@echo "\033[92mDownloading and Installing Go ...\033[0m"
 	@#cd ../ ; wget https://storage.googleapis.com/golang/go$(GO_VERSION).linux-amd64.tar.gz
-	@#cd ../ ; wget https://golang.org/dl/go$(GO_VERSION).linux-amd64.tar.gz
+	@cd ../ ; wget https://golang.org/dl/go$(GO_VERSION).linux-amd64.tar.gz
 	@cd ../ ; mkdir go$(GO_VERSION) ; tar -C go$(GO_VERSION) -xvzf go$(GO_VERSION).linux-amd64.tar.gz ; mv go$(GO_VERSION)/go/* go$(GO_VERSION)/

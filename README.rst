@@ -132,7 +132,7 @@ References
 .. _git clone: https://www.google.com/search?q=git+clone
 .. _pali repository: https://github.com/siongui/pali
 .. _data repository: https://github.com/siongui/data
-.. _UNLICENSE: http://unlicense.org/
+.. _UNLICENSE: https://unlicense.org/
 .. _GopherJS: http://www.gopherjs.org/
 .. _go-libsass: https://github.com/wellington/go-libsass
 .. _go-online-pali-ime: https://github.com/siongui/go-online-input-method-pali
