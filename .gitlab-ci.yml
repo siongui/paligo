@@ -5,6 +5,10 @@ image: ubuntu:latest
 pages:
   stage: deploy
   script:
+  # https://rtfm.co.ua/en/docker-configure-tzdata-and-timezone-during-build/
+  # https://askubuntu.com/a/1098881
+  - export TZ=Asia/Taipei
+  - ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
   # https://stackoverflow.com/a/58072486
   - apt-get update
   - apt-get install -y wget make git gcc gettext
