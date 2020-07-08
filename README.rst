@@ -32,7 +32,7 @@ Set Up Development Environment
      $ sudo apt-get install wget make git gcc g++ gettext
 
 
-1. `git clone`_ the `pali repository`_ and `data repository`_:
+2. `git clone`_ the `pali repository`_ and `data repository`_:
 
    .. code-block:: bash
 
@@ -49,7 +49,7 @@ Set Up Development Environment
      $ make clone_pali_data
 
 
-2. Install necessary packages:
+3. Install necessary packages:
 
    - Go_
    - gopalilib_
@@ -69,7 +69,7 @@ Set Up Development Environment
      $ make install
 
 
-3. Set up data of this project:
+4. Set up data of this project:
 
    .. code-block:: bash
 
@@ -80,7 +80,7 @@ Set Up Development Environment
      $ make js
 
 
-4. Run development server at http://localhost:8000/
+5. Run development server at http://localhost:8000/
 
    .. code-block:: bash
 
@@ -93,8 +93,16 @@ Deploy to GitHub Pages
 See
 
 - `.travis.yml <.travis.yml>`_
+- `setup/dicsetup.go <setup/dicsetup.go>`_ (set SiteUrl)
 - `GitHub Pages Deployment - Travis CI <https://docs.travis-ci.com/user/deployment/pages/>`_
 - `Environment Variables - Travis CI <https://docs.travis-ci.com/user/environment-variables/>`_
+
+
+Deploy to GitLab Pages
+++++++++++++++++++++++
+
+See `.gitlab-ci.yml <.gitlab-ci.yml>`_ and
+`setup/dicsetup.go <setup/dicsetup.go>`_ (set SiteUrl)
 
 
 Offline Data Processing (Optional)
