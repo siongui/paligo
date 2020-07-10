@@ -141,6 +141,23 @@ References
 
 .. [3] `old implementation of Pāli Dictionary <http://dictionary.sutta.org/>`_
 
+.. [4] | Home Screen Icon on Android/iPhone & PWA support
+       | `website icon on android home screen - Google search <https://www.google.com/search?q=website+icon+on+android+home+screen>`_
+       | `Tutorial: Home Screen Icons | Responsive Web Design Training Tutorial | Webucator <https://www.webucator.com/tutorial/developing-mobile-websites/home-screen-icons.cfm>`_
+       | `pwa manifest - Google search <https://www.google.com/search?q=pwa+manifest>`_
+       | `WebPageTest - Website Performance and Optimization Test <https://www.webpagetest.org/>`_
+
+.. [5] | `Add single page application support for Github pages · Issue #408 · isaacs/github · GitHub <https://github.com/isaacs/github/issues/408>`_
+       | `GitHub - rafgraph/spa-github-pages: Host single page apps with GitHub Pages <https://github.com/rafgraph/spa-github-pages>`_
+       | `S(GH)PA: The Single-Page App Hack For GitHub Pages — Smashing Magazine <https://www.smashingmagazine.com/2016/08/sghpa-single-page-app-hack-github-pages/>`_
+       | `GitHub - dmsnell/gh-pages-404-redirect: Can I use a custom 404 handler on GitHub pages to host a routed single-page app? <https://github.com/dmsnell/gh-pages-404-redirect>`_
+       | `Redirect a GitHub Pages site with this HTTP hack | Opensource.com <https://opensource.com/article/19/7/permanently-redirect-github-pages>`_
+       | `javascript - Is there a configuration in Github Pages that allows you to redirect everything to index.html for a Single Page App? - Stack Overflow <https://stackoverflow.com/questions/36296012/is-there-a-configuration-in-github-pages-that-allows-you-to-redirect-everything>`_
+
+.. [6] | `github pages symbolic link - Google search <https://www.google.com/search?q=github+pages+symbolic+link>`_
+       | `Pages: allow symlinks · Issue #553 · isaacs/github · GitHub <https://github.com/isaacs/github/issues/553>`_
+       | `Added .nojekyll to workaround symlink issue in GitHub Pages. Ref: isaacs/github#553 · siongui/paligo@b9fe689 · GitHub <https://github.com/siongui/paligo/commit/b9fe689770d705743a29bd33a3c7583a5c81bec1>`_
+
 
 .. _Pāli Dictionary: https://siongui.github.io/pali-dictionary/
 .. _Pāli Tipiṭaka: http://tipitaka.sutta.org/

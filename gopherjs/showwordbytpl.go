@@ -2,8 +2,9 @@ package main
 
 import (
 	"bytes"
-	"github.com/siongui/gopalilib/lib"
 	"html/template"
+
+	"github.com/siongui/gopalilib/lib"
 )
 
 func showWordByTemplate(wi lib.BookIdWordExps) {

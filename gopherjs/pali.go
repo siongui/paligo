@@ -28,7 +28,7 @@ func handleInputKeyUp(e Event) {
 		raw = strings.TrimSpace(raw)
 		w := strings.ToLower(raw)
 		e.Target().Blur()
-		go httpGetWordJson(w)
+		go httpGetWordJson(w, true)
 	default:
 	}
 }
@@ -74,9 +74,20 @@ func main() {
 	})
 
 	// Hide loader and show input element while website is fully loaded.
-	Window.Call("addEventListener", "load", func(e Event) {
+	Window.AddEventListener("load", func(e Event) {
 		l := Document.QuerySelector(".loader")
 		l.ClassList().Add("invisible")
 		input.ClassList().Remove("invisible")
+	})
+
+	// change url without reload
+	Window.AddEventListener("popstate", func(e Event) {
+		if e.Get("state") == nil {
+			// do nothing
+		} else {
+			// state here stores pali word
+			word := e.Get("state").String()
+			go httpGetWordJson(word, false)
+		}
 	})
 }
