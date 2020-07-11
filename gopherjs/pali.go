@@ -49,6 +49,11 @@ func main() {
 	sg.BindSuggest("word", func(w string) []string {
 		return frozenTrie.GetSuggestedWords(w, 30)
 	})
+	// add Bulma css helper to input suggest menu
+	ism := Document.QuerySelector(".suggest")
+	ism.ClassList().Add("px-1")
+	ism.ClassList().Add("py-1")
+	ism.ClassList().Add("is-size-5")
 
 	setupNavbar()
 	setupSetting()
