@@ -13,13 +13,15 @@
   {{template "navbar" .}}
   {{template "setting" .}}
 
-  <section class="section is-medium">
+  <section class="section is-medium py-4">
     <div class="container">
-      <div class="loader">{{gettext "Loading"}}</div>
+
+      <!-- When page fully loaded, hide this -->
+      <div class="notification is-info">{{gettext "Loading"}}...</div>
 
       <div class="field">
         <div class="control">
-          <input id="word" class="input" type="text" autofocus="autofocus"
+          <input id="word" class="input is-hidden" type="text" autofocus="autofocus"
                  tabindex="1" placeholder="{{gettext "Input Pāli Word"}}">
         </div>
       </div>
