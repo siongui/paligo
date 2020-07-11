@@ -2,13 +2,26 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 	"path"
 )
 
 func NotFound(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "my 404 page!")
+	//fmt.Fprintf(w, "my 404 page!")
+	f, err := os.Open("website/index.html")
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
+		return
+	}
+	defer f.Close()
+
+	_, err = io.Copy(w, f)
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
+		return
+	}
 }
 
 func FileServerWithCustom404(fs http.FileSystem) http.Handler {
