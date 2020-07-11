@@ -2,11 +2,23 @@
 `Pāli Dictionary`_ and `Pāli Tipiṭaka`_
 =======================================
 
+.. image:: https://img.shields.io/badge/Language-Go-blue.svg
+   :target: https://golang.org/
+
+.. image:: https://godoc.org/github.com/siongui/paligo?status.png
+   :target: https://godoc.org/github.com/siongui/paligo
+
 .. image:: https://travis-ci.org/siongui/paligo.svg?branch=master
     :target: https://travis-ci.org/siongui/paligo
 
 .. image:: https://gitlab.com/siongui/pali-dictionary/badges/master/pipeline.svg
     :target: https://gitlab.com/siongui/pali-dictionary/-/commits/master
+
+.. image:: https://goreportcard.com/badge/github.com/siongui/paligo
+   :target: https://goreportcard.com/report/github.com/siongui/paligo
+
+.. image:: https://img.shields.io/badge/license-Unlicense-blue.svg
+   :target: https://github.com/siongui/paligo/blob/master/UNLICENSE
 
 Re-implementation of `Pāli Dictionary`_ and `Pāli Tipiṭaka`_ in Go_ programming
 language.
