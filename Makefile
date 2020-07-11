@@ -17,6 +17,7 @@ endif
 
 WEBSITE_DIR=website
 WEBSITE_JSON_DIR=$(WEBSITE_DIR)/json
+WEBSITE_ABOUT_DIR=$(WEBSITE_DIR)/about
 PRODUCTION_GITHUB_REPO=github.com/siongui/pali-dictionary
 PRODUCTION_DIR=src/$(PRODUCTION_GITHUB_REPO)
 LOCALE_DIR=locale
@@ -25,7 +26,7 @@ DATA_REPO_DIR=$(CURDIR)/data
 DICTIONARY_DATA_DIR=$(DATA_REPO_DIR)/dictionary
 
 
-devserver: fmt html js
+devserver: fmt about_symlink html js
 	@# http://stackoverflow.com/a/5947779
 	@echo "\033[92mDevelopment Server Running ...\033[0m"
 	@go run server.go
@@ -65,7 +66,11 @@ succinct_trie:
 	@echo "\033[92mBuilding Succinct Trie ...\033[0m"
 	@go run setup/dicsetup.go -action=triebuild
 
-symlink:
+about_symlink: dir
+	@echo "\033[92mMaking symbolic link for about page ...\033[0m"
+	@cd $(WEBSITE_ABOUT_DIR); [ -f index.html ] || ln -s ../index.html index.html
+
+symlink: about_symlink
 	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
 	@echo "" > $(WEBSITE_DIR)/.nojekyll
 	@go run setup/dicsetup.go -action=symlink
@@ -73,6 +78,7 @@ symlink:
 dir:
 	@echo "\033[92mCreate website directory if not exists ...\033[0m"
 	@[ -d $(WEBSITE_JSON_DIR) ] || mkdir -p $(WEBSITE_JSON_DIR)
+	@[ -d $(WEBSITE_ABOUT_DIR) ] || mkdir -p $(WEBSITE_ABOUT_DIR)
 
 fmt:
 	@echo "\033[92mGo fmt source code...\033[0m"
