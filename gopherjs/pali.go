@@ -56,6 +56,18 @@ func setupMainContentAccordingToUrlPath() {
 	// handle other type of pages?
 }
 
+func setupBrowseDictionary() {
+	pl := Document.GetElementById("prefixList")
+	prefixs := []string{"a", "ā", "b", "c", "d", "ḍ", "e", "g", "h", "i", "ī", "j", "k", "l", "ḷ", "m", "ŋ", "n", "ñ", "ṅ", "ṇ", "o", "p", "r", "s", "t", "ṭ", "u", "ū", "v", "y", "-", "°"}
+	all := ""
+	for _, prefix := range prefixs {
+		html := `<li><a href="/browse/{{PREFIX}}/">{{PREFIX}}</a></li>`
+		html = strings.Replace(html, "{{PREFIX}}", prefix, 2)
+		all += html
+	}
+	pl.SetInnerHTML(all)
+}
+
 func main() {
 	// add pali input method to input text element
 	imepali.BindPaliInputMethodToInputTextElementById("word")
@@ -103,6 +115,8 @@ func main() {
 		l := Document.QuerySelector(".notification.is-info")
 		l.ClassList().Add("is-hidden")
 		input.ClassList().Remove("is-hidden")
+
+		setupBrowseDictionary()
 	})
 
 	// change url without reload
