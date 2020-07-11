@@ -10,14 +10,6 @@ import (
 func setupNavbar() {
 	jsgettext.SetupTranslationMapping(paliDataVFS.GetPoJsonBlob())
 
-	// about nav item
-	al := Document.QuerySelector(".about-link")
-	al.AddEventListener("click", func(e Event) {
-		// load about content
-		mainContent.RemoveAllChildNodes()
-		mainContent.SetInnerHTML(Document.GetElementById("about").InnerHTML())
-	})
-
 	// setting nav item
 	sl := Document.QuerySelector(".setting-link")
 	sl.AddEventListener("click", func(e Event) {

@@ -6,6 +6,7 @@ import (
 	imepali "github.com/siongui/go-online-input-method-pali"
 	bits "github.com/siongui/go-succinct-data-structure-trie"
 	. "github.com/siongui/godom"
+	"github.com/siongui/gopalilib/lib"
 	jsgettext "github.com/siongui/gopherjs-i18n"
 	sg "github.com/siongui/gopherjs-input-suggest"
 	"github.com/siongui/paliDataVFS"
@@ -31,6 +32,18 @@ func handleInputKeyUp(e Event) {
 		go httpGetWordJson(w, true)
 	default:
 	}
+}
+
+func setupMainContentAccordingToUrlPath() {
+	typ := lib.DeterminePageType(Window.Location().Pathname())
+	if typ == lib.RootPage {
+		mainContent.RemoveAllChildNodes()
+	}
+	if typ == lib.AboutPage {
+		mainContent.RemoveAllChildNodes()
+		mainContent.SetInnerHTML(Document.GetElementById("about").InnerHTML())
+	}
+	// TODO: handle other type of pages
 }
 
 func main() {
@@ -93,4 +106,6 @@ func main() {
 			go httpGetWordJson(word, false)
 		}
 	})
+
+	setupMainContentAccordingToUrlPath()
 }
