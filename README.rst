@@ -5,7 +5,7 @@
 .. image:: https://img.shields.io/badge/Language-Go-blue.svg
    :target: https://golang.org/
 
-.. image:: https://godoc.org/github.com/siongui/paligo?status.png
+.. image:: https://godoc.org/github.com/siongui/paligo?status.svg
    :target: https://godoc.org/github.com/siongui/paligo
 
 .. image:: https://travis-ci.org/siongui/paligo.svg?branch=master
