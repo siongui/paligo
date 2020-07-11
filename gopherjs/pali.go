@@ -15,6 +15,7 @@ import (
 var mainContent *Object
 var bookIdAndInfos = paliDataVFS.GetBookIdAndInfos()
 var frozenTrie bits.FrozenTrie
+var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
 var navigatorLanguages = Window.Navigator().Languages()
 
 func isDev() bool {
@@ -38,12 +39,21 @@ func setupMainContentAccordingToUrlPath() {
 	typ := lib.DeterminePageType(Window.Location().Pathname())
 	if typ == lib.RootPage {
 		mainContent.RemoveAllChildNodes()
+		// maybe put some news in the future.
+		return
 	}
 	if typ == lib.AboutPage {
 		mainContent.RemoveAllChildNodes()
 		mainContent.SetInnerHTML(Document.GetElementById("about").InnerHTML())
+		return
 	}
-	// TODO: handle other type of pages
+	if typ == lib.WordPage {
+		mainContent.RemoveAllChildNodes()
+		w := lib.GetWordFromUrlPath(Window.Location().Pathname())
+		go httpGetWordJson(w, false)
+		return
+	}
+	// handle other type of pages?
 }
 
 func main() {
@@ -72,7 +82,6 @@ func main() {
 	setupSetting()
 
 	// show language according to NavigatorLanguages API
-	supportedLocales := []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
 	initialLocale := jsgettext.DetermineLocaleByNavigatorLanguages(navigatorLanguages, supportedLocales)
 	if initialLocale != "en_US" {
 		jsgettext.Translate(initialLocale)
