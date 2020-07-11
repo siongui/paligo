@@ -11,7 +11,7 @@ pages:
   - ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
   # https://stackoverflow.com/a/58072486
   - apt-get update
-  - apt-get install -y wget make git gcc g++ gettext
+  - apt-get install -y wget make git gettext
   #- make clone_pali_data
   - make download_go
   - make install

@@ -8,8 +8,6 @@ addons:
     - wget
     - make
     - git
-    - gcc
-    - g++
     - gettext
 install:
   - make install
