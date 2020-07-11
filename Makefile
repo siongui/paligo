@@ -15,8 +15,6 @@ ifndef TRAVIS
 	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 endif
 
-SCSS_DIR=theme/styling
-SCSS_PATH=$(SCSS_DIR)/style.scss
 WEBSITE_DIR=website
 WEBSITE_JSON_DIR=$(WEBSITE_DIR)/json
 PRODUCTION_GITHUB_REPO=github.com/siongui/pali-dictionary
@@ -27,7 +25,7 @@ DATA_REPO_DIR=$(CURDIR)/data
 DICTIONARY_DATA_DIR=$(DATA_REPO_DIR)/dictionary
 
 
-devserver: fmt html js scss
+devserver: fmt html js
 	@# http://stackoverflow.com/a/5947779
 	@echo "\033[92mDevelopment Server Running ...\033[0m"
 	@go run server.go
@@ -44,10 +42,6 @@ ifneq ($(call ifdef_any_of,TRAVIS GITLAB_CI),)
 else
 	@gopherjs build gopherjs/*.go -o $(WEBSITE_DIR)/pali.js
 endif
-
-scss:
-	@echo "\033[92mGenerating CSS ...\033[0m"
-	@go run setup/scss.go -scsspath=$(SCSS_PATH) -scssdir=$(SCSS_DIR) -csspath=$(WEBSITE_DIR)/style.css
 
 html:
 	@echo "\033[92mGenerating HTML ...\033[0m"
@@ -91,19 +85,11 @@ clone_pali_data:
 	@git clone https://github.com/siongui/data.git $(DATA_REPO_DIR) --depth=1
 
 
-install: lib_pali lib_go_libsass lib_ime_pali lib_gopherjs_i18n lib_gopherjs_input_suggest lib_paliDataVFS lib_gopherjs
+install: lib_pali lib_ime_pali lib_gopherjs_i18n lib_gopherjs_input_suggest lib_paliDataVFS lib_gopherjs
 
 lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
 	go get -u github.com/siongui/gopalilib/dicutil
-
-lib_go_libsass: lib_normalize_css
-	@echo "\033[92mInstalling libsass and its Go binding ...\033[0m"
-	go get -u github.com/wellington/go-libsass
-
-lib_normalize_css:
-	@echo "\033[92mInstalling Normalize.css ...\033[0m"
-	@[ -e $(SCSS_DIR)/_normalize801.scss ] || wget -O $(SCSS_DIR)/_normalize801.scss https://necolas.github.io/normalize.css/8.0.1/normalize.css
 
 lib_ime_pali:
 	@echo "\033[92mInstalling Online Go Pāli IME ...\033[0m"

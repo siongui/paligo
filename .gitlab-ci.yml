@@ -18,7 +18,6 @@ pages:
   - make po2mo
   - make dir
   - make html
-  - make scss
   - make js
   - make symlink
   - mv website/ public/

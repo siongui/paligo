@@ -17,7 +17,6 @@ script:
   - make po2mo
   - make dir
   - make html
-  - make scss
   - make js
   - make cname
   - make symlink
