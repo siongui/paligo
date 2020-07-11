@@ -1,80 +1,59 @@
 package main
 
 import (
-	"github.com/gopherjs/gopherjs/js"
+	. "github.com/siongui/godom"
 	"github.com/siongui/gopherjs-i18n"
 	"github.com/siongui/paliDataVFS"
 )
 
+//DISCUSS: close mobile nav menu after click?
 func setupNavbar() {
 	jsgettext.SetupTranslationMapping(paliDataVFS.GetPoJsonBlob())
 
-	d := js.Global.Get("document")
-	about := d.Call("getElementById", "about")
-	punch := d.Call("getElementById", "punch")
-	settingMenu := d.Call("querySelector", ".setting-menu")
-
-	// about link
-	nodeList := d.Call("querySelectorAll", ".about-link")
-	length := nodeList.Get("length").Int()
-	for i := 0; i < length; i++ {
-		link := nodeList.Call("item", i)
-		link.Call("addEventListener", "click", func(event *js.Object) {
-			// prevent follow link to #
-			event.Call("preventDefault")
-
-			// load about content
-			mainContent.RemoveAllChildNodes()
-			mainContent.Set("innerHTML", about.Get("innerHTML").String())
-
-			// close toggle window on mobile device
-			punch.Set("checked", true)
-		})
-	}
-
-	// setting link
-	nodeList = d.Call("querySelectorAll", ".setting-link")
-	length = nodeList.Get("length").Int()
-	for i := 0; i < length; i++ {
-		link := nodeList.Call("item", i)
-		link.Call("addEventListener", "click", func(event *js.Object) {
-			// prevent follow link to #
-			event.Call("preventDefault")
-
-			// toggle arrow
-			downArrow := link.Get("firstChild")
-			downArrow.Get("classList").Call("toggle", "invisible")
-			// right arrow
-			downArrow.Get("nextSibling").Get("classList").Call("toggle", "invisible")
-			// setting menu
-			settingMenu.Get("classList").Call("toggle", "invisible")
-
-			// close toggle window on mobile device
-			punch.Set("checked", true)
-		})
-	}
-
-	// language select
-	ls := d.Call("getElementById", "lang-select")
-	ls.Call("addEventListener", "change", func(event *js.Object) {
-		locale := ls.Get("options").Call("item", ls.Get("selectedIndex").Int()).Get("value").String()
-		jsgettext.Translate(locale)
+	// about nav item
+	al := Document.QuerySelector(".about-link")
+	al.AddEventListener("click", func(e Event) {
+		// load about content
+		mainContent.RemoveAllChildNodes()
+		mainContent.SetInnerHTML(Document.GetElementById("about").InnerHTML())
 	})
 
-	// mobile language select
-	nodeList = d.Call("querySelectorAll", ".mobile-lang-select")
-	length = nodeList.Get("length").Int()
-	for i := 0; i < length; i++ {
-		link := nodeList.Call("item", i)
-		link.Call("addEventListener", "click", func(event *js.Object) {
-			// prevent follow link to #
-			event.Call("preventDefault")
+	// setting nav item
+	sl := Document.QuerySelector(".setting-link")
+	sl.AddEventListener("click", func(e Event) {
+		// toggle arrow
+		downArrow := sl.QuerySelector(".down-arrow")
+		downArrow.ClassList().Toggle("is-hidden")
+		// right arrow
+		downArrow.NextSibling().ClassList().Toggle("is-hidden")
+		// setting menu
+		Document.QuerySelector(".setting-menu").ClassList().Toggle("is-hidden")
+	})
 
-			locale := link.Get("dataset").Get("lang").String()
+	// language select nav item
+	lss := Document.QuerySelectorAll(".lang-select")
+	for _, ls := range lss {
+		ls.AddEventListener("click", func(e Event) {
+			// Cannot use the following line:
+			//locale := ls.Dataset().Get("lang").String()
+			// otherwise the lang value of dataset will always be the value of last "ls"
+			// must replace "ls" with e.Target()
+			locale := e.Target().Dataset().Get("lang").String()
 			jsgettext.Translate(locale)
-
-			// close toggle window on mobile device
-			punch.Set("checked", true)
 		})
 	}
+
+	// mobile toggle
+	Document.AddEventListener("DOMContentLoaded", func(e Event) {
+		nbs := Document.QuerySelectorAll(".navbar-burger")
+		for _, nb := range nbs {
+			nb.AddEventListener("click", func(e Event) {
+				tg := e.Target().Dataset().Get("target").String()
+				tgEl := Document.GetElementById(tg)
+
+				e.Target().ClassList().Toggle("is-active")
+				tgEl.ClassList().Toggle("is-active")
+			})
+		}
+	})
 }

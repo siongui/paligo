@@ -7,19 +7,32 @@
   <meta name="keywords" content="{{gettext "Pāli Dictionary"}}"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {{template "metaog" .}}
-  <link rel="stylesheet" type="text/css" href="{{.SiteUrl}}/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.css" integrity="sha256-oSsWW/ca1ll8OVu2t4EKkyb9lmH0Pkd8CXKXnYP4QvA=" crossorigin="anonymous">
+  <!--<link rel="stylesheet" type="text/css" href="{{.SiteUrl}}/style.css">-->
 </head>
 <body>
   {{template "navbar" .}}
   {{template "setting" .}}
-<div class="container">
-  <div class="loader">{{gettext "Loading"}}</div>
-  <input id="word" type="text" autofocus="autofocus" tabindex="1"
-         placeholder="{{gettext "Input Pāli Word"}}" class="invisible">
-  <div id="main-content"></div>
-  {{template "ime" .}}
-</div>
-  <div id="about" class="invisible">{{template "about" .}}</div>
+
+  <section class="section is-medium">
+    <div class="container">
+      <div class="loader">{{gettext "Loading"}}</div>
+
+      <div class="field">
+        <div class="control">
+          <input id="word" class="input" type="text" autofocus="autofocus"
+                 tabindex="1" placeholder="{{gettext "Input Pāli Word"}}">
+        </div>
+      </div>
+
+      <div id="main-content" class="content is-large"></div>
+
+      {{template "ime" .}}
+
+    </div>
+  </section>
+
+  <div id="about" class="is-hidden">{{template "about" .}}</div>
   <script src="{{.SiteUrl}}/pali.js"></script>
 </body>
 </html>

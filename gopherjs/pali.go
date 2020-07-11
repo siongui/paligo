@@ -58,8 +58,6 @@ func main() {
 	initialLocale := jsgettext.DetermineLocaleByNavigatorLanguages(navigatorLanguages, supportedLocales)
 	if initialLocale != "en_US" {
 		jsgettext.Translate(initialLocale)
-		langSelect := Document.GetElementById("lang-select")
-		langSelect.SetValue(initialLocale)
 	}
 
 	input := Document.GetElementById("word")
@@ -76,8 +74,8 @@ func main() {
 	// Hide loader and show input element while website is fully loaded.
 	Window.AddEventListener("load", func(e Event) {
 		l := Document.QuerySelector(".loader")
-		l.ClassList().Add("invisible")
-		input.ClassList().Remove("invisible")
+		l.ClassList().Add("is-hidden")
+		input.ClassList().Remove("is-hidden")
 	})
 
 	// change url without reload

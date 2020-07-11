@@ -158,6 +158,8 @@ References
        | `Pages: allow symlinks · Issue #553 · isaacs/github · GitHub <https://github.com/isaacs/github/issues/553>`_
        | `Added .nojekyll to workaround symlink issue in GitHub Pages. Ref: isaacs/github#553 · siongui/paligo@b9fe689 · GitHub <https://github.com/siongui/paligo/commit/b9fe689770d705743a29bd33a3c7583a5c81bec1>`_
 
+.. [7] `Bulma: Free, open source, and modern CSS framework based on Flexbox <https://bulma.io/>`_
+
 
 .. _Pāli Dictionary: https://siongui.github.io/pali-dictionary/
 .. _Pāli Tipiṭaka: http://tipitaka.sutta.org/
