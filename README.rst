@@ -53,7 +53,6 @@ Set Up Development Environment
 
    - Go_
    - gopalilib_
-   - `go-libsass`_
    - `go-online-pali-ime`_
    - `gopherjs-i18n`_
    - `gopherjs-input-suggest`_
@@ -171,7 +170,6 @@ References
 .. _data repository: https://github.com/siongui/data
 .. _UNLICENSE: https://unlicense.org/
 .. _GopherJS: http://www.gopherjs.org/
-.. _go-libsass: https://github.com/wellington/go-libsass
 .. _go-online-pali-ime: https://github.com/siongui/go-online-input-method-pali
 .. _gopherjs-i18n: https://github.com/siongui/gopherjs-i18n
 .. _gopherjs-input-suggest: https://github.com/siongui/gopherjs-input-suggest

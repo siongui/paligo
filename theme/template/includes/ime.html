@@ -1,5 +1,11 @@
 {{define "ime"}}
-<table class="mapping center">
+<!--
+Best way of centering a table
+https://github.com/jgthms/bulma/issues/1513
+-->
+<div class="columns is-centered">
+<div class="column is-narrow">
+<table class="table is-hoverable is-bordered is-striped">
 <tr><th>{{gettext "Type"}}</th><th>{{gettext "For"}}</th></tr>
 <tr><td>aa</td><td>ā</td></tr>
 <tr><td>ii</td><td>ī</td></tr>
@@ -12,4 +18,6 @@
 <tr><td>.n</td><td>ṇ</td></tr>
 <tr><td>.l</td><td>ḷ</td></tr>
 </table>
+</div>
+</div>
 {{end}}
