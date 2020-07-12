@@ -19,10 +19,17 @@ script:
   - make cname
   - make symlink
 deploy:
-  provider: pages
-  repo: siongui/pali-dictionary
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  local_dir: website
-  on:
-    branch: master
+  - provider: pages
+    repo: siongui/pali-dictionary
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    local_dir: website
+    on:
+      branch: master
+  - provider: pages
+    repo: siongui/dictionary.sutta.org
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    local_dir: website
+    on:
+      branch: master
