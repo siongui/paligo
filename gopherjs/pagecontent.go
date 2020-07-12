@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/url"
 	"strings"
 
 	. "github.com/siongui/godom"
@@ -8,10 +9,7 @@ import (
 )
 
 func setupMainContentAccordingToUrlPath() {
-	up := Window.Location().Pathname()
-	//println(up)
-	//println(lib.IsValidPrefixUrlPath(up))
-	// FIXME: /browse/ā/ is not valid prefix page! Why?
+	up, _ := url.PathUnescape(Window.Location().Pathname())
 	typ := lib.DeterminePageType(up)
 	if typ == lib.RootPage {
 		mainContent.RemoveAllChildNodes()
