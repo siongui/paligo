@@ -31,7 +31,13 @@ func setupMainContentAccordingToUrlPath() {
 	if typ == lib.PrefixPage {
 		mainContent.RemoveAllChildNodes()
 		p := lib.GetPrefixFromUrlPath(up)
-		mainContent.SetInnerHTML("prefix " + p)
+		//mainContent.SetInnerHTML("prefix " + p)
+		prefixwords := frozenTrie.GetSuggestedWords(p, 1000000)
+		html := ""
+		for _, prefixword := range prefixwords {
+			html += `<li><a href="` + lib.WordUrlPath(prefixword) + `">` + prefixword + `</a></li>`
+		}
+		mainContent.SetInnerHTML(`<nav class="breadcrumb" aria-label="breadcrumbs"><ul>` + html + `</ul></nav>`)
 		return
 	}
 	// handle other type of pages?
