@@ -157,8 +157,10 @@ References
        | `Tutorial: Home Screen Icons | Responsive Web Design Training Tutorial | Webucator <https://www.webucator.com/tutorial/developing-mobile-websites/home-screen-icons.cfm>`_
        | `pwa manifest - Google search <https://www.google.com/search?q=pwa+manifest>`_
        | `WebPageTest - Website Performance and Optimization Test <https://www.webpagetest.org/>`_
+       | `Microsoft and Google team up to make PWAs better in the Play Store | by Judah Gabriel Himango | PWABuilder | Jul, 2020 | Medium <https://medium.com/pwabuilder/microsoft-and-google-team-up-to-make-pwas-better-in-the-play-store-b59710e487>`_
 
-.. [5] | `Add single page application support for Github pages · Issue #408 · isaacs/github · GitHub <https://github.com/isaacs/github/issues/408>`_
+.. [5] | Howto SPA on GitHub Pages
+       | `Add single page application support for Github pages · Issue #408 · isaacs/github · GitHub <https://github.com/isaacs/github/issues/408>`_
        | `GitHub - rafgraph/spa-github-pages: Host single page apps with GitHub Pages <https://github.com/rafgraph/spa-github-pages>`_
        | `S(GH)PA: The Single-Page App Hack For GitHub Pages — Smashing Magazine <https://www.smashingmagazine.com/2016/08/sghpa-single-page-app-hack-github-pages/>`_
        | `GitHub - dmsnell/gh-pages-404-redirect: Can I use a custom 404 handler on GitHub pages to host a routed single-page app? <https://github.com/dmsnell/gh-pages-404-redirect>`_
@@ -170,6 +172,10 @@ References
        | `Added .nojekyll to workaround symlink issue in GitHub Pages. Ref: isaacs/github#553 · siongui/paligo@b9fe689 · GitHub <https://github.com/siongui/paligo/commit/b9fe689770d705743a29bd33a3c7583a5c81bec1>`_
 
 .. [7] `Bulma: Free, open source, and modern CSS framework based on Flexbox <https://bulma.io/>`_
+
+.. [8] | One Travis CI build deploy to two repository
+       | `Github deployments are broken when deploying to multiple repositories · Issue #928 · travis-ci/dpl · GitHub <https://github.com/travis-ci/dpl/issues/928>`_
+       | `Deploying to Multiple Providers - Deployment - Travis CI <https://docs.travis-ci.com/user/deployment#deploying-to-multiple-providers>`_
 
 
 .. _Pāli Dictionary: https://siongui.github.io/pali-dictionary/
