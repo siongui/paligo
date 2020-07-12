@@ -61,8 +61,8 @@ func setupBrowseDictionary() {
 	prefixs := []string{"a", "ā", "b", "c", "d", "ḍ", "e", "g", "h", "i", "ī", "j", "k", "l", "ḷ", "m", "ŋ", "n", "ñ", "ṅ", "ṇ", "o", "p", "r", "s", "t", "ṭ", "u", "ū", "v", "y", "-", "°"}
 	all := ""
 	for _, prefix := range prefixs {
-		html := `<li><a href="/browse/{{PREFIX}}/">{{PREFIX}}</a></li>`
-		html = strings.Replace(html, "{{PREFIX}}", prefix, 2)
+		html := `<li><a href="` + lib.PrefixUrlPath(prefix) + `">{{PREFIX}}</a></li>`
+		html = strings.Replace(html, "{{PREFIX}}", prefix, 1)
 		all += html
 	}
 	pl.SetInnerHTML(all)
