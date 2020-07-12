@@ -68,7 +68,7 @@ func setupSetting() {
 		setting.IsShowWordPreview = isPreview.Get("checked").Bool()
 		savePaliDictionarySetting(setting)
 	})
-	// http://stackoverflow.com/questions/4471401/getting-value-of-html-checkbox-from-onclick-onchange-events
+	// https://stackoverflow.com/questions/4471401/getting-value-of-html-checkbox-from-onclick-onchange-events
 	p2en.Call("addEventListener", "click", func(event *js.Object) {
 		setting.P2en = p2en.Get("checked").Bool()
 		savePaliDictionarySetting(setting)

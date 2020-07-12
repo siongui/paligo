@@ -27,7 +27,7 @@ DICTIONARY_DATA_DIR=$(DATA_REPO_DIR)/dictionary
 
 
 devserver: fmt about_symlink html js
-	@# http://stackoverflow.com/a/5947779
+	@# https://stackoverflow.com/a/5947779
 	@echo "\033[92mDevelopment Server Running ...\033[0m"
 	@go run server.go
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-# http://www.accesstoinsight.org/tipitaka/index.html
+# https://www.accesstoinsight.org/tipitaka/index.html
 PaliTextTitle = {
 'Tipiṭaka (Mūla)': 'Pāḷi Canon',
 'Vinayapiṭaka': 'The Basket of the Discipline',
