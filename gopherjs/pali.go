@@ -6,7 +6,6 @@ import (
 	imepali "github.com/siongui/go-online-input-method-pali"
 	bits "github.com/siongui/go-succinct-data-structure-trie"
 	. "github.com/siongui/godom"
-	"github.com/siongui/gopalilib/lib"
 	jsgettext "github.com/siongui/gopherjs-i18n"
 	sg "github.com/siongui/gopherjs-input-suggest"
 	"github.com/siongui/paliDataVFS"
@@ -17,10 +16,6 @@ var bookIdAndInfos = paliDataVFS.GetBookIdAndInfos()
 var frozenTrie bits.FrozenTrie
 var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
 var navigatorLanguages = Window.Navigator().Languages()
-
-func isDev() bool {
-	return Window.Location().Hostname() == "localhost"
-}
 
 func handleInputKeyUp(e Event) {
 	switch keycode := e.KeyCode(); keycode {
@@ -33,39 +28,6 @@ func handleInputKeyUp(e Event) {
 		go httpGetWordJson(w, true)
 	default:
 	}
-}
-
-func setupMainContentAccordingToUrlPath() {
-	typ := lib.DeterminePageType(Window.Location().Pathname())
-	if typ == lib.RootPage {
-		mainContent.RemoveAllChildNodes()
-		// maybe put some news in the future.
-		return
-	}
-	if typ == lib.AboutPage {
-		mainContent.RemoveAllChildNodes()
-		mainContent.SetInnerHTML(Document.GetElementById("about").InnerHTML())
-		return
-	}
-	if typ == lib.WordPage {
-		mainContent.RemoveAllChildNodes()
-		w := lib.GetWordFromUrlPath(Window.Location().Pathname())
-		go httpGetWordJson(w, false)
-		return
-	}
-	// handle other type of pages?
-}
-
-func setupBrowseDictionary() {
-	pl := Document.GetElementById("prefixList")
-	prefixs := []string{"a", "ā", "b", "c", "d", "ḍ", "e", "g", "h", "i", "ī", "j", "k", "l", "ḷ", "m", "ŋ", "n", "ñ", "ṅ", "ṇ", "o", "p", "r", "s", "t", "ṭ", "u", "ū", "v", "y", "-", "°"}
-	all := ""
-	for _, prefix := range prefixs {
-		html := `<li><a href="` + lib.PrefixUrlPath(prefix) + `">{{PREFIX}}</a></li>`
-		html = strings.Replace(html, "{{PREFIX}}", prefix, 1)
-		all += html
-	}
-	pl.SetInnerHTML(all)
 }
 
 func main() {
