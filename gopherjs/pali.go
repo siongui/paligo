@@ -34,6 +34,9 @@ func main() {
 	// add pali input method to input text element
 	imepali.BindPaliInputMethodToInputTextElementById("word")
 
+	// pali virtual keypad
+	bindKeypad("word", "keypad")
+
 	// init variables
 	mainContent = Document.GetElementById("main-content")
 
