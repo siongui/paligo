@@ -7,7 +7,19 @@ import (
 	"github.com/siongui/gopalilib/lib"
 )
 
+func hideLookingUp() {
+	l := Document.GetElementById("looking-up")
+	l.ClassList().Add("is-hidden")
+}
+
+func showLookingUp() {
+	l := Document.GetElementById("looking-up")
+	l.ClassList().Remove("is-hidden")
+}
+
 func httpGetWordJson(w string, changeUrl bool) {
+	showLookingUp()
+	defer hideLookingUp()
 	resp, err := http.Get(HttpWordJsonPath(w))
 	if err != nil {
 		mainContent.Set("textContent", "Not Found")
