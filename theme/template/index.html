@@ -29,9 +29,15 @@ https://stackoverflow.com/questions/56611772/how-to-shorten-bulma-input
   </div>
   <div class="column">
     <!-- Second column -->
+      <div>
+      If you want to physical keyboard
+      </div>
+      {{template "ime" .}}
+      If you want to use virtual keyboard
+      <div id="keypad"></div>
+      <br>
       <div class="field">
         <div class="control">
-          <div id="keypad"></div>
           <input id="word" class="input is-hidden" type="text"
                  autofocus="autofocus" tabindex="1" autocomplete="off"
                  placeholder="{{gettext "Input Pāli Word"}}">
@@ -44,8 +50,6 @@ https://stackoverflow.com/questions/56611772/how-to-shorten-bulma-input
 </div>
 
       <div id="main-content" class="content is-large"></div>
-
-      {{template "ime" .}}
 
       <hr>
       {{template "browse" .}}
