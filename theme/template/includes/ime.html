@@ -3,6 +3,7 @@
 Best way of centering a table
 https://github.com/jgthms/bulma/issues/1513
 -->
+<!--
 <div class="tanspose-table">
 <div class="columns is-centered">
 <div class="column is-narrow">
@@ -29,4 +30,38 @@ div.tanspose-table  tr { display: block; float: left; }
 div.tanspose-table  th { display: block; }
 div.tanspose-table  td { display: block; }
 </style>
+-->
+<!-- (Bulma) create a scrollable table by wrapping a table in a table-container element -->
+<div class="table-container">
+<table class="table is-bordered is-narrow">
+<tbody>
+  <tr>
+    <th>{{gettext "Type"}}</th>
+    <td>aa</td>
+    <td>ii</td>
+    <td>uu</td>
+    <td>"n</td>
+    <td>.m</td>
+    <td>~n</td>
+    <td>.t</td>
+    <td>.d</td>
+    <td>.n</td>
+    <td>.l</td>
+  </tr>
+  <tr>
+    <th>{{gettext "For"}}</th>
+    <td>ā</td>
+    <td>ī</td>
+    <td>ū</td>
+    <td>ṅ</td>
+    <td>ṃ</td>
+    <td>ñ</td>
+    <td>ṭ</td>
+    <td>ḍ</td>
+    <td>ṇ</td>
+    <td>ḷ</td>
+  </tr>
+</tbody>
+</table>
+</div>
 {{end}}
