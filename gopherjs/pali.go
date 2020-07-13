@@ -77,9 +77,9 @@ func main() {
 
 	// Hide loader and show input element while website is fully loaded.
 	Window.AddEventListener("load", func(e Event) {
-		l := Document.QuerySelector(".notification.is-info")
+		l := Document.GetElementById("website-loading")
 		l.ClassList().Add("is-hidden")
-		input.ClassList().Remove("is-hidden")
+		Document.QuerySelector("section.section").ClassList().Remove("is-hidden")
 
 		setupBrowseDictionary()
 	})

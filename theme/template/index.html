@@ -14,11 +14,12 @@
   {{template "navbar" .}}
   {{template "setting" .}}
 
-  <section class="section is-medium py-4">
-    <div class="container">
+  <!-- When page fully loaded, hide this -->
+  <div id="website-loading" class="notification is-info">{{gettext "Loading"}}...</div>
 
-      <!-- When page fully loaded, hide this -->
-      <div class="notification is-info">{{gettext "Loading"}}...</div>
+  <!-- When page fully loaded, show this -->
+  <section class="section is-medium py-4 is-hidden">
+    <div class="container">
 
 <!--
 https://stackoverflow.com/questions/56611772/how-to-shorten-bulma-input
@@ -38,7 +39,7 @@ https://stackoverflow.com/questions/56611772/how-to-shorten-bulma-input
       <br>
       <div class="field">
         <div class="control">
-          <input id="word" class="input is-hidden" type="text"
+          <input id="word" class="input" type="text"
                  autofocus="autofocus" tabindex="1" autocomplete="off"
                  placeholder="{{gettext "Input Pāli Word"}}">
         </div>
