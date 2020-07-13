@@ -16,6 +16,7 @@ script:
   - make dir
   - make html
   - make js
+  - make 404html
   - make cname
   - make symlink
   # https://unix.stackexchange.com/a/56170
