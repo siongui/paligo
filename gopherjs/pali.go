@@ -17,15 +17,19 @@ var frozenTrie bits.FrozenTrie
 var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
 var navigatorLanguages = Window.Navigator().Languages()
 
+func handleEnterEvent(input *Object) {
+	raw := input.Value()
+	raw = strings.TrimSpace(raw)
+	w := strings.ToLower(raw)
+	input.Blur()
+	go httpGetWordJson(w, true)
+}
+
 func handleInputKeyUp(e Event) {
 	switch keycode := e.KeyCode(); keycode {
 	case 13:
 		// user press enter key
-		raw := e.Target().Value()
-		raw = strings.TrimSpace(raw)
-		w := strings.ToLower(raw)
-		e.Target().Blur()
-		go httpGetWordJson(w, true)
+		handleEnterEvent(e.Target())
 	default:
 	}
 }
