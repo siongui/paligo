@@ -51,7 +51,7 @@ func main() {
 
 	// toggle type hint table
 	tth := Document.GetElementById("toggle-type-hint")
-	tht := Document.QuerySelector("div.tanspose-table")
+	tht := Document.QuerySelector(".pali-type-hint-table")
 	tth.AddEventListener("click", func(e Event) {
 		tht.ClassList().Toggle("is-hidden")
 

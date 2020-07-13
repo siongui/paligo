@@ -30,10 +30,10 @@ https://stackoverflow.com/questions/56611772/how-to-shorten-bulma-input
   </div>
   <div class="column">
     <!-- Second column -->
-      {{template "ime" .}}
+      <div class="pali-type-hint-table is-hidden">{{template "ime" .}}</div>
       <div id="keypad" class="is-hidden"></div>
       <button class="button is-rounded is-info is-light is-small my-1" id="toggle-keypad"><span>Show Keypad</span><span class="is-hidden">Hide Keypad</span></button>
-      <button class="button is-rounded is-info is-light is-small my-1" id="toggle-type-hint"><span>Hide Type Hint</span><span class="is-hidden">Show Type Hint</span></button>
+      <button class="button is-rounded is-info is-light is-small my-1" id="toggle-type-hint"><span>Show Pāli Type Hint</span><span class="is-hidden">Hide Pāli Type Hint</span></button>
       <div class="field">
         <div class="control">
           <input id="word" class="input" type="text"
