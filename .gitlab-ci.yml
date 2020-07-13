@@ -19,7 +19,8 @@ pages:
   - make dir
   - make html
   - make js
-  - make symlink
+  # The following line will make page deploy job fail (but build ok)
+  #- make symlink
   - mv website/ public/
   - "echo -e 'User-agent: *\nDisallow: /' > public/robots.txt"
   artifacts:
