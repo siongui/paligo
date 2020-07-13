@@ -32,8 +32,8 @@ devserver: fmt about_symlink html js
 	@go run server.go
 
 cname:
-	@echo "\033[92mCreate CNAME for GitHub Pages custom domain ...\033[0m"
-	@echo "dictionary.online-dhamma.net" > $(WEBSITE_DIR)/CNAME
+	@#echo "\033[92mCreate CNAME for GitHub Pages custom domain ...\033[0m"
+	@#echo "dictionary.online-dhamma.net" > $(WEBSITE_DIR)/CNAME
 
 js:
 	@echo "\033[92mGenerating JavaScript ...\033[0m"
