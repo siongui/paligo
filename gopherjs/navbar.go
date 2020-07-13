@@ -34,18 +34,4 @@ func setupNavbar() {
 			jsgettext.Translate(locale)
 		})
 	}
-
-	// mobile toggle
-	Document.AddEventListener("DOMContentLoaded", func(e Event) {
-		nbs := Document.QuerySelectorAll(".navbar-burger")
-		for _, nb := range nbs {
-			nb.AddEventListener("click", func(e Event) {
-				tg := e.Target().Dataset().Get("target").String()
-				tgEl := Document.GetElementById(tg)
-
-				e.Target().ClassList().Toggle("is-active")
-				tgEl.ClassList().Toggle("is-active")
-			})
-		}
-	})
 }

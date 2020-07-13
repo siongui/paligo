@@ -1,18 +1,33 @@
 {{define "navbar"}}
-<nav class="navbar has-background-light-gold has-border-gold" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item is-size-4 is-gold" href="{{.SiteUrl}}/">
-      <span data-default-string="Pāli Dictionary">{{gettext "Pāli Dictionary"}}</span>
-    </a>
+  <style>
+    @media screen and (max-width: 1023px) {
+      /* show mavbar-menu on screen less than 1024px */
+      #menu-toggle:checked ~ #paliNavbarMenu { display: block; }
 
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
+      /* make navbar-burger become cross on screen less than 1024px */
+      #menu-toggle:checked + .navbar-burger span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+      #menu-toggle:checked + .navbar-burger span:nth-child(2) { opacity: 0; }
+      #menu-toggle:checked + .navbar-burger span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+      /* you can also replace + with ~ in above three rules and get the same result */
 
-  <div id="navbarBasicExample" class="navbar-menu">
+      #paliNavbarMenu { left:0; right:0; top:100%; position: absolute; }
+    }
+  </style>
+
+<nav class="navbar is-flex-touch has-background-light-gold has-border-gold" role="navigation" aria-label="main navigation">
+  <a class="navbar-item nav-start is-size-4 is-gold" href="{{.SiteUrl}}/">
+    <span data-default-string="Pāli Dictionary">{{gettext "Pāli Dictionary"}}</span>
+  </a>
+
+  <input type="checkbox" id="menu-toggle" class="is-hidden">
+  <label for="menu-toggle" role="button" class="navbar-burger burger">
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </label>
+
+
+  <div id="paliNavbarMenu" class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item" href="{{.TipitakaURL}}" target="_blank">
         <span data-default-string="Canon">{{gettext "Canon"}}</span>
