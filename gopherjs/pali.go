@@ -104,6 +104,7 @@ func main() {
 		l := Document.GetElementById("website-loading")
 		l.ClassList().Add("is-hidden")
 		Document.QuerySelector("section.section").ClassList().Remove("is-hidden")
+		Document.QuerySelector(".footer-container").ClassList().Remove("is-hidden")
 
 		setupBrowseDictionary()
 	})
