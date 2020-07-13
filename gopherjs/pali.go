@@ -37,6 +37,30 @@ func main() {
 	// pali virtual keypad
 	bindKeypad("word", "keypad")
 
+	// toggle virtual keypad
+	tk := Document.GetElementById("toggle-keypad")
+	kp := Document.GetElementById("keypad")
+	tk.AddEventListener("click", func(e Event) {
+		kp.ClassList().Toggle("is-hidden")
+
+		spans := tk.QuerySelectorAll("span")
+		for _, span := range spans {
+			span.ClassList().Toggle("is-hidden")
+		}
+	})
+
+	// toggle type hint table
+	tth := Document.GetElementById("toggle-type-hint")
+	tht := Document.QuerySelector("div.tanspose-table")
+	tth.AddEventListener("click", func(e Event) {
+		tht.ClassList().Toggle("is-hidden")
+
+		spans := tth.QuerySelectorAll("span")
+		for _, span := range spans {
+			span.ClassList().Toggle("is-hidden")
+		}
+	})
+
 	// init variables
 	mainContent = Document.GetElementById("main-content")
 
