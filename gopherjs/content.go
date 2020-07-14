@@ -1,7 +1,6 @@
 package main
 
 import (
-	"net/url"
 	"strings"
 
 	. "github.com/siongui/godom"
@@ -9,7 +8,7 @@ import (
 )
 
 func setupMainContentAccordingToUrlPath() {
-	up, _ := url.PathUnescape(Window.Location().Pathname())
+	up := Window.Location().Pathname()
 	typ := lib.DeterminePageType(up)
 	if typ == lib.RootPage {
 		mainContent.RemoveAllChildNodes()
