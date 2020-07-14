@@ -62,10 +62,6 @@ else
 	@go run htmlspa.go -siteconf="config-empty-siteurl.json" -pathconf="path-for-build.json" > $(WEBSITE_DIR)/index.html
 endif
 
-404html:
-	@echo "\033[92mCopying 404 not found HTML ...\033[0m"
-	cp theme/template/404.html $(WEBSITE_DIR)/
-
 
 parsebooks: dir
 	@echo "\033[92mParse Dictionary Books Information ...\033[0m"

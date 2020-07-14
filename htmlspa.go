@@ -1,11 +1,12 @@
-// Create the only HTML for Single Page Application (SPA) for Pali dictionary
-// website.
+// Create the only index.html for Single Page Application (SPA), and 404.html to
+// be served if not found.
 package main
 
 import (
 	"encoding/json"
 	"flag"
 	"os"
+	"path"
 
 	"github.com/siongui/gopalilib/dicutil"
 )
@@ -44,7 +45,22 @@ func main() {
 		OgLocale:    siteconf["OgLocale"],
 	}
 
-	err = dicutil.CreateHTML(os.Stdout, "index.html", &data, pathconf["localeDir"], pathconf["htmlTemplateDir"])
+	findex, err := os.Create(path.Join(pathconf["websiteDir"], "index.html"))
+	if err != nil {
+		panic(err)
+	}
+	defer findex.Close()
+	f404, err := os.Create(path.Join(pathconf["websiteDir"], "404.html"))
+	if err != nil {
+		panic(err)
+	}
+	defer f404.Close()
+
+	err = dicutil.CreateHTML(findex, "index.html", &data, pathconf["localeDir"], pathconf["htmlTemplateDir"])
+	if err != nil {
+		panic(err)
+	}
+	err = dicutil.CreateHTML(f404, "404.html", &data, pathconf["localeDir"], pathconf["htmlTemplateDir"])
 	if err != nil {
 		panic(err)
 	}

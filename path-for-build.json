@@ -1,4 +1,5 @@
 {
+    "websiteDir": "website/",
     "localeDir": "locale/",
     "htmlTemplateDir": "theme/template/"
 }
