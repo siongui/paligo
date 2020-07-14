@@ -24,7 +24,7 @@ script:
   - echo "dictionary.sutta.org" > website2/CNAME
 deploy:
   - provider: pages
-    repo: siongui/pali-dictionary
+    repo: siongui/dictionary.online-dhamma.net
     skip_cleanup: true
     github_token: $GITHUB_TOKEN
     local_dir: website
