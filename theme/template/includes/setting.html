@@ -1,6 +1,6 @@
 {{define "setting"}}
-<div class="container">
-<div class="setting-menu is-hidden has-background-light-blue is-blue has-border-light-blue px-2 py-2">
+<article class="message is-info setting-menu is-hidden">
+<div class="message-body">
   <input type="checkbox" id="isShowWordPreview"/>
     <span data-default-string="Input Word Explanation Preview">{{gettext "Input Word Explanation Preview"}}</span>
     <br />
@@ -36,5 +36,5 @@
     <option value="my" data-default-string='Burmese First'>{{gettext "Burmese First"}}</option>
   </select>
 </div>
-</div>
+</article>
 {{end}}
