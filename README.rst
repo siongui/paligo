@@ -116,8 +116,17 @@ See `.gitlab-ci.yml <.gitlab-ci.yml>`_ and
 `setup/dicsetup.go <setup/dicsetup.go>`_ (set SiteUrl)
 
 
-Offline Data Processing (Optional)
-++++++++++++++++++++++++++++++++++
+Bootstrap Website (Optional)
+++++++++++++++++++++++++++++
+
+TODO: Provide instructions for offline website data processing.
+
+- How to create JSON format files from original CSV data.
+- How to extract i18n string for translation
+- How to convert PO to JSON format files
+- Build succinct data structure trie for all Pali words.
+  (For fast lookup without using too much space)
+- Embed all JSON format files in Go code by using goef package.
 
 .. code-block:: bash
 
