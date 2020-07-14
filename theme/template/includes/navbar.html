@@ -1,18 +1,18 @@
 {{define "navbar"}}
-  <style>
-    @media screen and (max-width: 1023px) {
-      /* show mavbar-menu on screen less than 1024px */
-      #menu-toggle:checked ~ #paliNavbarMenu { display: block; }
+<style>
+@media screen and (max-width: 1023px) {
+  /* show mavbar-menu on screen less than 1024px */
+  #menu-toggle:checked ~ #paliNavbarMenu { display: block; }
 
-      /* make navbar-burger become cross on screen less than 1024px */
-      #menu-toggle:checked + .navbar-brand > .navbar-burger span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
-      #menu-toggle:checked + .navbar-brand > .navbar-burger span:nth-child(2) { opacity: 0; }
-      #menu-toggle:checked + .navbar-brand > .navbar-burger span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
-      /* you can also replace + with ~ in above three rules and get the same result */
+  /* make navbar-burger become cross on screen less than 1024px */
+  #menu-toggle:checked + .navbar-brand > .navbar-burger span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+  #menu-toggle:checked + .navbar-brand > .navbar-burger span:nth-child(2) { opacity: 0; }
+  #menu-toggle:checked + .navbar-brand > .navbar-burger span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+  /* you can also replace + with ~ in above three rules and get the same result */
 
-      /* #paliNavbarMenu { left:0; right:0; top:100%; position: absolute; } */
-    }
-  </style>
+  /* #paliNavbarMenu { left:0; right:0; top:100%; position: absolute; } */
+}
+</style>
 
 <nav class="navbar has-background-light-gold has-border-gold" role="navigation" aria-label="main navigation">
   <input type="checkbox" id="menu-toggle" class="is-hidden">
