@@ -20,10 +20,6 @@ func setupNavbar() {
 		downArrow.NextSibling().ClassList().Toggle("is-hidden")
 		// setting menu
 		Document.QuerySelector(".setting-menu").ClassList().Toggle("is-hidden")
-
-		// close navbar menu
-		m := Document.GetElementById("menu-toggle")
-		m.Set("checked", false)
 	})
 
 	// language select nav item
