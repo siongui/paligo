@@ -29,7 +29,7 @@ DICTIONARY_DATA_DIR=$(DATA_REPO_DIR)/dictionary
 devserver: fmt about_symlink html js
 	@# https://stackoverflow.com/a/5947779
 	@echo "\033[92mDevelopment Server Running ...\033[0m"
-	@go run server.go
+	@go run devserver.go
 
 cname:
 	@echo "\033[92mCreate CNAME for GitHub Pages custom domain ...\033[0m"
@@ -47,7 +47,7 @@ endif
 html:
 	@echo "\033[92mGenerating HTML ...\033[0m"
 	@# Google Search: shell stdout to file
-	@go run setup/dicsetup.go -action=html > $(WEBSITE_DIR)/index.html
+	@go run htmlspa.go -siteconf="config-empty-siteurl.json" -pathconf="path-for-build.json" > $(WEBSITE_DIR)/index.html
 
 404html:
 	@echo "\033[92mCopying 404 not found HTML ...\033[0m"
@@ -88,7 +88,7 @@ fmt:
 	@echo "\033[92mGo fmt source code...\033[0m"
 	@go fmt setup/*.go
 	@go fmt gopherjs/*.go
-	@go fmt server.go
+	@go fmt *.go
 
 clone_pali_data:
 	@echo "\033[92mClone Pāli data Repo ...\033[0m"
