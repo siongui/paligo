@@ -33,7 +33,7 @@ https://stackoverflow.com/questions/56611772/how-to-shorten-bulma-input
       <div class="pali-type-hint-table is-hidden">{{template "ime" .}}</div>
       <div id="keypad" class="is-hidden"></div>
       <button class="button is-rounded is-info is-light is-small my-1" id="toggle-keypad"><span>Show Keypad</span><span class="is-hidden">Hide Keypad</span></button>
-      <button class="button is-rounded is-info is-light is-small my-1" id="toggle-type-hint"><span>Show Pāli Type Hint</span><span class="is-hidden">Hide Pāli Type Hint</span></button>
+      <button class="button is-rounded is-info is-light is-small my-1" id="toggle-type-hint"><span>Show Pāli Type Hint on Top</span><span class="is-hidden">Hide Pāli Type Hint on Top</span></button>
       <div class="field">
         <div class="control">
           <input id="word" class="input" type="text"
@@ -50,10 +50,22 @@ https://stackoverflow.com/questions/56611772/how-to-shorten-bulma-input
       <div id="looking-up" class="notification is-info is-hidden"><span data-default-string="Looking Up ...">Looking Up ...</span></div>
       <div id="main-content" class="content is-large"></div>
 
+      <!--
+        Best way of centering a table
+        https://github.com/jgthms/bulma/issues/1513
+      -->
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          {{template "ime" .}}
+        </div>
+      </div>
+
       <hr>
       {{template "browse" .}}
       <hr>
-      TODO: insert Google search here
+      <div class="notification is-primary is-light">
+        TODO: insert Google search here
+      </div>
       <hr>
 
     </div>
