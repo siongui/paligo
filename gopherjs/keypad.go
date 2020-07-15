@@ -66,8 +66,12 @@ func bindKeypad(inputId, keypadId string) {
 		if i == 1 {
 			// Enter
 			ie.AddEventListener("click", func(e Event) {
-				handleEnterEvent(ipp)
-				sg.HideSuggestion()
+				//handleEnterEvent(ipp)
+				//sg.HideSuggestion()
+				option := Window.Get("Object").New()
+				option.Set("keyCode", 13)
+				ke := Window.Get("KeyboardEvent").New("keyup", option)
+				ipp.Call("dispatchEvent", ke)
 			})
 		}
 		de2.AppendChild(ie)
