@@ -49,17 +49,15 @@ html:
 	@# Google Search: shell stdout to file
 ifneq ($(call ifdef_any_of,TRAVIS GITLAB_CI),)
 ifdef TRAVIS
-	#FIXME: how to one build two deployment on TRAVIS?
-	@#go run htmlspa.go -siteconf="config-dictionary.online-dhamma.net.json" -pathconf="path-for-build.json" > $(WEBSITE_DIR)/index.html
-	@#go run htmlspa.go -siteconf="config-dictionary.sutta.org.json" -pathconf="path-for-build.json" > $(WEBSITE_DIR)/index.html
-	#workaround: use empty siteurl for now
-	@go run htmlspa.go -siteconf="config-empty-siteurl.json" -pathconf="path-for-build.json" > $(WEBSITE_DIR)/index.html
+	#FIXME: better way to do one build two deployment on TRAVIS?
+	@go run htmlspa.go -siteconf="config-dictionary.online-dhamma.net.json" -pathconf="path-for-build.json"
+	@#go run htmlspa.go -siteconf="config-dictionary.sutta.org.json" -pathconf="path-for-build.json"
 endif
 ifdef GITLAB_CI
-	@go run htmlspa.go -siteconf="config-siongui.gitlab.io-pali-dictionary.json" -pathconf="path-for-build.json" > $(WEBSITE_DIR)/index.html
+	@go run htmlspa.go -siteconf="config-siongui.gitlab.io-pali-dictionary.json" -pathconf="path-for-build.json"
 endif
 else
-	@go run htmlspa.go -siteconf="config-empty-siteurl.json" -pathconf="path-for-build.json" > $(WEBSITE_DIR)/index.html
+	@go run htmlspa.go -siteconf="config-empty-siteurl.json" -pathconf="path-for-build.json"
 endif
 
 

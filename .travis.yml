@@ -20,19 +20,21 @@ script:
   - make symlink
   # https://unix.stackexchange.com/a/56170
   - cp -RP website/ website2
-  - echo "dictionary.sutta.org" > website2/CNAME
+  # website/ is for sutta.org, and website2 is for online-dhamma.net
+  - echo "dictionary.sutta.org" > website/CNAME
+  - go run htmlspa.go -siteconf="config-dictionary.sutta.org.json" -pathconf="path-for-build.json"
 deploy:
   - provider: pages
     repo: siongui/dictionary.online-dhamma.net
     skip_cleanup: true
     github_token: $GITHUB_TOKEN
-    local_dir: website
+    local_dir: website2
     on:
       branch: master
   - provider: pages
     repo: siongui/dictionary.sutta.org
     skip_cleanup: true
     github_token: $GITHUB_TOKEN
-    local_dir: website2
+    local_dir: website
     on:
       branch: master
