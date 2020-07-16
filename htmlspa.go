@@ -8,8 +8,17 @@ import (
 	"os"
 	"path"
 
-	"github.com/siongui/gopalilib/dicutil"
+	"github.com/siongui/gtmpl"
 )
+
+// Template data for webpage of Pāli Dictionary
+type TemplateData struct {
+	SiteUrl     string
+	TipitakaURL string
+	OgImage     string
+	OgUrl       string
+	OgLocale    string
+}
 
 func LoadJsonConfig(fp string) (conf map[string]string, err error) {
 	f, err := os.Open(fp)
@@ -37,7 +46,7 @@ func main() {
 		panic(err)
 	}
 
-	data := dicutil.TemplateData{
+	data := TemplateData{
 		SiteUrl:     siteconf["SiteUrl"],
 		TipitakaURL: siteconf["TipitakaURL"],
 		OgImage:     siteconf["OgImage"],
@@ -56,11 +65,16 @@ func main() {
 	}
 	defer f404.Close()
 
-	err = dicutil.CreateHTML(findex, "index.html", &data, pathconf["localeDir"], pathconf["htmlTemplateDir"])
+	tmpl, err := gtmpl.ParseDirectoryTree("messages", pathconf["localeDir"], pathconf["htmlTemplateDir"])
 	if err != nil {
 		panic(err)
 	}
-	err = dicutil.CreateHTML(f404, "404.html", &data, pathconf["localeDir"], pathconf["htmlTemplateDir"])
+
+	err = tmpl.ExecuteTemplate(findex, "index.html", &data)
+	if err != nil {
+		panic(err)
+	}
+	err = tmpl.ExecuteTemplate(findex, "404.html", &data)
 	if err != nil {
 		panic(err)
 	}

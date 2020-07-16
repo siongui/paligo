@@ -4,4 +4,5 @@ pkg/
 src/
 website/
 *.mo
+locale/zh_CN/
 go/

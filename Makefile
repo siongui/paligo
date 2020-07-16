@@ -102,11 +102,15 @@ clone_pali_data:
 	@git clone https://github.com/siongui/data.git $(DATA_REPO_DIR) --depth=1
 
 
-install: lib_pali lib_ime_pali lib_gopherjs_i18n lib_gopherjs_input_suggest lib_paliDataVFS lib_gopherjs
+install: lib_pali lib_gtmpl lib_ime_pali lib_gopherjs_i18n lib_gopherjs_input_suggest lib_paliDataVFS lib_gopherjs
 
 lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
 	go get -u github.com/siongui/gopalilib/dicutil
+
+lib_gtmpl:
+	@echo "\033[92mInstalling Go html/template with gettext support ...\033[0m"
+	go get -u github.com/siongui/gtmpl
 
 lib_ime_pali:
 	@echo "\033[92mInstalling Online Go Pāli IME ...\033[0m"
