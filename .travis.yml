@@ -20,15 +20,14 @@ script:
   - make cname
   - make symlink
   # move dictionary.online-dhamma.net content to website2/
-  # website2/ contains the content of dictionary.online-dhamma.net
-  - move website/ website2
+  - mv website/ website2
   # build website/ content for dictionary.sutta.org
   - make dir
   - make htmlsutta
   - make js
   - echo "dictionary.sutta.org" > website/CNAME
   - make symlink
-# website/ is for dictionary.sutta.org, and website2 is for dictionary.online-dhamma.net
+# website/ is dictionary.sutta.org, and website2/ is dictionary.online-dhamma.net
 deploy:
   - provider: pages
     repo: siongui/dictionary.online-dhamma.net
