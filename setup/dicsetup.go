@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"os"
 
 	"github.com/siongui/gopalilib/dicutil"
 	"github.com/siongui/gopherjs-i18n/tool"
@@ -32,30 +31,6 @@ func main() {
 
 	if *action == "symlink" {
 		err := dicutil.SymlinkToRootIndexHtml(websiteDir)
-		if err != nil {
-			panic(err)
-		}
-	}
-
-	if *action == "html" {
-		data := dicutil.TemplateData{
-			SiteUrl:     "",
-			TipitakaURL: "http://tipitaka.online-dhamma.net",
-			OgImage:     "https://upload.wikimedia.org/wikipedia/commons/d/df/Dharma_Wheel.svg",
-			OgUrl:       "https://dictionary.online-dhamma.net/",
-			OgLocale:    "en_US",
-		}
-
-		_, travis := os.LookupEnv("TRAVIS")
-		if travis {
-			data.SiteUrl = "https://dictionary.online-dhamma.net"
-		}
-		_, gitlab := os.LookupEnv("GITLAB_CI")
-		if gitlab {
-			data.SiteUrl = "https://siongui.gitlab.io/pali-dictionary"
-		}
-
-		err := dicutil.CreateHTML(os.Stdout, "index.html", &data, localeDir, htmlTemplateDir)
 		if err != nil {
 			panic(err)
 		}
