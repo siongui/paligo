@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"path"
 	"strings"
 
@@ -39,6 +40,7 @@ func main() {
 	}
 
 	if *action == "symlink" {
+		fmt.Println(pathconf["websiteDir"])
 		err := dicutil.SymlinkToRootIndexHtml(pathconf["websiteDir"])
 		if err != nil {
 			panic(err)
@@ -46,6 +48,7 @@ func main() {
 		locales := strings.Split(pathconf["supportedLocales"], ",")
 		for _, locale := range locales {
 			dir := path.Join(pathconf["websiteDir"], locale)
+			fmt.Println(dir)
 			err := dicutil.SymlinkToRootIndexHtml(dir)
 			if err != nil {
 				panic(err)
