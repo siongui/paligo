@@ -48,11 +48,11 @@ endif
 
 htmlsutta:
 	@echo "\033[92mGenerating HTML for dictionary.sutta.org ...\033[0m"
-	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.sutta.org.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	go run dictionary/htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.sutta.org.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 
 htmldhamma:
 	@echo "\033[92mGenerating HTML for dictionary.online-dhamma.net ...\033[0m"
-	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.online-dhamma.net.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	go run dictionary/htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.online-dhamma.net.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 
 html:
 	@echo "\033[92mGenerating HTML ...\033[0m"
@@ -62,28 +62,28 @@ ifdef TRAVIS
 	make htmldhamma
 endif
 ifdef GITLAB_CI
-	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/siongui.gitlab.io-pali-dictionary.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	go run dictionary/htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/siongui.gitlab.io-pali-dictionary.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 endif
 else
-	@go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/empty-siteurl.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	@go run dictionary/htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/empty-siteurl.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 endif
 
 
 parsebooks: dir
 	@echo "\033[92mParse Dictionary Books Information ...\033[0m"
-	@go run setup/dicsetup.go -action=parsebooks
+	@go run dictionary/dicsetup.go -action=parsebooks
 
 parsewords: dir
 	@echo "\033[92mParse Dictionary Words ...\033[0m"
-	@go run setup/dicsetup.go -action=parsewords
+	@go run dictionary/dicsetup.go -action=parsewords
 
 po2json:
 	@echo "\033[92mConverting PO files to JSON (to be used in client-side/browser) ...\033[0m"
-	@go run setup/dicsetup.go -action=po2json
+	@go run dictionary/dicsetup.go -action=po2json
 
 succinct_trie:
 	@echo "\033[92mBuilding Succinct Trie ...\033[0m"
-	@go run setup/dicsetup.go -action=triebuild
+	@go run dictionary/dicsetup.go -action=triebuild
 
 about_symlink: dir
 	@echo "\033[92mMaking symbolic link for about page ...\033[0m"
@@ -92,7 +92,7 @@ about_symlink: dir
 symlink: about_symlink
 	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
 	@echo "" > $(WEBSITE_DIR)/.nojekyll
-	@go run setup/dicsetup.go -action=symlink
+	@go run dictionary/dicsetup.go -action=symlink
 
 dir:
 	@echo "\033[92mCreate website directory if not exists ...\033[0m"
@@ -101,7 +101,7 @@ dir:
 
 fmt:
 	@echo "\033[92mGo fmt source code...\033[0m"
-	@go fmt setup/*.go
+	@go fmt dictionary/*.go
 	@go fmt gopherjs/*.go
 	@go fmt *.go
 
@@ -142,7 +142,7 @@ lib_gopherjs:
 
 twpo2cn:
 	@echo "\033[92mConverting zh_TW PO files to zh_CN ...\033[0m"
-	@go run setup/twpo2cn.go -tw=$(LOCALE_DIR)/zh_TW/LC_MESSAGES/messages.po -cn=$(LOCALE_DIR)/zh_CN/LC_MESSAGES/messages.po
+	@#FIXME: go run setup/twpo2cn.go -tw=$(LOCALE_DIR)/zh_TW/LC_MESSAGES/messages.po -cn=$(LOCALE_DIR)/zh_CN/LC_MESSAGES/messages.po
 
 po2mo:
 	@echo "\033[92mmsgfmt PO to MO ...\033[0m"
