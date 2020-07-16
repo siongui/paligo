@@ -74,7 +74,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	err = tmpl.ExecuteTemplate(findex, "404.html", &data)
+	err = tmpl.ExecuteTemplate(f404, "404.html", &data)
 	if err != nil {
 		panic(err)
 	}
