@@ -21,17 +21,4 @@ func setupNavbar() {
 		// setting menu
 		Document.QuerySelector(".setting-menu").ClassList().Toggle("is-hidden")
 	})
-
-	// language select nav item
-	lss := Document.QuerySelectorAll(".lang-select")
-	for _, ls := range lss {
-		ls.AddEventListener("click", func(e Event) {
-			// Cannot use the following line:
-			//locale := ls.Dataset().Get("lang").String()
-			// otherwise the lang value of dataset will always be the value of last "ls"
-			// must replace "ls" with e.Target()
-			locale := e.Target().Dataset().Get("lang").String()
-			jsgettext.Translate(locale)
-		})
-	}
 }
