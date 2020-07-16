@@ -11,6 +11,7 @@ addons:
     - gettext
 install:
   - make install
+  - travis_wait mvn install
 script:
   # build website/ content for dictionary.online-dhamma.net first
   - make po2mo
