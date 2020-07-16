@@ -8,6 +8,7 @@ import (
 	"html/template"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/siongui/gopalilib/util"
 	"github.com/siongui/gtmpl"
@@ -39,9 +40,11 @@ func CreateIndexAnd404(tmpl *template.Template, data TemplateData, locale, websi
 	p4 := path.Join(websiteDir, locale, "404.html")
 	data.OgLocale = locale
 
-	println(pi)
-	println(p4)
-	println(data.OgLocale)
+	/*
+		println(pi)
+		println(p4)
+		println(data.OgLocale)
+	*/
 
 	util.CreateDirIfNotExist(pi)
 	findex, err := os.Create(pi)
@@ -93,7 +96,7 @@ func main() {
 
 	err = CreateIndexAnd404(tmpl, data, "", pathconf["websiteDir"])
 
-	var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
+	var supportedLocales = strings.Split(pathconf["supportedLocales"], ",")
 	for _, locale := range supportedLocales {
 		gtmpl.SetLanguage(locale)
 		err = CreateIndexAnd404(tmpl, data, locale, pathconf["websiteDir"])
