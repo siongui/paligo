@@ -24,6 +24,7 @@ LOCALE_DIR=locale
 
 DATA_REPO_DIR=$(CURDIR)/data
 DICTIONARY_DATA_DIR=$(DATA_REPO_DIR)/dictionary
+DICTIONARY_CONF_DIR=dictionary/config/
 
 
 # html must run before about_symlink. otherwise make symlink will fail
@@ -45,20 +46,26 @@ else
 	@gopherjs build gopherjs/*.go -o $(WEBSITE_DIR)/pali.js
 endif
 
+htmlsutta:
+	@echo "\033[92mGenerating HTML for dictionary.sutta.org ...\033[0m"
+	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.sutta.org.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+
+htmldhamma:
+	@echo "\033[92mGenerating HTML for dictionary.online-dhamma.net ...\033[0m"
+	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.online-dhamma.net.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+
 html:
 	@echo "\033[92mGenerating HTML ...\033[0m"
-	@# Google Search: shell stdout to file
 ifneq ($(call ifdef_any_of,TRAVIS GITLAB_CI),)
 ifdef TRAVIS
 	#FIXME: better way to do one build two deployment on TRAVIS?
-	@go run htmlspa.go -siteconf="config-dictionary.online-dhamma.net.json" -pathconf="path-for-build.json"
-	@#go run htmlspa.go -siteconf="config-dictionary.sutta.org.json" -pathconf="path-for-build.json"
+	make htmldhamma
 endif
 ifdef GITLAB_CI
-	@go run htmlspa.go -siteconf="config-siongui.gitlab.io-pali-dictionary.json" -pathconf="path-for-build.json"
+	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/siongui.gitlab.io-pali-dictionary.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 endif
 else
-	@go run htmlspa.go -siteconf="config-empty-siteurl.json" -pathconf="path-for-build.json"
+	@go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/empty-siteurl.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 endif
 
 

@@ -12,17 +12,21 @@ addons:
 install:
   - make install
 script:
+  # build website/ content for dictionary.online-dhamma.net first
   - make po2mo
   - make dir
   - make html
   - make js
   - make cname
   - make symlink
-  # https://unix.stackexchange.com/a/56170
+  # copy dictionary.online-dhamma.net content to website2/
+  # website2/ contains the content of dictionary.online-dhamma.net
+  # ref for copy symlink: https://unix.stackexchange.com/a/56170
   - cp -RP website/ website2
-  # website/ is for sutta.org, and website2 is for online-dhamma.net
+  # overwrite website/ content such that it becomes content of dictionary.sutta.org
   - echo "dictionary.sutta.org" > website/CNAME
-  - go run htmlspa.go -siteconf="config-dictionary.sutta.org.json" -pathconf="path-for-build.json"
+  - make htmlsutta
+# website/ is for dictionary.sutta.org, and website2 is for dictionary.online-dhamma.net
 deploy:
   - provider: pages
     repo: siongui/dictionary.online-dhamma.net
