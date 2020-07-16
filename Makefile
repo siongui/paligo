@@ -26,7 +26,8 @@ DATA_REPO_DIR=$(CURDIR)/data
 DICTIONARY_DATA_DIR=$(DATA_REPO_DIR)/dictionary
 
 
-devserver: fmt about_symlink html js
+# html must run before about_symlink. otherwise make symlink will fail
+devserver: fmt html js about_symlink
 	@# https://stackoverflow.com/a/5947779
 	@echo "\033[92mDevelopment Server Running ...\033[0m"
 	@go run devserver.go
