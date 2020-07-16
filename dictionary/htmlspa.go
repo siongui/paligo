@@ -3,7 +3,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"html/template"
 	"os"
@@ -21,18 +20,6 @@ type TemplateData struct {
 	OgImage     string
 	OgUrl       string
 	OgLocale    string
-}
-
-func LoadJsonConfig(fp string) (conf map[string]string, err error) {
-	f, err := os.Open(fp)
-	if err != nil {
-		return
-	}
-	defer f.Close()
-
-	dec := json.NewDecoder(f)
-	err = dec.Decode(&conf)
-	return
 }
 
 func CreateIndexAnd404(tmpl *template.Template, data TemplateData, locale, websiteDir string) (err error) {
@@ -72,11 +59,11 @@ func main() {
 	pathconffile := flag.String("pathconf", "", "JSON config file for build path")
 	flag.Parse()
 
-	siteconf, err := LoadJsonConfig(*siteconffile)
+	siteconf, err := util.LoadJsonConfig(*siteconffile)
 	if err != nil {
 		panic(err)
 	}
-	pathconf, err := LoadJsonConfig(*pathconffile)
+	pathconf, err := util.LoadJsonConfig(*pathconffile)
 	if err != nil {
 		panic(err)
 	}
