@@ -4,6 +4,7 @@ import (
 	"flag"
 
 	"github.com/siongui/gopalilib/dicutil"
+	"github.com/siongui/gopalilib/util"
 	"github.com/siongui/gopherjs-i18n/tool"
 )
 
@@ -27,10 +28,17 @@ const poJsonPath = websiteDir + "/po.json"
 
 func main() {
 	action := flag.String("action", "", "What kind of action?")
+	pathconffile := flag.String("pathconf", "", "JSON config file for build path")
 	flag.Parse()
 
+	pathconf, err := util.LoadJsonConfig(*pathconffile)
+	if err != nil {
+		panic(err)
+	}
+
 	if *action == "symlink" {
-		err := dicutil.SymlinkToRootIndexHtml(websiteDir)
+		println(pathconf["websiteDir"])
+		err := dicutil.SymlinkToRootIndexHtml(pathconf["websiteDir"])
 		if err != nil {
 			panic(err)
 		}

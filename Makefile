@@ -92,7 +92,7 @@ about_symlink: dir
 symlink: about_symlink
 	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
 	@echo "" > $(WEBSITE_DIR)/.nojekyll
-	@go run dictionary/dicsetup.go -action=symlink
+	@go run dictionary/dicsetup.go -action=symlink -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 
 dir:
 	@echo "\033[92mCreate website directory if not exists ...\033[0m"
