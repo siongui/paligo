@@ -11,22 +11,23 @@ addons:
     - gettext
 install:
   - make install
-  - travis_wait mvn install
 script:
-  # build website/ content for dictionary.online-dhamma.net first
   - make po2mo
+  # build website/ content for dictionary.online-dhamma.net
   - make dir
   - make html
   - make js
   - make cname
   - make symlink
-  # copy dictionary.online-dhamma.net content to website2/
+  # move dictionary.online-dhamma.net content to website2/
   # website2/ contains the content of dictionary.online-dhamma.net
-  # ref for copy symlink: https://unix.stackexchange.com/a/56170
-  - cp -RP website/ website2
-  # overwrite website/ content such that it becomes content of dictionary.sutta.org
-  - echo "dictionary.sutta.org" > website/CNAME
+  - move website/ website2
+  # build website/ content for dictionary.sutta.org
+  - make dir
   - make htmlsutta
+  - make js
+  - echo "dictionary.sutta.org" > website/CNAME
+  - make symlink
 # website/ is for dictionary.sutta.org, and website2 is for dictionary.online-dhamma.net
 deploy:
   - provider: pages
