@@ -36,7 +36,6 @@ deploy:
     local_dir: website2
     on:
       branch: master
-    verbose: true
     fqdn: dictionary.online-dhamma.net
   - provider: pages
     repo: siongui/dictionary.sutta.org
@@ -45,5 +44,4 @@ deploy:
     local_dir: website
     on:
       branch: master
-    verbose: true
     fqdn: dictionary.sutta.org
