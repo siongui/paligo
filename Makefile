@@ -60,14 +60,8 @@ htmldhamma:
 
 html:
 	@echo "\033[92mGenerating HTML ...\033[0m"
-ifneq ($(call ifdef_any_of,TRAVIS GITLAB_CI),)
-ifdef TRAVIS
-	#FIXME: better way to do one build two deployment on TRAVIS?
-	make htmldhamma
-endif
 ifdef GITLAB_CI
 	go run dictionary/htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/siongui.gitlab.io-pali-dictionary.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
-endif
 else
 	@go run dictionary/htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/empty-siteurl.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 endif
@@ -89,13 +83,14 @@ succinct_trie:
 	@echo "\033[92mBuilding Succinct Trie ...\033[0m"
 	@go run dictionary/dicsetup.go -action=triebuild
 
-about_symlink: dir
+nojekyll: dir
+	@echo "\033[92mMaking symbolic links works on GitHub Pages ...\033[0m"
+	@touch $(WEBSITE_DIR)/.nojekyll
+about_symlink: nojekyll
 	@echo "\033[92mMaking symbolic link for about page ...\033[0m"
 	@cd $(WEBSITE_ABOUT_DIR); [ -f index.html ] || ln -s ../index.html index.html
-
 symlink: about_symlink
 	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
-	echo "" > $(WEBSITE_DIR)/.nojekyll
 	go run dictionary/dicsetup.go -action=symlink -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 
 tarsym:

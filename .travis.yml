@@ -15,33 +15,32 @@ script:
   - make po2mo
   # build website/ content for dictionary.online-dhamma.net
   - make dir
-  - make html
+  - make htmldhamma
   - make js
-  #- make cname-dhamma
-  - make symlink
-  # move dictionary.online-dhamma.net content to website2/
+  - make about_symlink
+  # move dictionary.online-dhamma.net to website2/
   - mv website/ website2
   # build website/ content for dictionary.sutta.org
   - make dir
   - make htmlsutta
   - make js
-  #- make cname-sutta
-  - make symlink
-# website/ is dictionary.sutta.org, and website2/ is dictionary.online-dhamma.net
+  - make about_symlink
 deploy:
   - provider: pages
     repo: siongui/dictionary.online-dhamma.net
+    fqdn: dictionary.online-dhamma.net
     skip_cleanup: true
+    keep_history: true
     github_token: $GITHUB_TOKEN
     local_dir: website2
     on:
       branch: master
-    fqdn: dictionary.online-dhamma.net
   - provider: pages
     repo: siongui/dictionary.sutta.org
+    fqdn: dictionary.sutta.org
     skip_cleanup: true
+    keep_history: true
     github_token: $GITHUB_TOKEN
     local_dir: website
     on:
       branch: master
-    fqdn: dictionary.sutta.org
