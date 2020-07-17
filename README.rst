@@ -110,11 +110,43 @@ See
 - `Environment Variables - Travis CI <https://docs.travis-ci.com/user/environment-variables/>`_
 
 
+The Pali dictionary has more than 200K+ words, and each words has its webpage.
+So totally there are 200K+ symlinks pointing to the root *index.html*. We can
+create symlinks on Travis CI build, and Travis CI can deploy to GitHub Pages
+after build success without problem. But after I add sub-sites for *en_US*,
+*zh_TW*, *vi_VN*, and *fr_FR*, Travis CI cannot successfully deploy to GitHub
+Pages after build success. This is because each sub-sites also has 200K+ pages,
+totally we have 1M+ pages/symlinks in the repo. To handle so many symlinks,
+Travis CI output nothing in 10 minutes so the deployment fails because 10 min
+no output constraint.
+
+The workaround is - the first time deployment is manually done. I create
+symlinks for all webpages (more than 1M+ symlinks) on my local Ubuntu machine,
+and push the whole repo to remote gh-pages branch of GitHub repo. The following
+is git instructions for first-time deployment [9]_:
+
+.. code-block:: bash
+
+  $ cd (website-directory)
+  $ git init
+  $ git add .
+  $ git commit -m "Initial commit"
+  $ git remote add origin <url>
+  $ git push --force --set-upstream origin master:gh-pages
+
+The following deployment can be done on Travis CI without creating symlinks in
+Travis build. Disable default “force push” behavior by setting *keep_history*
+option to *true*, so the created symlinks will be kept.
+
+
 Deploy to GitLab Pages
 ++++++++++++++++++++++
 
 See `.gitlab-ci.yml <.gitlab-ci.yml>`_ and
 `setup/dicsetup.go <setup/dicsetup.go>`_ (set SiteUrl)
+
+GitLab CI always fail to deploy to GitLab Pages, even if Travis CI can deploy
+without problem without sub-sites. No solution for now.
 
 
 Bootstrap Website (Optional)
@@ -186,6 +218,9 @@ References
 .. [8] | One Travis CI build deploy to two repository
        | `Github deployments are broken when deploying to multiple repositories · Issue #928 · travis-ci/dpl · GitHub <https://github.com/travis-ci/dpl/issues/928>`_
        | `Deploying to Multiple Providers - Deployment - Travis CI <https://docs.travis-ci.com/user/deployment#deploying-to-multiple-providers>`_
+
+.. [9] | `version control - How to reset a remote Git repository to remove all commits? - Stack Overflow <https://stackoverflow.com/a/2006252>`_
+       | `git - Push local master commits to remote branch - Stack Overflow <https://stackoverflow.com/a/3206144>`_
 
 
 .. _Pāli Dictionary: https://siongui.github.io/pali-dictionary/
