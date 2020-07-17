@@ -36,6 +36,7 @@ deploy:
     local_dir: website2
     on:
       branch: master
+    verbose: true
   - provider: pages
     repo: siongui/dictionary.sutta.org
     skip_cleanup: true
@@ -43,3 +44,4 @@ deploy:
     local_dir: website
     on:
       branch: master
+    verbose: true
