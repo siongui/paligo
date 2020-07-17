@@ -35,7 +35,11 @@ devserver: fmt html js about_symlink
 
 cname:
 	@echo "\033[92mCreate CNAME for GitHub Pages custom domain ...\033[0m"
-	echo "dictionary.online-dhamma.net" > $(WEBSITE_DIR)/CNAME
+	echo "$(CNAME)" > $(WEBSITE_DIR)/CNAME
+cname-dhamma:
+	CNAME=dictionary.online-dhamma.net make cname
+cname-sutta:
+	CNAME=dictionary.sutta.org make cname
 
 js:
 	@echo "\033[92mGenerating JavaScript ...\033[0m"

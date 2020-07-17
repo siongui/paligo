@@ -17,7 +17,7 @@ script:
   - make dir
   - make html
   - make js
-  #- make cname
+  #- make cname-dhamma
   - make symlink
   # move dictionary.online-dhamma.net content to website2/
   - mv website/ website2
@@ -25,7 +25,7 @@ script:
   - make dir
   - make htmlsutta
   - make js
-  #- echo "dictionary.sutta.org" > website/CNAME
+  #- make cname-sutta
   - make symlink
 # website/ is dictionary.sutta.org, and website2/ is dictionary.online-dhamma.net
 deploy:
