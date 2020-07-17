@@ -93,13 +93,14 @@ symlink: about_symlink
 	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
 	echo "" > $(WEBSITE_DIR)/.nojekyll
 	go run dictionary/dicsetup.go -action=symlink -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
-	make tarsym
 
 tarsym:
-	@echo "\033[92mtar symbolic link for fast deployment ...\033[0m"
+	# tar/untar will NOT speep up the deployment, i.e., tar/untar will not
+	# faster than make symlinks directly. do not use this make target.
+	@echo "\033[92mtar symbolic link for deployment ...\033[0m"
 	#cd $(WEBSITE_DIR); tar -cvf browse.tar browse/
 	cd $(WEBSITE_DIR); tar -cf browse.tar browse/
-	@echo "\033[92muntar symbolic link for fast deployment ...\033[0m"
+	@echo "\033[92muntar symbolic link for deployment ...\033[0m"
 	#cd $(WEBSITE_DIR)/zh_TW/; tar -xvf ../browse.tar
 	cd $(WEBSITE_DIR)/zh_TW/; tar -xf ../browse.tar
 	cd $(WEBSITE_DIR)/en_US/; tar -xf ../browse.tar

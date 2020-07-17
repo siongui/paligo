@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	//	"path"
-	//	"strings"
+	"path"
+	"strings"
 
 	"github.com/siongui/gopalilib/dicutil"
 	"github.com/siongui/gopalilib/util"
@@ -45,17 +45,15 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		/*
-			locales := strings.Split(pathconf["supportedLocales"], ",")
-			for _, locale := range locales {
-				dir := path.Join(pathconf["websiteDir"], locale)
-				fmt.Println(dir)
-				err := dicutil.SymlinkToRootIndexHtml(dir)
-				if err != nil {
-					panic(err)
-				}
+		locales := strings.Split(pathconf["supportedLocales"], ",")
+		for _, locale := range locales {
+			dir := path.Join(pathconf["websiteDir"], locale)
+			fmt.Println(dir)
+			err := dicutil.SymlinkToRootIndexHtml(dir)
+			if err != nil {
+				panic(err)
 			}
-		*/
+		}
 	}
 
 	if *action == "parsebooks" {
