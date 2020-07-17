@@ -25,22 +25,22 @@ script:
   - make htmlsutta
   - make js
   - make about_symlink
-deploy:
-  - provider: pages
-    repo: siongui/dictionary.online-dhamma.net
-    fqdn: dictionary.online-dhamma.net
-    skip_cleanup: true
-    keep_history: true
-    github_token: $GITHUB_TOKEN
-    local_dir: website2
-    on:
-      branch: master
-  - provider: pages
-    repo: siongui/dictionary.sutta.org
-    fqdn: dictionary.sutta.org
-    skip_cleanup: true
-    keep_history: true
-    github_token: $GITHUB_TOKEN
-    local_dir: website
-    on:
-      branch: master
+#deploy:
+#  - provider: pages
+#    repo: siongui/dictionary.online-dhamma.net
+#    fqdn: dictionary.online-dhamma.net
+#    skip_cleanup: true
+#    keep_history: true
+#    github_token: $GITHUB_TOKEN
+#    local_dir: website2
+#    on:
+#      branch: master
+#  - provider: pages
+#    repo: siongui/dictionary.sutta.org
+#    fqdn: dictionary.sutta.org
+#    skip_cleanup: true
+#    keep_history: true
+#    github_token: $GITHUB_TOKEN
+#    local_dir: website
+#    on:
+#      branch: master

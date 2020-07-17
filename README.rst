@@ -120,10 +120,10 @@ totally we have 1M+ pages/symlinks in the repo. To handle so many symlinks,
 Travis CI output nothing in 10 minutes so the deployment fails because 10 min
 no output constraint.
 
-The workaround is - the first time deployment is manually done. I create
-symlinks for all webpages (more than 1M+ symlinks) on my local Ubuntu machine,
-and push the whole repo to remote gh-pages branch of GitHub repo. The following
-is git instructions for first-time deployment [9]_:
+The workaround I thought is - the first time deployment is manually done. I
+create symlinks for all webpages (more than 1M+ symlinks) on my local Ubuntu
+machine, and push the whole repo to remote gh-pages branch of GitHub repo. The
+following is git instructions for first-time deployment [9]_:
 
 .. code-block:: bash
 
@@ -136,7 +136,10 @@ is git instructions for first-time deployment [9]_:
 
 The following deployment can be done on Travis CI without creating symlinks in
 Travis build. Disable default “force push” behavior by setting *keep_history*
-option to *true*, so the created symlinks will be kept.
+option to *true*, so the created symlinks will be kept (at least I thought).
+
+The workaround I think does not work. Travis CI will remove all symlinks and
+keeps only real files. No solution so far. Need more investigation.
 
 
 Deploy to GitLab Pages
