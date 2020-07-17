@@ -28,10 +28,31 @@ DICTIONARY_CONF_DIR=dictionary/config/
 
 
 # html must run before about_symlink. otherwise make symlink will fail
-devserver: fmt html js about_symlink
+devserver: fmt dir html js about_symlink
 	@# https://stackoverflow.com/a/5947779
 	@echo "\033[92mDevelopment Server Running ...\033[0m"
 	@go run devserver.go
+
+make-dhamma: dir htmldhamma js symlink cname-dhamma
+make-sutta: dir htmlsutta js symlink cname-sutta
+
+printurl:
+	@echo "\033[92mURL\033[0m": https://github.com/$(USERREPO)
+	@echo "\033[92mHTTPS GIT\033[0m": https://github.com/$(USERREPO).git
+TMPDIR=../mytmp
+deploy:
+	USERREPO="$(USERREPO)" make printurl
+	mv $(WEBSITE_DIR) $(TMPDIR)
+	cd $(TMPDIR); git init
+	cd $(TMPDIR); git add .
+	cd $(TMPDIR); git commit -m "Initial commit"
+	cd $(TMPDIR); git remote add origin https://github.com/$(USERREPO).git
+	cd $(TMPDIR); git push --force --set-upstream origin master:gh-pages
+	rm -rf $(TMPDIR)
+q-sutta:
+	@USERREPO="siongui/dictionary.sutta.org" make deploy
+q-dhamma:
+	@USERREPO="siongui/dictionary.online-dhamma.net" make deploy
 
 cname:
 	@echo "\033[92mCreate CNAME for GitHub Pages custom domain ...\033[0m"
