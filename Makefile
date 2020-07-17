@@ -91,9 +91,20 @@ about_symlink: dir
 
 symlink: about_symlink
 	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
-	@echo "" > $(WEBSITE_DIR)/.nojekyll
-	@go run dictionary/dicsetup.go -action=symlink -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	echo "" > $(WEBSITE_DIR)/.nojekyll
+	go run dictionary/dicsetup.go -action=symlink -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	make tarsym
 
+tarsym:
+	@echo "\033[92mtar symbolic link for fast deployment ...\033[0m"
+	#cd $(WEBSITE_DIR); tar -cvf browse.tar browse/
+	cd $(WEBSITE_DIR); tar -cf browse.tar browse/
+	@echo "\033[92muntar symbolic link for fast deployment ...\033[0m"
+	#cd $(WEBSITE_DIR)/zh_TW/; tar -xvf ../browse.tar
+	cd $(WEBSITE_DIR)/zh_TW/; tar -xf ../browse.tar
+	cd $(WEBSITE_DIR)/en_US/; tar -xf ../browse.tar
+	cd $(WEBSITE_DIR)/vi_VN/; tar -xf ../browse.tar
+	cd $(WEBSITE_DIR)/fr_FR/; tar -xf ../browse.tar
 dir:
 	@echo "\033[92mCreate website directory if not exists ...\033[0m"
 	@[ -d $(WEBSITE_JSON_DIR) ] || mkdir -p $(WEBSITE_JSON_DIR)
