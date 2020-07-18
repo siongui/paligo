@@ -19,25 +19,6 @@ script:
   - mv website/ website2
   # build website/ content for dictionary.sutta.org
   - make make-sutta
-deploy:
-  - provider: pages:git
-    repo: siongui/dictionary.online-dhamma.net
-    skip_cleanup: true
-    token: $GITHUB_TOKEN
-    local_dir: website2
-    on:
-      branch: master
-    edge: true
-    verbose: true
-  - provider: pages:git
-    repo: siongui/dictionary.sutta.org
-    skip_cleanup: true
-    token: $GITHUB_TOKEN
-    local_dir: website
-    on:
-      branch: master
-    edge: true
-    verbose: true
 #deploy:
 #  - provider: pages
 #    repo: siongui/dictionary.online-dhamma.net
