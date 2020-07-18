@@ -86,14 +86,19 @@ qw-dhamma:
 ###############################
 # https://docs.travis-ci.com/user/deployment/custom/
 # https://stackoverflow.com/questions/18935539/authenticate-with-github-using-a-token
+# How do I avoid the specification of the username and password at every git push?
+# https://stackoverflow.com/a/48854773
+# How to set up TravisCI for projects that push back to github
+# https://gist.github.com/willprice/e07efd73fb7f13f917ea
+# What is /dev/null 2>&1? https://stackoverflow.com/a/10508862
 travis_deploy:
 	cd $(TDDIR); git init
 	cd $(TDDIR); git add .
-	cd $(TDDIR); git commit -m "Initial commit"
-	cd $(TDDIR); git remote add origin https://siongui:$(GITHUB_TOKEN)@github.com/$(USERREPO).git
+	cd $(TDDIR); git commit -m "Initial commit" --quiet
+	cd $(TDDIR); git remote add origin https://siongui:$(GITHUB_TOKEN)@github.com/$(USERREPO).git > /dev/null 2>&1
 	cd $(TDDIR); git push --force --set-upstream origin master:gh-pages
 custom_github_pages_deploy:
-	@USERREPO="siongui/dictionary.sutta.org" TDDIR="website" make deploy
+	@USERREPO="siongui/dictionary.sutta.org" TDDIR="website" make travis_deploy
 	@#USERREPO="siongui/dictionary.online-dhamma.net" TDDIR="website2" make deploy
 ######################################
 # End of Travis CI Custom Deployment #
