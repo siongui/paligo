@@ -81,6 +81,24 @@ qw-dhamma:
 # End of GitHub Deploy #
 ########################
 
+###############################
+# Travis CI Custom Deployment #
+###############################
+# https://docs.travis-ci.com/user/deployment/custom/
+# https://stackoverflow.com/questions/18935539/authenticate-with-github-using-a-token
+travis_deploy:
+	cd $(TDDIR); git init
+	cd $(TDDIR); git add .
+	cd $(TDDIR); git commit -m "Initial commit"
+	cd $(TDDIR); git remote add origin https://siongui:$(GITHUB_TOKEN)@github.com/$(USERREPO).git
+	cd $(TDDIR); git push --force --set-upstream origin master:gh-pages
+custom_github_pages_deploy:
+	@USERREPO="siongui/dictionary.sutta.org" TDDIR="website" make deploy
+	@#USERREPO="siongui/dictionary.online-dhamma.net" TDDIR="website2" make deploy
+######################################
+# End of Travis CI Custom Deployment #
+######################################
+
 
 ############################
 # Build Dictionary Website #

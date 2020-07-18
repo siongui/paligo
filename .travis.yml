@@ -17,7 +17,9 @@ script:
   # move dictionary.online-dhamma.net to website2/
   - mv website/ website2
   # build website/ content for dictionary.sutta.org
-  - make make-sutta-basic
+  - make make-sutta
+after_success:
+  - make custom_github_pages_deploy
 # dpl v2
 #deploy:
 #  - provider: pages:git
