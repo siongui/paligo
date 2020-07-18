@@ -14,36 +14,30 @@ install:
 script:
   - make po2mo
   # build website/ content for dictionary.online-dhamma.net
-  - make dir
-  - make htmldhamma
-  - make js
-  - make about_symlink
-  - make cname-dhamma
+  - make make-dhamma
   # move dictionary.online-dhamma.net to website2/
   - mv website/ website2
   # build website/ content for dictionary.sutta.org
-  - make dir
-  - make htmlsutta
-  - make js
-  - make about_symlink
-  - make cname-sutta
-deploy:
-  - provider: pages:git
-    repo: siongui/dictionary.online-dhamma.net
-    token: $GITHUB_TOKEN
-    local_dir: website2
-    on:
-      branch: master
-    edge: true
-    verbose: true
-  - provider: pages:git
-    repo: siongui/dictionary.sutta.org
-    token: $GITHUB_TOKEN
-    local_dir: website
-    on:
-      branch: master
-    edge: true
-    verbose: true
+  - make make-sutta
+# dpl v2
+#deploy:
+#  - provider: pages:git
+#    repo: siongui/dictionary.online-dhamma.net
+#    token: $GITHUB_TOKEN
+#    local_dir: website2
+#    on:
+#      branch: master
+#    edge: true
+#    verbose: true
+#  - provider: pages:git
+#    repo: siongui/dictionary.sutta.org
+#    token: $GITHUB_TOKEN
+#    local_dir: website
+#    on:
+#      branch: master
+#    edge: true
+#    verbose: true
+# dpl v1
 #deploy:
 #  - provider: pages
 #    repo: siongui/dictionary.online-dhamma.net
