@@ -16,13 +16,7 @@ pages:
   - make download_go
   - make install
   - make po2mo
-  - make dir
-  - make html
-  - make js
-  # The following line will make page deploy job fail (but build ok)
-  #- make symlink
-  - mv website/ public/
-  - "echo -e 'User-agent: *\nDisallow: /' > public/robots.txt"
+  - make make-gitlab
   artifacts:
     paths:
     - public/
