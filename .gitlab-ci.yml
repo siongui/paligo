@@ -15,7 +15,7 @@ pages:
   #- make clone_pali_data
   - make download_go
   - make install
-  - make make-gitlab
+  - make make-gitlab-basic
   artifacts:
     paths:
     - public/

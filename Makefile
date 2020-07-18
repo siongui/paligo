@@ -27,11 +27,15 @@ devserver: fmt dir html js about_symlink
 	@echo "\033[92mDevelopment Server Running ...\033[0m"
 	@go run devserver.go
 
-#make-gitlab: rmsite dir html js symlink
-make-gitlab: rmsite dir html js about_symlink
+
+make-gitlab-basic: rmsite dir html js about_symlink gitlab-specific
+make-gitlab: rmsite dir html js symlink gitlab-specific
+gitlab-specific:
 	mv $(WEBSITE_DIR) public/
 	echo -e 'User-agent: *\nDisallow: /' > public/robots.txt
+make-dhamma-basic: rmsite dir htmldhamma js about_symlink cname-dhamma
 make-dhamma: rmsite dir htmldhamma js symlink cname-dhamma
+make-sutta-basic: rmsite dir htmlsutta js about_symlink cname-sutta
 make-sutta: rmsite dir htmlsutta js symlink cname-sutta
 rmsite:
 	@echo "\033[92mRemove $(WEBSITE_DIR)\033[0m"
