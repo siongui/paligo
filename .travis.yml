@@ -14,21 +14,14 @@ install:
 script:
   - make po2mo
   # build website/ content for dictionary.online-dhamma.net
-  - make dir
-  - make htmldhamma
-  - make js
-  - make about_symlink
+  - make make-dhamma
   # move dictionary.online-dhamma.net to website2/
   - mv website/ website2
   # build website/ content for dictionary.sutta.org
-  - make dir
-  - make htmlsutta
-  - make js
-  - make about_symlink
+  - make make-sutta
 #deploy:
 #  - provider: pages
 #    repo: siongui/dictionary.online-dhamma.net
-#    fqdn: dictionary.online-dhamma.net
 #    skip_cleanup: true
 #    keep_history: true
 #    github_token: $GITHUB_TOKEN
@@ -37,7 +30,6 @@ script:
 #      branch: master
 #  - provider: pages
 #    repo: siongui/dictionary.sutta.org
-#    fqdn: dictionary.sutta.org
 #    skip_cleanup: true
 #    keep_history: true
 #    github_token: $GITHUB_TOKEN

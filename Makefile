@@ -51,6 +51,7 @@ deploy:
 	cd $(TMPDIR); git remote add origin https://github.com/$(USERREPO).git
 	cd $(TMPDIR); git push --force --set-upstream origin master:gh-pages
 	rm -rf $(TMPDIR)
+	USERREPO="$(USERREPO)" make printurl
 q-sutta:
 	@USERREPO="siongui/dictionary.sutta.org" make deploy
 q-dhamma:
