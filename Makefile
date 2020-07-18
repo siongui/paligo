@@ -60,6 +60,21 @@ q-sutta:
 	@USERREPO="siongui/dictionary.sutta.org" make deploy
 q-dhamma:
 	@USERREPO="siongui/dictionary.online-dhamma.net" make deploy
+pagebuild:
+	# Request a GitHub Pages build
+	# https://docs.github.com/en/rest/reference/repos#pages
+	# https://docs.github.com/en/rest/overview/other-authentication-methods
+	@echo "\033[92mRequest a GitHub Pages build ...\033[0m"
+	echo "\033[92m/repos/$(USERREPO)/pages/builds\033[0m"
+	curl -u $(USER) https://api.github.com/user \
+		-X POST \
+		-H "Accept: application/vnd.github.v3+json" \
+		https://api.github.com/repos/$(USERREPO)/pages/builds
+qw-sutta:
+	@USERREPO="siongui/dictionary.sutta.org" USER=$(USER) make pagebuild
+qw-dhamma:
+	@USERREPO="siongui/dictionary.online-dhamma.net" USER=$(USER) make pagebuild
+
 
 cname:
 	@echo "\033[92mCreate CNAME for GitHub Pages custom domain ...\033[0m"
