@@ -1,12 +1,6 @@
 # cannot use relative path in GOROOT, otherwise 6g not found. For example,
 #   export GOROOT=../go  (=> 6g not found)
 # it is also not allowed to use relative path in GOPATH
-
-# Complex conditions check in Makefile
-# https://stackoverflow.com/a/5586785
-ifndef_any_of = $(filter undefined,$(foreach v,$(1),$(origin $(v))))
-ifdef_any_of = $(filter-out undefined,$(foreach v,$(1),$(origin $(v))))
-
 GO_VERSION=1.12.17
 ifndef TRAVIS
 	# set environment variables on local machine or GitLab CI
@@ -97,12 +91,8 @@ cname-sutta:
 
 js:
 	@echo "\033[92mGenerating JavaScript ...\033[0m"
-# ifdef TRAVIS || GITLAB_CI
-ifneq ($(call ifdef_any_of,TRAVIS GITLAB_CI),)
+	@#gopherjs build gopherjs/*.go -o $(WEBSITE_DIR)/pali.js ; exit
 	@gopherjs build gopherjs/*.go -m -o $(WEBSITE_DIR)/pali.js
-else
-	@gopherjs build gopherjs/*.go -o $(WEBSITE_DIR)/pali.js
-endif
 
 htmlsutta:
 	@echo "\033[92mGenerating HTML for dictionary.sutta.org ...\033[0m"
