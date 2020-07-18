@@ -42,6 +42,11 @@ make-sutta: rmsite dir htmlsutta js symlink cname-sutta
 rmsite:
 	@echo "\033[92mRemove $(WEBSITE_DIR)\033[0m"
 	rm -rf $(WEBSITE_DIR)
+
+
+#################
+# GitHub Deploy #
+#################
 printurl:
 	@echo "\033[92mURL\033[0m": https://github.com/$(USERREPO)
 	@echo "\033[92mHTTPS GIT\033[0m": https://github.com/$(USERREPO).git
@@ -74,8 +79,14 @@ qw-sutta:
 	@USERREPO="siongui/dictionary.sutta.org" USER=$(USER) make pagebuild
 qw-dhamma:
 	@USERREPO="siongui/dictionary.online-dhamma.net" USER=$(USER) make pagebuild
+########################
+# End of GitHub Deploy #
+########################
 
 
+############################
+# Build Dictionary Website #
+############################
 cname:
 	@echo "\033[92mCreate CNAME for GitHub Pages custom domain ...\033[0m"
 	echo "$(CNAME)" > $(WEBSITE_DIR)/CNAME
@@ -109,7 +120,28 @@ else
 	@go run dictionary/htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/empty-siteurl.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 endif
 
+nojekyll: dir
+	@echo "\033[92mMaking symbolic links works on GitHub Pages ...\033[0m"
+	@touch $(WEBSITE_DIR)/.nojekyll
+about_symlink: nojekyll
+	@echo "\033[92mMaking symbolic link for about page ...\033[0m"
+	@cd $(WEBSITE_ABOUT_DIR); [ -f index.html ] || ln -s ../index.html index.html
+symlink: about_symlink
+	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
+	go run dictionary/dicsetup.go -action=symlink -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 
+dir:
+	@echo "\033[92mCreate website directory if not exists ...\033[0m"
+	@[ -d $(WEBSITE_JSON_DIR) ] || mkdir -p $(WEBSITE_JSON_DIR)
+	@[ -d $(WEBSITE_ABOUT_DIR) ] || mkdir -p $(WEBSITE_ABOUT_DIR)
+###################################
+# End of Build Dictionary Website #
+###################################
+
+
+###################################################
+# Boostrap Website (only once, not daily routine) #
+###################################################
 parsebooks: dir
 	@echo "\033[92mParse Dictionary Books Information ...\033[0m"
 	@go run dictionary/dicsetup.go -action=parsebooks
@@ -126,44 +158,25 @@ succinct_trie:
 	@echo "\033[92mBuilding Succinct Trie ...\033[0m"
 	@go run dictionary/dicsetup.go -action=triebuild
 
-nojekyll: dir
-	@echo "\033[92mMaking symbolic links works on GitHub Pages ...\033[0m"
-	@touch $(WEBSITE_DIR)/.nojekyll
-about_symlink: nojekyll
-	@echo "\033[92mMaking symbolic link for about page ...\033[0m"
-	@cd $(WEBSITE_ABOUT_DIR); [ -f index.html ] || ln -s ../index.html index.html
-symlink: about_symlink
-	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
-	go run dictionary/dicsetup.go -action=symlink -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+twpo2cn:
+	@echo "\033[92mConverting zh_TW PO files to zh_CN ...\033[0m"
+	@#FIXME: go run setup/twpo2cn.go -tw=$(LOCALE_DIR)/zh_TW/LC_MESSAGES/messages.po -cn=$(LOCALE_DIR)/zh_CN/LC_MESSAGES/messages.po
 
-tarsym:
-	# tar/untar will NOT speep up the deployment, i.e., tar/untar will not
-	# faster than make symlinks directly. do not use this make target.
-	@echo "\033[92mtar symbolic link for deployment ...\033[0m"
-	#cd $(WEBSITE_DIR); tar -cvf browse.tar browse/
-	cd $(WEBSITE_DIR); tar -cf browse.tar browse/
-	@echo "\033[92muntar symbolic link for deployment ...\033[0m"
-	#cd $(WEBSITE_DIR)/zh_TW/; tar -xvf ../browse.tar
-	cd $(WEBSITE_DIR)/zh_TW/; tar -xf ../browse.tar
-	cd $(WEBSITE_DIR)/en_US/; tar -xf ../browse.tar
-	cd $(WEBSITE_DIR)/vi_VN/; tar -xf ../browse.tar
-	cd $(WEBSITE_DIR)/fr_FR/; tar -xf ../browse.tar
-dir:
-	@echo "\033[92mCreate website directory if not exists ...\033[0m"
-	@[ -d $(WEBSITE_JSON_DIR) ] || mkdir -p $(WEBSITE_JSON_DIR)
-	@[ -d $(WEBSITE_ABOUT_DIR) ] || mkdir -p $(WEBSITE_ABOUT_DIR)
-
-fmt:
-	@echo "\033[92mGo fmt source code...\033[0m"
-	@go fmt dictionary/*.go
-	@go fmt gopherjs/*.go
-	@go fmt *.go
-
-clone_pali_data:
-	@echo "\033[92mClone Pāli data Repo ...\033[0m"
-	@git clone https://github.com/siongui/data.git $(DATA_REPO_DIR) --depth=1
+po2mo:
+	# not used now. keep here for references
+	@echo "\033[92mmsgfmt PO to MO ...\033[0m"
+	msgfmt $(LOCALE_DIR)/zh_TW/LC_MESSAGES/messages.po -o $(LOCALE_DIR)/zh_TW/LC_MESSAGES/messages.mo
+	#@msgfmt $(LOCALE_DIR)/zh_CN/LC_MESSAGES/messages.po -o $(LOCALE_DIR)/zh_CN/LC_MESSAGES/messages.mo
+	msgfmt $(LOCALE_DIR)/vi_VN/LC_MESSAGES/messages.po -o $(LOCALE_DIR)/vi_VN/LC_MESSAGES/messages.mo
+	msgfmt $(LOCALE_DIR)/fr_FR/LC_MESSAGES/messages.po -o $(LOCALE_DIR)/fr_FR/LC_MESSAGES/messages.mo
+###########################
+# End of Boostrap Website #
+###########################
 
 
+###################
+# Install Library #
+###################
 install: lib_pali lib_gtmpl lib_ime_pali lib_gopherjs_i18n lib_gopherjs_input_suggest lib_paliDataVFS lib_gopherjs
 
 lib_pali:
@@ -193,17 +206,23 @@ lib_gopherjs_input_suggest:
 lib_gopherjs:
 	@echo "\033[92mInstalling GopherJS ...\033[0m"
 	go get -u github.com/gopherjs/gopherjs
+##########################
+# End of Install Library #
+##########################
 
-twpo2cn:
-	@echo "\033[92mConverting zh_TW PO files to zh_CN ...\033[0m"
-	@#FIXME: go run setup/twpo2cn.go -tw=$(LOCALE_DIR)/zh_TW/LC_MESSAGES/messages.po -cn=$(LOCALE_DIR)/zh_CN/LC_MESSAGES/messages.po
 
-po2mo:
-	@echo "\033[92mmsgfmt PO to MO ...\033[0m"
-	msgfmt $(LOCALE_DIR)/zh_TW/LC_MESSAGES/messages.po -o $(LOCALE_DIR)/zh_TW/LC_MESSAGES/messages.mo
-	#@msgfmt $(LOCALE_DIR)/zh_CN/LC_MESSAGES/messages.po -o $(LOCALE_DIR)/zh_CN/LC_MESSAGES/messages.mo
-	msgfmt $(LOCALE_DIR)/vi_VN/LC_MESSAGES/messages.po -o $(LOCALE_DIR)/vi_VN/LC_MESSAGES/messages.mo
-	msgfmt $(LOCALE_DIR)/fr_FR/LC_MESSAGES/messages.po -o $(LOCALE_DIR)/fr_FR/LC_MESSAGES/messages.mo
+########
+# Misc #
+########
+fmt:
+	@echo "\033[92mGo fmt source code...\033[0m"
+	@go fmt dictionary/*.go
+	@go fmt gopherjs/*.go
+	@go fmt *.go
+
+clone_pali_data:
+	@echo "\033[92mClone Pāli data Repo ...\033[0m"
+	@git clone https://github.com/siongui/data.git $(DATA_REPO_DIR) --depth=1
 
 clean:
 	@echo "\033[92mClean Repo ...\033[0m"

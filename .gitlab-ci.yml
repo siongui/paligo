@@ -15,7 +15,6 @@ pages:
   #- make clone_pali_data
   - make download_go
   - make install
-  - make po2mo
   - make make-gitlab
   artifacts:
     paths:

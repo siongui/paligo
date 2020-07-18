@@ -12,7 +12,6 @@ addons:
 install:
   - make install
 script:
-  - make po2mo
   # build website/ content for dictionary.online-dhamma.net
   - make make-dhamma
   # move dictionary.online-dhamma.net to website2/
