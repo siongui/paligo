@@ -33,16 +33,18 @@ devserver: fmt dir html js about_symlink
 	@echo "\033[92mDevelopment Server Running ...\033[0m"
 	@go run devserver.go
 
-make-dhamma: dir htmldhamma js symlink cname-dhamma
-make-sutta: dir htmlsutta js symlink cname-sutta
-
+make-dhamma: rmsite dir htmldhamma js symlink cname-dhamma
+make-sutta: rmsite dir htmlsutta js symlink cname-sutta
+rmsite:
+	@echo "\033[92mRemove $(WEBSITE_DIR)\033[0m"
+	rm -rf $(WEBSITE_DIR)
 printurl:
 	@echo "\033[92mURL\033[0m": https://github.com/$(USERREPO)
 	@echo "\033[92mHTTPS GIT\033[0m": https://github.com/$(USERREPO).git
-TMPDIR=../mytmp
+TMPDIR=$(WEBSITE_DIR)
 deploy:
 	USERREPO="$(USERREPO)" make printurl
-	mv $(WEBSITE_DIR) $(TMPDIR)
+	#mv $(WEBSITE_DIR) $(TMPDIR)
 	cd $(TMPDIR); git init
 	cd $(TMPDIR); git add .
 	cd $(TMPDIR); git commit -m "Initial commit"
