@@ -99,6 +99,14 @@ qw-dhamma:
 # What is /dev/null 2>&1? https://stackoverflow.com/a/10508862
 travis_deploy_to_github:
 	cd $(TDDIR); git init
+	# If "git all ." at once may cause 10min no output timeout
+	# To prevent timeout, git add sub-dir one by one
+	# https://stackoverflow.com/questions/13897945/wildcard-to-obtain-list-of-all-directories
+	# https://stackoverflow.com/questions/17834582/run-make-in-each-subdirectory
+	# http://kirste.userpage.fu-berlin.de/chemnet/use/info/make/make_8.html
+	cd $(TDDIR); for subdir in $(subst $(TDDIR)/,,$(wildcard $(TDDIR)/*/.)); do \
+		git add $$subdir ; \
+	done
 	cd $(TDDIR); git add .
 	# --quient is to prevent exceeded max log length on Travis CI
 	cd $(TDDIR); git commit -m "Initial commit" --quiet
