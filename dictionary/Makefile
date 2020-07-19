@@ -271,3 +271,4 @@ download_go:
 	@wget https://golang.org/dl/go$(GO_VERSION).linux-amd64.tar.gz
 	@tar -xvzf go$(GO_VERSION).linux-amd64.tar.gz
 	@rm go$(GO_VERSION).linux-amd64.tar.gz
+	@mv go/ ..

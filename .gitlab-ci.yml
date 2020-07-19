@@ -15,7 +15,6 @@ pages:
   - cd dictionary/
   #- make clone_pali_data
   - make download_go
-  - mv go/ ..
   - make install
   - make make-gitlab-basic
   artifacts:
