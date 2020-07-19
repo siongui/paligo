@@ -1,6 +1,6 @@
 {
     "supportedLocales": "en_US,zh_TW,vi_VN,fr_FR",
     "websiteDir": "website/",
-    "localeDir": "locale/",
+    "localeDir": "../locale/",
     "htmlTemplateDir": "theme/template/"
 }

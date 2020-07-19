@@ -2,19 +2,20 @@
 #   export GOROOT=../go  (=> 6g not found)
 # it is also not allowed to use relative path in GOPATH
 GO_VERSION=1.12.17
+PRJDIR=$(CURDIR)/../
+LOCALE_DIR=$(PRJDIR)/locale
 ifndef TRAVIS
 	# set environment variables on local machine or GitLab CI
-	export GOROOT=$(realpath ../go)
-	export GOPATH=$(realpath ../)
+	export GOROOT=$(realpath $(PRJDIR)/go)
+	export GOPATH=$(realpath $(PRJDIR))
 	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 endif
 
-WEBSITE_DIR=website
+WEBSITE_DIR=$(CURDIR)/website
 WEBSITE_JSON_DIR=$(WEBSITE_DIR)/json
 WEBSITE_ABOUT_DIR=$(WEBSITE_DIR)/about
-LOCALE_DIR=$(CURDIR)/../locale
 
-DATA_REPO_DIR=$(CURDIR)/../data
+DATA_REPO_DIR=$(PRJDIR)/data
 DICTIONARY_DATA_DIR=$(DATA_REPO_DIR)/dictionary
 DICTIONARY_CONF_DIR=$(CURDIR)/config/
 
@@ -23,7 +24,7 @@ DICTIONARY_CONF_DIR=$(CURDIR)/config/
 devserver: make-local-basic
 	@# https://stackoverflow.com/a/5947779
 	@echo "\033[92mDevelopment Server Running ...\033[0m"
-	@go run ../devserver.go
+	@go run $(PRJDIR)/devserver.go
 
 
 make-local-basic: fmt dir html js about_symlink
@@ -31,8 +32,8 @@ make-local: fmt dir html js symlink
 make-gitlab-basic: rmsite dir html js about_symlink gitlab-specific
 make-gitlab: rmsite dir html js symlink gitlab-specific
 gitlab-specific:
-	mv $(WEBSITE_DIR) ../public/
-	echo -e 'User-agent: *\nDisallow: /' > public/robots.txt
+	echo -e 'User-agent: *\nDisallow: /' > $(WEBSITE_DIR)/robots.txt
+	mv $(WEBSITE_DIR) $(PRJDIR)/public/
 make-dhamma-basic: rmsite dir htmldhamma js about_symlink cname-dhamma
 make-dhamma: rmsite dir htmldhamma js symlink cname-dhamma
 make-sutta-basic: rmsite dir htmlsutta js about_symlink cname-sutta
@@ -77,9 +78,9 @@ pagebuild:
 		-X POST \
 		-H "Accept: application/vnd.github.v3+json" \
 		https://api.github.com/repos/$(USERREPO)/pages/builds
-qw-sutta:
+rb-sutta:
 	@USERREPO="siongui/dictionary.sutta.org" USER=$(USER) make pagebuild
-qw-dhamma:
+rb-dhamma:
 	@USERREPO="siongui/dictionary.online-dhamma.net" USER=$(USER) make pagebuild
 #################################
 # End of Local Deploy to GitHub #
@@ -133,7 +134,7 @@ cname-sutta:
 
 js:
 	@echo "\033[92mGenerating JavaScript ...\033[0m"
-	@#gopherjs build gopherjs/*.go -o $(WEBSITE_DIR)/pali.js ; exit
+	@#gopherjs build gopherjs/*.go -o $(WEBSITE_DIR)/pali.js
 	@gopherjs build gopherjs/*.go -m -o $(WEBSITE_DIR)/pali.js
 
 htmlsutta:
@@ -248,7 +249,7 @@ lib_gopherjs:
 ########
 fmt:
 	@echo "\033[92mGo fmt source code...\033[0m"
-	@go fmt ../*.go
+	@go fmt $(PRJDIR)/*.go
 	@go fmt gopherjs/*.go
 	@go fmt *.go
 
@@ -271,4 +272,4 @@ download_go:
 	@wget https://golang.org/dl/go$(GO_VERSION).linux-amd64.tar.gz
 	@tar -xvzf go$(GO_VERSION).linux-amd64.tar.gz
 	@rm go$(GO_VERSION).linux-amd64.tar.gz
-	@mv go/ ..
+	@mv go/ $(PRJDIR)
