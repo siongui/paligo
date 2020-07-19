@@ -105,6 +105,7 @@ travis_deploy_to_github:
 	# https://stackoverflow.com/questions/17834582/run-make-in-each-subdirectory
 	# http://kirste.userpage.fu-berlin.de/chemnet/use/info/make/make_8.html
 	cd $(TDDIR); for subdir in $(subst $(TDDIR)/,,$(wildcard $(TDDIR)/*/.)); do \
+		echo $$subdir ; \
 		git add $$subdir ; \
 	done
 	cd $(TDDIR); git add .
