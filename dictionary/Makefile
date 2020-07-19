@@ -31,7 +31,7 @@ make-local: fmt dir html js symlink
 make-gitlab-basic: rmsite dir html js about_symlink gitlab-specific
 make-gitlab: rmsite dir html js symlink gitlab-specific
 gitlab-specific:
-	mv $(WEBSITE_DIR) public/
+	mv $(WEBSITE_DIR) ../public/
 	echo -e 'User-agent: *\nDisallow: /' > public/robots.txt
 make-dhamma-basic: rmsite dir htmldhamma js about_symlink cname-dhamma
 make-dhamma: rmsite dir htmldhamma js symlink cname-dhamma
