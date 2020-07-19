@@ -12,8 +12,10 @@ pages:
   # https://stackoverflow.com/a/58072486
   - apt-get update
   - apt-get install -y wget make git gettext
+  - cd dictionary/
   #- make clone_pali_data
   - make download_go
+  - mv go/ ..
   - make install
   - make make-gitlab-basic
   artifacts:

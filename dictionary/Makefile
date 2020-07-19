@@ -4,28 +4,26 @@
 GO_VERSION=1.12.17
 ifndef TRAVIS
 	# set environment variables on local machine or GitLab CI
-	export GOROOT=$(realpath ./go)
-	export GOPATH=$(realpath .)
+	export GOROOT=$(realpath ../go)
+	export GOPATH=$(realpath ../)
 	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 endif
 
 WEBSITE_DIR=website
 WEBSITE_JSON_DIR=$(WEBSITE_DIR)/json
 WEBSITE_ABOUT_DIR=$(WEBSITE_DIR)/about
-PRODUCTION_GITHUB_REPO=github.com/siongui/pali-dictionary
-PRODUCTION_DIR=src/$(PRODUCTION_GITHUB_REPO)
-LOCALE_DIR=locale
+LOCALE_DIR=$(CURDIR)/../locale
 
-DATA_REPO_DIR=$(CURDIR)/data
+DATA_REPO_DIR=$(CURDIR)/../data
 DICTIONARY_DATA_DIR=$(DATA_REPO_DIR)/dictionary
-DICTIONARY_CONF_DIR=dictionary/config/
+DICTIONARY_CONF_DIR=$(CURDIR)/config/
 
 
 # html must run before about_symlink. otherwise make symlink will fail
 devserver: make-local-basic
 	@# https://stackoverflow.com/a/5947779
 	@echo "\033[92mDevelopment Server Running ...\033[0m"
-	@go run devserver.go
+	@go run ../devserver.go
 
 
 make-local-basic: fmt dir html js about_symlink
@@ -140,18 +138,18 @@ js:
 
 htmlsutta:
 	@echo "\033[92mGenerating HTML for dictionary.sutta.org ...\033[0m"
-	go run dictionary/htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.sutta.org.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.sutta.org.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 
 htmldhamma:
 	@echo "\033[92mGenerating HTML for dictionary.online-dhamma.net ...\033[0m"
-	go run dictionary/htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.online-dhamma.net.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.online-dhamma.net.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 
 html:
 	@echo "\033[92mGenerating HTML ...\033[0m"
 ifdef GITLAB_CI
-	go run dictionary/htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/siongui.gitlab.io-pali-dictionary.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/siongui.gitlab.io-pali-dictionary.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 else
-	@go run dictionary/htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/empty-siteurl.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	@go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/empty-siteurl.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 endif
 
 nojekyll: dir
@@ -162,7 +160,7 @@ about_symlink: nojekyll
 	@cd $(WEBSITE_ABOUT_DIR); [ -f index.html ] || ln -s ../index.html index.html
 symlink: about_symlink
 	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
-	go run dictionary/dicsetup.go -action=symlink -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	go run dicsetup.go -action=symlink -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 
 dir:
 	@echo "\033[92mCreate website directory if not exists ...\033[0m"
@@ -178,19 +176,19 @@ dir:
 ###################################################
 parsebooks: dir
 	@echo "\033[92mParse Dictionary Books Information ...\033[0m"
-	@go run dictionary/dicsetup.go -action=parsebooks
+	@go run dicsetup.go -action=parsebooks
 
 parsewords: dir
 	@echo "\033[92mParse Dictionary Words ...\033[0m"
-	@go run dictionary/dicsetup.go -action=parsewords
+	@go run dicsetup.go -action=parsewords
 
 po2json:
 	@echo "\033[92mConverting PO files to JSON (to be used in client-side/browser) ...\033[0m"
-	@go run dictionary/dicsetup.go -action=po2json
+	@go run dicsetup.go -action=po2json
 
 succinct_trie:
 	@echo "\033[92mBuilding Succinct Trie ...\033[0m"
-	@go run dictionary/dicsetup.go -action=triebuild
+	@go run dicsetup.go -action=triebuild
 
 twpo2cn:
 	@echo "\033[92mConverting zh_TW PO files to zh_CN ...\033[0m"
@@ -250,7 +248,7 @@ lib_gopherjs:
 ########
 fmt:
 	@echo "\033[92mGo fmt source code...\033[0m"
-	@go fmt dictionary/*.go
+	@go fmt ../*.go
 	@go fmt gopherjs/*.go
 	@go fmt *.go
 

@@ -12,6 +12,7 @@ addons:
 install:
   - make install
 script:
+  - cd dictionary/
   # build website/ content for dictionary.online-dhamma.net
   - make make-dhamma
   # move dictionary.online-dhamma.net to website2/
