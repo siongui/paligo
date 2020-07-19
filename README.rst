@@ -111,8 +111,8 @@ See
 
 
 The Pali dictionary has more than 200K+ words, and each words has its webpage.
-So totally there are 200K+ symlinks pointing to the root *index.html*. We can
-create symlinks on Travis CI build, and Travis CI can deploy to GitHub Pages
+So totally there are 200K+ symlinks pointing to the root *index.html*. Symbolic
+links are created on Travis CI build, and Travis CI can deploy to GitHub Pages
 after build success without problem. But after I add sub-sites for *en_US*,
 *zh_TW*, *vi_VN*, and *fr_FR*, Travis CI cannot successfully deploy to GitHub
 Pages after build success. This is because each sub-sites also has 200K+ pages,
@@ -120,10 +120,8 @@ totally we have 1M+ pages/symlinks in the repo. To handle so many symlinks,
 Travis CI output nothing in 10 minutes so the deployment fails because 10 min
 no output constraint.
 
-The workaround I thought is - the first time deployment is manually done. I
-create symlinks for all webpages (more than 1M+ symlinks) on my local Ubuntu
-machine, and push the whole repo to remote gh-pages branch of GitHub repo. The
-following is git instructions for first-time deployment [9]_:
+I tried to deploy the website on my local Ubuntu machine, and after some
+investigation [9]_, I successfully deploy to GitHub Pages:
 
 .. code-block:: bash
 
@@ -134,12 +132,19 @@ following is git instructions for first-time deployment [9]_:
   $ git remote add origin <url>
   $ git push --force --set-upstream origin master:gh-pages
 
-The following deployment can be done on Travis CI without creating symlinks in
-Travis build. Disable default “force push” behavior by setting *keep_history*
-option to *true*, so the created symlinks will be kept (at least I thought).
+Even if the website is deployed to GitHub, the GitHub Pages build may fail due
+to unknown timeout, so we can request a re-build as follows [10]_:
 
-The workaround I think does not work. Travis CI will remove all symlinks and
-keeps only real files. No solution so far. Need more investigation.
+.. code-block:: bash
+
+  $ curl -u $(USER) https://api.github.com/user \
+         -X POST \
+         -H "Accept: application/vnd.github.v3+json" \
+         https://api.github.com/repos/$(USER)/$(REPO)/pages/builds
+
+You will be prompted to enter password. After successfully deployment on local
+machine, I tried again to deploy on Travis CI via custom deployment. See
+`Makefile <Makefile>`__ for more information.
 
 
 Deploy to GitLab Pages
@@ -224,6 +229,9 @@ References
 
 .. [9] | `version control - How to reset a remote Git repository to remove all commits? - Stack Overflow <https://stackoverflow.com/a/2006252>`_
        | `git - Push local master commits to remote branch - Stack Overflow <https://stackoverflow.com/a/3206144>`_
+
+.. [10] | `Repositories - GitHub Docs <https://docs.github.com/en/rest/reference/repos#pages>`_
+        | `Other authentication methods - GitHub Docs <https://docs.github.com/en/rest/overview/other-authentication-methods>`_
 
 
 .. _Pāli Dictionary: https://siongui.github.io/pali-dictionary/
