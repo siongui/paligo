@@ -22,12 +22,14 @@ DICTIONARY_CONF_DIR=dictionary/config/
 
 
 # html must run before about_symlink. otherwise make symlink will fail
-devserver: fmt dir html js about_symlink
+devserver: make-local-basic
 	@# https://stackoverflow.com/a/5947779
 	@echo "\033[92mDevelopment Server Running ...\033[0m"
 	@go run devserver.go
 
 
+make-local-basic: fmt dir html js about_symlink
+make-local: fmt dir html js symlink
 make-gitlab-basic: rmsite dir html js about_symlink gitlab-specific
 make-gitlab: rmsite dir html js symlink gitlab-specific
 gitlab-specific:
@@ -42,14 +44,18 @@ rmsite:
 	rm -rf $(WEBSITE_DIR)
 
 
-#################
-# GitHub Deploy #
-#################
+##########################
+# Local Deploy to GitHub #
+##########################
+# version control - How to reset a remote Git repository to remove all commits?
+# https://stackoverflow.com/a/2006252
+# git - Push local master commits to remote branch
+# https://stackoverflow.com/a/3206144
 printurl:
 	@echo "\033[92mURL\033[0m": https://github.com/$(USERREPO)
 	@echo "\033[92mHTTPS GIT\033[0m": https://github.com/$(USERREPO).git
 TMPDIR=$(WEBSITE_DIR)
-deploy:
+local_deploy_to_github:
 	USERREPO="$(USERREPO)" make printurl
 	#mv $(WEBSITE_DIR) $(TMPDIR)
 	cd $(TMPDIR); git init
@@ -60,9 +66,9 @@ deploy:
 	rm -rf $(TMPDIR)
 	USERREPO="$(USERREPO)" make printurl
 q-sutta:
-	@USERREPO="siongui/dictionary.sutta.org" make deploy
+	@USERREPO="siongui/dictionary.sutta.org" make local_deploy_to_github
 q-dhamma:
-	@USERREPO="siongui/dictionary.online-dhamma.net" make deploy
+	@USERREPO="siongui/dictionary.online-dhamma.net" make local_deploy_to_github
 pagebuild:
 	# Request a GitHub Pages build
 	# https://docs.github.com/en/rest/reference/repos#pages
@@ -77,13 +83,13 @@ qw-sutta:
 	@USERREPO="siongui/dictionary.sutta.org" USER=$(USER) make pagebuild
 qw-dhamma:
 	@USERREPO="siongui/dictionary.online-dhamma.net" USER=$(USER) make pagebuild
-########################
-# End of GitHub Deploy #
-########################
+#################################
+# End of Local Deploy to GitHub #
+#################################
 
-###############################
-# Travis CI Custom Deployment #
-###############################
+#########################################
+# Travis CI Custom Deployment to GitHub #
+#########################################
 # https://docs.travis-ci.com/user/deployment/custom/
 # https://stackoverflow.com/questions/18935539/authenticate-with-github-using-a-token
 # How do I avoid the specification of the username and password at every git push?
@@ -91,18 +97,20 @@ qw-dhamma:
 # How to set up TravisCI for projects that push back to github
 # https://gist.github.com/willprice/e07efd73fb7f13f917ea
 # What is /dev/null 2>&1? https://stackoverflow.com/a/10508862
-travis_deploy:
+travis_deploy_to_github:
 	cd $(TDDIR); git init
 	cd $(TDDIR); git add .
+	# --quient is to prevent exceeded max log length on Travis CI
 	cd $(TDDIR); git commit -m "Initial commit" --quiet
+	# > /dev/null 2>&1 is for security.
 	cd $(TDDIR); git remote add origin https://siongui:$(GITHUB_TOKEN)@github.com/$(USERREPO).git > /dev/null 2>&1
 	cd $(TDDIR); git push --force --set-upstream origin master:gh-pages
 custom_github_pages_deploy:
-	@USERREPO="siongui/dictionary.sutta.org" TDDIR="website" make travis_deploy
-	@#USERREPO="siongui/dictionary.online-dhamma.net" TDDIR="website2" make deploy
-######################################
-# End of Travis CI Custom Deployment #
-######################################
+	@USERREPO="siongui/dictionary.sutta.org" TDDIR="website" make travis_deploy_to_github
+	@USERREPO="siongui/dictionary.online-dhamma.net" TDDIR="website2" make travis_deploy_to_github
+################################################
+# End of Travis CI Custom Deployment to GitHub #
+################################################
 
 
 ############################
