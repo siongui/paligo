@@ -12,11 +12,10 @@ ifndef TRAVIS
 endif
 
 WEBSITE_DIR=$(CURDIR)/website
-WEBSITE_JSON_DIR=$(WEBSITE_DIR)/json
 WEBSITE_ABOUT_DIR=$(WEBSITE_DIR)/about
 
 DATA_REPO_DIR=$(PRJDIR)/data
-DICTIONARY_DATA_DIR=$(DATA_REPO_DIR)/dictionary
+DICTIONARY_BOOTSTRAP_DATA_DIR=$(DATA_REPO_DIR)/dictionary
 DICTIONARY_CONF_DIR=$(CURDIR)/config/
 
 
@@ -29,8 +28,8 @@ devserver: make-local-basic
 
 make-local-basic: fmt dir html js about_symlink
 make-local: fmt dir html js symlink
-make-gitlab-basic: rmsite dir html js about_symlink gitlab-specific
-make-gitlab: rmsite dir html js symlink gitlab-specific
+make-gitlab-basic: rmsite dir htmlgitlab js about_symlink gitlab-specific
+make-gitlab: rmsite dir htmlgitlab js symlink gitlab-specific
 gitlab-specific:
 	echo -e 'User-agent: *\nDisallow: /' > $(WEBSITE_DIR)/robots.txt
 	mv $(WEBSITE_DIR) $(PRJDIR)/public/
@@ -53,10 +52,8 @@ rmsite:
 printurl:
 	@echo "\033[92mURL\033[0m": https://github.com/$(USERREPO)
 	@echo "\033[92mHTTPS GIT\033[0m": https://github.com/$(USERREPO).git
-TMPDIR=$(WEBSITE_DIR)
 local_deploy_to_github:
 	USERREPO="$(USERREPO)" make printurl
-	#mv $(WEBSITE_DIR) $(TMPDIR)
 	cd $(TMPDIR); git init
 	cd $(TMPDIR); git add .
 	cd $(TMPDIR); git commit -m "Initial commit"
@@ -65,9 +62,9 @@ local_deploy_to_github:
 	rm -rf $(TMPDIR)
 	USERREPO="$(USERREPO)" make printurl
 q-sutta:
-	@USERREPO="siongui/dictionary.sutta.org" make local_deploy_to_github
+	@USERREPO="siongui/dictionary.sutta.org" TMPDIR=$(WEBSITE_DIR) make local_deploy_to_github
 q-dhamma:
-	@USERREPO="siongui/dictionary.online-dhamma.net" make local_deploy_to_github
+	@USERREPO="siongui/dictionary.online-dhamma.net" TMPDIR=$(WEBSITE_DIR) make local_deploy_to_github
 pagebuild:
 	# Request a GitHub Pages build
 	# https://docs.github.com/en/rest/reference/repos#pages
@@ -99,7 +96,7 @@ rb-dhamma:
 travis_deploy_to_github:
 	cd $(TDDIR); git init
 	# If "git all ." at once may cause 10min no output timeout
-	# To prevent timeout, git add sub-dir one by one
+	# To prevent timeout, git add sub-dir and echo something one by one
 	# https://stackoverflow.com/questions/13897945/wildcard-to-obtain-list-of-all-directories
 	# https://stackoverflow.com/questions/17834582/run-make-in-each-subdirectory
 	# http://kirste.userpage.fu-berlin.de/chemnet/use/info/make/make_8.html
@@ -114,9 +111,9 @@ travis_deploy_to_github:
 	cd $(TDDIR); git remote add origin https://siongui:$(GITHUB_TOKEN)@github.com/$(USERREPO).git > /dev/null 2>&1
 	cd $(TDDIR); git push --force --set-upstream origin master:gh-pages
 custom_sutta_deploy:
-	@USERREPO="siongui/dictionary.sutta.org" TDDIR="website" make travis_deploy_to_github
+	@USERREPO="siongui/dictionary.sutta.org" TDDIR=$(WEBSITE_DIR) make travis_deploy_to_github
 custom_dhamma_deploy:
-	@USERREPO="siongui/dictionary.online-dhamma.net" TDDIR="website" make travis_deploy_to_github
+	@USERREPO="siongui/dictionary.online-dhamma.net" TDDIR=$(WEBSITE_DIR) make travis_deploy_to_github
 ################################################
 # End of Travis CI Custom Deployment to GitHub #
 ################################################
@@ -146,13 +143,13 @@ htmldhamma:
 	@echo "\033[92mGenerating HTML for dictionary.online-dhamma.net ...\033[0m"
 	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.online-dhamma.net.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
 
+htmlgitlab:
+	@echo "\033[92mGenerating HTML for siongui.gitlab.io/pali-dictionary ...\033[0m"
+	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/siongui.gitlab.io-pali-dictionary.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+
 html:
 	@echo "\033[92mGenerating HTML ...\033[0m"
-ifdef GITLAB_CI
-	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/siongui.gitlab.io-pali-dictionary.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
-else
 	@go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/empty-siteurl.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
-endif
 
 nojekyll: dir
 	@echo "\033[92mMaking symbolic links works on GitHub Pages ...\033[0m"
@@ -166,7 +163,6 @@ symlink: about_symlink
 
 dir:
 	@echo "\033[92mCreate website directory if not exists ...\033[0m"
-	@[ -d $(WEBSITE_JSON_DIR) ] || mkdir -p $(WEBSITE_JSON_DIR)
 	@[ -d $(WEBSITE_ABOUT_DIR) ] || mkdir -p $(WEBSITE_ABOUT_DIR)
 ###################################
 # End of Build Dictionary Website #
