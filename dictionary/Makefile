@@ -11,8 +11,12 @@ ifndef TRAVIS
 	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 endif
 
+HTML_TEMPLATE_DIR=$(CURDIR)/theme/template/
+SUPPORTED_LOCALES="en_US,zh_TW,vi_VN,fr_FR"
 WEBSITE_DIR=$(CURDIR)/website
 WEBSITE_ABOUT_DIR=$(WEBSITE_DIR)/about
+SYMLINK_OPTIONS=-websiteDir=$(WEBSITE_DIR) -supportedLocales=$(SUPPORTED_LOCALES)
+DIC_BUILD_OPTIONS=$(SYMLINK_OPTIONS) -htmlTemplateDir=$(HTML_TEMPLATE_DIR) -localeDir=$(LOCALE_DIR)
 
 DATA_REPO_DIR=$(PRJDIR)/data
 DICTIONARY_BOOTSTRAP_DATA_DIR=$(DATA_REPO_DIR)/dictionary
@@ -137,19 +141,19 @@ js:
 
 htmlsutta:
 	@echo "\033[92mGenerating HTML for dictionary.sutta.org ...\033[0m"
-	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.sutta.org.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.sutta.org.json" $(DIC_BUILD_OPTIONS)
 
 htmldhamma:
 	@echo "\033[92mGenerating HTML for dictionary.online-dhamma.net ...\033[0m"
-	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.online-dhamma.net.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/dictionary.online-dhamma.net.json" $(DIC_BUILD_OPTIONS)
 
 htmlgitlab:
 	@echo "\033[92mGenerating HTML for siongui.gitlab.io/pali-dictionary ...\033[0m"
-	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/siongui.gitlab.io-pali-dictionary.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/siongui.gitlab.io-pali-dictionary.json" $(DIC_BUILD_OPTIONS)
 
 html:
 	@echo "\033[92mGenerating HTML ...\033[0m"
-	@go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/empty-siteurl.json" -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	@go run htmlspa.go -siteconf="$(DICTIONARY_CONF_DIR)/empty-siteurl.json" $(DIC_BUILD_OPTIONS)
 
 nojekyll: dir
 	@echo "\033[92mMaking symbolic links works on GitHub Pages ...\033[0m"
@@ -159,7 +163,7 @@ about_symlink: nojekyll
 	@cd $(WEBSITE_ABOUT_DIR); [ -f index.html ] || ln -s ../index.html index.html
 symlink: about_symlink
 	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
-	go run dicsetup.go -action=symlink -pathconf="$(DICTIONARY_CONF_DIR)/path-for-build.json"
+	go run dicsetup.go -action=symlink $(SYMLINK_OPTIONS)
 
 dir:
 	@echo "\033[92mCreate website directory if not exists ...\033[0m"

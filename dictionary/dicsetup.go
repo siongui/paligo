@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/siongui/gopalilib/dicutil"
-	"github.com/siongui/gopalilib/util"
 	"github.com/siongui/gopherjs-i18n/tool"
 )
 
@@ -31,23 +30,19 @@ const poJsonPath = websiteDir + "/po.json"
 
 func main() {
 	action := flag.String("action", "", "What kind of action?")
-	pathconffile := flag.String("pathconf", "", "JSON config file for build path")
+	websiteDir := flag.String("websiteDir", "", "output dir of website")
+	supportedLocales := flag.String("supportedLocales", "", "supported locales on website, separated by ,")
 	flag.Parse()
 
-	pathconf, err := util.LoadJsonConfig(*pathconffile)
-	if err != nil {
-		panic(err)
-	}
-
 	if *action == "symlink" {
-		fmt.Println(pathconf["websiteDir"])
-		err := dicutil.SymlinkToRootIndexHtml(pathconf["websiteDir"])
+		fmt.Println(*websiteDir)
+		err := dicutil.SymlinkToRootIndexHtml(*websiteDir)
 		if err != nil {
 			panic(err)
 		}
-		locales := strings.Split(pathconf["supportedLocales"], ",")
+		locales := strings.Split(*supportedLocales, ",")
 		for _, locale := range locales {
-			dir := path.Join(pathconf["websiteDir"], locale)
+			dir := path.Join(*websiteDir, locale)
 			fmt.Println(dir)
 			err := dicutil.SymlinkToRootIndexHtml(dir)
 			if err != nil {
