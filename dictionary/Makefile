@@ -139,6 +139,12 @@ cname-sutta:
 extra:
 	@echo "\033[92mMoving extra items to website dir ...\033[0m"
 	@cp -r $(EXTRA_DIR)/* $(WEBSITE_DIR)
+ifeq ($(TARGET_WEBSITE), dhamma)
+	mv $(WEBSITE_DIR)/manifest-dhamma.json $(WEBSITE_DIR)/manifest.json
+endif
+ifdef GITLAB_CI
+	mv $(WEBSITE_DIR)/manifest-gitlab.json $(WEBSITE_DIR)/manifest.json
+endif
 
 js:
 	@echo "\033[92mGenerating JavaScript ...\033[0m"
