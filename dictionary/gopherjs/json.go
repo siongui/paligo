@@ -22,7 +22,7 @@ func DecodeWordJson(w string) lib.BookIdWordExps {
 	return wi
 }
 
-func PaliDictionarySetting2JsonString(setting lib.PaliDictionarySetting) string {
+func PaliDictionarySetting2JsonString(setting lib.PaliSetting) string {
 	b, err := json.Marshal(setting)
 	if err != nil {
 		panic(err)
@@ -30,8 +30,8 @@ func PaliDictionarySetting2JsonString(setting lib.PaliDictionarySetting) string 
 	return string(b)
 }
 
-func JsonString2PaliDictionarySetting(jsonStr string) lib.PaliDictionarySetting {
-	setting := lib.PaliDictionarySetting{}
+func JsonString2PaliDictionarySetting(jsonStr string) lib.PaliSetting {
+	setting := lib.PaliSetting{}
 	err := json.Unmarshal([]byte(jsonStr), &setting)
 	if err != nil {
 		panic(err)

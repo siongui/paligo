@@ -15,7 +15,7 @@ import (
 
 var localStorage = js.Global.Get("localStorage")
 
-func savePaliDictionarySetting(setting lib.PaliDictionarySetting) {
+func savePaliDictionarySetting(setting lib.PaliSetting) {
 	str := PaliDictionarySetting2JsonString(setting)
 	localStorage.Set("PaliDictionarySetting", str)
 }
@@ -30,7 +30,7 @@ func setupSetting() {
 	p2my := d.Call("getElementById", "p2my")
 	dicLangOrder := d.Call("getElementById", "dicLangOrder")
 
-	setting := lib.PaliDictionarySetting{
+	setting := lib.PaliSetting{
 		IsShowWordPreview: false,
 		P2en:              true,
 		P2ja:              true,
@@ -96,6 +96,6 @@ func setupSetting() {
 	})
 }
 
-func getSetting() lib.PaliDictionarySetting {
+func getSetting() lib.PaliSetting {
 	return JsonString2PaliDictionarySetting(localStorage.Get("PaliDictionarySetting").String())
 }
