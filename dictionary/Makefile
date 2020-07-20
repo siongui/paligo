@@ -12,6 +12,7 @@ ifndef TRAVIS
 endif
 
 HTML_TEMPLATE_DIR=$(CURDIR)/theme/template/
+EXTRA_DIR=$(CURDIR)/theme/extra/
 SUPPORTED_LOCALES="en_US,zh_TW,vi_VN,fr_FR"
 WEBSITE_DIR=$(CURDIR)/website
 WEBSITE_ABOUT_DIR=$(WEBSITE_DIR)/about
@@ -30,17 +31,18 @@ devserver: make-local-basic
 	@go run $(PRJDIR)/devserver.go
 
 
-make-local-basic: fmt dir html js about_symlink
-make-local: fmt dir html js symlink
-make-gitlab-basic: rmsite dir htmlgitlab js about_symlink gitlab-specific
-make-gitlab: rmsite dir htmlgitlab js symlink gitlab-specific
+make-common: dir js extra
+make-local-basic: fmt make-common html about_symlink
+make-local: fmt make-common html symlink
+make-gitlab-basic: rmsite make-common htmlgitlab about_symlink gitlab-specific
+make-gitlab: rmsite make-common htmlgitlab symlink gitlab-specific
 gitlab-specific:
 	echo -e 'User-agent: *\nDisallow: /' > $(WEBSITE_DIR)/robots.txt
 	mv $(WEBSITE_DIR) $(PRJDIR)/public/
-make-dhamma-basic: rmsite dir htmldhamma js about_symlink cname-dhamma
-make-dhamma: rmsite dir htmldhamma js symlink cname-dhamma
-make-sutta-basic: rmsite dir htmlsutta js about_symlink cname-sutta
-make-sutta: rmsite dir htmlsutta js symlink cname-sutta
+make-dhamma-basic: rmsite make-common htmldhamma about_symlink cname-dhamma
+make-dhamma: rmsite make-common htmldhamma symlink cname-dhamma
+make-sutta-basic: rmsite make-common htmlsutta about_symlink cname-sutta
+make-sutta: rmsite make-common htmlsutta symlink cname-sutta
 rmsite:
 	@echo "\033[92mRemove $(WEBSITE_DIR)\033[0m"
 	rm -rf $(WEBSITE_DIR)
@@ -133,6 +135,10 @@ cname-dhamma:
 	CNAME=dictionary.online-dhamma.net make cname
 cname-sutta:
 	CNAME=dictionary.sutta.org make cname
+
+extra:
+	@echo "\033[92mMoving extra items to website dir ...\033[0m"
+	@cp -r $(EXTRA_DIR)/* $(WEBSITE_DIR)
 
 js:
 	@echo "\033[92mGenerating JavaScript ...\033[0m"

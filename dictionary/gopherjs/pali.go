@@ -108,7 +108,6 @@ func main() {
 
 		// show language according to NavigatorLanguages API
 		initialLocale := jsgettext.DetermineLocaleByNavigatorLanguages(navigatorLanguages, supportedLocales)
-		// FIXME: should consider site locale
 		if locale == "" && initialLocale != "en_US" {
 			jsgettext.Translate(initialLocale)
 		}
