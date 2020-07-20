@@ -87,12 +87,6 @@ func main() {
 	setupNavbar()
 	setupSetting()
 
-	// show language according to NavigatorLanguages API
-	initialLocale := jsgettext.DetermineLocaleByNavigatorLanguages(navigatorLanguages, supportedLocales)
-	if initialLocale != "en_US" {
-		jsgettext.Translate(initialLocale)
-	}
-
 	input := Document.GetElementById("word")
 	input.AddEventListener("keyup", handleInputKeyUp)
 	Document.AddEventListener("keyup", func(e Event) {
@@ -111,6 +105,13 @@ func main() {
 		locale := si.Dataset().Get("locale").String()
 		lib.SetSiteUrl(siteurl)
 		lib.SetCurrentLocale(locale)
+
+		// show language according to NavigatorLanguages API
+		initialLocale := jsgettext.DetermineLocaleByNavigatorLanguages(navigatorLanguages, supportedLocales)
+		// FIXME: should consider site locale
+		if locale == "" && initialLocale != "en_US" {
+			jsgettext.Translate(initialLocale)
+		}
 
 		setupMainContentAccordingToUrlPath()
 
