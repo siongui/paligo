@@ -2,6 +2,10 @@ dist: bionic
 language: go
 go:
   - 1.12.17
+# https://docs.travis-ci.com/user/customizing-the-build#setting-symlinks-option
+git:
+  symlinks: true
+# https://docs.travis-ci.com/user/installing-dependencies/
 addons:
   apt:
     packages:
@@ -9,30 +13,30 @@ addons:
     - make
     - git
     - gettext
-install:
-  - cd dictionary/
-  - make install
-script:
-  # build website/ content for dictionary.online-dhamma.net
-  - make make-dhamma
-  # move dictionary.online-dhamma.net to website2/
-  - mv website/ website2
-  # build website/ content for dictionary.sutta.org
-  - make make-sutta
-after_success:
-  - make custom_github_pages_deploy
+# https://docs.travis-ci.com/user/build-matrix/
+jobs:
+  include:
+  - env: TARGET_WEBSITE=dhamma
+    install:
+      - cd dictionary/
+      - make install
+    script:
+      - make make-dhamma
+    after_success:
+      - make custom_dhamma_deploy
+  - env: TARGET_WEBSITE=sutta
+    install:
+      - cd dictionary/
+      - make install
+    script:
+      - make make-sutta
+    after_success:
+      - make custom_sutta_deploy
 # dpl v2
 #deploy:
 #  - provider: pages:git
-#    repo: siongui/dictionary.online-dhamma.net
-#    token: $GITHUB_TOKEN
-#    local_dir: website2
-#    on:
-#      branch: master
-#    edge: true
-#    verbose: true
-#  - provider: pages:git
 #    repo: siongui/dictionary.sutta.org
+#    keep_history: false
 #    token: $GITHUB_TOKEN
 #    local_dir: website
 #    on:
@@ -42,17 +46,8 @@ after_success:
 # dpl v1
 #deploy:
 #  - provider: pages
-#    repo: siongui/dictionary.online-dhamma.net
-#    skip_cleanup: true
-#    keep_history: true
-#    github_token: $GITHUB_TOKEN
-#    local_dir: website2
-#    on:
-#      branch: master
-#  - provider: pages
 #    repo: siongui/dictionary.sutta.org
 #    skip_cleanup: true
-#    keep_history: true
 #    github_token: $GITHUB_TOKEN
 #    local_dir: website
 #    on:
