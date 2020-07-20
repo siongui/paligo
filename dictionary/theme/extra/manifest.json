@@ -1,0 +1,22 @@
+{
+    "dir": "ltr",
+    "name": "Pāli Dictionary",
+    "short_name": "Pāli Dictionary",
+    "scope": "/",
+    "display": "standalone",
+    "start_url": "https://dictionary.sutta.org/",
+    "background_color": "transparent",
+    "theme_color": "transparent",
+    "description": "Pāli to English, Chinese, Japanese, Vietnamese, Burmese Dictionary",
+    "orientation": "any",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "/dhamma-wheel.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "url": "https://dictionary.sutta.org/"
+}
