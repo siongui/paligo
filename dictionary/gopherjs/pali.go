@@ -6,6 +6,7 @@ import (
 	imepali "github.com/siongui/go-online-input-method-pali"
 	bits "github.com/siongui/go-succinct-data-structure-trie"
 	. "github.com/siongui/godom"
+	"github.com/siongui/gopalilib/lib"
 	jsgettext "github.com/siongui/gopherjs-i18n"
 	sg "github.com/siongui/gopherjs-input-suggest"
 	"github.com/siongui/paliDataVFS"
@@ -105,6 +106,14 @@ func main() {
 
 	// Hide loader and show input element while website is fully loaded.
 	Window.AddEventListener("load", func(e Event) {
+		si := Document.GetElementById("site-info")
+		siteurl := si.Dataset().Get("siteurl").String()
+		locale := si.Dataset().Get("locale").String()
+		lib.SetSiteUrl(siteurl)
+		lib.SetCurrentLocale(locale)
+
+		setupMainContentAccordingToUrlPath()
+
 		l := Document.GetElementById("website-loading")
 		l.ClassList().Add("is-hidden")
 		Document.QuerySelector("section.section").ClassList().Remove("is-hidden")
@@ -114,14 +123,16 @@ func main() {
 
 	// change url without reload
 	Window.AddEventListener("popstate", func(e Event) {
-		if e.Get("state") == nil {
-			// do nothing
-		} else {
-			// state here stores pali word
-			word := e.Get("state").String()
-			go httpGetWordJson(word, false)
-		}
+		setupMainContentAccordingToUrlPath()
+		/*
+			if e.Get("state") == nil {
+				// do nothing
+			} else {
+				setupMainContentAccordingToUrlPath()
+				// state here stores pali word
+				//word := e.Get("state").String()
+				//go httpGetWordJson(word, false)
+			}
+		*/
 	})
-
-	setupMainContentAccordingToUrlPath()
 }
