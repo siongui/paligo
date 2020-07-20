@@ -90,5 +90,25 @@ https://stackoverflow.com/questions/56611772/how-to-shorten-bulma-input
   <div id="about" class="is-hidden">{{template "about" .}}</div>
   <span id="site-info" data-siteurl="{{.SiteUrl}}" data-locale="{{.OgLocale}}"></span>
   <script src="{{.SiteUrl}}/pali.js"></script>
+
+<script type="module">
+// https://www.pwabuilder.com/
+// This is the "Offline copy of pages" service worker
+
+/*
+
+ This code uses the pwa-update web component https://github.com/pwa-builder/pwa-update to register your service worker,
+
+ tell the user when there is an update available and let the user know when your PWA is ready to use offline.
+
+*/
+import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+
+const el = document.createElement('pwa-update');
+
+document.body.appendChild(el);
+
+</script>
+
 </body>
 </html>
