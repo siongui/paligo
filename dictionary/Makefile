@@ -34,10 +34,8 @@ devserver: make-local-basic
 make-common: dir js extra
 make-local-basic: fmt make-common html about_symlink
 make-local: fmt make-common html symlink
-make-gitlab-basic: rmsite make-common htmlgitlab about_symlink gitlab-specific
-make-gitlab: rmsite make-common htmlgitlab symlink gitlab-specific
-gitlab-specific:
-	mv $(WEBSITE_DIR) $(PRJDIR)/public/
+make-gitlab-basic: rmsite make-common htmlgitlab about_symlink
+make-gitlab: rmsite make-common htmlgitlab symlink
 make-dhamma-basic: rmsite make-common htmldhamma about_symlink cname-dhamma
 make-dhamma: rmsite make-common htmldhamma symlink cname-dhamma
 make-sutta-basic: rmsite make-common htmlsutta about_symlink cname-sutta
@@ -45,6 +43,8 @@ make-sutta: rmsite make-common htmlsutta symlink cname-sutta
 rmsite:
 	@echo "\033[92mRemove $(WEBSITE_DIR)\033[0m"
 	rm -rf $(WEBSITE_DIR)
+mvtopublic:
+	mv $(WEBSITE_DIR) $(PRJDIR)/public/
 
 
 ##########################

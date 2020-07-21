@@ -17,6 +17,7 @@ pages:
   - make download_go
   - make install
   - make make-gitlab-basic
+  - make mvtopublic
   artifacts:
     paths:
     - public/
