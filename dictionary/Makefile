@@ -37,7 +37,6 @@ make-local: fmt make-common html symlink
 make-gitlab-basic: rmsite make-common htmlgitlab about_symlink gitlab-specific
 make-gitlab: rmsite make-common htmlgitlab symlink gitlab-specific
 gitlab-specific:
-	echo -e 'User-agent: *\nDisallow: /' > $(WEBSITE_DIR)/robots.txt
 	mv $(WEBSITE_DIR) $(PRJDIR)/public/
 make-dhamma-basic: rmsite make-common htmldhamma about_symlink cname-dhamma
 make-dhamma: rmsite make-common htmldhamma symlink cname-dhamma
@@ -139,6 +138,10 @@ cname-sutta:
 extra:
 	@echo "\033[92mMoving extra items to website dir ...\033[0m"
 	@cp -r $(EXTRA_DIR)/* $(WEBSITE_DIR)
+ifeq ($(TARGET_WEBSITE), sutta)
+	# allow search indexing only on dictionary.sutta.org
+	mv $(WEBSITE_DIR)/robots-all.txt $(WEBSITE_DIR)/robots.txt
+endif
 ifeq ($(TARGET_WEBSITE), dhamma)
 	mv $(WEBSITE_DIR)/manifest-dhamma.json $(WEBSITE_DIR)/manifest.json
 endif
