@@ -12,7 +12,8 @@ var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
 var navigatorLanguages = Window.Navigator().Languages()
 
 func setDocumentTitle(titleLocale string, typ lib.PageType, wordOrPrefix string) {
-	title := jsgettext.Gettext(titleLocale, "Pali Dictionary | Pāli to English, Chinese, Japanese, Vietnamese, Burmese Dictionary")
+	//title := jsgettext.Gettext(titleLocale, "Pali Dictionary | Pāli to English, Chinese, Japanese, Vietnamese, Burmese Dictionary")
+	title := jsgettext.Gettext(titleLocale, "Pāli Dictionary")
 	if typ == lib.AboutPage {
 		// add prefix "About"?
 	}

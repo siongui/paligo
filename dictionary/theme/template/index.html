@@ -68,6 +68,11 @@ https://stackoverflow.com/questions/56611772/how-to-shorten-bulma-input
     {{template "ime" .}}
   </div>
 </div>
+<div class="columns is-centered">
+  <div class="column is-narrow notification is-info is-light">
+    <span data-default-string="Press TAB to focus on input">{{gettext "Press TAB to focus on input"}}</span>
+  </div>
+</div>
 
 {{template "browse" .}}
 
