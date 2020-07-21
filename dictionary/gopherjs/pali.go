@@ -19,9 +19,7 @@ var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
 var navigatorLanguages = Window.Navigator().Languages()
 
 func handleEnterEvent(input *Object) {
-	raw := input.Value()
-	raw = strings.TrimSpace(raw)
-	w := strings.ToLower(raw)
+	w := strings.ToLower(strings.TrimSpace(input.Value()))
 	input.Blur()
 	go httpGetWordJson(w, true)
 }
@@ -76,6 +74,8 @@ func main() {
 
 	// input suggest menu
 	sg.BindSuggest("word", func(w string) []string {
+		w = strings.ToLower(w)
+		Document.GetElementById("word").SetValue(w)
 		return frozenTrie.GetSuggestedWords(w, 30)
 	})
 	// add Bulma css helper to input suggest menu
