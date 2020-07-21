@@ -5,24 +5,54 @@ import (
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
+	jsgettext "github.com/siongui/gopherjs-i18n"
 )
 
-func setupMainContentAccordingToUrlPath() {
+var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
+var navigatorLanguages = Window.Navigator().Languages()
+
+func setDocumentTitle(titleLocale string, typ lib.PageType, wordOrPrefix string) {
+	title := jsgettext.Gettext(titleLocale, "Pali Dictionary | Pāli to English, Chinese, Japanese, Vietnamese, Burmese Dictionary")
+	if typ == lib.AboutPage {
+		// add prefix "About"?
+	}
+	if typ == lib.WordPage {
+		title = wordOrPrefix + " - " + jsgettext.Gettext(titleLocale, "Definition and Meaning") + " - " + title
+	}
+	if typ == lib.PrefixPage {
+		title = jsgettext.Gettext(titleLocale, "Words Start with") + " " + wordOrPrefix + " - " + title
+	}
+	Document.Set("title", title)
+}
+
+func setupContentAccordingToUrlPath() {
+	// show language according to NavigatorLanguages API
+	siteLocale := Document.GetElementById("site-info").Dataset().Get("locale").String()
+	titleLocale := siteLocale
+	initialLocale := jsgettext.DetermineLocaleByNavigatorLanguages(navigatorLanguages, supportedLocales)
+	if siteLocale == "" {
+		jsgettext.Translate(initialLocale)
+		titleLocale = initialLocale
+	}
+
 	up := Window.Location().Pathname()
 	typ := lib.DeterminePageType(up)
 	if typ == lib.RootPage {
 		mainContent.RemoveAllChildNodes()
+		setDocumentTitle(titleLocale, lib.RootPage, "")
 		// maybe put some news in the future.
 		return
 	}
 	if typ == lib.AboutPage {
 		mainContent.RemoveAllChildNodes()
 		mainContent.SetInnerHTML(Document.GetElementById("about").InnerHTML())
+		setDocumentTitle(titleLocale, lib.AboutPage, "")
 		return
 	}
 	if typ == lib.WordPage {
 		mainContent.RemoveAllChildNodes()
 		w := lib.GetWordFromUrlPath(up)
+		setDocumentTitle(titleLocale, lib.WordPage, w)
 		//println(w)
 		go httpGetWordJson(w, false)
 		return
@@ -30,6 +60,7 @@ func setupMainContentAccordingToUrlPath() {
 	if typ == lib.PrefixPage {
 		mainContent.RemoveAllChildNodes()
 		p := lib.GetPrefixFromUrlPath(up)
+		setDocumentTitle(titleLocale, lib.PrefixPage, p)
 		//mainContent.SetInnerHTML("prefix " + p)
 		prefixwords := frozenTrie.GetSuggestedWords(p, 1000000)
 		html := ""

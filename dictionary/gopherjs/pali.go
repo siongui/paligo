@@ -7,7 +7,7 @@ import (
 	bits "github.com/siongui/go-succinct-data-structure-trie"
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
-	jsgettext "github.com/siongui/gopherjs-i18n"
+
 	sg "github.com/siongui/gopherjs-input-suggest"
 	"github.com/siongui/paliDataVFS"
 )
@@ -15,8 +15,6 @@ import (
 var mainContent *Object
 var bookIdAndInfos = paliDataVFS.GetBookIdAndInfos()
 var frozenTrie bits.FrozenTrie
-var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
-var navigatorLanguages = Window.Navigator().Languages()
 
 func handleEnterEvent(input *Object) {
 	w := strings.ToLower(strings.TrimSpace(input.Value()))
@@ -102,17 +100,11 @@ func main() {
 	Window.AddEventListener("load", func(e Event) {
 		si := Document.GetElementById("site-info")
 		siteurl := si.Dataset().Get("siteurl").String()
-		locale := si.Dataset().Get("locale").String()
+		sitelocale := si.Dataset().Get("locale").String()
 		lib.SetSiteUrl(siteurl)
-		lib.SetCurrentLocale(locale)
+		lib.SetCurrentLocale(sitelocale)
 
-		// show language according to NavigatorLanguages API
-		initialLocale := jsgettext.DetermineLocaleByNavigatorLanguages(navigatorLanguages, supportedLocales)
-		if locale == "" && initialLocale != "en_US" {
-			jsgettext.Translate(initialLocale)
-		}
-
-		setupMainContentAccordingToUrlPath()
+		setupContentAccordingToUrlPath()
 
 		l := Document.GetElementById("website-loading")
 		l.ClassList().Add("is-hidden")
@@ -123,12 +115,12 @@ func main() {
 
 	// change url without reload
 	Window.AddEventListener("popstate", func(e Event) {
-		setupMainContentAccordingToUrlPath()
+		setupContentAccordingToUrlPath()
 		/*
 			if e.Get("state") == nil {
 				// do nothing
 			} else {
-				setupMainContentAccordingToUrlPath()
+				setupContentAccordingToUrlPath()
 				// state here stores pali word
 				//word := e.Get("state").String()
 				//go httpGetWordJson(word, false)
