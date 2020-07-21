@@ -31,7 +31,9 @@ Development Environment:
   - GopherJS_
 
 Re-implementation of `Pāli Dictionary`_ is almost finished. `Pāli Tipiṭaka`_ not
-yet. See `dictionary README <dictionary/README.rst>`_ for more information.
+yet.
+
+For dictionary code, see `dictionary dir <dictionary/>`_ for more information.
 
 
 

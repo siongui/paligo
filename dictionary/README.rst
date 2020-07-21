@@ -29,8 +29,8 @@ Development Environment:
   - `Go 1.12.17`_
   - GopherJS_
 
-Re-implementation of `Pāli Dictionary`_ is almost finished. `Pāli Tipiṭaka`_ not
-yet.
+This directory contains implementation of `Pāli Dictionary`_.
+
 
 Set Up Development Environment
 ++++++++++++++++++++++++++++++
@@ -81,18 +81,18 @@ Set Up Development Environment
      $ make install
 
 
-4. Set up data of this project:
+4. Create localhost dictionary website:
 
    .. code-block:: bash
 
-     $ make po2mo
-     $ make dir
-     $ make html
-     $ make scss
-     $ make js
+     # create only basic website (no symlinks for words and prefix)
+     $ make make-local-basic
+     # create complete website (this might take some time because of lots of symlinks)
+     $ make make-local
 
 
-5. Run development server at http://localhost:8000/
+5. Create basic localhost dictionary website and run development server at
+   http://localhost:8000/
 
    .. code-block:: bash
 
@@ -104,10 +104,9 @@ Deploy to GitHub Pages
 
 See
 
-- `.travis.yml <.travis.yml>`_
-- `setup/dicsetup.go <setup/dicsetup.go>`_ (set SiteUrl)
-- `GitHub Pages Deployment - Travis CI <https://docs.travis-ci.com/user/deployment/pages/>`_
-- `Environment Variables - Travis CI <https://docs.travis-ci.com/user/environment-variables/>`_
+- `.travis.yml <../.travis.yml>`_
+- `config/dictionary.sutta.org.json <config/dictionary.sutta.org.json>`_
+- `Makefile <Makefile>`__
 
 
 The Pali dictionary has more than 200K+ words, and each words has its webpage.
@@ -142,19 +141,25 @@ to unknown timeout, so we can request a re-build as follows [10]_:
          -H "Accept: application/vnd.github.v3+json" \
          https://api.github.com/repos/$(USER)/$(REPO)/pages/builds
 
-You will be prompted to enter password. After successfully deployment on local
-machine, I tried again to deploy on Travis CI via custom deployment. See
-`Makefile <Makefile>`__ for more information.
+You will be prompted for password.
+
+After successfully deployment on local machine, I tried again to apply the
+procedure of local deployment via Travis CI custom deployment, and successfully
+deploy to GitHub Pages. See `Makefile <Makefile>`__ for more information.
 
 
 Deploy to GitLab Pages
 ++++++++++++++++++++++
 
-See `.gitlab-ci.yml <.gitlab-ci.yml>`_ and
-`setup/dicsetup.go <setup/dicsetup.go>`_ (set SiteUrl)
+See
 
-GitLab CI always fail to deploy to GitLab Pages, even if Travis CI can deploy
-without problem without sub-sites. No solution for now.
+- `.gitlab-ci.yml <../.gitlab-ci.yml>`_
+- `config/siongui.gitlab.io-pali-dictionary.json <config/siongui.gitlab.io-pali-dictionary.json>`_.
+- `Makefile <Makefile>`__
+
+GitLab CI always fail to deploy to GitLab Pages if there are lots of symlinks,
+even if Travis CI can deploy without problem without sub-sites. No solution for
+now.
 
 
 Bootstrap Website (Optional)
