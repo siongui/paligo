@@ -35,7 +35,7 @@ func httpGetWordJson(w string, changeUrl bool) {
 
 	if changeUrl {
 		Window.History().PushState(w, "", lib.WordUrlPath(w))
-		//FIXME: set document title here
+		setDocumentTitle(getFinalShowLocale(), lib.WordPage, w)
 	}
 
 	showWordByTemplate(wi)

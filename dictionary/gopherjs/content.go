@@ -25,15 +25,19 @@ func setDocumentTitle(titleLocale string, typ lib.PageType, wordOrPrefix string)
 	Document.Set("title", title)
 }
 
+func getFinalShowLocale() string {
+	// show language according to site url and NavigatorLanguages API
+	locale := Document.GetElementById("site-info").Dataset().Get("locale").String()
+	if locale == "" {
+		return jsgettext.DetermineLocaleByNavigatorLanguages(navigatorLanguages, supportedLocales)
+	}
+	return locale
+}
+
 func setupContentAccordingToUrlPath() {
 	// show language according to NavigatorLanguages API
-	siteLocale := Document.GetElementById("site-info").Dataset().Get("locale").String()
-	titleLocale := siteLocale
-	initialLocale := jsgettext.DetermineLocaleByNavigatorLanguages(navigatorLanguages, supportedLocales)
-	if siteLocale == "" {
-		jsgettext.Translate(initialLocale)
-		titleLocale = initialLocale
-	}
+	titleLocale := getFinalShowLocale()
+	jsgettext.Translate(titleLocale)
 
 	up := Window.Location().Pathname()
 	typ := lib.DeterminePageType(up)
