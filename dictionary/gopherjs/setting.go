@@ -16,7 +16,7 @@ import (
 var localStorage = js.Global.Get("localStorage")
 
 func savePaliDictionarySetting(setting lib.PaliSetting) {
-	str := PaliDictionarySetting2JsonString(setting)
+	str, _ := lib.PaliSettingToJsonString(setting)
 	localStorage.Set("PaliDictionarySetting", str)
 }
 
@@ -54,7 +54,7 @@ func setupSetting() {
 	} else {
 		// use saved setting
 		//localStorage.Call("getItem", "PaliDictionarySetting").String()
-		setting = JsonString2PaliDictionarySetting(localStorage.Get("PaliDictionarySetting").String())
+		setting, _ = lib.JsonStringToPaliSetting(localStorage.Get("PaliDictionarySetting").String())
 		isPreview.Set("checked", setting.IsShowWordPreview)
 		p2en.Set("checked", setting.P2en)
 		p2ja.Set("checked", setting.P2ja)
@@ -97,5 +97,6 @@ func setupSetting() {
 }
 
 func getSetting() lib.PaliSetting {
-	return JsonString2PaliDictionarySetting(localStorage.Get("PaliDictionarySetting").String())
+	setting, _ := lib.JsonStringToPaliSetting(localStorage.Get("PaliDictionarySetting").String())
+	return setting
 }

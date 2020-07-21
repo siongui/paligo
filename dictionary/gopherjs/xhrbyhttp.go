@@ -31,7 +31,11 @@ func httpGetWordJson(w string, changeUrl bool) {
 		return
 	}
 
-	wi := DecodeHttpRespWord(resp.Body)
+	wi, err := lib.DecodeHttpRespWord(resp.Body)
+	if err != nil {
+		mainContent.Set("textContent", "Not Found")
+		return
+	}
 
 	if changeUrl {
 		Window.History().PushState(w, "", lib.WordUrlPath(w))
