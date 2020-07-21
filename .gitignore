@@ -6,3 +6,4 @@ website/
 *.mo
 locale/zh_CN/
 go/
+*.pot

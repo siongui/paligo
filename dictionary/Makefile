@@ -188,6 +188,19 @@ dir:
 ###################################
 
 
+####################
+# gettext workflow #
+####################
+pot:
+	@echo "\033[92mExtract translatable strings from html ...\033[0m"
+	@# sed convert {{gettext "Pāḷi Dictionary"}} to {{gettext("Pāḷi Dictionary")}}
+	@# https://siongui.github.io/2016/01/19/xgettext-extract-translatable-string-from-go-html-template/
+	@sed "s/{{gettext \(".*"\)}}/{{gettext(\1)}}/g" `find $(HTML_TEMPLATE_DIR) -name "*.html"` | xgettext --no-wrap --language=c --from-code=UTF-8 --output=$(LOCALE_DIR)/messages.pot -
+###########################
+# End of gettext workflow #
+###########################
+
+
 ###################################################
 # Boostrap Website (only once, not daily routine) #
 ###################################################
