@@ -32,23 +32,12 @@ func handleInputKeyUp(e Event) {
 }
 
 func main() {
+	setupNavbar()
+	setupSetting()
+	setupKeypad()
+
 	// add pali input method to input text element
 	imepali.BindPaliInputMethodToInputTextElementById("word")
-
-	// pali virtual keypad
-	bindKeypad("word", "keypad")
-
-	// toggle virtual keypad
-	tk := Document.GetElementById("toggle-keypad")
-	kp := Document.GetElementById("keypad")
-	tk.AddEventListener("click", func(e Event) {
-		kp.ClassList().Toggle("is-hidden")
-
-		spans := tk.QuerySelectorAll("span")
-		for _, span := range spans {
-			span.ClassList().Toggle("is-hidden")
-		}
-	})
 
 	// toggle type hint table
 	tth := Document.GetElementById("toggle-type-hint")
@@ -81,9 +70,8 @@ func main() {
 	ism.ClassList().Add("px-1")
 	ism.ClassList().Add("py-1")
 	ism.ClassList().Add("is-size-5")
-
-	setupNavbar()
-	setupSetting()
+	// setup word preview
+	setupWordPreview()
 
 	input := Document.GetElementById("word")
 	input.AddEventListener("keyup", handleInputKeyUp)

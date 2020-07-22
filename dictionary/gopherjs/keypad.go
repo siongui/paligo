@@ -78,3 +78,20 @@ func bindKeypad(inputId, keypadId string) {
 	}
 	k.AppendChild(de2)
 }
+
+func setupKeypad() {
+	// pali virtual keypad
+	bindKeypad("word", "keypad")
+
+	// toggle virtual keypad
+	tk := Document.GetElementById("toggle-keypad")
+	kp := Document.GetElementById("keypad")
+	tk.AddEventListener("click", func(e Event) {
+		kp.ClassList().Toggle("is-hidden")
+
+		spans := tk.QuerySelectorAll("span")
+		for _, span := range spans {
+			span.ClassList().Toggle("is-hidden")
+		}
+	})
+}
