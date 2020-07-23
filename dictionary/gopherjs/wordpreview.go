@@ -80,4 +80,14 @@ func setupWordPreview() {
 		//println("show word preview")
 		go httpGetWordJson2(word)
 	})
+
+	sg.OnUpdateSuggestMenu(func(word string) {
+		wordPreviewElm.ClassList().Add("is-hidden")
+		Document.QuerySelector(".suggest").ClassList().Remove("suggest-is-absolute")
+	})
+
+	sg.OnHideSuggestMenu(func() {
+		wordPreviewElm.ClassList().Add("is-hidden")
+		Document.QuerySelector(".suggest").ClassList().Remove("suggest-is-absolute")
+	})
 }
