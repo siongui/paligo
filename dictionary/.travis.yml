@@ -1,0 +1,56 @@
+dist: bionic
+language: go
+go:
+  - 1.12.17
+# https://docs.travis-ci.com/user/customizing-the-build#setting-symlinks-option
+git:
+  symlinks: true
+# https://docs.travis-ci.com/user/installing-dependencies/
+addons:
+  apt:
+    packages:
+    - wget
+    - make
+    - git
+    - gettext
+# https://docs.travis-ci.com/user/build-matrix/
+jobs:
+  include:
+  # for dictionary.online-dhamma.net
+  - env: TARGET_WEBSITE=dhamma
+    install:
+      - cd dictionary/
+      - make install
+    script:
+      - make make-dhamma
+    after_success:
+      - make custom_dhamma_deploy
+  # for dictionary.sutta.org
+  - env: TARGET_WEBSITE=sutta
+    install:
+      - cd dictionary/
+      - make install
+    script:
+      - make make-sutta
+    after_success:
+      - make custom_sutta_deploy
+# dpl v2 (not working for lots of symlinks)
+#deploy:
+#  - provider: pages:git
+#    repo: siongui/dictionary.sutta.org
+#    keep_history: false
+#    token: $GITHUB_TOKEN
+#    local_dir: website
+#    on:
+#      branch: master
+#    edge: true
+#    verbose: true
+# dpl v1 (not working for lots of symlinks)
+#deploy:
+#  - provider: pages
+#    repo: siongui/dictionary.sutta.org
+#    skip_cleanup: true
+#    github_token: $GITHUB_TOKEN
+#    local_dir: website
+#    on:
+#      branch: master

@@ -31,7 +31,7 @@ func setWordPreviewUI(word, rawhtml string) {
 	wordPreviewElm.ClassList().Remove("is-hidden")
 	Document.QuerySelector(".suggest").ClassList().Add("suggest-is-absolute")
 	w := Document.QuerySelector(".suggest").Get("offsetWidth").String() + "px"
-	println(w)
+	//println(w)
 	wordPreviewElm.Style().SetLeft(w)
 }
 

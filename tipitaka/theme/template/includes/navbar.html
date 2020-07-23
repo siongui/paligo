@@ -1,0 +1,63 @@
+{{define "navbar"}}
+<style>
+@media screen and (max-width: 1023px) {
+  /* show mavbar-menu on screen less than 1024px */
+  #menu-toggle:checked ~ #paliNavbarMenu { display: block; }
+
+  /* make navbar-burger become cross on screen less than 1024px */
+  #menu-toggle:checked + .navbar-brand > .navbar-burger span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+  #menu-toggle:checked + .navbar-brand > .navbar-burger span:nth-child(2) { opacity: 0; }
+  #menu-toggle:checked + .navbar-brand > .navbar-burger span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+  /* you can also replace + with ~ in above three rules and get the same result */
+
+  /* #paliNavbarMenu { left:0; right:0; top:100%; position: absolute; } */
+}
+</style>
+
+<nav class="navbar has-background-light-gold has-border-gold" role="navigation" aria-label="main navigation">
+  <input type="checkbox" id="menu-toggle" class="is-hidden">
+  <div class="navbar-brand">
+    <a class="navbar-item is-size-4 is-gold" href="{{.SiteUrl}}/">
+      <span data-default-string="Pāli Tipiṭaka">{{gettext "Pāli Tipiṭaka"}}</span>
+    </a>
+
+    <label for="menu-toggle" class="navbar-burger burger">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </label>
+  </div>
+
+  <div id="paliNavbarMenu" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="{{.DictionaryURL}}" target="_blank">
+        <span data-default-string="Dictionary">{{gettext "Dictionary"}}</span>
+      </a>
+
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          <span data-default-string="Language">{{gettext "Language"}}</span>
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item lang-select" href="{{.SiteUrl}}/en_US/">
+            English
+          </a>
+          <a class="navbar-item lang-select" href="{{.SiteUrl}}/zh_TW/">
+            傳統中文
+          </a>
+          <a class="navbar-item lang-select" href="{{.SiteUrl}}/vi_VN/">
+            Tiếng Việt
+          </a>
+          <a class="navbar-item lang-select" href="{{.SiteUrl}}/fr_FR/">
+            Français
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+{{end}}

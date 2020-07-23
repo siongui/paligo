@@ -1,0 +1,103 @@
+# cannot use relative path in GOROOT, otherwise 6g not found. For example,
+#   export GOROOT=../go  (=> 6g not found)
+# it is also not allowed to use relative path in GOPATH
+GO_VERSION=1.12.17
+PRJDIR=$(CURDIR)/../
+LOCALE_DIR=$(PRJDIR)/locale
+ifndef TRAVIS
+	# set environment variables on local machine or GitLab CI
+	export GOROOT=$(realpath $(PRJDIR)/go)
+	export GOPATH=$(realpath $(PRJDIR))
+	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
+endif
+
+HTML_TEMPLATE_DIR=$(CURDIR)/theme/template/
+EXTRA_DIR=$(CURDIR)/theme/extra/
+SUPPORTED_LOCALES="en_US,zh_TW,vi_VN,fr_FR"
+WEBSITE_DIR=$(CURDIR)/website
+TPK_BUILD_OPTIONS=-websiteDir=$(WEBSITE_DIR) -htmlTemplateDir=$(HTML_TEMPLATE_DIR) -localeDir=$(LOCALE_DIR) -supportedLocales=$(SUPPORTED_LOCALES)
+TIPITAKA_CONF_DIR=$(CURDIR)/config/
+
+
+devserver: make-local
+	@# https://stackoverflow.com/a/5947779
+	@echo "\033[92mDevelopment Server Running ...\033[0m"
+	@go run $(PRJDIR)/devserver.go
+
+
+make-local: fmt dir extra html
+make-sutta: rmsite dir extra htmlsutta cname-sutta
+rmsite:
+	@echo "\033[92mRemove $(WEBSITE_DIR)\033[0m"
+	rm -rf $(WEBSITE_DIR)
+
+
+##########################
+# Build Tipiṭaka Website #
+##########################
+cname:
+	@echo "\033[92mCreate CNAME for GitHub Pages custom domain ...\033[0m"
+	echo "$(CNAME)" > $(WEBSITE_DIR)/CNAME
+cname-sutta:
+	CNAME=tipitaka.sutta.org make cname
+
+extra:
+	@echo "\033[92mMoving extra items to website dir ...\033[0m"
+	@cp -r $(EXTRA_DIR)/* $(WEBSITE_DIR)
+
+htmlsutta:
+	@echo "\033[92mGenerating HTML for dictionary.sutta.org ...\033[0m"
+	go run htmlspa.go -siteconf="$(TIPITAKA_CONF_DIR)/tipitaka.sutta.org.json" $(TPK_BUILD_OPTIONS)
+html:
+	@echo "\033[92mGenerating HTML ...\033[0m"
+	@go run htmlspa.go -siteconf="$(TIPITAKA_CONF_DIR)/empty-siteurl.json" $(TPK_BUILD_OPTIONS)
+
+dir:
+	@echo "\033[92mCreate website directory if not exists ...\033[0m"
+	@[ -d $(WEBSITE_DIR) ] || mkdir -p $(WEBSITE_DIR)
+#################################
+# End of Build Tipiṭaka Website #
+#################################
+
+
+###################
+# Install Library #
+###################
+install: lib_pali lib_gtmpl
+
+lib_pali:
+	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
+	go get -u github.com/siongui/gopalilib/util
+
+lib_gtmpl:
+	@echo "\033[92mInstalling Go html/template with gettext support ...\033[0m"
+	go get -u github.com/siongui/gtmpl
+##########################
+# End of Install Library #
+##########################
+
+
+########
+# Misc #
+########
+fmt:
+	@echo "\033[92mGo fmt source code...\033[0m"
+	@go fmt $(PRJDIR)/*.go
+	@go fmt *.go
+
+clean:
+	@echo "\033[92mClean Repo ...\033[0m"
+	@#rm -rf bin pkg src data $(WEBSITE_DIR)
+	rm -rf bin pkg src $(WEBSITE_DIR)
+
+update_ubuntu:
+	@echo "\033[92mUpdating Ubuntu ...\033[0m"
+	@sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
+
+download_go:
+	@echo "\033[92mDownloading and Installing Go ...\033[0m"
+	@#wget https://storage.googleapis.com/golang/go$(GO_VERSION).linux-amd64.tar.gz
+	@wget https://golang.org/dl/go$(GO_VERSION).linux-amd64.tar.gz
+	@tar -xvzf go$(GO_VERSION).linux-amd64.tar.gz
+	@rm go$(GO_VERSION).linux-amd64.tar.gz
+	@mv go/ $(PRJDIR)
