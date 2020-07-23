@@ -23,6 +23,6 @@ deploy:
     repo: siongui/tipitaka.sutta.org
     skip_cleanup: true
     github_token: $GITHUB_TOKEN
-    local_dir: website
+    local_dir: tipitaka/website
     on:
       branch: master
