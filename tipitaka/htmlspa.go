@@ -25,7 +25,6 @@ type TemplateData struct {
 func CreateIndexAnd404(tmpl *template.Template, data TemplateData, locale, websiteDir string) (err error) {
 	pi := path.Join(websiteDir, locale, "index.html")
 	p4 := path.Join(websiteDir, locale, "404.html")
-	data.OgLocale = locale
 
 	/*
 		println(pi)
@@ -57,7 +56,6 @@ func CreateIndexAnd404(tmpl *template.Template, data TemplateData, locale, websi
 func main() {
 	siteconffile := flag.String("siteconf", "", "JSON config file for website")
 	websiteDir := flag.String("websiteDir", "", "output dir of website")
-	supportedLocales := flag.String("supportedLocales", "", "supported locales on website, separated by ,")
 	htmlTemplateDir := flag.String("htmlTemplateDir", "", "html template dir")
 	localeDir := flag.String("localeDir", "", "locale translation dir")
 	flag.Parse()
@@ -67,12 +65,13 @@ func main() {
 		panic(err)
 	}
 
+	supportedLocales := siteconf["supportedLocales"]
 	data := TemplateData{
 		SiteUrl:       siteconf["SiteUrl"],
 		DictionaryURL: siteconf["DictionaryURL"],
 		OgImage:       siteconf["OgImage"],
 		OgUrl:         siteconf["OgUrl"],
-		OgLocale:      siteconf["OgLocale"],
+		OgLocale:      "",
 	}
 
 	tmpl, err := gtmpl.ParseDirectoryTree("messages", *localeDir, *htmlTemplateDir)
@@ -82,9 +81,10 @@ func main() {
 
 	err = CreateIndexAnd404(tmpl, data, "", *websiteDir)
 
-	sl := strings.Split(*supportedLocales, ",")
+	sl := strings.Split(supportedLocales, ",")
 	for _, locale := range sl {
 		gtmpl.SetLanguage(locale)
+		data.OgLocale = locale
 		err = CreateIndexAnd404(tmpl, data, locale, *websiteDir)
 		if err != nil {
 			panic(err)

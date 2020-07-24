@@ -3,5 +3,5 @@
     "DictionaryURL": "http://dictionary.sutta.org/",
     "OgImage": "https://upload.wikimedia.org/wikipedia/commons/d/df/Dharma_Wheel.svg",
     "OgUrl": "",
-    "OgLocale": "en_US"
+    "supportedLocales": "en_US,zh_TW,vi_VN,fr_FR"
 }

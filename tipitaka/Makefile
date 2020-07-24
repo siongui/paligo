@@ -13,9 +13,8 @@ endif
 
 HTML_TEMPLATE_DIR=$(CURDIR)/theme/template/
 EXTRA_DIR=$(CURDIR)/theme/extra/
-SUPPORTED_LOCALES="en_US,zh_TW,vi_VN,fr_FR"
 WEBSITE_DIR=$(CURDIR)/website
-TPK_BUILD_OPTIONS=-websiteDir=$(WEBSITE_DIR) -htmlTemplateDir=$(HTML_TEMPLATE_DIR) -localeDir=$(LOCALE_DIR) -supportedLocales=$(SUPPORTED_LOCALES)
+TPK_BUILD_OPTIONS=-websiteDir=$(WEBSITE_DIR) -htmlTemplateDir=$(HTML_TEMPLATE_DIR) -localeDir=$(LOCALE_DIR)
 TIPITAKA_CONF_DIR=$(CURDIR)/config/
 
 
