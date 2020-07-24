@@ -1,0 +1,55 @@
+{{define "about"}}
+<article class="message is-info is-light">
+  <div class="message-header">
+    <p>Welcome to Online Pāḷi Tipiṭaka Website!</p>
+  </div>
+  <div class="message-body">
+
+This website
+(<a href="https://github.com/siongui/paligo" target="_blank">source code</a>,
+<a href="https://github.com/siongui/data" target="_blank">data</a>)
+allows instant lookup of words when mouse cursor hovers over words, and contrast
+(parallel) reading of Pāḷi texts and translations (if available). The
+dictionaries include Pāḷi-English, Pāḷi-Japanese, Pāḷi-Chinese, Pāli-Vietnamese,
+Pāli-Burmese. The data of Pāḷi Tipiṭaka in this website comes from
+<a href="https://www.tipitaka.org/" target="_blank">Pāḷi Tipiṭaka</a>.
+
+Before using this website, please read
+<a href="https://www.tipitaka.org/help#howto" target="_blank">Howto</a> on
+<a href="https://www.tipitaka.org/" target="_blank">Pāḷi Tipiṭaka</a> first.
+If you only need to look up Pāḷi words, please visit
+<a href="{{.DictionaryURL}}" target="_blank">Pāḷi Dictionary</a>.
+
+The data of dictionaries comes from
+<a href="http://dhamma.sutta.org/pali-course/Pali-Chinese-English%20Dictionary.html" target="_blank">Pali Canon E-Dictionary Version 1.94 (PCED)</a>.
+This website is still under development.
+If any questions, problems, or suggestions, please
+<a href="mailto:siongui@gmail.com" target="_blank">contact me</a>.
+
+<!--
+{% if serverEnv == 'appspot' %}
+  Users who use old browsers please visit
+<a href="https://1.epalitipitaka.appspot.com/" target="_blank">old version of this website</a>.
+{% endif %}
+-->
+
+  </div>
+</article>
+
+<!--
+<div class="notification is-info is-light">
+<strong>Notice:</strong>
+<br /><br />
+The data of Pāḷi Tipiṭaka in this website comes from V.R.I. (Vipassana Research Institute, India) &amp; the VRI editions are based on the Burmese texts (Chaṭṭhasaṅgāyana edition).
+<br /><br />
+During compiling Pāḷi text, we have perceived some misplacements and these points have been confirmed by VRI. According to VRI, the misplacements had been occurring from the Chaṭṭhasaṅgāyana edition.
+<br /><br />
+The misplacements are being on these paths:
+<br /><br />
+1. Tipiṭaka (Mūla) (Pāḷi Canon)  &gt;&gt;  Suttapiṭaka (The Basket of Discourses)  &gt;&gt;  Aṅguttaranikāya (Further-factored Discourses)  &gt;&gt;  Ekakanipātapāḷi (Book of the Ones)  &gt;&gt;  9. Pamādādivaggo, the paragraph #81 should belong to the previous chapter (8. Kalyāṇamittādivaggo) instead of current state.
+<br /><br />
+2. Tipiṭaka (Mūla) (Pāḷi Canon)  &gt;&gt;  Suttapiṭaka (The Basket of Discourses)  &gt;&gt;  Aṅguttaranikāya (Further-factored Discourses)  &gt;&gt;  Ekakanipātapāḷi (Book of the Ones)  &gt;&gt;  10. Dutiyapamādādivaggo, the paragraphs 130 to 139 should belong to the next chapter (11. Adhammavaggo) instead of current state.
+</div>
+-->
+
+{{end}}

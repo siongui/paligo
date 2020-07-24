@@ -13,26 +13,14 @@
   {{template "css" .}}
 </head>
 <body>
-  {{template "navbar" .}}
-
-<div class="notification is-info is-light">
-
-Under Construction, Please visit other mirror sites:
-
-  <p>
-     <strong>Pāli Tipiṭaka Mirrors:</strong>
-<ul>
-  <li>
-     <a href="https://epalitipitaka.appspot.com/" target="_blank">epalitipitaka.appspot.com</a>
-  </li>
-  <li>
-     <a href="http://tipitaka.online-dhamma.net/" target="_blank">tipitaka.online-dhamma.net</a>
-  </li>
-</ul>
-  </p>
-
+{{template "navbar" .}}
+{{template "tmpinfo" .}}
+<section class="section">
+<div class="container">
+{{template "about" .}}
 </div>
-
+</section>
+{{template "footer" .}}
 <span id="site-info" data-siteurl="{{.SiteUrl}}" data-locale="{{.OgLocale}}"></span>
 <script src="{{.SiteUrl}}/pali.js"></script>
 </body>
