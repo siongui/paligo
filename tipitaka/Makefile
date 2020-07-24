@@ -25,8 +25,8 @@ devserver: make-local
 	@go run $(PRJDIR)/devserver.go
 
 
-make-local: fmt dir extra html
-make-sutta: rmsite dir extra htmlsutta cname-sutta
+make-local: fmt dir extra js html
+make-sutta: rmsite dir extra js htmlsutta cname-sutta
 rmsite:
 	@echo "\033[92mRemove $(WEBSITE_DIR)\033[0m"
 	rm -rf $(WEBSITE_DIR)
@@ -44,6 +44,11 @@ cname-sutta:
 extra:
 	@echo "\033[92mMoving extra items to website dir ...\033[0m"
 	@cp -r $(EXTRA_DIR)/* $(WEBSITE_DIR)
+
+js:
+	@echo "\033[92mGenerating JavaScript ...\033[0m"
+	@#gopherjs build gopherjs/*.go -o $(WEBSITE_DIR)/pali.js
+	@gopherjs build gopherjs/*.go -m -o $(WEBSITE_DIR)/pali.js
 
 htmlsutta:
 	@echo "\033[92mGenerating HTML for dictionary.sutta.org ...\033[0m"
@@ -63,7 +68,7 @@ dir:
 ###################
 # Install Library #
 ###################
-install: lib_pali lib_gtmpl
+install: lib_pali lib_gtmpl lib_gopherjs_i18n lib_godom lib_paliDataVFS lib_gopherjs
 
 lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
@@ -72,6 +77,22 @@ lib_pali:
 lib_gtmpl:
 	@echo "\033[92mInstalling Go html/template with gettext support ...\033[0m"
 	go get -u github.com/siongui/gtmpl
+
+lib_gopherjs_i18n:
+	@echo "\033[92mInstalling GopherJS gettext library (online/client-side)...\033[0m"
+	go get -u github.com/siongui/gopherjs-i18n
+
+lib_godom:
+	@echo "\033[92mInstalling dom manipulation library ...\033[0m"
+	go get -u github.com/siongui/godom
+
+lib_paliDataVFS:
+	@echo "\033[92mInstalling VFS for fullstack Go ...\033[0m"
+	go get -u github.com/siongui/paliDataVFS
+
+lib_gopherjs:
+	@echo "\033[92mInstalling GopherJS ...\033[0m"
+	go get -u github.com/gopherjs/gopherjs
 ##########################
 # End of Install Library #
 ##########################
@@ -84,6 +105,7 @@ fmt:
 	@echo "\033[92mGo fmt source code...\033[0m"
 	@go fmt $(PRJDIR)/*.go
 	@go fmt *.go
+	@go fmt gopherjs/*.go
 
 clean:
 	@echo "\033[92mClean Repo ...\033[0m"
