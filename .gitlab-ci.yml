@@ -1,0 +1,25 @@
+# https://hub.docker.com/_/ubuntu
+# The ubuntu:latest tag points to the "latest LTS"
+image: ubuntu:latest
+
+pages:
+  stage: deploy
+  script:
+  # https://rtfm.co.ua/en/docker-configure-tzdata-and-timezone-during-build/
+  # https://askubuntu.com/a/1098881
+  - export TZ=Asia/Taipei
+  - ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+  # https://stackoverflow.com/a/58072486
+  - apt-get update
+  - apt-get install -y wget make git gettext
+  - cd dictionary/
+  #- make clone_pali_data
+  - make download_go
+  - make install
+  - make make-gitlab-basic
+  - make mvtopublic
+  artifacts:
+    paths:
+    - public/
+  only:
+  - master

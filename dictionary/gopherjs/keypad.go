@@ -1,9 +1,8 @@
 package main
 
 import (
-	"unicode/utf8"
-
 	. "github.com/siongui/godom"
+	"github.com/siongui/gopalilib/lib"
 	sg "github.com/siongui/gopherjs-input-suggest"
 )
 
@@ -17,14 +16,6 @@ var letters = [][]string{
 // http://blog.elliottcable.name/posts/useful_unicode.xhtml
 // https://www.compart.com/en/unicode/U+23CE
 var specialKeys = []string{"Backspace ⌫", "Enter ⏎"}
-
-func RemoveLastChar(str string) string {
-	for len(str) > 0 {
-		_, size := utf8.DecodeLastRuneInString(str)
-		return str[:len(str)-size]
-	}
-	return str
-}
 
 func initKeypadInputElement(value string) *Object {
 	ie := Document.CreateElement("input")
@@ -59,7 +50,7 @@ func bindKeypad(inputId, keypadId string) {
 		if i == 0 {
 			// Backspace
 			ie.AddEventListener("click", func(e Event) {
-				ipp.SetValue(RemoveLastChar(ipp.Value()))
+				ipp.SetValue(lib.RemoveLastChar(ipp.Value()))
 				sg.UpdateSuggestion()
 			})
 		}
