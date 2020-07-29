@@ -23,6 +23,9 @@ DATA_REPO_DIR=$(PRJDIR)/data
 DICTIONARY_BOOTSTRAP_DATA_DIR=$(DATA_REPO_DIR)/dictionary
 DICTIONARY_CONF_DIR=$(CURDIR)/config/
 
+OFFLINE_LINUX=$(GOPATH)/bin/offline-linux
+GITLAB_PUBLIC_DIR=$(PRJDIR)/public/
+
 
 # html must run before about_symlink. otherwise make symlink will fail
 devserver: make-local-basic
@@ -44,7 +47,34 @@ rmsite:
 	@echo "\033[92mRemove $(WEBSITE_DIR)\033[0m"
 	rm -rf $(WEBSITE_DIR)
 mvtopublic:
-	mv $(WEBSITE_DIR) $(PRJDIR)/public/
+	mv $(WEBSITE_DIR) $(GITLAB_PUBLIC_DIR)
+
+
+###############################
+# Build Single Offline Binary #
+###############################
+clone-word-json:
+	@echo "\033[92mClone Pali words JSON files ...\033[0m"
+	[ -d $(WEBSITE_DIR)/json/ ] || git clone -b master https://github.com/siongui/xemaauj9k5qn34x88m4h.git $(WEBSITE_DIR)/json/
+
+bulma-offline:
+	@echo "\033[92mMaking offline bulma.css ...\033[0m"
+	[ -f $(WEBSITE_DIR)/bulma.css ] || wget -O $(WEBSITE_DIR)/bulma.css https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.css
+	find $(WEBSITE_DIR) -name "index.html" -exec sed -i -e 's/https:\/\/cdn.jsdelivr.net\/npm\/bulma@0.9.0\/css//' {} \;
+	find $(WEBSITE_DIR) -name "index.html" -exec sed -i -e 's/ integrity="sha256-oSsWW\/ca1ll8OVu2t4EKkyb9lmH0Pkd8CXKXnYP4QvA=" crossorigin="anonymous"//' {} \;
+
+offline: make-local-basic clone-word-json bulma-offline
+	@echo "\033[92mBuild single offline website binary ...\033[0m"
+	go run offline/embed.go -websiteDir=$(WEBSITE_DIR)
+	cd offline; go build -o $(OFFLINE_LINUX)
+	$(OFFLINE_LINUX)
+
+mvofflinetopublic:
+	[ -d $(GITLAB_PUBLIC_DIR) ] || mkdir -p $(GITLAB_PUBLIC_DIR)
+	mv $(OFFLINE_LINUX) $(GITLAB_PUBLIC_DIR)
+######################################
+# End of Build Single Offline Binary #
+######################################
 
 
 ##########################
@@ -268,6 +298,11 @@ lib_gopherjs_input_suggest:
 lib_gopherjs:
 	@echo "\033[92mInstalling GopherJS ...\033[0m"
 	go get -u github.com/gopherjs/gopherjs
+
+# only for create offline binary
+lib_goef:
+	@echo "\033[92mInstalling goef for creating offline binary ...\033[0m"
+	go get -u github.com/siongui/goef
 ##########################
 # End of Install Library #
 ##########################
@@ -281,6 +316,7 @@ fmt:
 	@go fmt $(PRJDIR)/*.go
 	@go fmt gopherjs/*.go
 	@go fmt *.go
+	@go fmt offline/*.go
 
 clone_pali_data:
 	@echo "\033[92mClone Pāli data Repo ...\033[0m"
