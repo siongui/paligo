@@ -21,4 +21,7 @@ func main() {
 	//println(getFinalShowLocale())
 	jsgettext.SetupTranslationMapping(paliDataVFS.GetPoJsonBlob())
 	jsgettext.Translate(getFinalShowLocale())
+
+	b, _ := ReadFile("tpktoc.json")
+	println(string(b))
 }

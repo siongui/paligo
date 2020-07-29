@@ -14,8 +14,10 @@ endif
 HTML_TEMPLATE_DIR=$(CURDIR)/theme/template/
 EXTRA_DIR=$(CURDIR)/theme/extra/
 WEBSITE_DIR=$(CURDIR)/website
+WEBSITE_DATA_DIR=$(WEBSITE_DIR)/data
 TPK_BUILD_OPTIONS=-websiteDir=$(WEBSITE_DIR) -htmlTemplateDir=$(HTML_TEMPLATE_DIR) -localeDir=$(LOCALE_DIR)
 TIPITAKA_CONF_DIR=$(CURDIR)/config/
+TIPITAKA_XML_DIR=$(WEBSITE_DIR)/tpkxml/
 
 
 devserver: make-local
@@ -64,10 +66,26 @@ dir:
 #################################
 
 
+##############################
+# Bootstrap Tipiṭaka Website #
+##############################
+clone_tpk_xml:
+	@echo "\033[92mClone Tipiṭaka XML repo ...\033[0m"
+	@[ -d $(TIPITAKA_XML_DIR) ] || git clone https://github.com/siongui/tipitaka-romn.git $(TIPITAKA_XML_DIR)
+
+embed_data: fmt clone_tpk_xml
+	@echo "\033[92mEmbed Tipiṭaka ToC(Table of Content) in Go code ...\033[0m"
+	@[ -d $(WEBSITE_DATA_DIR) ] || mkdir -p $(WEBSITE_DATA_DIR)
+	@go run embed.go -xmlDir=$(TIPITAKA_XML_DIR) -dataDir=$(WEBSITE_DATA_DIR)
+#####################################
+# End of Bootstrap Tipiṭaka Website #
+#####################################
+
+
 ###################
 # Install Library #
 ###################
-install: lib_pali lib_gtmpl lib_gopherjs_i18n lib_godom lib_paliDataVFS lib_gopherjs
+install: lib_pali lib_gtmpl lib_gopherjs_i18n lib_godom lib_paliDataVFS lib_gopherjs lib_goef
 
 lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
@@ -92,6 +110,10 @@ lib_paliDataVFS:
 lib_gopherjs:
 	@echo "\033[92mInstalling GopherJS ...\033[0m"
 	go get -u github.com/gopherjs/gopherjs
+
+lib_goef:
+	@echo "\033[92mInstalling GopherJS ...\033[0m"
+	go get -u github.com/siongui/goef
 ##########################
 # End of Install Library #
 ##########################
