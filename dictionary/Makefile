@@ -24,6 +24,7 @@ DICTIONARY_BOOTSTRAP_DATA_DIR=$(DATA_REPO_DIR)/dictionary
 DICTIONARY_CONF_DIR=$(CURDIR)/config/
 
 OFFLINE_LINUX=$(GOPATH)/bin/offline-linux
+OFFLINE_WINDOWS=$(GOPATH)/bin/offline-windows.exe
 GITLAB_PUBLIC_DIR=$(PRJDIR)/public/
 
 
@@ -66,7 +67,10 @@ bulma-offline:
 offline: make-local-basic clone-word-json bulma-offline
 	@echo "\033[92mBuild single offline website binary ...\033[0m"
 	go run offline/embed.go -websiteDir=$(WEBSITE_DIR)
+	# build binary for linux
 	cd offline; go build -o $(OFFLINE_LINUX)
+	# build binary for windows
+	cd offline; GOOS=windows GOARCH=amd64 go build -o $(OFFLINE_WINDOWS)
 
 run-offline: offline
 	$(OFFLINE_LINUX)
@@ -74,6 +78,7 @@ run-offline: offline
 mvofflinetopublic:
 	[ -d $(GITLAB_PUBLIC_DIR) ] || mkdir -p $(GITLAB_PUBLIC_DIR)
 	mv $(OFFLINE_LINUX) $(GITLAB_PUBLIC_DIR)
+	mv $(OFFLINE_WINDOWS) $(GITLAB_PUBLIC_DIR)
 ######################################
 # End of Build Single Offline Binary #
 ######################################
