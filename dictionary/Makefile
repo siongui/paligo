@@ -67,6 +67,8 @@ offline: make-local-basic clone-word-json bulma-offline
 	@echo "\033[92mBuild single offline website binary ...\033[0m"
 	go run offline/embed.go -websiteDir=$(WEBSITE_DIR)
 	cd offline; go build -o $(OFFLINE_LINUX)
+
+run-offline: offline
 	$(OFFLINE_LINUX)
 
 mvofflinetopublic:
