@@ -323,7 +323,7 @@ fmt:
 	@go fmt $(PRJDIR)/*.go
 	@go fmt gopherjs/*.go
 	@go fmt *.go
-	@go fmt offline/*.go
+	@go fmt `find offline/ -name "*.go" | grep -v data.go`
 
 clone_pali_data:
 	@echo "\033[92mClone Pāli data Repo ...\033[0m"
