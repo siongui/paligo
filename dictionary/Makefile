@@ -25,6 +25,7 @@ DICTIONARY_CONF_DIR=$(CURDIR)/config/
 
 OFFLINE_LINUX=$(GOPATH)/bin/offline-linux
 OFFLINE_WINDOWS=$(GOPATH)/bin/offline-windows.exe
+OFFLINE_MAC=$(GOPATH)/bin/offline-darwin
 GITLAB_PUBLIC_DIR=$(PRJDIR)/public/
 
 
@@ -71,6 +72,8 @@ offline: make-local-basic clone-word-json bulma-offline
 	cd offline; go build -o $(OFFLINE_LINUX)
 	# build binary for windows
 	cd offline; GOOS=windows GOARCH=amd64 go build -o $(OFFLINE_WINDOWS)
+	# build binary for Mac OS X
+	cd offline; GOOS=darwin GOARCH=amd64 go build -o $(OFFLINE_MAC)
 
 run-offline: offline
 	$(OFFLINE_LINUX)
@@ -79,6 +82,7 @@ mvofflinetopublic:
 	[ -d $(GITLAB_PUBLIC_DIR) ] || mkdir -p $(GITLAB_PUBLIC_DIR)
 	mv $(OFFLINE_LINUX) $(GITLAB_PUBLIC_DIR)
 	mv $(OFFLINE_WINDOWS) $(GITLAB_PUBLIC_DIR)
+	mv $(OFFLINE_MAC) $(GITLAB_PUBLIC_DIR)
 ######################################
 # End of Build Single Offline Binary #
 ######################################
