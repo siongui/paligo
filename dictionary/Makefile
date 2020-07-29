@@ -60,7 +60,7 @@ clone-word-json:
 
 bulma-offline:
 	@echo "\033[92mMaking offline bulma.css ...\033[0m"
-	[ -f $(WEBSITE_DIR)/bulma.css ] || wget -O $(WEBSITE_DIR)/bulma.css https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.css
+	[ -f $(WEBSITE_DIR)/bulma.css ] || wget https://raw.githubusercontent.com/jgthms/bulma/0.9.0/css/bulma.css -O $(WEBSITE_DIR)/bulma.css
 	find $(WEBSITE_DIR) -name "index.html" -exec sed -i -e 's/https:\/\/cdn.jsdelivr.net\/npm\/bulma@0.9.0\/css//' {} \;
 	find $(WEBSITE_DIR) -name "index.html" -exec sed -i -e 's/ integrity="sha256-oSsWW\/ca1ll8OVu2t4EKkyb9lmH0Pkd8CXKXnYP4QvA=" crossorigin="anonymous"//' {} \;
 
