@@ -90,6 +90,6 @@ func setupBrowseDictionary() {
 	pl.SetInnerHTML(all)
 }
 
-func isDev() bool {
-	return Window.Location().Hostname() == "localhost"
+func isOffline() bool {
+	return Window.Location().Hostname() == "localhost" && Window.Location().Port() == "8080"
 }
