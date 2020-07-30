@@ -30,11 +30,12 @@ Development Environment:
   - `Go 1.12.17`_
   - GopherJS_
 
-Re-implementation of `Pāli Dictionary`_ is almost finished. `Pāli Tipiṭaka`_ not
-yet.
+Re-implementation of `Pāli Dictionary`_ is finished.
+See `dictionary dir <dictionary/>`_ for more information.
 
-For dictionary code, see `dictionary dir <dictionary/>`_ for more information.
 
+`Pāli Tipiṭaka`_ is under construction now.
+See `tipitaka dir <tipitaka/>`_ for more information.
 
 
 UNLICENSE

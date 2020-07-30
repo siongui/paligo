@@ -99,6 +99,18 @@ Set Up Development Environment
      $ make devserver
 
 
+Offline Support
++++++++++++++++
+
+Use `Pāli Dictionary`_ without internet connection. The technique used to
+offline website is to embed all data in Go code, and serve the Go code via local
+http server.
+
+Use goef_ package to embed all website content in Go code, and a simple http
+server is used to serve the website content on local machine/desktop/laptop.
+See `offline dir <offline/>` and `Makefile <Makefile>`__ for more information.
+
+
 Deploy to GitHub Pages
 ++++++++++++++++++++++
 
@@ -255,3 +267,4 @@ References
 .. _gtmpl: https://github.com/siongui/gtmpl
 .. _gopalilib: https://github.com/siongui/gopalilib
 .. _paliDataVFS: https://github.com/siongui/paliDataVFS
+.. _goef: https://github.com/siongui/goef
