@@ -40,8 +40,36 @@ func ReadFile(filename string) ([]byte, error) {
 		return base64.StdEncoding.DecodeString(content)
 	}
 
-	index, ok2 := virtualFilesystem["index.html"]
-	if ok2 {
+	if strings.HasPrefix(filename, "zh_TW/") {
+		index, ok := virtualFilesystem["zh_TW/index.html"]
+		if ok {
+			return []byte(index), nil
+		}
+	}
+
+	if strings.HasPrefix(filename, "en_US/") {
+		index, ok := virtualFilesystem["en_US/index.html"]
+		if ok {
+			return []byte(index), nil
+		}
+	}
+
+	if strings.HasPrefix(filename, "vi_VN/") {
+		index, ok := virtualFilesystem["vi_VN/index.html"]
+		if ok {
+			return []byte(index), nil
+		}
+	}
+
+	if strings.HasPrefix(filename, "fr_FR/") {
+		index, ok := virtualFilesystem["fr_FR/index.html"]
+		if ok {
+			return []byte(index), nil
+		}
+	}
+
+	index, ok := virtualFilesystem["index.html"]
+	if ok {
 		return []byte(index), nil
 	}
 
