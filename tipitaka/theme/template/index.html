@@ -20,7 +20,10 @@
 
 <div class="columns">
   <div class="column is-one-third" id="treeview"></div>
-  <div class="column">{{template "about" .}}</div>
+  <div class="column">
+    <div class="container" id="mainview"></div>
+    {{template "about" .}}
+  </div>
 </div>
 
 </div>

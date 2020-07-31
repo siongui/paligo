@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
@@ -21,7 +22,9 @@ func getFinalShowLocale() string {
 }
 
 func xmlAction(action string) {
-	println(action)
+	url := ActionXmlUrl(action)
+	html := fmt.Sprintf("<a href='%s'>%s</a>", url, url)
+	Document.GetElementById("mainview").SetInnerHTML(html)
 }
 
 func main() {
