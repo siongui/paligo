@@ -106,9 +106,10 @@ Use `Pāli Dictionary`_ without internet connection. The technique used to
 offline website is to embed all data in Go code, and serve the Go code via local
 http server.
 
-Use goef_ package to embed all website content in Go code, and a simple http
-server is used to serve the website content on local machine/desktop/laptop.
-See `offline dir <offline/>` and `Makefile <Makefile>`__ for more information.
+Use goef_ package to embed all website content in Go code, together with a
+simple http server to serve the website content on local machine/desktop/laptop.
+See `offline dir <offline/>`_, `Makefile <Makefile>`__, and ref [11]_ for more
+information.
 
 
 Deploy to GitHub Pages
@@ -250,9 +251,14 @@ References
 .. [10] | `Repositories - GitHub Docs <https://docs.github.com/en/rest/reference/repos#pages>`_
         | `Other authentication methods - GitHub Docs <https://docs.github.com/en/rest/overview/other-authentication-methods>`_
 
+.. [11] | `Writing Web Applications - The Go Programming Language <https://golang.org/doc/articles/wiki/>`_
+        | `How To Build Go Executables for Multiple Platforms on Ubuntu 16.04 | DigitalOcean <https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04>`_
+        | `How To Build and Install Go Programs | DigitalOcean <https://www.digitalocean.com/community/tutorials/how-to-build-and-install-go-programs>`_
+        | `Uploading large (100+ MB) mp4 files onto Git Pages? - GitHub Pages - GitHub Support Community <https://github.community/t/uploading-large-100-mb-mp4-files-onto-git-pages/10565>`_
 
-.. _Pāli Dictionary: https://siongui.github.io/pali-dictionary/
-.. _Pāli Tipiṭaka: http://tipitaka.sutta.org/
+
+.. _Pāli Dictionary: https://dictionary.sutta.org/
+.. _Pāli Tipiṭaka: https://tipitaka.sutta.org/
 .. _Go: https://golang.org/
 .. _Ubuntu 20.04: https://releases.ubuntu.com/20.04/
 .. _Go 1.12.17: https://golang.org/dl/

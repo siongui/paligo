@@ -52,8 +52,8 @@ References
 .. [3] `old implementation of Pāli Dictionary <https://palidictionary.appspot.com/>`_
 
 
-.. _Pāli Dictionary: https://siongui.github.io/pali-dictionary/
-.. _Pāli Tipiṭaka: http://tipitaka.sutta.org/
+.. _Pāli Dictionary: https://dictionary.sutta.org/
+.. _Pāli Tipiṭaka: https://tipitaka.sutta.org/
 .. _Go: https://golang.org/
 .. _Ubuntu 20.04: https://releases.ubuntu.com/20.04/
 .. _Go 1.12.17: https://golang.org/dl/
