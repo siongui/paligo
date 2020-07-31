@@ -5,7 +5,7 @@ import (
 	"github.com/siongui/gopalilib/lib"
 )
 
-func traverseTreeviewData(tree lib.Tree) *Object {
+func traverseTreeviewData(tree lib.Tree, actionFunc func(string)) *Object {
 	if len(tree.SubTrees) > 0 {
 		div := Document.CreateElement("div")
 		div.ClassList().Add("item")
@@ -23,7 +23,7 @@ func traverseTreeviewData(tree lib.Tree) *Object {
 		childrenContainer := Document.CreateElement("div")
 		childrenContainer.ClassList().Add("childrenContainer")
 		for _, child := range tree.SubTrees {
-			childrenContainer.AppendChild(traverseTreeviewData(child))
+			childrenContainer.AppendChild(traverseTreeviewData(child, actionFunc))
 		}
 		childrenContainer.Style().SetDisplay("none")
 
@@ -45,7 +45,15 @@ func traverseTreeviewData(tree lib.Tree) *Object {
 	} else {
 		div := Document.CreateElement("div")
 		div.ClassList().Add("item")
-		div.SetInnerHTML("<span class='treeNode'>" + tree.Text + "</span>")
+
+		span := Document.CreateElement("span")
+		span.ClassList().Add("treeNode")
+		span.SetInnerHTML(tree.Text)
+		span.AddEventListener("click", func(e Event) {
+			actionFunc(tree.Action)
+		})
+
+		div.AppendChild(span)
 		return div
 	}
 }
@@ -77,12 +85,12 @@ func appendCSSToHeadElement() {
 	Document.QuerySelector("head").AppendChild(s)
 }
 
-func NewTreeview(id string, root lib.Tree) {
+func NewTreeview(id string, root lib.Tree, actionFunc func(string)) {
 	appendCSSToHeadElement()
 	treeviewContainer := Document.GetElementById(id)
 
 	for _, child := range root.SubTrees {
-		tree := traverseTreeviewData(child)
+		tree := traverseTreeviewData(child, actionFunc)
 		treeviewContainer.AppendChild(tree)
 	}
 }

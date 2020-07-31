@@ -102,9 +102,9 @@ Set Up Development Environment
 Offline Support
 +++++++++++++++
 
-Use `Pāli Dictionary`_ without internet connection. The technique used to build
-offline website is to embed all data in Go code, and serve the Go code via local
-http server.
+Use `Pāli Dictionary`_ without internet connection. The technique used to create
+offline website is to embed all files of the website in Go code, and serve the
+offline website via local http server.
 
 Use goef_ package to embed all website content in Go code, together with a
 simple http server to serve the website content on local machine/desktop/laptop.

@@ -20,6 +20,10 @@ func getFinalShowLocale() string {
 	return locale
 }
 
+func xmlAction(action string) {
+	println(action)
+}
+
 func main() {
 	//println(getFinalShowLocale())
 	jsgettext.SetupTranslationMapping(paliDataVFS.GetPoJsonBlob())
@@ -29,5 +33,5 @@ func main() {
 	//println(string(b))
 	tree := lib.Tree{}
 	json.Unmarshal(b, &tree)
-	NewTreeview("treeview", tree)
+	NewTreeview("treeview", tree, xmlAction)
 }
