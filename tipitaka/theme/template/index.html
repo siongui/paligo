@@ -17,7 +17,12 @@
 {{template "tmpinfo" .}}
 <section class="section">
 <div class="container">
-{{template "about" .}}
+
+<div class="columns">
+  <div class="column is-one-third" id="treeview"></div>
+  <div class="column">{{template "about" .}}</div>
+</div>
+
 </div>
 </section>
 {{template "footer" .}}

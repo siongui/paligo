@@ -102,7 +102,7 @@ Set Up Development Environment
 Offline Support
 +++++++++++++++
 
-Use `Pāli Dictionary`_ without internet connection. The technique used to
+Use `Pāli Dictionary`_ without internet connection. The technique used to build
 offline website is to embed all data in Go code, and serve the Go code via local
 http server.
 

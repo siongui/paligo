@@ -1,7 +1,10 @@
 package main
 
 import (
+	"encoding/json"
+
 	. "github.com/siongui/godom"
+	"github.com/siongui/gopalilib/lib"
 	jsgettext "github.com/siongui/gopherjs-i18n"
 	"github.com/siongui/paliDataVFS"
 )
@@ -23,5 +26,8 @@ func main() {
 	jsgettext.Translate(getFinalShowLocale())
 
 	b, _ := ReadFile("tpktoc.json")
-	println(string(b))
+	//println(string(b))
+	tree := lib.Tree{}
+	json.Unmarshal(b, &tree)
+	NewTreeview("treeview", tree)
 }
