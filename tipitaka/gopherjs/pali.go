@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
+	"strings"
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
@@ -23,8 +23,24 @@ func getFinalShowLocale() string {
 
 func xmlAction(action string) {
 	url := ActionXmlUrl(action)
-	html := fmt.Sprintf("<a href='%s'>%s</a>", url, url)
-	Document.GetElementById("mainview").SetInnerHTML(html)
+
+	xsltProcessor := NewXSLTProcessor()
+
+	// Load the xsl file using synchronous (third param is set to false) XMLHttpRequest
+	myXMLHTTPRequest := NewXMLHttpRequest()
+	myXMLHTTPRequest.Open("GET", url, false)
+	myXMLHTTPRequest.Send()
+
+	xslRef := myXMLHTTPRequest.ResponseXML()
+
+	// Finally import the .xsl
+	xsltProcessor.ImportStylesheet(xslRef)
+
+	// Cannot append DOM element to DIV node: Uncaught HierarchyRequestError: Failed to execute 'appendChild' on 'Node'
+	// https://stackoverflow.com/a/29643573
+	Document.GetElementById("mainview").RemoveAllChildNodes()
+	content := xslRef.DocumentElement().QuerySelector("body").InnerHTML()
+	Document.GetElementById("mainview").SetInnerHTML(strings.Replace(content, "rend", "class", -1))
 }
 
 func main() {
