@@ -40,7 +40,9 @@ func xmlAction(action string) {
 	// https://stackoverflow.com/a/29643573
 	Document.GetElementById("mainview").RemoveAllChildNodes()
 	content := xslRef.DocumentElement().QuerySelector("body").InnerHTML()
-	Document.GetElementById("mainview").SetInnerHTML(strings.Replace(content, "rend", "class", -1))
+	content = strings.Replace(content, "rend=", "class=", -1)
+	content = strings.Replace(content, `"centre"`, `"centered"`, -1)
+	Document.GetElementById("mainview").SetInnerHTML(content)
 }
 
 func main() {
