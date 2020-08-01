@@ -16,20 +16,24 @@
 <body>
 {{template "navbar" .}}
 {{template "tmpinfo" .}}
-<section class="section">
+
+<section class="section pt-1">
 <div class="container">
 
 <div class="columns">
-  <div class="column is-one-third" id="treeview"></div>
+  <div class="column is-one-third" id="treeview">
+    <div class="notification is-info is-light"><span data-default-string="Loading">{{gettext "Loading"}}</span> ...</div>
+  </div>
   <div class="column">
-    <div class="container" id="mainview"></div>
+    <div class="container mb-6" id="mainview"></div>
     {{template "about" .}}
   </div>
 </div>
 
 </div>
-</section>
 {{template "footer" .}}
+</section>
+
 <span id="site-info" data-siteurl="{{.SiteUrl}}" data-locale="{{.OgLocale}}"></span>
 <script src="{{.SiteUrl}}/pali.js"></script>
 </body>

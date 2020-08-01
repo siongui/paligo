@@ -22,6 +22,7 @@ func getFinalShowLocale() string {
 }
 
 func xmlAction(action string) {
+	mainview := Document.GetElementById("mainview")
 	url := ActionXmlUrl(action)
 
 	xsltProcessor := NewXSLTProcessor()
@@ -42,7 +43,7 @@ func xmlAction(action string) {
 	content := xslRef.DocumentElement().QuerySelector("body").InnerHTML()
 	content = strings.Replace(content, "rend=", "class=", -1)
 	content = strings.Replace(content, `"centre"`, `"centered"`, -1)
-	Document.GetElementById("mainview").SetInnerHTML(content)
+	mainview.SetInnerHTML(content)
 }
 
 func main() {
@@ -55,4 +56,5 @@ func main() {
 	tree := lib.Tree{}
 	json.Unmarshal(b, &tree)
 	NewTreeview("treeview", tree, xmlAction)
+	Document.GetElementById("treeview").QuerySelector("div.notification").ClassList().Add("is-hidden")
 }
