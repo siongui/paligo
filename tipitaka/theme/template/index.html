@@ -25,7 +25,10 @@
     <div class="notification is-info is-light"><span data-default-string="Loading">{{gettext "Loading"}}</span> ...</div>
   </div>
   <div class="column">
-    <div class="container mb-6" id="mainview"></div>
+    <div class="container mb-6" id="mainview">
+      <div class="notification is-info is-light is-hidden"><span data-default-string="Loading">{{gettext "Loading"}}</span> ...</div>
+      <div class="content"></div>
+    </div>
     {{template "about" .}}
   </div>
 </div>

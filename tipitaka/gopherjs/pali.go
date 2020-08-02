@@ -22,6 +22,7 @@ func getFinalShowLocale() string {
 
 func xmlAction(action string) {
 	mainview := Document.GetElementById("mainview")
+	mainview.QuerySelector("div.notification").ClassList().Remove("is-hidden")
 
 	// Load the xml file using synchronous (third param is set to false) XMLHttpRequest
 	myXMLHTTPRequest := NewXMLHttpRequest()
@@ -31,8 +32,9 @@ func xmlAction(action string) {
 	xmlDoc := myXMLHTTPRequest.ResponseXML()
 	fragment := GetXSLTProcessor().TransformToFragment(xmlDoc, Document)
 
-	mainview.RemoveAllChildNodes()
-	mainview.AppendChild(fragment)
+	mainview.QuerySelector("div.content").RemoveAllChildNodes()
+	mainview.QuerySelector("div.content").AppendChild(fragment)
+	mainview.QuerySelector("div.notification").ClassList().Add("is-hidden")
 }
 
 func main() {
