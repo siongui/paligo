@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"strings"
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
@@ -23,27 +22,17 @@ func getFinalShowLocale() string {
 
 func xmlAction(action string) {
 	mainview := Document.GetElementById("mainview")
-	url := ActionXmlUrl(action)
 
-	xsltProcessor := NewXSLTProcessor()
-
-	// Load the xsl file using synchronous (third param is set to false) XMLHttpRequest
+	// Load the xml file using synchronous (third param is set to false) XMLHttpRequest
 	myXMLHTTPRequest := NewXMLHttpRequest()
-	myXMLHTTPRequest.Open("GET", url, false)
+	myXMLHTTPRequest.Open("GET", ActionXmlUrl(action), false)
 	myXMLHTTPRequest.Send()
 
-	xslRef := myXMLHTTPRequest.ResponseXML()
+	xmlDoc := myXMLHTTPRequest.ResponseXML()
+	fragment := GetXSLTProcessor().TransformToFragment(xmlDoc, Document)
 
-	// Finally import the .xsl
-	xsltProcessor.ImportStylesheet(xslRef)
-
-	// Cannot append DOM element to DIV node: Uncaught HierarchyRequestError: Failed to execute 'appendChild' on 'Node'
-	// https://stackoverflow.com/a/29643573
-	Document.GetElementById("mainview").RemoveAllChildNodes()
-	content := xslRef.DocumentElement().QuerySelector("body").InnerHTML()
-	content = strings.Replace(content, "rend=", "class=", -1)
-	content = strings.Replace(content, `"centre"`, `"centered"`, -1)
-	mainview.SetInnerHTML(content)
+	mainview.RemoveAllChildNodes()
+	mainview.AppendChild(fragment)
 }
 
 func main() {
@@ -56,5 +45,8 @@ func main() {
 	tree := lib.Tree{}
 	json.Unmarshal(b, &tree)
 	NewTreeview("treeview", tree, xmlAction)
+
+	SetupXSLTProcessor()
+
 	Document.GetElementById("treeview").QuerySelector("div.notification").ClassList().Add("is-hidden")
 }
