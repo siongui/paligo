@@ -34,6 +34,11 @@ func xmlAction(action string) {
 
 	mainview.QuerySelector("div.content").RemoveAllChildNodes()
 	mainview.QuerySelector("div.content").AppendChild(fragment)
+
+	MarkEveryWord("#mainview > div.content", func(word string) {
+		println(word)
+	})
+
 	mainview.QuerySelector("div.notification").ClassList().Add("is-hidden")
 }
 
