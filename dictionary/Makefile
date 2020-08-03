@@ -331,7 +331,7 @@ fmt:
 
 clone_pali_data:
 	@echo "\033[92mClone Pāli data Repo ...\033[0m"
-	@git clone https://github.com/siongui/data.git $(DATA_REPO_DIR) --depth=1
+	@[ -d $(DATA_REPO_DIR) ] || git clone https://github.com/siongui/data.git $(DATA_REPO_DIR) --depth=1
 
 clean:
 	@echo "\033[92mClean Repo ...\033[0m"

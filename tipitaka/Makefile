@@ -19,6 +19,7 @@ TPK_BUILD_OPTIONS=-websiteDir=$(WEBSITE_DIR) -htmlTemplateDir=$(HTML_TEMPLATE_DI
 TIPITAKA_CONF_DIR=$(CURDIR)/config/
 TIPITAKA_XML_DIR=$(WEBSITE_DIR)/tpkxml/
 
+DATA_REPO_DIR=$(PRJDIR)/data
 
 devserver: make-local
 	@# https://stackoverflow.com/a/5947779
@@ -127,6 +128,10 @@ fmt:
 	@go fmt $(PRJDIR)/*.go
 	@go fmt *.go
 	@go fmt gopherjs/*.go
+
+clone_pali_data:
+	@echo "\033[92mClone Pāli data Repo ...\033[0m"
+	@[ -d $(DATA_REPO_DIR) ] || git clone https://github.com/siongui/data.git $(DATA_REPO_DIR) --depth=1
 
 clean:
 	@echo "\033[92mClean Repo ...\033[0m"
