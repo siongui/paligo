@@ -74,10 +74,10 @@ clone_tpk_xml:
 	@echo "\033[92mClone Tipiṭaka XML repo ...\033[0m"
 	@[ -d $(TIPITAKA_XML_DIR) ] || git clone https://github.com/siongui/tipitaka-romn.git $(TIPITAKA_XML_DIR)
 
-embed_data: fmt clone_tpk_xml
+embed_data: fmt clone_tpk_xml clone_pali_data
 	@echo "\033[92mEmbed Tipiṭaka ToC(Table of Content) in Go code ...\033[0m"
 	@[ -d $(WEBSITE_DATA_DIR) ] || mkdir -p $(WEBSITE_DATA_DIR)
-	@go run embed.go -xmlDir=$(TIPITAKA_XML_DIR) -dataDir=$(WEBSITE_DATA_DIR)
+	@go run embed.go -xmlDir=$(TIPITAKA_XML_DIR) -dataDir=$(WEBSITE_DATA_DIR) -dataRepoDir=$(DATA_REPO_DIR)
 #####################################
 # End of Bootstrap Tipiṭaka Website #
 #####################################
@@ -90,7 +90,7 @@ install: lib_pali lib_gtmpl lib_gopherjs_i18n lib_godom lib_paliDataVFS lib_goph
 
 lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
-	go get -u github.com/siongui/gopalilib/util
+	go get -u github.com/siongui/gopalilib/dicutil
 
 lib_gtmpl:
 	@echo "\033[92mInstalling Go html/template with gettext support ...\033[0m"
@@ -127,7 +127,7 @@ fmt:
 	@echo "\033[92mGo fmt source code...\033[0m"
 	@go fmt $(PRJDIR)/*.go
 	@go fmt *.go
-	@go fmt gopherjs/*.go
+	@go fmt `find gopherjs/ -name "*.go" | grep -v data.go`
 
 clone_pali_data:
 	@echo "\033[92mClone Pāli data Repo ...\033[0m"
