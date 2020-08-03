@@ -36,7 +36,8 @@ func xmlAction(action string) {
 	mainview.QuerySelector("div.content").AppendChild(fragment)
 
 	MarkEveryWord("#mainview > div.content", func(word string) {
-		println(word)
+		SetModalTitle(word)
+		openModal()
 	})
 
 	mainview.QuerySelector("div.notification").ClassList().Add("is-hidden")
@@ -54,6 +55,7 @@ func main() {
 	NewTreeview("treeview", tree, xmlAction)
 
 	SetupXSLTProcessor()
+	SetupModal()
 
 	Document.GetElementById("treeview").QuerySelector("div.notification").ClassList().Add("is-hidden")
 }
