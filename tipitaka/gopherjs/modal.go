@@ -10,6 +10,10 @@ func SetModalTitle(title string) {
 	modal.QuerySelector(".modal-card-title").SetInnerHTML(title)
 }
 
+func SetModalBody(b string) {
+	modal.QuerySelector(".modal-card-body").SetInnerHTML(b)
+}
+
 func openModal() {
 	Document.DocumentElement().ClassList().Add("is-clipped")
 	modal.ClassList().Add("is-active")

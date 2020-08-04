@@ -37,6 +37,11 @@ func xmlAction(action string) {
 
 	MarkEveryWord("#mainview > div.content", func(word string) {
 		SetModalTitle(word)
+		if Lookup(word) {
+			SetModalBody("in trie")
+		} else {
+			SetModalBody("not in trie")
+		}
 		openModal()
 	})
 
