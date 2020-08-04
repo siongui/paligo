@@ -56,6 +56,7 @@ func main() {
 
 	SetupXSLTProcessor()
 	SetupModal()
+	SetupTrie()
 
 	Document.GetElementById("treeview").QuerySelector("div.notification").ClassList().Add("is-hidden")
 }
