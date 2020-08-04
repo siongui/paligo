@@ -78,6 +78,7 @@ embed_data: fmt clone_tpk_xml clone_pali_data
 	@echo "\033[92mEmbed Tipiṭaka ToC(Table of Content) in Go code ...\033[0m"
 	@[ -d $(WEBSITE_DATA_DIR) ] || mkdir -p $(WEBSITE_DATA_DIR)
 	@go run embed.go -xmlDir=$(TIPITAKA_XML_DIR) -dataDir=$(WEBSITE_DATA_DIR) -dataRepoDir=$(DATA_REPO_DIR)
+	@du -hs $(WEBSITE_DATA_DIR)/*
 #####################################
 # End of Bootstrap Tipiṭaka Website #
 #####################################
@@ -86,7 +87,7 @@ embed_data: fmt clone_tpk_xml clone_pali_data
 ###################
 # Install Library #
 ###################
-install: lib_pali lib_gtmpl lib_gopherjs_i18n lib_godom lib_paliDataVFS lib_gopherjs lib_goef
+install: lib_pali lib_gtmpl lib_gopherjs_i18n lib_godom lib_paliDataVFS lib_gopherjs lib_goef lib_paliwords
 
 lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
@@ -104,6 +105,7 @@ lib_godom:
 	@echo "\033[92mInstalling dom manipulation library ...\033[0m"
 	go get -u github.com/siongui/godom
 
+# TODO: remove this
 lib_paliDataVFS:
 	@echo "\033[92mInstalling VFS for fullstack Go ...\033[0m"
 	go get -u github.com/siongui/paliDataVFS
@@ -115,6 +117,10 @@ lib_gopherjs:
 lib_goef:
 	@echo "\033[92mInstalling GopherJS ...\033[0m"
 	go get -u github.com/siongui/goef
+
+lib_paliwords:
+	@echo "\033[92mInstalling VFS of all Pali words ...\033[0m"
+	go get -u github.com/siongui/gopaliwordvfs
 ##########################
 # End of Install Library #
 ##########################
