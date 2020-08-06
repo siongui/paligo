@@ -69,7 +69,6 @@ Set Up Development Environment
    - `go-online-pali-ime`_
    - `gopherjs-i18n`_
    - `gopherjs-input-suggest`_
-   - paliDataVFS_
    -  GopherJS_
 
    |
@@ -272,5 +271,4 @@ References
 .. _gopherjs-input-suggest: https://github.com/siongui/gopherjs-input-suggest
 .. _gtmpl: https://github.com/siongui/gtmpl
 .. _gopalilib: https://github.com/siongui/gopalilib
-.. _paliDataVFS: https://github.com/siongui/paliDataVFS
 .. _goef: https://github.com/siongui/goef

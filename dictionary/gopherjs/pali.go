@@ -4,17 +4,14 @@ import (
 	"strings"
 
 	imepali "github.com/siongui/go-online-input-method-pali"
-	bits "github.com/siongui/go-succinct-data-structure-trie"
 	. "github.com/siongui/godom"
-	"github.com/siongui/gopalilib/lib"
-
+	"github.com/siongui/gopalilib/lib/dicmgr"
+	dic "github.com/siongui/gopalilib/lib/dictionary"
 	sg "github.com/siongui/gopherjs-input-suggest"
-	"github.com/siongui/paliDataVFS"
+	//jsgettext "github.com/siongui/gopherjs-i18n"
 )
 
 var mainContent *Object
-var bookIdAndInfos = paliDataVFS.GetBookIdAndInfos()
-var frozenTrie bits.FrozenTrie
 
 func handleEnterEvent(input *Object) {
 	w := strings.ToLower(strings.TrimSpace(input.Value()))
@@ -32,6 +29,7 @@ func handleInputKeyUp(e Event) {
 }
 
 func main() {
+	//jsgettext.SetupTranslationMapping(paliDataVFS.GetPoJsonBlob())
 	setupNavbar()
 	setupSetting()
 	setupKeypad()
@@ -54,16 +52,11 @@ func main() {
 	// init variables
 	mainContent = Document.GetElementById("main-content")
 
-	// init trie for words suggestion
-	bits.SetAllowedCharacters("abcdeghijklmnoprstuvyāīūṁṃŋṇṅñṭḍḷ…'’° -")
-	frozenTrie = bits.FrozenTrie{}
-	frozenTrie.Init(paliDataVFS.GetTrieData())
-
 	// input suggest menu
 	sg.BindSuggest("word", func(w string) []string {
 		w = strings.ToLower(w)
 		Document.GetElementById("word").SetValue(w)
-		return frozenTrie.GetSuggestedWords(w, 30)
+		return dicmgr.GetSuggestedWords(w, 30)
 	})
 	// add Bulma css helper to input suggest menu
 	ism := Document.QuerySelector(".suggest")
@@ -89,8 +82,8 @@ func main() {
 		si := Document.GetElementById("site-info")
 		siteurl := si.Dataset().Get("siteurl").String()
 		sitelocale := si.Dataset().Get("locale").String()
-		lib.SetSiteUrl(siteurl)
-		lib.SetCurrentLocale(sitelocale)
+		dic.SetSiteUrl(siteurl)
+		dic.SetCurrentLocale(sitelocale)
 
 		setupContentAccordingToUrlPath()
 

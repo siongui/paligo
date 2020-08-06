@@ -1,28 +1,13 @@
 package main
 
 import (
-	"bytes"
-	"html/template"
 	"net/http"
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
+	"github.com/siongui/gopalilib/lib/dicmgr"
 	sg "github.com/siongui/gopherjs-input-suggest"
 )
-
-type WordPreview struct {
-	Word              string
-	BookNameShortExps []lib.BookNameWordExp
-}
-
-var setmpl = `
-<span class="previewWordName">{{ .Word }}</span>
-{{range $bnwe := .BookNameShortExps}}
-<div class="shortDicExp">
-  <span>{{$bnwe.BookName}}</span>
-  <span>{{$bnwe.Explanation}}</span>
-</div>
-{{end}}`
 
 var wordPreviewElm *Object
 
@@ -36,21 +21,7 @@ func setWordPreviewUI(word, rawhtml string) {
 }
 
 func showWordPreviewByTemplate(word string, wi lib.BookIdWordExps) {
-	// bnwes: (Book-Name, Word-Explanation)s
-	idexps := lib.BookIdWordExps2IdExpsAccordingToSetting(wi, bookIdAndInfos, getSetting(), navigatorLanguages)
-	bnwes := lib.IdExps2BookNameWordExps(
-		lib.ShortExplanation(idexps, bookIdAndInfos),
-		bookIdAndInfos,
-	)
-	t1, _ := template.New("wordExplanationPreview").Parse(setmpl)
-	wp := WordPreview{word, bnwes}
-	// Google Search: go html template output string
-	// https://groups.google.com/forum/#!topic/golang-nuts/dSFHCV-e6Nw
-	var buf bytes.Buffer
-	t1.Execute(&buf, wp)
-	rawhtml := buf.String()
-
-	setWordPreviewUI(word, rawhtml)
+	setWordPreviewUI(word, dicmgr.GetWordPreviewHtml(word, wi, getSetting(), navigatorLanguages))
 }
 
 func httpGetWordJson2(word string) {

@@ -4,23 +4,24 @@ import (
 	"strings"
 
 	. "github.com/siongui/godom"
-	"github.com/siongui/gopalilib/lib"
+	"github.com/siongui/gopalilib/lib/dicmgr"
+	dic "github.com/siongui/gopalilib/lib/dictionary"
 	jsgettext "github.com/siongui/gopherjs-i18n"
 )
 
 var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
 var navigatorLanguages = Window.Navigator().Languages()
 
-func setDocumentTitle(titleLocale string, typ lib.PageType, wordOrPrefix string) {
+func setDocumentTitle(titleLocale string, typ dic.PageType, wordOrPrefix string) {
 	//title := jsgettext.Gettext(titleLocale, "Pali Dictionary | Pāli to English, Chinese, Japanese, Vietnamese, Burmese Dictionary")
 	title := jsgettext.Gettext(titleLocale, "Pāli Dictionary")
-	if typ == lib.AboutPage {
+	if typ == dic.AboutPage {
 		// add prefix "About"?
 	}
-	if typ == lib.WordPage {
+	if typ == dic.WordPage {
 		title = wordOrPrefix + " - " + jsgettext.Gettext(titleLocale, "Definition and Meaning") + " - " + title
 	}
-	if typ == lib.PrefixPage {
+	if typ == dic.PrefixPage {
 		title = jsgettext.Gettext(titleLocale, "Words Start with") + " " + wordOrPrefix + " - " + title
 	}
 	Document.Set("title", title)
@@ -41,36 +42,36 @@ func setupContentAccordingToUrlPath() {
 	jsgettext.Translate(titleLocale)
 
 	up := Window.Location().Pathname()
-	typ := lib.DeterminePageType(up)
-	if typ == lib.RootPage {
+	typ := dic.DeterminePageType(up)
+	if typ == dic.RootPage {
 		mainContent.RemoveAllChildNodes()
-		setDocumentTitle(titleLocale, lib.RootPage, "")
+		setDocumentTitle(titleLocale, dic.RootPage, "")
 		// maybe put some news in the future.
 		return
 	}
-	if typ == lib.AboutPage {
+	if typ == dic.AboutPage {
 		mainContent.RemoveAllChildNodes()
 		mainContent.SetInnerHTML(Document.GetElementById("about").InnerHTML())
-		setDocumentTitle(titleLocale, lib.AboutPage, "")
+		setDocumentTitle(titleLocale, dic.AboutPage, "")
 		return
 	}
-	if typ == lib.WordPage {
+	if typ == dic.WordPage {
 		mainContent.RemoveAllChildNodes()
-		w := lib.GetWordFromUrlPath(up)
-		setDocumentTitle(titleLocale, lib.WordPage, w)
+		w := dic.GetWordFromUrlPath(up)
+		setDocumentTitle(titleLocale, dic.WordPage, w)
 		//println(w)
 		go httpGetWordJson(w, false)
 		return
 	}
-	if typ == lib.PrefixPage {
+	if typ == dic.PrefixPage {
 		mainContent.RemoveAllChildNodes()
-		p := lib.GetPrefixFromUrlPath(up)
-		setDocumentTitle(titleLocale, lib.PrefixPage, p)
+		p := dic.GetPrefixFromUrlPath(up)
+		setDocumentTitle(titleLocale, dic.PrefixPage, p)
 		//mainContent.SetInnerHTML("prefix " + p)
-		prefixwords := frozenTrie.GetSuggestedWords(p, 1000000)
+		prefixwords := dicmgr.GetSuggestedWords(p, 1000000)
 		html := ""
 		for _, prefixword := range prefixwords {
-			html += `<li><a href="` + lib.WordUrlPath(prefixword) + `">` + prefixword + `</a></li>`
+			html += `<li><a href="` + dic.WordUrlPath(prefixword) + `">` + prefixword + `</a></li>`
 		}
 		mainContent.SetInnerHTML(`<nav class="breadcrumb" aria-label="breadcrumbs"><ul>` + html + `</ul></nav>`)
 		return
@@ -83,7 +84,7 @@ func setupBrowseDictionary() {
 	prefixs := []string{"a", "ā", "b", "c", "d", "ḍ", "e", "g", "h", "i", "ī", "j", "k", "l", "ḷ", "m", "ŋ", "n", "ñ", "ṅ", "ṇ", "o", "p", "r", "s", "t", "ṭ", "u", "ū", "v", "y", "-", "°"}
 	all := ""
 	for _, prefix := range prefixs {
-		html := `<li><a href="` + lib.PrefixUrlPath(prefix) + `">{{PREFIX}}</a></li>`
+		html := `<li><a href="` + dic.PrefixUrlPath(prefix) + `">{{PREFIX}}</a></li>`
 		html = strings.Replace(html, "{{PREFIX}}", prefix, 1)
 		all += html
 	}

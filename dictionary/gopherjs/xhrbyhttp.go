@@ -5,6 +5,7 @@ import (
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
+	dic "github.com/siongui/gopalilib/lib/dictionary"
 )
 
 func hideLookingUp() {
@@ -38,8 +39,8 @@ func httpGetWordJson(w string, changeUrl bool) {
 	}
 
 	if changeUrl {
-		Window.History().PushState(w, "", lib.WordUrlPath(w))
-		setDocumentTitle(getFinalShowLocale(), lib.WordPage, w)
+		Window.History().PushState(w, "", dic.WordUrlPath(w))
+		setDocumentTitle(getFinalShowLocale(), dic.WordPage, w)
 	}
 
 	showWordByTemplate(wi)

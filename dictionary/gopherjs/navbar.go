@@ -2,14 +2,10 @@ package main
 
 import (
 	. "github.com/siongui/godom"
-	"github.com/siongui/gopherjs-i18n"
-	"github.com/siongui/paliDataVFS"
 )
 
 //DISCUSS: close mobile nav menu after click?
 func setupNavbar() {
-	jsgettext.SetupTranslationMapping(paliDataVFS.GetPoJsonBlob())
-
 	// setting nav item
 	sl := Document.QuerySelector(".setting-link")
 	sl.AddEventListener("click", func(e Event) {
