@@ -5,6 +5,7 @@ import (
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
+	"github.com/siongui/gopalilib/lib/dicmgr"
 	dic "github.com/siongui/gopalilib/lib/dictionary"
 )
 
@@ -23,18 +24,18 @@ func httpGetWordJson(w string, changeUrl bool) {
 	defer hideLookingUp()
 	resp, err := http.Get(HttpWordJsonPath(w))
 	if err != nil {
-		mainContent.Set("textContent", "Not Found")
+		mainContent.Set("textContent", err.Error())
 		return
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
-		mainContent.Set("textContent", "Not Found")
+		mainContent.Set("textContent", "resp.StatusCode != 200")
 		return
 	}
 
 	wi, err := lib.DecodeHttpRespWord(resp.Body)
 	if err != nil {
-		mainContent.Set("textContent", "Not Found")
+		mainContent.Set("textContent", err.Error())
 		return
 	}
 
@@ -43,5 +44,6 @@ func httpGetWordJson(w string, changeUrl bool) {
 		setDocumentTitle(getFinalShowLocale(), dic.WordPage, w)
 	}
 
-	showWordByTemplate(wi)
+	mainContent.RemoveAllChildNodes()
+	mainContent.Set("innerHTML", dicmgr.GetWordDefinitionHtml(wi, getSetting(), navigatorLanguages))
 }

@@ -30,15 +30,7 @@ func setupSetting() {
 	p2my := d.Call("getElementById", "p2my")
 	dicLangOrder := d.Call("getElementById", "dicLangOrder")
 
-	setting := lib.PaliSetting{
-		IsShowWordPreview: false,
-		P2en:              true,
-		P2ja:              true,
-		P2zh:              true,
-		P2vi:              true,
-		P2my:              true,
-		DicLangOrder:      "hdr",
-	}
+	setting := lib.GetDefaultPaliSetting()
 	// check if there is saved setting in user browser
 	if localStorage.Get("PaliDictionarySetting") == js.Undefined {
 		// no setting saved, use default setting
