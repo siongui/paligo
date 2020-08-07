@@ -1,8 +1,6 @@
 package main
 
 import (
-	"net/http"
-
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
 	"github.com/siongui/gopalilib/lib/dicmgr"
@@ -22,18 +20,8 @@ func showLookingUp() {
 func httpGetWordJson(w string, changeUrl bool) {
 	showLookingUp()
 	defer hideLookingUp()
-	resp, err := http.Get(HttpWordJsonPath(w))
-	if err != nil {
-		mainContent.Set("textContent", err.Error())
-		return
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != 200 {
-		mainContent.Set("textContent", "resp.StatusCode != 200")
-		return
-	}
 
-	wi, err := lib.DecodeHttpRespWord(resp.Body)
+	wi, err := lib.HttpGetWordJson(HttpWordJsonPath(w))
 	if err != nil {
 		mainContent.Set("textContent", err.Error())
 		return

@@ -1,8 +1,6 @@
 package main
 
 import (
-	"net/http"
-
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
 	"github.com/siongui/gopalilib/lib/dicmgr"
@@ -20,25 +18,13 @@ func setWordPreviewUI(word, rawhtml string) {
 	wordPreviewElm.Style().SetLeft(w)
 }
 
-func showWordPreviewByTemplate(word string, wi lib.BookIdWordExps) {
-	setWordPreviewUI(word, dicmgr.GetWordPreviewHtml(word, wi, getSetting(), navigatorLanguages))
-}
-
 func httpGetWordJson2(word string) {
-	resp, err := http.Get(HttpWordJsonPath(word))
-	if err != nil {
-		return
-	}
-	if resp.StatusCode != 200 {
-		return
-	}
-
-	wi, err := lib.DecodeHttpRespWord(resp.Body)
+	wi, err := lib.HttpGetWordJson(HttpWordJsonPath(word))
 	if err != nil {
 		return
 	}
 
-	showWordPreviewByTemplate(word, wi)
+	setWordPreviewUI(word, dicmgr.GetWordPreviewHtml(word, wi, getSetting(), navigatorLanguages))
 }
 
 func setupWordPreview() {
