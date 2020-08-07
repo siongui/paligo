@@ -6,7 +6,7 @@ import (
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib/dicmgr"
 	dic "github.com/siongui/gopalilib/lib/dictionary"
-	jsgettext "github.com/siongui/gopalilib/lib/gettext"
+	"github.com/siongui/gopalilib/lib/jsgettext"
 )
 
 var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
