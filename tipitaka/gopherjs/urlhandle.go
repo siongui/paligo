@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	. "github.com/siongui/godom"
 	dic "github.com/siongui/gopalilib/lib/dictionary"
 )
@@ -26,7 +24,6 @@ func isOffline() bool {
 	return Window.Location().Hostname() == "localhost" && Window.Location().Port() == "8080"
 }
 
-func wordLinkHtml(word string) string {
-	url := "https://dictionary.sutta.org" + dic.WordUrlPath(word)
-	return fmt.Sprintf("<a href='%s' target='_blank'>%s</a>", url, word)
+func wordDictionaryUrl(word string) string {
+	return "https://dictionary.sutta.org" + dic.WordUrlPath(word)
 }

@@ -8,12 +8,16 @@ import (
 	"github.com/siongui/gopalilib/lib/dicmgr"
 )
 
+func wordLinkHtml(word string) string {
+	return fmt.Sprintf("<a href='%s' target='_blank'>%s</a>", wordDictionaryUrl(word), word)
+}
+
 func showWordDefinitionInModal(word string) {
 	//showLookingUp()
 	//defer hideLookingUp()
 	wi, err := lib.HttpGetWordJson(HttpWordJsonPath(word))
 	if err != nil {
-		SetModalBody(fmt.Sprintf("Fail to Get %s, %s", word, err.Error()))
+		SetModalBody(fmt.Sprintf("Fail to Get %s: %s", word, err.Error()))
 		return
 	}
 	setting := lib.GetDefaultPaliSetting()
