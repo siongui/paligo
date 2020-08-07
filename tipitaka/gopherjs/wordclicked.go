@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
@@ -12,34 +11,12 @@ import (
 func showWordDefinitionInModal(word string) {
 	//showLookingUp()
 	//defer hideLookingUp()
-
-	resp, err := http.Get(HttpWordJsonPath(word))
+	wi, err := lib.HttpGetWordJson(HttpWordJsonPath(word))
 	if err != nil {
-		SetModalBody("Fail to look up " + word + err.Error())
+		SetModalBody(fmt.Sprintf("Fail to Get %s, %s", word, err.Error()))
 		return
 	}
-	defer resp.Body.Close()
-	if resp.StatusCode != 200 {
-		SetModalBody("Fail to look up " + word + " != 200")
-		return
-	}
-
-	wi, err := lib.DecodeHttpRespWord(resp.Body)
-	if err != nil {
-		SetModalBody("Fail to look up " + word + err.Error())
-		return
-	}
-
-	setting := lib.PaliSetting{
-		IsShowWordPreview: false,
-		P2en:              true,
-		P2ja:              true,
-		P2zh:              true,
-		P2vi:              true,
-		P2my:              true,
-		DicLangOrder:      "hdr",
-	}
-
+	setting := lib.GetDefaultPaliSetting()
 	SetModalBody(dicmgr.GetWordDefinitionHtml(wi, setting, Window.Navigator().Languages()))
 }
 
