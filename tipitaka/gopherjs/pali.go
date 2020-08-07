@@ -5,7 +5,6 @@ import (
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
-	"github.com/siongui/gopalilib/lib/dicmgr"
 	"github.com/siongui/gopalilib/lib/jsgettext"
 )
 
@@ -35,15 +34,7 @@ func xmlAction(action string) {
 	mainview.QuerySelector("div.content").RemoveAllChildNodes()
 	mainview.QuerySelector("div.content").AppendChild(fragment)
 
-	MarkEveryWord("#mainview > div.content", func(word string) {
-		SetModalTitle(word)
-		if dicmgr.Lookup(word) {
-			SetModalBody("in trie")
-		} else {
-			SetModalBody("not in trie")
-		}
-		openModal()
-	})
+	MarkEveryWord("#mainview > div.content", wordClickedHandler)
 
 	mainview.QuerySelector("div.notification").ClassList().Add("is-hidden")
 }

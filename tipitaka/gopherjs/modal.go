@@ -22,6 +22,7 @@ func openModal() {
 func closeModal() {
 	Document.DocumentElement().ClassList().Remove("is-clipped")
 	modal.ClassList().Remove("is-active")
+	SetModalBody("")
 }
 
 func SetupModal() {
