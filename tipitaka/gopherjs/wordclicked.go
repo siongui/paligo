@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	. "github.com/siongui/godom"
@@ -42,12 +43,29 @@ func showWordDefinitionInModal(word string) {
 	SetModalBody(dicmgr.GetWordDefinitionHtml(wi, setting, Window.Navigator().Languages()))
 }
 
+func showPossibleWords(word string) {
+	for len(word) > 0 {
+		word = lib.RemoveLastChar(word)
+		if len(dicmgr.GetSuggestedWords(word, 10)) > 0 {
+			break
+		}
+	}
+
+	html := ""
+	for _, w := range dicmgr.GetSuggestedWords(word, 10) {
+		html += fmt.Sprintf("<div>%s</div>", wordLinkHtml(w))
+	}
+
+	SetModalBody(html)
+}
+
 func wordClickedHandler(word string) {
 	SetModalTitle(word)
 	if dicmgr.Lookup(word) {
+		SetModalTitle(wordLinkHtml(word))
 		go showWordDefinitionInModal(word)
 	} else {
-		SetModalBody("not in trie")
+		showPossibleWords(word)
 	}
 	openModal()
 }
