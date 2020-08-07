@@ -5,8 +5,8 @@ import (
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
-	jsgettext "github.com/siongui/gopherjs-i18n"
-	"github.com/siongui/paliDataVFS"
+	"github.com/siongui/gopalilib/lib/dicmgr"
+	"github.com/siongui/gopalilib/lib/jsgettext"
 )
 
 func getFinalShowLocale() string {
@@ -37,7 +37,7 @@ func xmlAction(action string) {
 
 	MarkEveryWord("#mainview > div.content", func(word string) {
 		SetModalTitle(word)
-		if Lookup(word) {
+		if dicmgr.Lookup(word) {
 			SetModalBody("in trie")
 		} else {
 			SetModalBody("not in trie")
@@ -48,10 +48,17 @@ func xmlAction(action string) {
 	mainview.QuerySelector("div.notification").ClassList().Add("is-hidden")
 }
 
+func TranslateDocument(locale string) {
+	elms := Document.QuerySelectorAll("[data-default-string]")
+	for _, elm := range elms {
+		str := elm.Get("dataset").Get("defaultString").String()
+		elm.Set("textContent", jsgettext.Gettext(locale, str))
+	}
+}
+
 func main() {
 	//println(getFinalShowLocale())
-	jsgettext.SetupTranslationMapping(paliDataVFS.GetPoJsonBlob())
-	jsgettext.Translate(getFinalShowLocale())
+	TranslateDocument(getFinalShowLocale())
 
 	b, _ := ReadFile("tpktoc.json")
 	//println(string(b))
@@ -61,7 +68,6 @@ func main() {
 
 	SetupXSLTProcessor()
 	SetupModal()
-	SetupTrie()
 
 	Document.GetElementById("treeview").QuerySelector("div.notification").ClassList().Add("is-hidden")
 }
