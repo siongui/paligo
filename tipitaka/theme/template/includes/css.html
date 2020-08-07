@@ -11,5 +11,14 @@
 span.paliword:hover {
   color: red;
 }
+
+/* change default width of modal */
+@media screen and (min-width: 769px), print {
+  .modal-content,
+  .modal-card {
+    /*max-height: calc(100vh - 40px);*/
+    width: 760px;
+  }
+}
 </style>
 {{end}}
