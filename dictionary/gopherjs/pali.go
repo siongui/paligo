@@ -8,7 +8,6 @@ import (
 	"github.com/siongui/gopalilib/lib/dicmgr"
 	dic "github.com/siongui/gopalilib/lib/dictionary"
 	sg "github.com/siongui/gopherjs-input-suggest"
-	//jsgettext "github.com/siongui/gopherjs-i18n"
 )
 
 var mainContent *Object
@@ -29,7 +28,6 @@ func handleInputKeyUp(e Event) {
 }
 
 func main() {
-	//jsgettext.SetupTranslationMapping(paliDataVFS.GetPoJsonBlob())
 	setupNavbar()
 	setupSetting()
 	setupKeypad()

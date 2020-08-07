@@ -6,11 +6,19 @@ import (
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib/dicmgr"
 	dic "github.com/siongui/gopalilib/lib/dictionary"
-	jsgettext "github.com/siongui/gopherjs-i18n"
+	jsgettext "github.com/siongui/gopalilib/lib/gettext"
 )
 
 var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
 var navigatorLanguages = Window.Navigator().Languages()
+
+func TranslateDocument(locale string) {
+	elms := Document.QuerySelectorAll("[data-default-string]")
+	for _, elm := range elms {
+		str := elm.Get("dataset").Get("defaultString").String()
+		elm.Set("textContent", jsgettext.Gettext(locale, str))
+	}
+}
 
 func setDocumentTitle(titleLocale string, typ dic.PageType, wordOrPrefix string) {
 	//title := jsgettext.Gettext(titleLocale, "Pali Dictionary | Pāli to English, Chinese, Japanese, Vietnamese, Burmese Dictionary")
@@ -39,7 +47,7 @@ func getFinalShowLocale() string {
 func setupContentAccordingToUrlPath() {
 	// show language according to NavigatorLanguages API
 	titleLocale := getFinalShowLocale()
-	jsgettext.Translate(titleLocale)
+	TranslateDocument(titleLocale)
 
 	up := Window.Location().Pathname()
 	typ := dic.DeterminePageType(up)
