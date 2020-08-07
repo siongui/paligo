@@ -14,7 +14,6 @@ endif
 HTML_TEMPLATE_DIR=$(CURDIR)/theme/template/
 EXTRA_DIR=$(CURDIR)/theme/extra/
 WEBSITE_DIR=$(CURDIR)/website
-WEBSITE_DATA_DIR=$(WEBSITE_DIR)/data
 TPK_BUILD_OPTIONS=-websiteDir=$(WEBSITE_DIR) -htmlTemplateDir=$(HTML_TEMPLATE_DIR) -localeDir=$(LOCALE_DIR)
 TIPITAKA_CONF_DIR=$(CURDIR)/config/
 TIPITAKA_XML_DIR=$(WEBSITE_DIR)/tpkxml/
@@ -76,9 +75,8 @@ clone_tpk_xml:
 
 embed_data: fmt clone_tpk_xml clone_pali_data
 	@echo "\033[92mEmbed Tipiṭaka ToC(Table of Content) in Go code ...\033[0m"
-	@[ -d $(WEBSITE_DATA_DIR) ] || mkdir -p $(WEBSITE_DATA_DIR)
-	@go run embed.go -xmlDir=$(TIPITAKA_XML_DIR) -dataDir=$(WEBSITE_DATA_DIR) -dataRepoDir=$(DATA_REPO_DIR)
-	@du -hs $(WEBSITE_DATA_DIR)/*
+	@go run embed.go -xmlDir=$(TIPITAKA_XML_DIR)
+	@make fmt
 #####################################
 # End of Bootstrap Tipiṭaka Website #
 #####################################
