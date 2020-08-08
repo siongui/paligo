@@ -32,3 +32,7 @@ func HideIsLoadingXML() {
 		l.ClassList().Add("is-hidden")
 	}
 }
+
+func HideIsLoadingTreeview() {
+	Document.QuerySelector(".is-loading-treeview").ClassList().Add("is-hidden")
+}

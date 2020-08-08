@@ -63,4 +63,6 @@ func main() {
 	SetupXSLTProcessor()
 	SetupModal()
 	SetupMobileTreeviewToggle()
+
+	HideIsLoadingTreeview()
 }
