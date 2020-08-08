@@ -18,11 +18,11 @@
 {{template "tmpinfo" .}}
 
 <section class="section pt-1">
-<button class="button is-info is-light is-hidden-tablet is-pulled-right is-relative" style="z-index: 9999" id="mobile-treeview-toggle"><span>◄</span><span class="is-hidden">►</span></button>
+<button class="button is-info is-light is-hidden-tablet is-relative" style="z-index: 9999" id="mobile-treeview-toggle"><span class="is-hidden">◄</span><span>►</span></button>
 <div class="container">
 
 <div class="columns">
-  <div class="column is-one-third is-one-quarter-desktop" id="treeview">
+  <div class="column is-one-third is-one-quarter-desktop is-hidden-mobile" id="treeview">
     <div class="notification is-info is-light"><button class="button is-info is-loading is-light">Loading</button><span data-default-string="Loading">{{gettext "Loading"}}</span></div>
   </div>
   <div class="column">
