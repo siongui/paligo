@@ -64,5 +64,5 @@ func main() {
 	SetupModal()
 	SetupMobileTreeviewToggle()
 
-	HideIsLoadingTreeview()
+	HideIsLoadingWebsite()
 }

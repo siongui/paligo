@@ -33,6 +33,8 @@ func HideIsLoadingXML() {
 	}
 }
 
-func HideIsLoadingTreeview() {
-	Document.QuerySelector(".is-loading-treeview").ClassList().Add("is-hidden")
+func HideIsLoadingWebsite() {
+	Document.QuerySelector(".is-loading-website").ClassList().Add("is-hidden")
+	// show website content
+	Document.QuerySelector("section.pt-1").ClassList().Remove("is-hidden")
 }
