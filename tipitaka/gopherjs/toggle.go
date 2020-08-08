@@ -5,14 +5,8 @@ import (
 )
 
 func SetupMobileTreeviewToggle() {
-	tv := Document.GetElementById("treeview")
-	mtt := Document.GetElementById("mobile-treeview-toggle")
-	mtt.AddEventListener("click", func(e Event) {
-		tv.ClassList().Toggle("is-hidden-mobile")
-		mtt.ClassList().Toggle("is-pulled-right")
-		for _, span := range mtt.QuerySelectorAll("span") {
-			span.ClassList().Toggle("is-hidden")
-		}
+	Document.GetElementById("mobile-treeview-toggle").AddEventListener("click", func(e Event) {
+		ToggleMobileTreeview()
 	})
 }
 
