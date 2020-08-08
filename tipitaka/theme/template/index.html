@@ -17,6 +17,8 @@
 {{template "navbar" .}}
 {{template "tmpinfo" .}}
 
+<div class="is-loading-xml is-hidden-tablet is-hidden notification is-info is-light">Loading XML ...</div>
+
 <section class="section pt-1">
 <button class="button is-info is-light is-hidden-tablet is-relative mb-1" style="z-index: 9999" id="mobile-treeview-toggle"><span class="is-hidden">◄</span><span>►</span></button>
 <div class="container">
@@ -25,6 +27,7 @@
   <div class="column is-one-third is-one-quarter-desktop is-hidden-mobile" id="treeview">
   </div>
   <div class="column">
+    <div class="is-loading-xml is-hidden notification is-info is-light">Loading XML ...</div>
     <div class="container" id="mainview">
       <div class="content"></div>
     </div>

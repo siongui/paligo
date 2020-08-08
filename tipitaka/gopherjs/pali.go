@@ -20,6 +20,10 @@ func getFinalShowLocale() string {
 }
 
 func xmlAction(action string) {
+	// FIXME: show loading not working on Chromium
+	ShowIsLoadingXML()
+	defer HideIsLoadingXML()
+
 	mainview := Document.GetElementById("mainview")
 
 	// Load the xml file using synchronous (third param is set to false) XMLHttpRequest
