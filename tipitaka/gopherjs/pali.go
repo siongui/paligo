@@ -37,6 +37,7 @@ func xmlAction(action string) {
 	MarkEveryWord("#mainview > div.content", wordClickedHandler)
 
 	mainview.QuerySelector("div.notification").ClassList().Add("is-hidden")
+	ToggleMobileTreeview()
 }
 
 func TranslateDocument(locale string) {
@@ -59,6 +60,7 @@ func main() {
 
 	SetupXSLTProcessor()
 	SetupModal()
+	SetupMobileTreeviewToggle()
 
 	Document.GetElementById("treeview").QuerySelector("div.notification").ClassList().Add("is-hidden")
 }
