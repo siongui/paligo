@@ -26,8 +26,8 @@ devserver: make-local
 	@go run $(PRJDIR)/devserver.go
 
 
-make-local: fmt dir extra js html
-make-sutta: rmsite dir extra js htmlsutta cname-sutta
+make-local: fmt dir extra js css html
+make-sutta: rmsite dir extra js css htmlsutta cname-sutta
 rmsite:
 	@echo "\033[92mRemove $(WEBSITE_DIR)\033[0m"
 	rm -rf $(WEBSITE_DIR)
@@ -50,6 +50,16 @@ js:
 	@echo "\033[92mGenerating JavaScript ...\033[0m"
 	@#gopherjs build gopherjs/*.go -o $(WEBSITE_DIR)/pali.js
 	@gopherjs build gopherjs/*.go -m -o $(WEBSITE_DIR)/pali.js
+
+BULMA_TEMPLATE=$(HTML_TEMPLATE_DIR)/includes/bulma.html
+bulma:
+	@echo "\033[92mDownloading Bulma css and making Bulma template ...\033[0m"
+	@wget https://raw.githubusercontent.com/jgthms/bulma/0.9.0/css/bulma.css -O $(BULMA_TEMPLATE)
+	@echo "{{end}}" >> $(BULMA_TEMPLATE)
+	@echo '{{define "bulma"}}' | cat - $(BULMA_TEMPLATE) > temp && mv temp $(BULMA_TEMPLATE)
+css:
+	@echo "\033[92mChecking Bulma css template ...\033[0m"
+	@[ -f $(BULMA_TEMPLATE) ] || make bulma
 
 htmlsutta:
 	@echo "\033[92mGenerating HTML for dictionary.sutta.org ...\033[0m"
