@@ -23,11 +23,9 @@
 
 <div class="columns">
   <div class="column is-one-third is-one-quarter-desktop is-hidden-mobile" id="treeview">
-    <div class="notification is-info is-light"><button class="button is-info is-loading is-light">Loading</button><span data-default-string="Loading">{{gettext "Loading"}}</span></div>
   </div>
   <div class="column">
-    <div class="container mb-6" id="mainview">
-      <div class="notification is-info is-light is-hidden"><span data-default-string="Loading">{{gettext "Loading"}}</span> ...</div>
+    <div class="container" id="mainview">
       <div class="content"></div>
     </div>
     {{template "about" .}}

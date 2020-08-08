@@ -21,7 +21,6 @@ func getFinalShowLocale() string {
 
 func xmlAction(action string) {
 	mainview := Document.GetElementById("mainview")
-	mainview.QuerySelector("div.notification").ClassList().Remove("is-hidden")
 
 	// Load the xml file using synchronous (third param is set to false) XMLHttpRequest
 	myXMLHTTPRequest := NewXMLHttpRequest()
@@ -36,7 +35,6 @@ func xmlAction(action string) {
 
 	MarkEveryWord("#mainview > div.content", wordClickedHandler)
 
-	mainview.QuerySelector("div.notification").ClassList().Add("is-hidden")
 	ToggleMobileTreeview()
 }
 
@@ -61,6 +59,4 @@ func main() {
 	SetupXSLTProcessor()
 	SetupModal()
 	SetupMobileTreeviewToggle()
-
-	Document.GetElementById("treeview").QuerySelector("div.notification").ClassList().Add("is-hidden")
 }
