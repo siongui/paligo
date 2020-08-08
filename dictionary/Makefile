@@ -245,26 +245,6 @@ pot:
 ###################################################
 # Boostrap Website (only once, not daily routine) #
 ###################################################
-parsebooks: dir
-	@echo "\033[92mParse Dictionary Books Information ...\033[0m"
-	@go run dicsetup.go -action=parsebooks
-
-parsewords: dir
-	@echo "\033[92mParse Dictionary Words ...\033[0m"
-	@go run dicsetup.go -action=parsewords
-
-po2json:
-	@echo "\033[92mConverting PO files to JSON (to be used in client-side/browser) ...\033[0m"
-	@go run dicsetup.go -action=po2json
-
-succinct_trie:
-	@echo "\033[92mBuilding Succinct Trie ...\033[0m"
-	@go run dicsetup.go -action=triebuild
-
-twpo2cn:
-	@echo "\033[92mConverting zh_TW PO files to zh_CN ...\033[0m"
-	@#FIXME: go run setup/twpo2cn.go -tw=$(LOCALE_DIR)/zh_TW/LC_MESSAGES/messages.po -cn=$(LOCALE_DIR)/zh_CN/LC_MESSAGES/messages.po
-
 po2mo:
 	# not used now. keep here for references
 	@echo "\033[92mmsgfmt PO to MO ...\033[0m"
@@ -286,6 +266,7 @@ lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
 	go get -u github.com/siongui/gopalilib/dicutil
 	go get -u github.com/siongui/gopalilib/lib/jsgettext
+	go get -u github.com/siongui/gopaliwordvfs
 
 lib_gtmpl:
 	@echo "\033[92mInstalling Go html/template with gettext support ...\033[0m"
