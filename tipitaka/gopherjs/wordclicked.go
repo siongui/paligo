@@ -32,7 +32,7 @@ func showPossibleWords(word string) {
 		word = lib.RemoveLastChar(word)
 	}
 
-	SetModalBody(GetPossibleWordsHtml(word, dicmgr.GetSuggestedWords(word, 10)))
+	SetModalBody(GetPossibleWordsHtml(word, dicmgr.GetSuggestedWords(word, 7)))
 }
 
 func wordClickedHandler(word string) {
