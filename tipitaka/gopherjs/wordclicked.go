@@ -26,10 +26,10 @@ func showWordDefinitionInModal(word string) {
 
 func showPossibleWords(word string) {
 	for len(word) > 0 {
-		word = lib.RemoveLastChar(word)
 		if len(dicmgr.GetSuggestedWords(word, 10)) > 0 {
 			break
 		}
+		word = lib.RemoveLastChar(word)
 	}
 
 	html := ""
