@@ -32,12 +32,14 @@ func showPossibleWords(word string) {
 		word = lib.RemoveLastChar(word)
 	}
 
-	html := ""
-	for _, w := range dicmgr.GetSuggestedWords(word, 10) {
-		html += fmt.Sprintf("<div>%s</div>", wordLinkHtml(w))
-	}
+	/*
+		html := ""
+		for _, w := range dicmgr.GetSuggestedWords(word, 10) {
+			html += fmt.Sprintf("<div>%s</div>", wordLinkHtml(w))
+		}
+	*/
 
-	SetModalBody(html)
+	SetModalBody(GetPossibleWordsHtml(word, dicmgr.GetSuggestedWords(word, 10)))
 }
 
 func wordClickedHandler(word string) {
