@@ -1,13 +1,30 @@
 {{define "modal"}}
+<style>
+#modal-input-toggle:not(:checked) ~ div.modal div.is-narrow {
+  display: none;
+}
+</style>
+<input id="modal-input-toggle" type="checkbox" class="is-hidden" />
+
 <div class="modal">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
       <p class="modal-card-title">Modal title</p>
+      <label for="modal-input-toggle">Show Input</label>
       <button class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
       <!-- Content ... -->
+
+<div class="columns">
+  <div class="column is-narrow">
+    <input class="input" type="text" id="modal-input">
+    <div id="words"></div>
+  </div>
+  <div class="column" id="modal-content">Click word to get definition</div>
+</div>
+
     </section>
 <!--
     <footer class="modal-card-foot">

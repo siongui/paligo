@@ -22,7 +22,32 @@ func openModal() {
 func closeModal() {
 	Document.DocumentElement().ClassList().Remove("is-clipped")
 	modal.ClassList().Remove("is-active")
-	SetModalBody("")
+
+	//SetModalBody("")
+	SetModalWords("")
+	SetModalContent("")
+	SetModalInputValue("")
+	HideModalInput()
+}
+
+func SetModalContent(html string) {
+	Document.GetElementById("modal-content").SetInnerHTML(html)
+}
+
+func SetModalWords(html string) {
+	Document.GetElementById("words").SetInnerHTML(html)
+}
+
+func SetModalInputValue(v string) {
+	Document.GetElementById("modal-input").SetValue(v)
+}
+
+func HideModalInput() {
+	Document.GetElementById("modal-input-toggle").Set("checked", false)
+}
+
+func ShowModalInput() {
+	Document.GetElementById("modal-input-toggle").Set("checked", true)
 }
 
 func SetupModal() {
