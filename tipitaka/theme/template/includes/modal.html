@@ -3,6 +3,12 @@
 #modal-input-toggle:not(:checked) ~ div.modal div.is-narrow {
   display: none;
 }
+#modal-input-toggle:checked ~ div.modal label[for=modal-input-toggle] > span > span:first-child {
+  display: none;
+}
+#modal-input-toggle:not(:checked) ~ div.modal label[for=modal-input-toggle] > span > span:nth-child(2) {
+  display: none;
+}
 </style>
 <input id="modal-input-toggle" type="checkbox" class="is-hidden" />
 
@@ -10,8 +16,10 @@
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Modal title</p>
-      <label for="modal-input-toggle">Show Input</label>
+      <p class="modal-card-title">
+        <span id="modal-title"></span>
+        <label for="modal-input-toggle" class="is-size-6" style="cursor: pointer;"><span class="tag is-info is-light"><span>Show</span><span>Hide</span>&nbsp;Input</span></label>
+      </p>
       <button class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">

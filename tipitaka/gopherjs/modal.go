@@ -7,7 +7,8 @@ import (
 var modal *Object
 
 func SetModalTitle(title string) {
-	modal.QuerySelector(".modal-card-title").SetInnerHTML(title)
+	//modal.QuerySelector(".modal-card-title").SetInnerHTML(title)
+	modal.QuerySelector("#modal-title").SetInnerHTML(title)
 }
 
 func SetModalBody(b string) {
