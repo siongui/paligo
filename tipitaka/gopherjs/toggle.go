@@ -21,8 +21,9 @@ func ToggleMobileTreeview() {
 	}
 }
 
-func ShowIsLoadingXML() {
+func ShowIsLoadingXML(text string) {
 	for _, l := range Document.QuerySelectorAll(".is-loading-xml") {
+		l.SetTextContent("Loading XML " + text + " ...")
 		l.ClassList().Remove("is-hidden")
 	}
 }

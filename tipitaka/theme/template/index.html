@@ -17,7 +17,7 @@
 {{template "navbar" .}}
 {{template "tmpinfo" .}}
 
-<div class="is-loading-xml is-hidden-tablet is-hidden notification is-info is-light">Loading XML ...</div>
+<div class="is-loading-xml is-hidden notification is-info is-light" style="position: sticky; top: 0; z-index: 5;">Loading XML ...</div>
 
 <div class="is-loading-website notification is-info is-light">Loading Website ...</div>
 
@@ -30,7 +30,6 @@
   <div class="column is-one-third is-one-quarter-desktop is-hidden-mobile" id="treeview">
   </div>
   <div class="column">
-    <div class="is-loading-xml is-hidden notification is-info is-light">Loading XML ...</div>
     <div class="container" id="mainview">
       <div class="content"></div>
     </div>

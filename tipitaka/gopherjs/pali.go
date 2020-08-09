@@ -19,9 +19,9 @@ func getFinalShowLocale() string {
 	return locale
 }
 
-func xmlAction(action string) {
+func xmlAction(text, action string) {
 	// FIXME: show loading not working on Chromium
-	ShowIsLoadingXML()
+	ShowIsLoadingXML(text)
 	defer HideIsLoadingXML()
 
 	mainview := Document.GetElementById("mainview")

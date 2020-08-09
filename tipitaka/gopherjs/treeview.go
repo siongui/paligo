@@ -5,7 +5,7 @@ import (
 	"github.com/siongui/gopalilib/lib"
 )
 
-func traverseTreeviewData(tree lib.Tree, actionFunc func(string)) *Object {
+func traverseTreeviewData(tree lib.Tree, actionFunc func(string, string)) *Object {
 	if len(tree.SubTrees) > 0 {
 		div := Document.CreateElement("div")
 		div.ClassList().Add("item")
@@ -50,7 +50,7 @@ func traverseTreeviewData(tree lib.Tree, actionFunc func(string)) *Object {
 		span.ClassList().Add("treeNode")
 		span.SetInnerHTML(tree.Text)
 		span.AddEventListener("click", func(e Event) {
-			actionFunc(tree.Action)
+			actionFunc(tree.Text, tree.Action)
 		})
 
 		div.AppendChild(span)
@@ -85,7 +85,7 @@ func appendCSSToHeadElement() {
 	Document.QuerySelector("head").AppendChild(s)
 }
 
-func NewTreeview(id string, root lib.Tree, actionFunc func(string)) {
+func NewTreeview(id string, root lib.Tree, actionFunc func(string, string)) {
 	appendCSSToHeadElement()
 	treeviewContainer := Document.GetElementById(id)
 
