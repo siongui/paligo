@@ -11,11 +11,8 @@ import (
 
 const pwt = `
 <style>
-.previewWordName {
+.previewWordName > a {
   color: GoldenRod;
-  font-weight: bold;
-  font-size: 1.5rem;
-  margin: .5rem;
 }
 
 div.is-possible-word:hover {
@@ -28,7 +25,7 @@ div.is-possible-word:hover {
   <div class="column is-narrow">
     <input class="input" type="text" value="{{.Word}}">
     {{range $possibleWord := .PossibleWords}}
-      <div class="is-possible-word"
+      <div class="is-possible-word is-size-5"
            onclick="pwh('{{$possibleWord}}')">
              {{$possibleWord}}
       </div>
@@ -70,7 +67,7 @@ func onPossibleWordHandler(word string) {
 		}
 		setting := lib.GetDefaultPaliSetting()
 
-		html := `<div class="previewWordName">` + wordLinkHtml(word) + `</div>`
+		html := `<div class="previewWordName is-size-4 mb-1">` + wordLinkHtml(word) + `</div>`
 		//html += dicmgr.GetWordPreviewHtmlWithCustomTemplate(word, wi, setting, Window.Navigator().Languages(), HtmlTemplateWordPreview)
 		html += dicmgr.GetWordDefinitionHtml(wi, setting, Window.Navigator().Languages())
 		SetModalExp(html)
@@ -92,5 +89,4 @@ func GetPossibleWordsHtml(word string, possibleWords []string) string {
 		return err.Error()
 	}
 	return buf.String()
-
 }
