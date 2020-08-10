@@ -103,6 +103,7 @@ lib_pali:
 	go get -u github.com/siongui/gopalilib/lib/jsgettext
 	go get -u github.com/siongui/gopalilib/libfrontend
 	go get -u github.com/siongui/gopalilib/libfrontend/everyword
+	go get -u github.com/siongui/gopalilib/libfrontend/treeview
 
 lib_gtmpl:
 	@echo "\033[92mInstalling Go html/template with gettext support ...\033[0m"

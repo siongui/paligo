@@ -8,6 +8,7 @@ import (
 	"github.com/siongui/gopalilib/lib/jsgettext"
 	"github.com/siongui/gopalilib/libfrontend"
 	"github.com/siongui/gopalilib/libfrontend/everyword"
+	"github.com/siongui/gopalilib/libfrontend/treeview"
 )
 
 func getFinalShowLocale() string {
@@ -60,7 +61,7 @@ func main() {
 	//println(string(b))
 	tree := lib.Tree{}
 	json.Unmarshal(b, &tree)
-	NewTreeview("treeview", tree, xmlAction)
+	treeview.NewTreeview("treeview", tree, xmlAction)
 
 	SetupXSLTProcessor()
 	SetupModal()
