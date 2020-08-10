@@ -101,6 +101,7 @@ lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
 	go get -u github.com/siongui/gopalilib/dicutil
 	go get -u github.com/siongui/gopalilib/lib/jsgettext
+	go get -u github.com/siongui/gopalilib/libfrontend
 
 lib_gtmpl:
 	@echo "\033[92mInstalling Go html/template with gettext support ...\033[0m"

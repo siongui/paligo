@@ -6,6 +6,7 @@ import (
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
 	"github.com/siongui/gopalilib/lib/jsgettext"
+	"github.com/siongui/gopalilib/libfrontend"
 )
 
 func getFinalShowLocale() string {
@@ -28,7 +29,7 @@ func xmlAction(text, action string) {
 
 	// Load the xml file using synchronous (third param is set to false) XMLHttpRequest
 	myXMLHTTPRequest := NewXMLHttpRequest()
-	myXMLHTTPRequest.Open("GET", ActionXmlUrl(action), false)
+	myXMLHTTPRequest.Open("GET", libfrontend.ActionXmlUrl(action), false)
 	myXMLHTTPRequest.Send()
 
 	xmlDoc := myXMLHTTPRequest.ResponseXML()

@@ -7,10 +7,11 @@ import (
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
 	"github.com/siongui/gopalilib/lib/dicmgr"
+	"github.com/siongui/gopalilib/libfrontend"
 )
 
 func wordLinkHtml(word string) string {
-	return "<a href='" + wordDictionaryUrl(word) + "' target='_blank'>" + word + "</a>"
+	return "<a href='" + libfrontend.DictionarySuttaWordUrl(word) + "' target='_blank'>" + word + "</a>"
 }
 
 const pwt = `
@@ -38,7 +39,7 @@ func possibleWordClickHandler(word string) {
 	SetModalContent("Loading " + wordLinkHtml(word) + " ...")
 
 	go func() {
-		wi, err := lib.HttpGetWordJson(HttpWordJsonPath(word))
+		wi, err := lib.HttpGetWordJson(libfrontend.HttpWordJsonPath(word))
 		if err != nil {
 			SetModalContent("Fail to Get " + word + ": " + err.Error())
 			return
@@ -76,7 +77,7 @@ func GetPossibleWordsHtml(word string, possibleWords []string) string {
 func showWordDefinitionInModal(word string) {
 	//showLookingUp()
 	//defer hideLookingUp()
-	wi, err := lib.HttpGetWordJson(HttpWordJsonPath(word))
+	wi, err := lib.HttpGetWordJson(libfrontend.HttpWordJsonPath(word))
 	if err != nil {
 		SetModalContent("Fail to Get " + word + ": " + err.Error())
 		return
