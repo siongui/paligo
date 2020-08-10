@@ -63,7 +63,7 @@ func main() {
 	json.Unmarshal(b, &tree)
 	treeview.NewTreeview("treeview", tree, xmlAction)
 
-	SetupXSLTProcessor()
+	SetupXSLTProcessor(libfrontend.GetXslUrl())
 	SetupModal()
 	SetupMobileTreeviewToggle()
 	SetupModalInput("#modal-input")
