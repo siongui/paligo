@@ -9,6 +9,7 @@ import (
 	"github.com/siongui/gopalilib/libfrontend"
 	"github.com/siongui/gopalilib/libfrontend/everyword"
 	"github.com/siongui/gopalilib/libfrontend/treeview"
+	"github.com/siongui/gopalilib/libfrontend/xslt"
 )
 
 func getFinalShowLocale() string {
@@ -35,7 +36,7 @@ func xmlAction(t lib.Tree) {
 	myXMLHTTPRequest.Send()
 
 	xmlDoc := myXMLHTTPRequest.ResponseXML()
-	fragment := GetXSLTProcessor().TransformToFragment(xmlDoc, Document)
+	fragment := xslt.GetXSLTProcessor().TransformToFragment(xmlDoc, Document)
 
 	mainview.QuerySelector("div.content").RemoveAllChildNodes()
 	mainview.QuerySelector("div.content").AppendChild(fragment)
@@ -63,7 +64,7 @@ func main() {
 	json.Unmarshal(b, &tree)
 	treeview.NewTreeview("treeview", tree, xmlAction)
 
-	SetupXSLTProcessor(libfrontend.GetXslUrl())
+	xslt.SetupXSLTProcessor(libfrontend.GetXslUrl())
 	SetupModal()
 	SetupMobileTreeviewToggle()
 	SetupModalInput("#modal-input")
