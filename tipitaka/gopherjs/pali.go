@@ -21,16 +21,16 @@ func getFinalShowLocale() string {
 	return locale
 }
 
-func xmlAction(text, action string) {
+func xmlAction(t lib.Tree) {
 	// FIXME: show loading not working on Chromium
-	ShowIsLoadingXML(text)
+	ShowIsLoadingXML(t.Text)
 	defer HideIsLoadingXML()
 
 	mainview := Document.GetElementById("mainview")
 
 	// Load the xml file using synchronous (third param is set to false) XMLHttpRequest
 	myXMLHTTPRequest := NewXMLHttpRequest()
-	myXMLHTTPRequest.Open("GET", libfrontend.ActionXmlUrl(action), false)
+	myXMLHTTPRequest.Open("GET", libfrontend.ActionXmlUrl(t.Action), false)
 	myXMLHTTPRequest.Send()
 
 	xmlDoc := myXMLHTTPRequest.ResponseXML()
