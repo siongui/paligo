@@ -63,6 +63,7 @@ func main() {
 	SetupXSLTProcessor()
 	SetupModal()
 	SetupMobileTreeviewToggle()
+	SetupModalInput("#modal-input")
 
 	HideIsLoadingWebsite()
 }

@@ -53,7 +53,7 @@ func possibleWordClickHandler(word string) {
 
 func possibleWordMouseenterHandler(i int, word string) {
 	SetModalInputValue(word)
-	println(i)
+	//println(i)
 }
 
 func GetPossibleWordsHtml(word string, possibleWords []string) string {
