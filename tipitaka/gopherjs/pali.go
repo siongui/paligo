@@ -7,6 +7,7 @@ import (
 	"github.com/siongui/gopalilib/lib"
 	"github.com/siongui/gopalilib/lib/jsgettext"
 	"github.com/siongui/gopalilib/libfrontend"
+	"github.com/siongui/gopalilib/libfrontend/everyword"
 )
 
 func getFinalShowLocale() string {
@@ -38,7 +39,7 @@ func xmlAction(text, action string) {
 	mainview.QuerySelector("div.content").RemoveAllChildNodes()
 	mainview.QuerySelector("div.content").AppendChild(fragment)
 
-	MarkEveryWord("#mainview > div.content", wordClickedHandler)
+	everyword.MarkEveryWord("#mainview > div.content", wordClickedHandler)
 
 	ToggleMobileTreeview()
 }
