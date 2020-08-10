@@ -25,15 +25,16 @@ div.is-possible-word:hover {
   cursor: pointer;
 }
 </style>
-{{range $possibleWord := .}}
+{{range $i, $possibleWord := .}}
   <div class="is-possible-word is-size-5"
+       onmouseenter="pwmeh({{$i}}, '{{$possibleWord}}')"
        onclick="pwh('{{$possibleWord}}')">
          {{$possibleWord}}
   </div>
 {{end}}
 `
 
-func onPossibleWordHandler(word string) {
+func possibleWordClickHandler(word string) {
 	SetModalContent("Loading " + wordLinkHtml(word) + " ...")
 
 	go func() {
@@ -50,8 +51,14 @@ func onPossibleWordHandler(word string) {
 	}()
 }
 
+func possibleWordMouseenterHandler(i int, word string) {
+	SetModalInputValue(word)
+	println(i)
+}
+
 func GetPossibleWordsHtml(word string, possibleWords []string) string {
-	Document.Set("pwh", onPossibleWordHandler)
+	Document.Set("pwh", possibleWordClickHandler)
+	Document.Set("pwmeh", possibleWordMouseenterHandler)
 
 	t, err := template.New("pwt").Parse(pwt)
 	if err != nil {
@@ -91,11 +98,11 @@ func showPossibleWords(word string) {
 }
 
 func wordClickedHandler(word string) {
-	SetModalTitle(word)
 	if dicmgr.Lookup(word) {
 		SetModalTitle(wordLinkHtml(word))
 		go showWordDefinitionInModal(word)
 	} else {
+		SetModalTitle(word)
 		showPossibleWords(word)
 	}
 	openModal()
