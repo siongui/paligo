@@ -27,7 +27,7 @@ func closeModal() {
 	//SetModalBody("")
 	SetModalWords("")
 	SetModalContent("")
-	SetModalInputValue("")
+	SetInputValue("")
 	HideModalInput()
 }
 
@@ -37,10 +37,6 @@ func SetModalContent(html string) {
 
 func SetModalWords(html string) {
 	Document.GetElementById("words").SetInnerHTML(html)
-}
-
-func SetModalInputValue(v string) {
-	Document.GetElementById("modal-input").SetValue(v)
 }
 
 func HideModalInput() {

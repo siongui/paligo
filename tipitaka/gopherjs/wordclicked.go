@@ -53,7 +53,7 @@ func possibleWordClickHandler(word string) {
 }
 
 func possibleWordMouseenterHandler(i int, word string) {
-	SetModalInputValue(word)
+	SetInputValue(word)
 	//println(i)
 }
 
@@ -100,7 +100,7 @@ func showPossibleWords(word string) {
 	prefix := FindLongestPrefixWithNonZeroSuggestedWords(word)
 
 	SetModalWords(GetPossibleWordsHtml(prefix, dicmgr.GetSuggestedWords(prefix, 7)))
-	SetModalInputValue(prefix)
+	SetInputValue(prefix)
 	ShowModalInput()
 }
 

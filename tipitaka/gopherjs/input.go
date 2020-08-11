@@ -4,8 +4,10 @@ import (
 	. "github.com/siongui/godom"
 )
 
+var input *Object
+
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
-func modalInputKeyupEventHandler(key string) {
+func inputKeyupEventHandler(key string) {
 	switch key {
 	case "ArrowUp", "Up":
 		println("ArrowUp")
@@ -18,9 +20,13 @@ func modalInputKeyupEventHandler(key string) {
 	}
 }
 
+func SetInputValue(v string) {
+	input.SetValue(v)
+}
+
 func SetupModalInput(selector string) {
-	input := Document.QuerySelector(selector)
+	input = Document.QuerySelector(selector)
 	input.AddEventListener("keyup", func(e Event) {
-		modalInputKeyupEventHandler(e.Key())
+		inputKeyupEventHandler(e.Key())
 	})
 }
