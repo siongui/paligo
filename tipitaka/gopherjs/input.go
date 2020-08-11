@@ -1,7 +1,10 @@
 package main
 
 import (
+	"strings"
+
 	. "github.com/siongui/godom"
+	"github.com/siongui/gopalilib/lib/dicmgr"
 )
 
 var input *Object
@@ -14,14 +17,29 @@ func inputKeyupEventHandler(key string) {
 	case "ArrowDown", "Down":
 		println("ArrowDown")
 	case "Enter":
-		println("Enter")
+		word := GetInputValue()
+		if dicmgr.Lookup(word) {
+			SetModalTitle(wordLinkHtml(word))
+			go showWordDefinitionInModal(word)
+		}
 	default:
 		println("default")
 	}
 }
 
+func FocusInput() {
+	input.Focus()
+}
+
 func SetInputValue(v string) {
 	input.SetValue(v)
+}
+
+func GetInputValue() string {
+	s := input.Value()
+	s = strings.TrimSpace(s)
+	s = strings.ToLower(s)
+	return s
 }
 
 func SetupModalInput(selector string) {

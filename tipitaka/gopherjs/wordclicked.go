@@ -105,6 +105,7 @@ func showPossibleWords(word string) {
 }
 
 func wordClickedHandler(word string) {
+	FocusInput()
 	if dicmgr.Lookup(word) {
 		SetModalTitle(wordLinkHtml(word))
 		go showWordDefinitionInModal(word)
