@@ -7,10 +7,12 @@ import (
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
 func modalInputKeyupEventHandler(key string) {
 	switch key {
-	case "ArrowUp":
+	case "ArrowUp", "Up":
 		println("ArrowUp")
-	case "ArrowDown":
+	case "ArrowDown", "Down":
 		println("ArrowDown")
+	case "Enter":
+		println("Enter")
 	default:
 		println("default")
 	}

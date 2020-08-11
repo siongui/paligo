@@ -86,15 +86,21 @@ func showWordDefinitionInModal(word string) {
 	SetModalContent(dicmgr.GetWordDefinitionHtml(wi, setting, Window.Navigator().Languages()))
 }
 
-func showPossibleWords(word string) {
+func FindLongestPrefixWithNonZeroSuggestedWords(word string) string {
 	for len(word) > 0 {
 		if len(dicmgr.GetSuggestedWords(word, 10)) > 0 {
 			break
 		}
 		word = lib.RemoveLastChar(word)
 	}
+	return word
+}
 
-	SetModalWords(GetPossibleWordsHtml(word, dicmgr.GetSuggestedWords(word, 7)))
+func showPossibleWords(word string) {
+	prefix := FindLongestPrefixWithNonZeroSuggestedWords(word)
+
+	SetModalWords(GetPossibleWordsHtml(prefix, dicmgr.GetSuggestedWords(prefix, 7)))
+	SetModalInputValue(prefix)
 	ShowModalInput()
 }
 
