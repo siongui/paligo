@@ -23,7 +23,8 @@ func inputKeyupEventHandler(key string) {
 			go showWordDefinitionInModal(word)
 		}
 	default:
-		println("default")
+		word := GetInputValue()
+		SetModalWords(GetSuggestedWordsHtml(word, 7))
 	}
 }
 
