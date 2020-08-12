@@ -57,7 +57,7 @@ func possibleWordMouseenterHandler(i int, word string) {
 	//println(i)
 }
 
-func GetPossibleWordsHtml(word string, possibleWords []string) string {
+func GetSuggestedWordsHtml(word string, limit int) string {
 	Document.Set("pwh", possibleWordClickHandler)
 	Document.Set("pwmeh", possibleWordMouseenterHandler)
 
@@ -67,7 +67,7 @@ func GetPossibleWordsHtml(word string, possibleWords []string) string {
 	}
 
 	var buf bytes.Buffer
-	err = t.Execute(&buf, possibleWords)
+	err = t.Execute(&buf, dicmgr.GetSuggestedWords(word, 7))
 	if err != nil {
 		return err.Error()
 	}
@@ -99,7 +99,7 @@ func FindLongestPrefixWithNonZeroSuggestedWords(word string) string {
 func showPossibleWords(word string) {
 	prefix := FindLongestPrefixWithNonZeroSuggestedWords(word)
 
-	SetModalWords(GetPossibleWordsHtml(prefix, dicmgr.GetSuggestedWords(prefix, 7)))
+	SetModalWords(GetSuggestedWordsHtml(prefix, 7))
 	SetInputValue(prefix)
 	ShowModalInput()
 }
