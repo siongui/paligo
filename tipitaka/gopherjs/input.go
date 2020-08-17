@@ -12,6 +12,7 @@ var st *StateMachine
 type StateMachine struct {
 	Input        *Object
 	CurrentIndex int
+	CurrentWord  string
 }
 
 func (s *StateMachine) HandleArrowUp() {
@@ -28,6 +29,12 @@ func (s *StateMachine) HandleEnter() {
 		SetModalTitle(wordLinkHtml(word))
 		go showWordDefinitionInModal(word)
 	}
+}
+
+func SetStateMachineCurrentIndexAndWord(i int, word string) {
+	st.CurrentIndex = i
+	st.CurrentWord = word
+	SetInputValue(word)
 }
 
 func (s *StateMachine) HandleDefault() {

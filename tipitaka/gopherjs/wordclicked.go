@@ -53,8 +53,7 @@ func possibleWordClickHandler(word string) {
 }
 
 func possibleWordMouseenterHandler(i int, word string) {
-	SetInputValue(word)
-	//println(i)
+	SetStateMachineCurrentIndexAndWord(i, word)
 }
 
 func GetSuggestedWordsHtml(word string, limit int) string {
