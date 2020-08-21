@@ -98,8 +98,7 @@ func FindLongestPrefixWithNonZeroSuggestedWords(word string) string {
 func showPossibleWords(word string) {
 	prefix := FindLongestPrefixWithNonZeroSuggestedWords(word)
 
-	SetModalWords(GetSuggestedWordsHtml(prefix, 7))
-	SetInputValue(prefix)
+	ResetStateMachine(prefix)
 	ShowModalInput()
 }
 

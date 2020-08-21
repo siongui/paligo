@@ -13,6 +13,7 @@ type StateMachine struct {
 	Input        *Object
 	CurrentIndex int
 	CurrentWord  string
+	Words        []string
 }
 
 func (s *StateMachine) HandleArrowUp() {
@@ -39,7 +40,15 @@ func SetStateMachineCurrentIndexAndWord(i int, word string) {
 
 func (s *StateMachine) HandleDefault() {
 	word := GetInputValue()
+	ResetStateMachine(word)
+}
+
+func ResetStateMachine(word string) {
+	st.CurrentIndex = 0
+	st.CurrentWord = word
+	st.Words = dicmgr.GetSuggestedWords(word, 7)
 	SetModalWords(GetSuggestedWordsHtml(word, 7))
+	SetInputValue(word)
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
