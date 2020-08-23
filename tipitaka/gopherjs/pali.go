@@ -9,6 +9,7 @@ import (
 	"github.com/siongui/gopalilib/libfrontend"
 	"github.com/siongui/gopalilib/libfrontend/everyword"
 	"github.com/siongui/gopalilib/libfrontend/treeview"
+	"github.com/siongui/gopalilib/libfrontend/velthuis"
 	"github.com/siongui/gopalilib/libfrontend/xslt"
 )
 
@@ -67,6 +68,8 @@ func main() {
 	xslt.SetupXSLTProcessor(libfrontend.GetXslUrl())
 	SetupModal()
 	SetupMobileTreeviewToggle()
+	// Call velthuis before SetupModalInput (order of keyevent handler matters)
+	velthuis.BindPaliInputMethodToInputTextElementById("modal-input")
 	SetupModalInput("#modal-input")
 
 	HideIsLoadingWebsite()
