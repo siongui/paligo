@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"html/template"
+	"strconv"
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
@@ -20,15 +21,17 @@ const pwt = `
   color: GoldenRod;
 }
 
-div.is-possible-word:hover {
+.word-highlight {
   color: red;
   background-color: #F0F8FF;
   cursor: pointer;
 }
 </style>
 {{range $i, $possibleWord := .}}
-  <div class="is-possible-word is-size-5"
+  <div id="word-index-{{$i}}"
+       class="is-possible-word is-size-5"
        onmouseenter="pwmeh({{$i}}, '{{$possibleWord}}')"
+       onmouseleave="pwmlh({{$i}}, '{{$possibleWord}}')"
        onclick="pwh('{{$possibleWord}}')">
          {{$possibleWord}}
   </div>
@@ -52,13 +55,27 @@ func possibleWordClickHandler(word string) {
 	}()
 }
 
+func HighlightWord(i int, word string) {
+	Document.QuerySelector("#word-index-" + strconv.Itoa(i)).ClassList().Add("word-highlight")
+}
+
+func UnhighlightWord(i int, word string) {
+	Document.QuerySelector("#word-index-" + strconv.Itoa(i)).ClassList().Remove("word-highlight")
+}
+
 func possibleWordMouseenterHandler(i int, word string) {
 	SetStateMachineCurrentIndexAndWord(i, word)
+	HighlightWord(i, word)
+}
+
+func possibleWordMouseleaveHandler(i int, word string) {
+	UnhighlightWord(i, word)
 }
 
 func GetSuggestedWordsHtml(word string, limit int) string {
 	Document.Set("pwh", possibleWordClickHandler)
 	Document.Set("pwmeh", possibleWordMouseenterHandler)
+	Document.Set("pwmlh", possibleWordMouseleaveHandler)
 
 	t, err := template.New("pwt").Parse(pwt)
 	if err != nil {

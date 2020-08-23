@@ -17,21 +17,33 @@ type StateMachine struct {
 }
 
 func (s *StateMachine) HandleArrowUp() {
+	if s.CurrentIndex >= 0 && s.CurrentIndex < len(s.Words) {
+		UnhighlightWord(s.CurrentIndex, s.Words[s.CurrentIndex])
+	}
 	s.CurrentIndex--
-	if s.CurrentIndex == -1 {
+	if s.CurrentIndex < 0 {
 		s.CurrentIndex = 0
 	}
 	s.CurrentWord = s.Words[s.CurrentIndex]
 	SetInputValue(s.CurrentWord)
+	if s.CurrentIndex >= 0 && s.CurrentIndex < len(s.Words) {
+		HighlightWord(s.CurrentIndex, s.Words[s.CurrentIndex])
+	}
 }
 
 func (s *StateMachine) HandleArrowDown() {
+	if s.CurrentIndex >= 0 && s.CurrentIndex < len(s.Words) {
+		UnhighlightWord(s.CurrentIndex, s.Words[s.CurrentIndex])
+	}
 	s.CurrentIndex++
 	if s.CurrentIndex == len(s.Words) {
 		s.CurrentIndex = len(s.Words) - 1
 	}
 	s.CurrentWord = s.Words[s.CurrentIndex]
 	SetInputValue(s.CurrentWord)
+	if s.CurrentIndex >= 0 && s.CurrentIndex < len(s.Words) {
+		HighlightWord(s.CurrentIndex, s.Words[s.CurrentIndex])
+	}
 }
 
 func (s *StateMachine) HandleEnter() {
@@ -55,7 +67,7 @@ func (s *StateMachine) HandleDefault() {
 }
 
 func ResetStateMachine(word string) {
-	st.CurrentIndex = 0
+	st.CurrentIndex = -1
 	st.CurrentWord = word
 	st.Words = dicmgr.GetSuggestedWords(word, 7)
 	SetModalWords(GetSuggestedWordsHtml(word, 7))
