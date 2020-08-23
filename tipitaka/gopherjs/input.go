@@ -17,17 +17,28 @@ type StateMachine struct {
 }
 
 func (s *StateMachine) HandleArrowUp() {
-	println("ArrowUp")
+	s.CurrentIndex--
+	if s.CurrentIndex == -1 {
+		s.CurrentIndex = 0
+	}
+	s.CurrentWord = s.Words[s.CurrentIndex]
+	SetInputValue(s.CurrentWord)
 }
 
 func (s *StateMachine) HandleArrowDown() {
-	println("ArrowDown")
+	s.CurrentIndex++
+	if s.CurrentIndex == len(s.Words) {
+		s.CurrentIndex = len(s.Words) - 1
+	}
+	s.CurrentWord = s.Words[s.CurrentIndex]
+	SetInputValue(s.CurrentWord)
 }
 
 func (s *StateMachine) HandleEnter() {
 	word := GetInputValue()
 	if dicmgr.Lookup(word) {
 		SetModalTitle(wordLinkHtml(word))
+		ResetStateMachine(word)
 		go showWordDefinitionInModal(word)
 	}
 }
