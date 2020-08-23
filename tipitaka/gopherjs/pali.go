@@ -71,6 +71,7 @@ func main() {
 	// Call velthuis before SetupModalInput (order of keyevent handler matters)
 	velthuis.BindPaliInputMethodToInputTextElementById("modal-input")
 	SetupModalInput("#modal-input")
+	SetupPaliSetting()
 
 	HideIsLoadingWebsite()
 }

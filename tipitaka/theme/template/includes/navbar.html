@@ -1,7 +1,7 @@
 {{define "navbar"}}
 <style>
 @media screen and (max-width: 1023px) {
-  /* show mavbar-menu on screen less than 1024px */
+  /* show navbar-menu on screen less than 1024px */
   #menu-toggle:checked ~ #paliNavbarMenu { display: block; }
 
   /* make navbar-burger become cross on screen less than 1024px */
@@ -12,15 +12,22 @@
 
   /* #paliNavbarMenu { left:0; right:0; top:100%; position: absolute; } */
 }
+
+label[for="setting-toggle"]:hover {
+  cursor: pointer;
+  background-color: #fafafa;
+  color: #3273dc;
+}
+#setting-toggle:not(:checked) ~ article.setting-menu { display: none; }
+#setting-toggle:not(:checked) + .navbar > .navbar-menu > .navbar-start > label span:nth-child(1) { display: none; }
+#setting-toggle:checked + .navbar > .navbar-menu > .navbar-start > label span:nth-child(2) { display: none; }
 </style>
 
+<input type="checkbox" id="setting-toggle" class="is-hidden">
 <nav class="navbar has-background-light-gold has-border-gold" role="navigation" aria-label="main navigation">
   <input type="checkbox" id="menu-toggle" class="is-hidden">
   <div class="navbar-brand">
     <a class="navbar-item is-size-4 is-gold" href="{{.SiteUrl}}/">
-<!--
-      <span data-default-string="Pāli Tipiṭaka">{{gettext "Pāli Tipiṭaka"}}</span>
--->
       <span data-default-string="Pali Tipitaka">{{gettext "Pali Tipitaka"}}</span> (Pāli Tipiṭaka)
     </a>
 
@@ -37,6 +44,9 @@
         <span data-default-string="Dictionary">{{gettext "Dictionary"}}</span>
       </a>
 
+      <label class="navbar-item" for="setting-toggle">
+        <span>&#9660;</span><span>&#9658;</span><span data-default-string="Setting">{{gettext "Setting"}}</span>
+      </label>
     </div>
     <div class="navbar-end">
       <div class="navbar-item has-dropdown is-hoverable">

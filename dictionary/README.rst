@@ -66,7 +66,6 @@ Set Up Development Environment
    - Go_
    - gopalilib_
    - gtmpl_
-   - `go-online-pali-ime`_
    - `gopherjs-input-suggest`_
    -  GopherJS_
 

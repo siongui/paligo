@@ -47,10 +47,9 @@ func possibleWordClickHandler(word string) {
 			SetModalContent("Fail to Get " + word + ": " + err.Error())
 			return
 		}
-		setting := lib.GetDefaultPaliSetting()
 
 		html := `<div class="previewWordName is-size-4 mb-1">` + wordLinkHtml(word) + `</div>`
-		html += dicmgr.GetWordDefinitionHtml(wi, setting, Window.Navigator().Languages())
+		html += dicmgr.GetWordDefinitionHtml(wi, LoadPaliSetting(), Window.Navigator().Languages())
 		SetModalContent(html)
 	}()
 }
@@ -102,8 +101,7 @@ func showWordDefinitionInModal(word string) {
 		SetModalContent("Fail to Get " + word + ": " + err.Error())
 		return
 	}
-	setting := lib.GetDefaultPaliSetting()
-	SetModalContent(dicmgr.GetWordDefinitionHtml(wi, setting, Window.Navigator().Languages()))
+	SetModalContent(dicmgr.GetWordDefinitionHtml(wi, LoadPaliSetting(), Window.Navigator().Languages()))
 }
 
 func FindLongestPrefixWithNonZeroSuggestedWords(word string) string {
