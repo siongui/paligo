@@ -56,11 +56,15 @@ func possibleWordClickHandler(word string) {
 }
 
 func HighlightWord(i int, word string) {
-	Document.QuerySelector("#word-index-" + strconv.Itoa(i)).ClassList().Add("word-highlight")
+	for _, elm := range Document.QuerySelectorAll("#word-index-" + strconv.Itoa(i)) {
+		elm.ClassList().Add("word-highlight")
+	}
 }
 
 func UnhighlightWord(i int, word string) {
-	Document.QuerySelector("#word-index-" + strconv.Itoa(i)).ClassList().Remove("word-highlight")
+	for _, elm := range Document.QuerySelectorAll("#word-index-" + strconv.Itoa(i)) {
+		elm.ClassList().Remove("word-highlight")
+	}
 }
 
 func possibleWordMouseenterHandler(i int, word string) {
