@@ -9,6 +9,7 @@ import (
 	"github.com/siongui/gopalilib/lib"
 	"github.com/siongui/gopalilib/lib/dicmgr"
 	"github.com/siongui/gopalilib/libfrontend"
+	"github.com/siongui/gopalilib/libfrontend/setting"
 )
 
 func wordLinkHtml(word string) string {
@@ -49,7 +50,7 @@ func possibleWordClickHandler(word string) {
 		}
 
 		html := `<div class="previewWordName is-size-4 mb-1">` + wordLinkHtml(word) + `</div>`
-		html += dicmgr.GetWordDefinitionHtml(wi, LoadPaliSetting(), Window.Navigator().Languages())
+		html += dicmgr.GetWordDefinitionHtml(wi, setting.LoadPaliSetting(), Window.Navigator().Languages())
 		SetModalContent(html)
 	}()
 }
@@ -101,7 +102,7 @@ func showWordDefinitionInModal(word string) {
 		SetModalContent("Fail to Get " + word + ": " + err.Error())
 		return
 	}
-	SetModalContent(dicmgr.GetWordDefinitionHtml(wi, LoadPaliSetting(), Window.Navigator().Languages()))
+	SetModalContent(dicmgr.GetWordDefinitionHtml(wi, setting.LoadPaliSetting(), Window.Navigator().Languages()))
 }
 
 func FindLongestPrefixWithNonZeroSuggestedWords(word string) string {

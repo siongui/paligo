@@ -8,6 +8,7 @@ import (
 	"github.com/siongui/gopalilib/lib/jsgettext"
 	"github.com/siongui/gopalilib/libfrontend"
 	"github.com/siongui/gopalilib/libfrontend/everyword"
+	"github.com/siongui/gopalilib/libfrontend/setting"
 	"github.com/siongui/gopalilib/libfrontend/treeview"
 	"github.com/siongui/gopalilib/libfrontend/velthuis"
 	"github.com/siongui/gopalilib/libfrontend/xslt"
@@ -71,7 +72,7 @@ func main() {
 	// Call velthuis before SetupModalInput (order of keyevent handler matters)
 	velthuis.BindPaliInputMethodToInputTextElementById("modal-input")
 	SetupModalInput("#modal-input")
-	SetupPaliSetting()
+	setting.SetupPaliSetting()
 
 	HideIsLoadingWebsite()
 }
