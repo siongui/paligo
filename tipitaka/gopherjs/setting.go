@@ -5,13 +5,15 @@ import (
 	"github.com/siongui/gopalilib/lib"
 )
 
+var storageKeyName = "PaliSetting"
+
 func SavePaliSetting(setting lib.PaliSetting) {
 	str, _ := lib.PaliSettingToJsonString(setting)
-	LocalStorage.Set("PaliSetting", str)
+	LocalStorage.Set(storageKeyName, str)
 }
 
 func LoadPaliSetting() lib.PaliSetting {
-	setting, _ := lib.JsonStringToPaliSetting(LocalStorage.GetItem("PaliSetting"))
+	setting, _ := lib.JsonStringToPaliSetting(LocalStorage.GetItem(storageKeyName))
 	return setting
 }
 
@@ -26,12 +28,12 @@ func SetupPaliSetting() {
 
 	setting := lib.GetDefaultPaliSetting()
 	// check if there is saved setting in user browser
-	if s := LocalStorage.GetItem("PaliSetting"); s == "null" {
+	if LocalStorage.IsKeyExist(storageKeyName) {
+		// use saved setting
+		setting, _ = lib.JsonStringToPaliSetting(LocalStorage.GetItem(storageKeyName))
+	} else {
 		// no setting saved, use default setting
 		SavePaliSetting(setting)
-	} else {
-		// use saved setting
-		setting, _ = lib.JsonStringToPaliSetting(s)
 	}
 
 	// restore setting
