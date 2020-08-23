@@ -3,10 +3,10 @@ package main
 import (
 	"strings"
 
-	imepali "github.com/siongui/go-online-input-method-pali"
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib/dicmgr"
 	dic "github.com/siongui/gopalilib/lib/dictionary"
+	"github.com/siongui/gopalilib/libfrontend/velthuis"
 	sg "github.com/siongui/gopherjs-input-suggest"
 )
 
@@ -33,7 +33,8 @@ func main() {
 	setupKeypad()
 
 	// add pali input method to input text element
-	imepali.BindPaliInputMethodToInputTextElementById("word")
+	// call velthuis before input suggest setup (order of keyevent handlers matters)
+	velthuis.BindPaliInputMethodToInputTextElementById("word")
 
 	// toggle type hint table
 	tth := Document.GetElementById("toggle-type-hint")

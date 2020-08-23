@@ -260,21 +260,18 @@ po2mo:
 ###################
 # Install Library #
 ###################
-install: lib_pali lib_gtmpl lib_ime_pali lib_gopherjs_input_suggest lib_gopherjs
+install: lib_pali lib_gtmpl lib_gopherjs_input_suggest lib_gopherjs
 
 lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
 	go get -u github.com/siongui/gopalilib/dicutil
 	go get -u github.com/siongui/gopalilib/lib/jsgettext
 	go get -u github.com/siongui/gopaliwordvfs
+	go get -u github.com/siongui/gopalilib/libfrontend/velthuis
 
 lib_gtmpl:
 	@echo "\033[92mInstalling Go html/template with gettext support ...\033[0m"
 	go get -u github.com/siongui/gtmpl
-
-lib_ime_pali:
-	@echo "\033[92mInstalling Online Go Pāli IME ...\033[0m"
-	go get -u github.com/siongui/go-online-input-method-pali
 
 lib_gopherjs_input_suggest:
 	@echo "\033[92mInstalling GopherJS input suggest library ...\033[0m"
