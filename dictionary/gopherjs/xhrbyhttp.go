@@ -5,6 +5,7 @@ import (
 	"github.com/siongui/gopalilib/lib"
 	"github.com/siongui/gopalilib/lib/dicmgr"
 	dic "github.com/siongui/gopalilib/lib/dictionary"
+	"github.com/siongui/gopalilib/libfrontend/setting"
 )
 
 func hideLookingUp() {
@@ -33,5 +34,5 @@ func httpGetWordJson(w string, changeUrl bool) {
 	}
 
 	mainContent.RemoveAllChildNodes()
-	mainContent.Set("innerHTML", dicmgr.GetWordDefinitionHtml(wi, getSetting(), navigatorLanguages))
+	mainContent.Set("innerHTML", dicmgr.GetWordDefinitionHtml(wi, setting.LoadPaliSetting(), Window.Navigator().Languages()))
 }

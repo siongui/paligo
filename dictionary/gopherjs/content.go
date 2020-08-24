@@ -10,7 +10,6 @@ import (
 )
 
 var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
-var navigatorLanguages = Window.Navigator().Languages()
 
 func TranslateDocument(locale string) {
 	elms := Document.QuerySelectorAll("[data-default-string]")
@@ -39,7 +38,7 @@ func getFinalShowLocale() string {
 	// show language according to site url and NavigatorLanguages API
 	locale := Document.GetElementById("site-info").Dataset().Get("locale").String()
 	if locale == "" {
-		return jsgettext.DetermineLocaleByNavigatorLanguages(navigatorLanguages, supportedLocales)
+		return jsgettext.DetermineLocaleByNavigatorLanguages(Window.Navigator().Languages(), supportedLocales)
 	}
 	return locale
 }

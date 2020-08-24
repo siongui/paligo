@@ -6,6 +6,7 @@ import (
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib/dicmgr"
 	dic "github.com/siongui/gopalilib/lib/dictionary"
+	"github.com/siongui/gopalilib/libfrontend/setting"
 	"github.com/siongui/gopalilib/libfrontend/velthuis"
 	sg "github.com/siongui/gopherjs-input-suggest"
 )
@@ -29,7 +30,8 @@ func handleInputKeyUp(e Event) {
 
 func main() {
 	setupNavbar()
-	setupSetting()
+	setting.SetStorageKeyName("PaliDictionarySetting")
+	setting.SetupPaliSetting()
 	setupKeypad()
 
 	// add pali input method to input text element

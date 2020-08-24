@@ -4,6 +4,7 @@ import (
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
 	"github.com/siongui/gopalilib/lib/dicmgr"
+	"github.com/siongui/gopalilib/libfrontend/setting"
 	sg "github.com/siongui/gopherjs-input-suggest"
 )
 
@@ -24,14 +25,14 @@ func httpGetWordJson2(word string) {
 		return
 	}
 
-	setWordPreviewUI(word, dicmgr.GetWordPreviewHtml(word, wi, getSetting(), navigatorLanguages))
+	setWordPreviewUI(word, dicmgr.GetWordPreviewHtml(word, wi, setting.LoadPaliSetting(), Window.Navigator().Languages()))
 }
 
 func setupWordPreview() {
 	wordPreviewElm = Document.QuerySelector(".suggestedWordPreview")
 	sg.OnHighlightSelectedWord(func(word string) {
 		//println(word)
-		if !getSetting().IsShowWordPreview {
+		if !setting.LoadPaliSetting().IsShowWordPreview {
 			return
 		}
 		//println("show word preview")
