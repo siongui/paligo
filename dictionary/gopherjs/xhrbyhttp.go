@@ -5,6 +5,7 @@ import (
 	"github.com/siongui/gopalilib/lib"
 	"github.com/siongui/gopalilib/lib/dicmgr"
 	dic "github.com/siongui/gopalilib/lib/dictionary"
+	"github.com/siongui/gopalilib/libfrontend"
 	"github.com/siongui/gopalilib/libfrontend/setting"
 )
 
@@ -22,7 +23,7 @@ func httpGetWordJson(w string, changeUrl bool) {
 	showLookingUp()
 	defer hideLookingUp()
 
-	wi, err := lib.HttpGetWordJson(HttpWordJsonPath(w))
+	wi, err := lib.HttpGetWordJson(libfrontend.HttpWordJsonPath(w))
 	if err != nil {
 		mainContent.Set("textContent", err.Error())
 		return

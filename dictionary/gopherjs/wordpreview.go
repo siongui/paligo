@@ -4,6 +4,7 @@ import (
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
 	"github.com/siongui/gopalilib/lib/dicmgr"
+	"github.com/siongui/gopalilib/libfrontend"
 	"github.com/siongui/gopalilib/libfrontend/setting"
 	sg "github.com/siongui/gopherjs-input-suggest"
 )
@@ -20,7 +21,7 @@ func setWordPreviewUI(word, rawhtml string) {
 }
 
 func httpGetWordJson2(word string) {
-	wi, err := lib.HttpGetWordJson(HttpWordJsonPath(word))
+	wi, err := lib.HttpGetWordJson(libfrontend.HttpWordJsonPath(word))
 	if err != nil {
 		return
 	}
