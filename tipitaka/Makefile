@@ -26,8 +26,9 @@ devserver: make-local
 	@go run $(PRJDIR)/devserver.go
 
 
-make-local: fmt dir extra js css html
-make-sutta: rmsite dir extra js css htmlsutta cname-sutta
+make-common: dir extra js css
+make-local: fmt make-common html
+make-sutta: rmsite make-common htmlsutta cname-sutta
 rmsite:
 	@echo "\033[92mRemove $(WEBSITE_DIR)\033[0m"
 	rm -rf $(WEBSITE_DIR)

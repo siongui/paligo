@@ -1,0 +1,63 @@
+{{define "ime"}}
+<!--
+<div class="tanspose-table">
+<div class="columns is-centered">
+<div class="column is-narrow">
+<table class="table is-hoverable is-bordered is-striped">
+<tr><th>{{gettext "Type"}}</th><th>{{gettext "For"}}</th></tr>
+<tr><td>aa</td><td>ā</td></tr>
+<tr><td>ii</td><td>ī</td></tr>
+<tr><td>uu</td><td>ū</td></tr>
+<tr><td>"n</td><td>ṅ</td></tr>
+<tr><td>.m</td><td>ṃ</td></tr>
+<tr><td>~n</td><td>ñ</td></tr>
+<tr><td>.t</td><td>ṭ</td></tr>
+<tr><td>.d</td><td>ḍ</td></tr>
+<tr><td>.n</td><td>ṇ</td></tr>
+<tr><td>.l</td><td>ḷ</td></tr>
+</table>
+</div>
+</div>
+</div>
+<style>
+/* https://stackoverflow.com/a/16919439 */
+/* https://stackoverflow.com/a/29581347 */
+div.tanspose-table  tr { display: block; float: left; }
+div.tanspose-table  th { display: block; }
+div.tanspose-table  td { display: block; }
+</style>
+-->
+<!-- (Bulma) create a scrollable table by wrapping a table in a table-container element -->
+<div class="table-container">
+<table class="table is-bordered is-narrow">
+<tbody>
+  <tr>
+    <th>{{gettext "Type"}}</th>
+    <td>aa</td>
+    <td>ii</td>
+    <td>uu</td>
+    <td>"n</td>
+    <td>.m</td>
+    <td>~n</td>
+    <td>.t</td>
+    <td>.d</td>
+    <td>.n</td>
+    <td>.l</td>
+  </tr>
+  <tr>
+    <th>{{gettext "For"}}</th>
+    <td>ā</td>
+    <td>ī</td>
+    <td>ū</td>
+    <td>ṅ</td>
+    <td>ṃ</td>
+    <td>ñ</td>
+    <td>ṭ</td>
+    <td>ḍ</td>
+    <td>ṇ</td>
+    <td>ḷ</td>
+  </tr>
+</tbody>
+</table>
+</div>
+{{end}}

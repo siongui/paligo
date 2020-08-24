@@ -1,16 +1,15 @@
 {{define "modal"}}
 <style>
-#modal-input-toggle:not(:checked) ~ div.modal div.is-narrow {
-  display: none;
-}
-#modal-input-toggle:checked ~ div.modal label[for=modal-input-toggle] > span > span:first-child {
-  display: none;
-}
-#modal-input-toggle:not(:checked) ~ div.modal label[for=modal-input-toggle] > span > span:nth-child(2) {
-  display: none;
-}
+#modal-input-toggle:not(:checked) ~ div.modal div.is-narrow { display: none; }
+#modal-input-toggle:checked ~ div.modal label[for=modal-input-toggle] > span > span:first-child { display: none; }
+#modal-input-toggle:not(:checked) ~ div.modal label[for=modal-input-toggle] > span > span:nth-child(2) { display: none; }
+
+#modal-hint-toggle:not(:checked) ~ div.modal div.table-container { display: none; }
+#modal-hint-toggle:checked ~ div.modal label[for=modal-hint-toggle] > span > span:first-child { display: none; }
+#modal-hint-toggle:not(:checked) ~ div.modal label[for=modal-hint-toggle] > span > span:nth-child(2) { display: none; }
 </style>
 <input id="modal-input-toggle" type="checkbox" class="is-hidden" />
+<input id="modal-hint-toggle" type="checkbox" class="is-hidden" />
 
 <div class="modal">
   <div class="modal-background"></div>
@@ -19,10 +18,12 @@
       <p class="modal-card-title">
         <span id="modal-title"></span>
         <label for="modal-input-toggle" class="is-size-6" style="cursor: pointer;"><span class="tag is-info is-light"><span>Show</span><span>Hide</span>&nbsp;Input</span></label>
+        <label for="modal-hint-toggle" class="is-size-6" style="cursor: pointer;"><span class="tag is-info is-light"><span>Show</span><span>Hide</span>&nbsp;Hint</span></label>
       </p>
       <button class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
+      {{template "ime" .}}
       <!-- Content ... -->
 
 <div class="columns">
