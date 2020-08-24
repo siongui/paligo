@@ -12,8 +12,18 @@
 
   /* #paliNavbarMenu { left:0; right:0; top:100%; position: absolute; } */
 }
+
+label[for="setting-toggle"]:hover {
+  cursor: pointer;
+  background-color: #fafafa;
+  color: #3273dc;
+}
+#setting-toggle:not(:checked) ~ article.setting-menu { display: none; }
+#setting-toggle:not(:checked) + .navbar > .navbar-menu > .navbar-start > label span:nth-child(1) { display: none; }
+#setting-toggle:checked + .navbar > .navbar-menu > .navbar-start > label span:nth-child(2) { display: none; }
 </style>
 
+<input type="checkbox" id="setting-toggle" class="is-hidden">
 <nav class="navbar has-background-light-gold has-border-gold" role="navigation" aria-label="main navigation">
   <input type="checkbox" id="menu-toggle" class="is-hidden">
   <div class="navbar-brand">
@@ -38,9 +48,9 @@
         <span data-default-string="About">{{gettext "About"}}</span>
       </a>
 
-      <a class="navbar-item setting-link">
-        <span class="is-hidden down-arrow">&#9660;</span><span>&#9658;</span><span data-default-string="Setting">{{gettext "Setting"}}</span>
-      </a>
+      <label class="navbar-item" for="setting-toggle">
+        <span>&#9660;</span><span>&#9658;</span><span data-default-string="Setting">{{gettext "Setting"}}</span>
+      </label>
     </div>
 
     <div class="navbar-end">

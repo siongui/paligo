@@ -29,7 +29,6 @@ func handleInputKeyUp(e Event) {
 }
 
 func main() {
-	setupNavbar()
 	setting.SetStorageKeyName("PaliDictionarySetting")
 	setting.SetupPaliSetting()
 	setupKeypad()
