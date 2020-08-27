@@ -1,5 +1,13 @@
 {{define "footer"}}
 <footer>
+
+<div class="content is-small">
+  <span class="tag is-link is-light">
+    <span data-default-string="Share to">{{gettext "Share to"}}</span>
+  </span>
+  {{template "socialbuttons" .}}
+</div>
+
   <div class="content has-text-right">
     <p>
       Built with
