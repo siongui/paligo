@@ -23,6 +23,7 @@ func setWordPreviewUI(word, rawhtml string) {
 func httpGetWordJson2(word string) {
 	wi, err := lib.HttpGetWordJson(libfrontend.HttpWordJsonPath(word))
 	if err != nil {
+		// TODO: handle error here.
 		return
 	}
 

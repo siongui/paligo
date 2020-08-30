@@ -25,7 +25,7 @@ func httpGetWordJson(w string, changeUrl bool) {
 
 	wi, err := lib.HttpGetWordJson(libfrontend.HttpWordJsonPath(w))
 	if err != nil {
-		mainContent.Set("textContent", err.Error())
+		mainContent.Set("innerHTML", err.Error()+"<br>"+"No Such Word or Internet Connection Error")
 		return
 	}
 
