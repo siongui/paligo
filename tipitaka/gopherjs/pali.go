@@ -65,6 +65,7 @@ func main() {
 	tree := lib.Tree{}
 	json.Unmarshal(b, &tree)
 	treeview.NewTreeview("treeview", tree, xmlAction)
+	SetupTipitakaUrl(tree)
 
 	xslt.SetupXSLTProcessor(libfrontend.GetXslUrl())
 	SetupModal()
