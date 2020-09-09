@@ -25,13 +25,13 @@ func httpGetWordJson(w string, changeUrl bool) {
 
 	wi, err := lib.HttpGetWordJson(libfrontend.HttpWordJsonPath(w))
 	if err != nil {
-		mainContent.Set("innerHTML", err.Error()+"<br>"+"No Such Word or Internet Connection Error")
+		mainContent.Set("innerHTML", "No Such Word or Internet Connection Error"+"<br>"+err.Error())
 		return
 	}
 
 	if changeUrl {
 		Window.History().PushState(w, "", dic.WordUrlPath(w))
-		setDocumentTitle(getFinalShowLocale(), dic.WordPage, w)
+		setDocumentTitle(libfrontend.GetFinalShowLocale(), dic.WordPage, w)
 	}
 
 	mainContent.RemoveAllChildNodes()

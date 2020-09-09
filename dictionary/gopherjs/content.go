@@ -7,17 +7,8 @@ import (
 	"github.com/siongui/gopalilib/lib/dicmgr"
 	dic "github.com/siongui/gopalilib/lib/dictionary"
 	"github.com/siongui/gopalilib/lib/jsgettext"
+	"github.com/siongui/gopalilib/libfrontend"
 )
-
-var supportedLocales = []string{"en_US", "zh_TW", "vi_VN", "fr_FR"}
-
-func TranslateDocument(locale string) {
-	elms := Document.QuerySelectorAll("[data-default-string]")
-	for _, elm := range elms {
-		str := elm.Get("dataset").Get("defaultString").String()
-		elm.Set("textContent", jsgettext.Gettext(locale, str))
-	}
-}
 
 func setDocumentTitle(titleLocale string, typ dic.PageType, wordOrPrefix string) {
 	//title := jsgettext.Gettext(titleLocale, "Pali Dictionary | Pāli to English, Chinese, Japanese, Vietnamese, Burmese Dictionary")
@@ -34,19 +25,10 @@ func setDocumentTitle(titleLocale string, typ dic.PageType, wordOrPrefix string)
 	Document.Set("title", title)
 }
 
-func getFinalShowLocale() string {
-	// show language according to site url and NavigatorLanguages API
-	locale := Document.GetElementById("site-info").Dataset().Get("locale").String()
-	if locale == "" {
-		return jsgettext.DetermineLocaleByNavigatorLanguages(Window.Navigator().Languages(), supportedLocales)
-	}
-	return locale
-}
-
 func setupContentAccordingToUrlPath() {
 	// show language according to NavigatorLanguages API
-	titleLocale := getFinalShowLocale()
-	TranslateDocument(titleLocale)
+	titleLocale := libfrontend.GetFinalShowLocale()
+	libfrontend.TranslateDocument(titleLocale)
 
 	up := Window.Location().Pathname()
 	typ := dic.DeterminePageType(up)
@@ -96,8 +78,4 @@ func setupBrowseDictionary() {
 		all += html
 	}
 	pl.SetInnerHTML(all)
-}
-
-func isOffline() bool {
-	return Window.Location().Hostname() == "localhost" && Window.Location().Port() == "8080"
 }
