@@ -101,7 +101,6 @@ install: lib_pali lib_gtmpl lib_godom lib_gopherjs lib_goef
 lib_pali:
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
 	go get -u github.com/siongui/gopalilib/dicutil
-	go get -u github.com/siongui/gopalilib/lib/jsgettext
 	go get -u github.com/siongui/gopalilib/lib/tipitaka
 	go get -u github.com/siongui/gopalilib/libfrontend
 	go get -u github.com/siongui/gopalilib/libfrontend/everyword
