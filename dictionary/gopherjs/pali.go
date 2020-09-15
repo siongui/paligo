@@ -2,6 +2,7 @@ package main
 
 import (
 	"strings"
+	"time"
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib/dicmgr"
@@ -9,6 +10,7 @@ import (
 	"github.com/siongui/gopalilib/libfrontend/setting"
 	"github.com/siongui/gopalilib/libfrontend/velthuis"
 	sg "github.com/siongui/gopherjs-input-suggest"
+	palitrans "github.com/siongui/pali-transliteration"
 )
 
 var mainContent *Object
@@ -17,6 +19,12 @@ func handleEnterEvent(input *Object) {
 	w := strings.ToLower(strings.TrimSpace(input.Value()))
 	input.Blur()
 	go httpGetWordJson(w, true)
+}
+
+func toThai(input *Object) {
+	w := strings.ToLower(strings.TrimSpace(input.Value()))
+	t := palitrans.RomanToThai(w)
+	Document.GetElementById("r2t").SetInnerHTML(t)
 }
 
 func handleInputKeyUp(e Event) {
@@ -108,4 +116,15 @@ func main() {
 			}
 		*/
 	})
+
+	// Romanized Pali to Thai
+	ticker := time.NewTicker(500 * time.Millisecond)
+	go func() {
+		for {
+			select {
+			case <-ticker.C:
+				toThai(input)
+			}
+		}
+	}()
 }
