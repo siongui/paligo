@@ -262,13 +262,17 @@ po2mo:
 ###################
 install: lib_pali lib_gtmpl lib_gopherjs_input_suggest lib_gopherjs
 
-lib_pali:
+lib_pali: lib_palitrans
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
 	go get -u github.com/siongui/gopalilib/dicutil
 	go get -u github.com/siongui/gopaliwordvfs
 	go get -u github.com/siongui/gopalilib/libfrontend/velthuis
 	go get -u github.com/siongui/gopalilib/libfrontend/setting
 	go get -u github.com/siongui/gopalilib/libfrontend
+	go get -u github.com/siongui/pali-transliteration
+
+lib_palitrans:
+	@echo "\033[92mInstalling Go Pāli Transliteration ...\033[0m"
 	go get -u github.com/siongui/pali-transliteration
 
 lib_gtmpl:

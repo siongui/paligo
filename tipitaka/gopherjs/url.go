@@ -16,6 +16,12 @@ func CopyTreeToToCTree(t lib.Tree, toc *ToCTree) {
 	toc.Src = t.Src
 	toc.Action = t.Action
 
+	/*
+		if t.Text != "" && t.Src == "" && t.Action == "" {
+			println(t.Text)
+		}
+	*/
+
 	if subpath := tipitaka.TrimTreeText2(t.Text); subpath != "" {
 		if subpath == "tipiṭaka (mūla)" {
 			subpath = "canon"
@@ -30,7 +36,7 @@ func CopyTreeToToCTree(t lib.Tree, toc *ToCTree) {
 	}
 
 	toc.UrlPath += "/"
-	println(toc.UrlPath)
+	//println(toc.UrlPath)
 }
 
 func SetupTipitakaUrl(tree lib.Tree) {

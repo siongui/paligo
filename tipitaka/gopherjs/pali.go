@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"strings"
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
@@ -11,7 +12,17 @@ import (
 	"github.com/siongui/gopalilib/libfrontend/treeview"
 	"github.com/siongui/gopalilib/libfrontend/velthuis"
 	"github.com/siongui/gopalilib/libfrontend/xslt"
+	palitrans "github.com/siongui/pali-transliteration"
 )
+
+func toThai() {
+	mainview := Document.GetElementById("mainview")
+	spans := mainview.QuerySelectorAll("span[class=\"paliword\"]")
+	for _, span := range spans {
+		word := strings.ToLower(span.InnerHTML())
+		span.SetInnerHTML(palitrans.RomanToThai(word))
+	}
+}
 
 func xmlAction(t lib.Tree) {
 	// FIXME: show loading not working on Chromium
@@ -29,6 +40,12 @@ func xmlAction(t lib.Tree) {
 	fragment := xslt.GetXSLTProcessor().TransformToFragment(xmlDoc, Document)
 
 	mainview.QuerySelector("div.content").RemoveAllChildNodes()
+	r2t := Document.CreateElement("div")
+	r2t.SetInnerHTML("To Thai Script (experimental)")
+	r2t.AddEventListener("click", func(e Event) {
+		toThai()
+	})
+	mainview.QuerySelector("div.content").AppendChild(r2t)
 	mainview.QuerySelector("div.content").AppendChild(fragment)
 
 	everyword.MarkEveryWord("#mainview > div.content", wordClickedHandler)

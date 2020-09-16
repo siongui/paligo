@@ -98,7 +98,7 @@ embed_data: fmt clone_tpk_xml clone_pali_data
 ###################
 install: lib_pali lib_gtmpl lib_godom lib_gopherjs lib_goef
 
-lib_pali:
+lib_pali: lib_palitrans
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
 	go get -u github.com/siongui/gopalilib/dicutil
 	go get -u github.com/siongui/gopalilib/lib/tipitaka
@@ -108,6 +108,10 @@ lib_pali:
 	go get -u github.com/siongui/gopalilib/libfrontend/xslt
 	go get -u github.com/siongui/gopalilib/libfrontend/velthuis
 	go get -u github.com/siongui/gopalilib/libfrontend/setting
+
+lib_palitrans:
+	@echo "\033[92mInstalling Go Pāli Transliteration ...\033[0m"
+	go get -u github.com/siongui/pali-transliteration
 
 lib_gtmpl:
 	@echo "\033[92mInstalling Go html/template with gettext support ...\033[0m"
