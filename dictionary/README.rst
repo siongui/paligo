@@ -65,6 +65,7 @@ Set Up Development Environment
 
    - Go_
    - gopalilib_
+   - `pali-transliteration`_
    - gtmpl_
    - `gopherjs-input-suggest`_
    -  GopherJS_
@@ -266,6 +267,7 @@ References
 .. _GopherJS: http://www.gopherjs.org/
 .. _go-online-pali-ime: https://github.com/siongui/go-online-input-method-pali
 .. _gopherjs-input-suggest: https://github.com/siongui/gopherjs-input-suggest
+.. _pali-transliteration: https://github.com/siongui/pali-transliteration
 .. _gtmpl: https://github.com/siongui/gtmpl
 .. _gopalilib: https://github.com/siongui/gopalilib
 .. _goef: https://github.com/siongui/goef
