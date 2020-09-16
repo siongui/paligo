@@ -24,6 +24,21 @@ func toThai() {
 	}
 }
 
+func createToThaiButton() *Object {
+	r2t := Document.CreateElement("button")
+	r2t.ClassList().Add("toThai")
+	r2t.ClassList().Add("button")
+	r2t.ClassList().Add("is-small")
+	r2t.ClassList().Add("is-rounded")
+	r2t.SetInnerHTML("To Thai Script (experimental)")
+	r2t.AddEventListener("click", func(e Event) {
+		r2t.ClassList().Add("is-rounded")
+		toThai()
+		r2t.ClassList().Add("is-hidden")
+	})
+	return r2t
+}
+
 func xmlAction(t lib.Tree) {
 	// FIXME: show loading not working on Chromium
 	ShowIsLoadingXML(t.Text)
@@ -43,17 +58,7 @@ func xmlAction(t lib.Tree) {
 	mainview.QuerySelector("div.content").AppendChild(fragment)
 
 	everyword.MarkEveryWord("#mainview > div.content", wordClickedHandler)
-	r2t := Document.CreateElement("button")
-	r2t.ClassList().Add("toThai")
-	r2t.ClassList().Add("button")
-	r2t.SetInnerHTML("To Thai Script (experimental)")
-	r2t.AddEventListener("click", func(e Event) {
-		r2t.SetInnerHTML("Transliterating")
-		toThai()
-		r2t.SetInnerHTML("Done!")
-	})
-	mainview.QuerySelector("div.content").Call("prepend", r2t)
-
+	mainview.QuerySelector("div.content").Call("prepend", createToThaiButton())
 	ToggleMobileTreeview()
 }
 
