@@ -43,8 +43,9 @@ func xmlAction(t lib.Tree) {
 	mainview.QuerySelector("div.content").AppendChild(fragment)
 
 	everyword.MarkEveryWord("#mainview > div.content", wordClickedHandler)
-	r2t := Document.CreateElement("div")
+	r2t := Document.CreateElement("button")
 	r2t.ClassList().Add("toThai")
+	r2t.ClassList().Add("button")
 	r2t.SetInnerHTML("To Thai Script (experimental)")
 	r2t.AddEventListener("click", func(e Event) {
 		r2t.SetInnerHTML("Transliterating")
