@@ -40,15 +40,18 @@ func xmlAction(t lib.Tree) {
 	fragment := xslt.GetXSLTProcessor().TransformToFragment(xmlDoc, Document)
 
 	mainview.QuerySelector("div.content").RemoveAllChildNodes()
-	r2t := Document.CreateElement("div")
-	r2t.SetInnerHTML("To Thai Script (experimental)")
-	r2t.AddEventListener("click", func(e Event) {
-		toThai()
-	})
-	mainview.QuerySelector("div.content").AppendChild(r2t)
 	mainview.QuerySelector("div.content").AppendChild(fragment)
 
 	everyword.MarkEveryWord("#mainview > div.content", wordClickedHandler)
+	r2t := Document.CreateElement("div")
+	r2t.ClassList().Add("toThai")
+	r2t.SetInnerHTML("To Thai Script (experimental)")
+	r2t.AddEventListener("click", func(e Event) {
+		r2t.SetInnerHTML("Transliterating")
+		toThai()
+		r2t.SetInnerHTML("Done!")
+	})
+	mainview.QuerySelector("div.content").Call("prepend", r2t)
 
 	ToggleMobileTreeview()
 }
