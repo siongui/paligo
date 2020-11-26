@@ -8,6 +8,8 @@ on:
 jobs:
   build-sutta:
     runs-on: ubuntu-latest
+    env:
+      TARGET_WEBSITE: sutta
     steps:
     - uses: actions/checkout@v2.3.1
       with:
