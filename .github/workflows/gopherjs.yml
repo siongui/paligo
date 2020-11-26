@@ -21,6 +21,7 @@ jobs:
         make install
     - name: Build Pāli Dictionary Website for sutta.org
       run: |
+        cd dictionary/
         make make-sutta
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@3.7.1
