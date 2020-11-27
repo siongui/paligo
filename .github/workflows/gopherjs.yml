@@ -6,6 +6,7 @@ on:
       - master
 
 jobs:
+
   build-sutta:
     runs-on: ubuntu-latest
     env:
@@ -30,6 +31,34 @@ jobs:
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         REPOSITORY_NAME: siongui/dictionary.sutta.org
+        BRANCH: gh-pages
+        FOLDER: dictionary/website
+        CLEAN: true
+
+  build-dhamma:
+    runs-on: ubuntu-latest
+    env:
+      TARGET_WEBSITE: dhamma
+    steps:
+    - uses: actions/checkout@v2.3.1
+      with:
+        persist-credentials: false
+    - uses: actions/setup-go@v2
+      with:
+        go-version: '1.12.17'
+    - name: Install dependencies
+      run: |
+        cd dictionary/
+        make install
+    - name: Build Pāli Dictionary Website for sutta.org
+      run: |
+        cd dictionary/
+        make make-dhamma
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        REPOSITORY_NAME: siongui/dictionary.online-dhamma.net
         BRANCH: gh-pages
         FOLDER: dictionary/website
         CLEAN: true
