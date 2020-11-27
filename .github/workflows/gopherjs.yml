@@ -1,4 +1,4 @@
-name: Build Pāli Dictionary Website for sutta.org and online-dhamma.net
+name: Build Pāli Dictionary Website
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
       run: |
         cd dictionary/
         make install
-    - name: Build Pāli Dictionary Website for sutta.org
+    - name: Build Pāli Dictionary Website for dictionary.sutta.org
       run: |
         cd dictionary/
         make make-sutta
@@ -50,7 +50,7 @@ jobs:
       run: |
         cd dictionary/
         make install
-    - name: Build Pāli Dictionary Website for sutta.org
+    - name: Build Pāli Dictionary Website for dictionary.online-dhamma.net
       run: |
         cd dictionary/
         make make-dhamma
