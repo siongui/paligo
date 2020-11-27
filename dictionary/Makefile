@@ -269,7 +269,6 @@ lib_pali: lib_palitrans
 	go get -u github.com/siongui/gopalilib/libfrontend/velthuis
 	go get -u github.com/siongui/gopalilib/libfrontend/setting
 	go get -u github.com/siongui/gopalilib/libfrontend
-	go get -u github.com/siongui/pali-transliteration
 
 lib_palitrans:
 	@echo "\033[92mInstalling Go Pāli Transliteration ...\033[0m"
