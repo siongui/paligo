@@ -9,7 +9,7 @@ jobs:
 
   build-sutta:
     runs-on: ubuntu-latest
-    if: ${{ false }}
+    #if: ${{ false }}
     env:
       TARGET_WEBSITE: sutta
     steps:
@@ -38,7 +38,7 @@ jobs:
 
   build-dhamma:
     runs-on: ubuntu-latest
-    if: ${{ false }}
+    #if: ${{ false }}
     env:
       TARGET_WEBSITE: dhamma
     steps:
@@ -67,7 +67,7 @@ jobs:
 
   build-offline:
     runs-on: ubuntu-latest
-    if: ${{ false }}
+    #if: ${{ false }}
     steps:
     - uses: actions/checkout@v2.3.1
       with:
