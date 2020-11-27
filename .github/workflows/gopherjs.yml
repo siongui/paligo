@@ -1,4 +1,4 @@
-name: Build Pāli Dictionary Website
+name: Build Pāli Website
 
 on:
   push:
@@ -7,9 +7,9 @@ on:
 
 jobs:
 
-  build-sutta:
+  build-dic-sutta:
     runs-on: ubuntu-latest
-    #if: ${{ false }}
+    if: ${{ false }}
     env:
       TARGET_WEBSITE: sutta
     steps:
@@ -36,9 +36,9 @@ jobs:
         FOLDER: dictionary/website
         CLEAN: true
 
-  build-dhamma:
+  build-dic-dhamma:
     runs-on: ubuntu-latest
-    #if: ${{ false }}
+    if: ${{ false }}
     env:
       TARGET_WEBSITE: dhamma
     steps:
@@ -65,9 +65,9 @@ jobs:
         FOLDER: dictionary/website
         CLEAN: true
 
-  build-offline:
+  build-dic-offline:
     runs-on: ubuntu-latest
-    #if: ${{ false }}
+    if: ${{ false }}
     steps:
     - uses: actions/checkout@v2.3.1
       with:
@@ -84,4 +84,31 @@ jobs:
       run: |
         cd dictionary/
         make offline
-# TODO: deploy offline on GitHub Pages
+    # TODO: deploy offline on GitHub Pages
+
+  build-tpk-sutta:
+    runs-on: ubuntu-latest
+    #if: ${{ false }}
+    steps:
+    - uses: actions/checkout@v2.3.1
+      with:
+        persist-credentials: false
+    - uses: actions/setup-go@v2
+      with:
+        go-version: '1.12.17'
+    - name: Install dependencies
+      run: |
+        cd tipitaka/
+        make install
+    - name: Build Pāli Tipiṭaka Website for tipitaka.sutta.org
+      run: |
+        cd tipitaka/
+        make make-sutta
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        REPOSITORY_NAME: siongui/tipitaka.sutta.org
+        BRANCH: gh-pages
+        FOLDER: tipitaka/website
+        CLEAN: true
