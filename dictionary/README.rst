@@ -8,8 +8,11 @@
 .. image:: https://godoc.org/github.com/siongui/paligo?status.svg
    :target: https://godoc.org/github.com/siongui/paligo
 
-.. image:: https://travis-ci.org/siongui/paligo.svg?branch=master
+.. .. image:: https://travis-ci.org/siongui/paligo.svg?branch=master
     :target: https://travis-ci.org/siongui/paligo
+
+.. image:: https://github.com/siongui/paligo/workflows/Build%20Pāli%20Website/badge.svg
+    :target: https://github.com/siongui/paligo/blob/master/.github/workflows/gopherjs.yml
 
 .. image:: https://gitlab.com/siongui/pali-dictionary/badges/master/pipeline.svg
     :target: https://gitlab.com/siongui/pali-dictionary/-/commits/master
@@ -110,8 +113,17 @@ See `offline dir <offline/>`_, `Makefile <Makefile>`__, and ref [11]_ for more
 information.
 
 
-Deploy to GitHub Pages
-++++++++++++++++++++++
+
+Deploy to GitHub Pages via GitHub Actions
++++++++++++++++++++++++++++++++++++++++++
+
+TODO: add descriptions here.
+
+
+Deploy to GitHub Pages via Travis CI (Obsoleted)
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+*This repo is not deployed via Travis CI now.*
 
 See
 
@@ -171,6 +183,8 @@ See
 GitLab CI always fail to deploy to GitLab Pages if there are lots of symlinks,
 even if Travis CI can deploy without problem without sub-sites. No solution for
 now.
+
+Currently GitLab repo is used to build offline website for Pāli Dictionary.
 
 
 Bootstrap Website (Optional)

@@ -8,8 +8,11 @@
 .. image:: https://godoc.org/github.com/siongui/paligo?status.svg
    :target: https://godoc.org/github.com/siongui/paligo
 
-.. image:: https://travis-ci.org/siongui/paligo.svg?branch=master
+.. .. image:: https://travis-ci.org/siongui/paligo.svg?branch=master
     :target: https://travis-ci.org/siongui/paligo
+
+.. image:: https://github.com/siongui/paligo/workflows/Build%20Pāli%20Website/badge.svg
+    :target: https://github.com/siongui/paligo/blob/master/.github/workflows/gopherjs.yml
 
 .. image:: https://gitlab.com/siongui/pali-dictionary/badges/master/pipeline.svg
     :target: https://gitlab.com/siongui/pali-dictionary/-/commits/master
