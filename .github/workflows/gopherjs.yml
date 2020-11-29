@@ -67,7 +67,7 @@ jobs:
 
   build-dic-offline:
     runs-on: ubuntu-latest
-    #if: ${{ false }}
+    if: ${{ false }}
     steps:
     - uses: actions/checkout@v2.3.1
       with:
@@ -84,15 +84,15 @@ jobs:
       run: |
         cd dictionary/
         make offline
-        make mvofflinetopublic
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@3.7.1
-      with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        REPOSITORY_NAME: siongui/offline-pali-dictionary
-        BRANCH: gh-pages
-        FOLDER: public
-        CLEAN: true
+    #    make mvofflinetopublic
+    #- name: Deploy
+    #  uses: JamesIves/github-pages-deploy-action@3.7.1
+    #  with:
+    #    ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    #    REPOSITORY_NAME: siongui/offline-pali-dictionary
+    #    BRANCH: gh-pages
+    #    FOLDER: public
+    #    CLEAN: true
 
   build-tpk-sutta:
     runs-on: ubuntu-latest
