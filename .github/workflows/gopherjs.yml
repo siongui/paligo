@@ -9,7 +9,7 @@ jobs:
 
   build-dic-sutta:
     runs-on: ubuntu-latest
-    if: ${{ false }}
+    #if: ${{ false }}
     env:
       TARGET_WEBSITE: sutta
     steps:
@@ -38,7 +38,7 @@ jobs:
 
   build-dic-dhamma:
     runs-on: ubuntu-latest
-    if: ${{ false }}
+    #if: ${{ false }}
     env:
       TARGET_WEBSITE: dhamma
     steps:
