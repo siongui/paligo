@@ -4,7 +4,7 @@
 GO_VERSION=1.12.17
 PRJDIR=$(CURDIR)/../
 LOCALE_DIR=$(PRJDIR)/locale
-ifndef TRAVIS
+ifndef GITHUB_ACTIONS
 	# set environment variables on local machine or GitLab CI
 	export GOROOT=$(realpath $(PRJDIR)/go)
 	export GOPATH=$(realpath $(PRJDIR))
