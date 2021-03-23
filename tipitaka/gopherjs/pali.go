@@ -39,16 +39,31 @@ func createToThaiButton() *Object {
 	return r2t
 }
 
-func xmlAction(t lib.Tree) {
-	// FIXME: show loading not working on Chromium
-	ShowIsLoadingXML(t.Text)
-	defer HideIsLoadingXML()
+func ChangeUrlPath(action string) {
+	Window.History().PushState(action, "", ActionToUrlPath(action))
+	// TODO: set document title
+}
 
+func SetupHistoryPopstate() {
+	Window.AddEventListener("popstate", func(e Event) {
+		if e.Get("state") == nil {
+			mainview := Document.GetElementById("mainview")
+			mainview.QuerySelector("div.content").RemoveAllChildNodes()
+		} else {
+			// state here stores action
+			action := e.Get("state").String()
+			//println(action)
+			SetXmlMainview(action)
+		}
+	})
+}
+
+func SetXmlMainview(action string) {
 	mainview := Document.GetElementById("mainview")
 
 	// Load the xml file using synchronous (third param is set to false) XMLHttpRequest
 	myXMLHTTPRequest := NewXMLHttpRequest()
-	myXMLHTTPRequest.Open("GET", libfrontend.ActionXmlUrl(t.Action), false)
+	myXMLHTTPRequest.Open("GET", libfrontend.ActionXmlUrl(action), false)
 	myXMLHTTPRequest.Send()
 
 	xmlDoc := myXMLHTTPRequest.ResponseXML()
@@ -60,6 +75,16 @@ func xmlAction(t lib.Tree) {
 	everyword.MarkEveryWord("#mainview > div.content", wordClickedHandler)
 	mainview.QuerySelector("div.content").Call("prepend", createToThaiButton())
 	ToggleMobileTreeview()
+
+}
+
+func xmlAction(t lib.Tree) {
+	// FIXME: show loading not working on Chromium
+	ShowIsLoadingXML(t.Text)
+	defer HideIsLoadingXML()
+
+	SetXmlMainview(t.Action)
+	ChangeUrlPath(t.Action)
 }
 
 func main() {
@@ -79,6 +104,7 @@ func main() {
 	velthuis.BindPaliInputMethodToInputTextElementById("modal-input")
 	SetupModalInput("#modal-input")
 	setting.SetupPaliSetting()
+	SetupHistoryPopstate()
 
 	HideIsLoadingWebsite()
 }
