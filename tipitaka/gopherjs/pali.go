@@ -6,6 +6,7 @@ import (
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
+	"github.com/siongui/gopalilib/lib/tipitaka/toc"
 	"github.com/siongui/gopalilib/libfrontend"
 	"github.com/siongui/gopalilib/libfrontend/everyword"
 	"github.com/siongui/gopalilib/libfrontend/setting"
@@ -90,7 +91,7 @@ func xmlAction(t lib.Tree) {
 func main() {
 	libfrontend.TranslateDocument(libfrontend.GetFinalShowLocale())
 
-	b, _ := ReadFile("tpktoc.json")
+	b, _ := toc.ReadFile("tpktoc.json")
 	//println(string(b))
 	tree := lib.Tree{}
 	json.Unmarshal(b, &tree)
