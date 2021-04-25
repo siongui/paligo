@@ -6,6 +6,7 @@ import (
 
 	. "github.com/siongui/godom"
 	"github.com/siongui/gopalilib/lib"
+	"github.com/siongui/gopalilib/lib/tipitaka"
 	"github.com/siongui/gopalilib/lib/tipitaka/toc"
 	"github.com/siongui/gopalilib/libfrontend"
 	"github.com/siongui/gopalilib/libfrontend/everyword"
@@ -41,7 +42,7 @@ func createToThaiButton() *Object {
 }
 
 func ChangeUrlPath(action string) {
-	Window.History().PushState(action, "", ActionToUrlPath(action))
+	Window.History().PushState(action, "", tipitaka.ActionToUrlPath(action))
 	// TODO: set document title
 }
 

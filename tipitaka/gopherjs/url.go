@@ -1,9 +1,6 @@
 package main
 
 import (
-	"path/filepath"
-	"strings"
-
 	"github.com/siongui/gopalilib/lib"
 	"github.com/siongui/gopalilib/lib/tipitaka"
 )
@@ -12,11 +9,6 @@ type ToCTree struct {
 	lib.Tree
 	ChildTrees []ToCTree
 	UrlPath    string
-}
-
-func ActionToUrlPath(action string) string {
-	noext := strings.TrimSuffix(action, filepath.Ext(action))
-	return "/" + strings.Replace(noext, ".", "/", -1)
 }
 
 func CopyTreeToToCTree(t lib.Tree, toc *ToCTree) {

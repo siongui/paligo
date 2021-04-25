@@ -102,7 +102,6 @@ lib_pali: lib_palitrans
 	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
 	go get -u github.com/siongui/gopalilib/dicutil
 	go get -u github.com/siongui/gopalilib/lib/tipitaka
-	go get -u github.com/siongui/gopalilib/lib/tipitaka/toc
 	go get -u github.com/siongui/gopalilib/libfrontend
 	go get -u github.com/siongui/gopalilib/libfrontend/everyword
 	go get -u github.com/siongui/gopalilib/libfrontend/treeview
