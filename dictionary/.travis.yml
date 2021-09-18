@@ -1,7 +1,7 @@
 dist: bionic
 language: go
 go:
-  - 1.16.5
+  - 1.17.1
 # https://docs.travis-ci.com/user/customizing-the-build#setting-symlinks-option
 git:
   symlinks: true
@@ -20,7 +20,6 @@ jobs:
   - env: TARGET_WEBSITE=dhamma
     install:
       - cd dictionary/
-      - make install
     script:
       - make make-dhamma
     after_success:
@@ -29,7 +28,6 @@ jobs:
   - env: TARGET_WEBSITE=sutta
     install:
       - cd dictionary/
-      - make install
     script:
       - make make-sutta
     after_success:

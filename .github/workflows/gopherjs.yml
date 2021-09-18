@@ -18,11 +18,10 @@ jobs:
         persist-credentials: false
     - uses: actions/setup-go@v2
       with:
-        go-version: '1.16.5'
+        go-version: '1.17.1'
     - name: Install dependencies
       run: |
         cd dictionary/
-        make install
     - name: Build Pāli Dictionary Website for dictionary.sutta.org
       run: |
         cd dictionary/
@@ -47,11 +46,10 @@ jobs:
         persist-credentials: false
     - uses: actions/setup-go@v2
       with:
-        go-version: '1.16.5'
+        go-version: '1.17.1'
     - name: Install dependencies
       run: |
         cd dictionary/
-        make install
     - name: Build Pāli Dictionary Website for dictionary.online-dhamma.net
       run: |
         cd dictionary/
@@ -74,12 +72,10 @@ jobs:
         persist-credentials: false
     - uses: actions/setup-go@v2
       with:
-        go-version: '1.16.5'
+        go-version: '1.17.1'
     - name: Install dependencies
       run: |
         cd dictionary/
-        make install
-        make lib_goef
     - name: Build Pāli Dictionary Offline Website
       run: |
         cd dictionary/
@@ -103,11 +99,10 @@ jobs:
         persist-credentials: false
     - uses: actions/setup-go@v2
       with:
-        go-version: '1.16.5'
+        go-version: '1.17.1'
     - name: Install dependencies
       run: |
         cd tipitaka/
-        make install
     - name: Build Pāli Tipiṭaka Website for tipitaka.sutta.org
       run: |
         cd tipitaka/

@@ -30,7 +30,7 @@ language.
 Development Environment:
 
   - `Ubuntu 20.04`_
-  - `Go 1.16.5`_
+  - `Go 1.17.1`_
   - GopherJS_
 
 Re-implementation of `Pāli Dictionary`_ is finished.
@@ -59,6 +59,6 @@ References
 .. _Pāli Tipiṭaka: https://tipitaka.sutta.org/
 .. _Go: https://golang.org/
 .. _Ubuntu 20.04: https://releases.ubuntu.com/20.04/
-.. _Go 1.16.5: https://golang.org/dl/
+.. _Go 1.17.1: https://golang.org/dl/
 .. _GopherJS: http://www.gopherjs.org/
 .. _UNLICENSE: https://unlicense.org/

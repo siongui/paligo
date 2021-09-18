@@ -17,8 +17,6 @@ pages:
   - cd dictionary/
   #- make clone_pali_data
   - make download_go
-  - make install
-  - make lib_goef
   - make offline
   - make mvofflinetopublic
   artifacts:

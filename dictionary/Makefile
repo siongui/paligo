@@ -1,7 +1,7 @@
 # cannot use relative path in GOROOT, otherwise 6g not found. For example,
 #   export GOROOT=../go  (=> 6g not found)
 # it is also not allowed to use relative path in GOPATH
-GO_VERSION=1.16.5
+GO_VERSION=1.17.1
 PRJDIR=$(CURDIR)/../
 LOCALE_DIR=$(PRJDIR)/locale
 ifndef GITHUB_ACTIONS
@@ -254,44 +254,6 @@ po2mo:
 ###########################
 # End of Boostrap Website #
 ###########################
-
-
-###################
-# Install Library #
-###################
-install: lib_pali lib_gtmpl lib_gopherjs_input_suggest lib_gopherjs
-
-lib_pali: lib_palitrans
-	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
-	go get -u github.com/siongui/gopalilib/dicutil
-	go get -u github.com/siongui/gopaliwordvfs
-	go get -u github.com/siongui/gopalilib/libfrontend/velthuis
-	go get -u github.com/siongui/gopalilib/libfrontend/setting
-	go get -u github.com/siongui/gopalilib/libfrontend
-
-lib_palitrans:
-	@echo "\033[92mInstalling Go Pāli Transliteration ...\033[0m"
-	go get -u github.com/siongui/pali-transliteration
-
-lib_gtmpl:
-	@echo "\033[92mInstalling Go html/template with gettext support ...\033[0m"
-	go get -u github.com/siongui/gtmpl
-
-lib_gopherjs_input_suggest:
-	@echo "\033[92mInstalling GopherJS input suggest library ...\033[0m"
-	go get -u github.com/siongui/gopherjs-input-suggest
-
-lib_gopherjs:
-	@echo "\033[92mInstalling GopherJS ...\033[0m"
-	go get -u github.com/gopherjs/gopherjs
-
-# only for create offline binary
-lib_goef:
-	@echo "\033[92mInstalling goef for creating offline binary ...\033[0m"
-	go get -u github.com/siongui/goef
-##########################
-# End of Install Library #
-##########################
 
 
 ########

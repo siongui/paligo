@@ -1,7 +1,7 @@
 dist: bionic
 language: go
 go:
-  - 1.16.5
+  - 1.17.1
 # https://docs.travis-ci.com/user/customizing-the-build#setting-symlinks-option
 git:
   symlinks: true
@@ -15,7 +15,6 @@ addons:
     - gettext
 install:
   - cd tipitaka/
-  - make install
 script:
   - make make-sutta
 deploy:

@@ -1,7 +1,7 @@
 # cannot use relative path in GOROOT, otherwise 6g not found. For example,
 #   export GOROOT=../go  (=> 6g not found)
 # it is also not allowed to use relative path in GOPATH
-GO_VERSION=1.16.5
+GO_VERSION=1.17.1
 PRJDIR=$(CURDIR)/../
 LOCALE_DIR=$(PRJDIR)/locale
 ifndef GITHUB_ACTIONS
@@ -90,46 +90,6 @@ embed_data: fmt clone_tpk_xml clone_pali_data
 #####################################
 # End of Bootstrap Tipiṭaka Website #
 #####################################
-
-
-###################
-# Install Library #
-###################
-install: lib_pali lib_gtmpl lib_godom lib_gopherjs lib_goef
-
-lib_pali: lib_palitrans
-	@echo "\033[92mInstalling common lib used in this project ...\033[0m"
-	go get -u github.com/siongui/gopalilib/dicutil
-	go get -u github.com/siongui/gopalilib/lib/tipitaka
-	go get -u github.com/siongui/gopalilib/libfrontend
-	go get -u github.com/siongui/gopalilib/libfrontend/everyword
-	go get -u github.com/siongui/gopalilib/libfrontend/treeview
-	go get -u github.com/siongui/gopalilib/libfrontend/xslt
-	go get -u github.com/siongui/gopalilib/libfrontend/velthuis
-	go get -u github.com/siongui/gopalilib/libfrontend/setting
-
-lib_palitrans:
-	@echo "\033[92mInstalling Go Pāli Transliteration ...\033[0m"
-	go get -u github.com/siongui/pali-transliteration
-
-lib_gtmpl:
-	@echo "\033[92mInstalling Go html/template with gettext support ...\033[0m"
-	go get -u github.com/siongui/gtmpl
-
-lib_godom:
-	@echo "\033[92mInstalling dom manipulation library ...\033[0m"
-	go get -u github.com/siongui/godom
-
-lib_gopherjs:
-	@echo "\033[92mInstalling GopherJS ...\033[0m"
-	go get -u github.com/gopherjs/gopherjs
-
-lib_goef:
-	@echo "\033[92mInstalling GopherJS ...\033[0m"
-	go get -u github.com/siongui/goef
-##########################
-# End of Install Library #
-##########################
 
 
 ########
