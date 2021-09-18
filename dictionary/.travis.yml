@@ -20,6 +20,7 @@ jobs:
   - env: TARGET_WEBSITE=dhamma
     install:
       - cd dictionary/
+      - make install_gopherjs
     script:
       - make make-dhamma
     after_success:
@@ -28,6 +29,7 @@ jobs:
   - env: TARGET_WEBSITE=sutta
     install:
       - cd dictionary/
+      - make install_gopherjs
     script:
       - make make-sutta
     after_success:

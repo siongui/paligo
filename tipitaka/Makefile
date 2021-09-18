@@ -92,6 +92,17 @@ embed_data: fmt clone_tpk_xml clone_pali_data
 #####################################
 
 
+###################
+# Install Library #
+###################
+install_gopherjs:
+	@echo "\033[92mInstalling GopherJS ...\033[0m"
+	go get -u github.com/gopherjs/gopherjs
+##########################
+# End of Install Library #
+##########################
+
+
 ########
 # Misc #
 ########

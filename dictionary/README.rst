@@ -77,8 +77,9 @@ Set Up Development Environment
 
    .. code-block:: bash
 
-     $ cd ~/dev/paligo
+     $ cd ~/dev/paligo/dictionary
      $ make download_go
+     $ make install_gopherjs
 
 
 4. Create localhost dictionary website:

@@ -256,6 +256,17 @@ po2mo:
 ###########################
 
 
+###################
+# Install Library #
+###################
+install_gopherjs:
+	@echo "\033[92mInstalling GopherJS ...\033[0m"
+	go get -u github.com/gopherjs/gopherjs
+##########################
+# End of Install Library #
+##########################
+
+
 ########
 # Misc #
 ########

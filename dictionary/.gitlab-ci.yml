@@ -15,6 +15,7 @@ pages:
   - cd dictionary/
   #- make clone_pali_data
   - make download_go
+  - make install_gopherjs
   - make make-gitlab-basic
   - make mvtopublic
   artifacts:

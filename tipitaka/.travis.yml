@@ -15,6 +15,7 @@ addons:
     - gettext
 install:
   - cd tipitaka/
+  - make install_gopherjs
 script:
   - make make-sutta
 deploy:

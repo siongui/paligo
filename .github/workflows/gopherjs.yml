@@ -22,6 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd dictionary/
+        make install_gopherjs
     - name: Build Pāli Dictionary Website for dictionary.sutta.org
       run: |
         cd dictionary/
@@ -50,6 +51,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd dictionary/
+        make install_gopherjs
     - name: Build Pāli Dictionary Website for dictionary.online-dhamma.net
       run: |
         cd dictionary/
@@ -76,6 +78,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd dictionary/
+        make install_gopherjs
     - name: Build Pāli Dictionary Offline Website
       run: |
         cd dictionary/
@@ -103,6 +106,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd tipitaka/
+        make install_gopherjs
     - name: Build Pāli Tipiṭaka Website for tipitaka.sutta.org
       run: |
         cd tipitaka/
