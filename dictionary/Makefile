@@ -1,14 +1,13 @@
 # cannot use relative path in GOROOT, otherwise 6g not found. For example,
 #   export GOROOT=../go  (=> 6g not found)
 # it is also not allowed to use relative path in GOPATH
-GO_VERSION=1.12.17
+GO_VERSION=1.16.5
 PRJDIR=$(CURDIR)/../
 LOCALE_DIR=$(PRJDIR)/locale
-ifndef TRAVIS
+ifndef GITHUB_ACTIONS
 	# set environment variables on local machine or GitLab CI
 	export GOROOT=$(realpath $(PRJDIR)/go)
-	export GOPATH=$(realpath $(PRJDIR))
-	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
+	export PATH := $(GOROOT)/bin:$(PATH)
 endif
 
 HTML_TEMPLATE_DIR=$(CURDIR)/theme/template/
@@ -23,9 +22,9 @@ DATA_REPO_DIR=$(PRJDIR)/data
 DICTIONARY_BOOTSTRAP_DATA_DIR=$(DATA_REPO_DIR)/dictionary
 DICTIONARY_CONF_DIR=$(CURDIR)/config/
 
-OFFLINE_LINUX=$(GOPATH)/bin/offline-linux
-OFFLINE_WINDOWS=$(GOPATH)/bin/offline-windows.exe
-OFFLINE_MAC=$(GOPATH)/bin/offline-darwin
+OFFLINE_LINUX=$(GOROOT)/bin/offline-linux
+OFFLINE_WINDOWS=$(GOROOT)/bin/offline-windows.exe
+OFFLINE_MAC=$(GOROOT)/bin/offline-darwin
 GITLAB_PUBLIC_DIR=$(PRJDIR)/public/
 
 

@@ -29,7 +29,7 @@ language.
 Development Environment:
 
   - `Ubuntu 20.04`_
-  - `Go 1.12.17`_
+  - `Go 1.16.5`_
   - GopherJS_
 
 This directory contains implementation of `Pāli Dictionary`_.
@@ -273,7 +273,7 @@ References
 .. _Pāli Tipiṭaka: https://tipitaka.sutta.org/
 .. _Go: https://golang.org/
 .. _Ubuntu 20.04: https://releases.ubuntu.com/20.04/
-.. _Go 1.12.17: https://golang.org/dl/
+.. _Go 1.16.5: https://golang.org/dl/
 .. _git clone: https://www.google.com/search?q=git+clone
 .. _pali repository: https://github.com/siongui/pali
 .. _data repository: https://github.com/siongui/data
