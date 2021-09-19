@@ -7,7 +7,8 @@ LOCALE_DIR=$(PRJDIR)/locale
 ifndef GITHUB_ACTIONS
 	# set environment variables on local machine or GitLab CI
 	export GOROOT=$(realpath $(PRJDIR)/go)
-	export PATH := $(GOROOT)/bin:$(PATH)
+	export GOPATH=$(PRJDIR)/dictionary
+	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 endif
 
 HTML_TEMPLATE_DIR=$(CURDIR)/theme/template/

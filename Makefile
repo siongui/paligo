@@ -1,4 +1,4 @@
-PRJDIR=../paligo/
+PRJDIR=$(CURDIR)
 ifndef GITHUB_ACTIONS
 ifndef GITLAB_CI
 	export GOROOT=$(realpath $(PRJDIR)/go)

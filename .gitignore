@@ -1,7 +1,6 @@
 data/
-bin/
-pkg/
-src/
+dictionary/bin
+dictionary/pkg
 website/
 *.mo
 locale/zh_CN/
