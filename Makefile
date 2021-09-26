@@ -1,9 +1,6 @@
-PRJDIR=$(CURDIR)
-ifndef GITHUB_ACTIONS
-ifndef GITLAB_CI
-	export GOROOT=$(realpath $(PRJDIR)/go)
+ifndef GOROOT
+	export GOROOT=$(realpath ../go)
 	export PATH := $(GOROOT)/bin:$(PATH)
-endif
 endif
 
 modinit:

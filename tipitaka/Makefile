@@ -4,11 +4,15 @@
 GO_VERSION=1.17.1
 PRJDIR=$(CURDIR)/../
 LOCALE_DIR=$(PRJDIR)/locale
-ifndef GITHUB_ACTIONS
-	# set environment variables on local machine or GitLab CI
-	export GOROOT=$(realpath $(PRJDIR)/go)
-	export GOPATH=$(PRJDIR)/dictionary
-	export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
+
+GODIR=../../
+ifdef GITLAB_CI
+export GODIR=$(PRJDIR)
+endif
+ifndef GOROOT
+export GOROOT=$(realpath $(GODIR)/go)
+export GOPATH=$(PRJDIR)/dictionary
+export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 endif
 
 HTML_TEMPLATE_DIR=$(CURDIR)/theme/template/
