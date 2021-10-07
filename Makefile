@@ -9,3 +9,6 @@ modinit:
 modtidy:
 	#go list -m all
 	go mod tidy
+
+libupdate:
+	go get -u github.com/siongui/gopalilib
