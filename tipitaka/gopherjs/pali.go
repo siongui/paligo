@@ -107,5 +107,13 @@ func main() {
 	setting.SetupPaliSetting()
 	SetupHistoryPopstate()
 
-	HideIsLoadingWebsite()
+	Window.AddEventListener("load", func(e Event) {
+		si := Document.GetElementById("site-info")
+		siteurl := si.Dataset().Get("siteurl").String()
+		sitelocale := si.Dataset().Get("locale").String()
+		tipitaka.SetSiteUrl(siteurl)
+		tipitaka.SetCurrentLocale(sitelocale)
+
+		HideIsLoadingWebsite()
+	})
 }
