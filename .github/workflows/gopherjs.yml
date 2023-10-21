@@ -18,7 +18,7 @@ jobs:
         persist-credentials: false
     - uses: actions/setup-go@v2
       with:
-        go-version: '1.17.1'
+        go-version: '1.18.10'
     - name: Install dependencies
       run: |
         cd dictionary/
@@ -47,7 +47,7 @@ jobs:
         persist-credentials: false
     - uses: actions/setup-go@v2
       with:
-        go-version: '1.17.1'
+        go-version: '1.18.10'
     - name: Install dependencies
       run: |
         cd dictionary/
@@ -74,7 +74,7 @@ jobs:
         persist-credentials: false
     - uses: actions/setup-go@v2
       with:
-        go-version: '1.17.1'
+        go-version: '1.18.10'
     - name: Install dependencies
       run: |
         cd dictionary/
@@ -102,7 +102,7 @@ jobs:
         persist-credentials: false
     - uses: actions/setup-go@v2
       with:
-        go-version: '1.17.1'
+        go-version: '1.18.10'
     - name: Install dependencies
       run: |
         cd tipitaka/

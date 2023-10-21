@@ -29,8 +29,8 @@ language.
 
 Development Environment:
 
-  - `Ubuntu 20.04`_
-  - `Go 1.17.1`_
+  - `Ubuntu 22.04`_
+  - `Go 1.18.10`_
   - GopherJS_
 
 Re-implementation of `Pāli Dictionary`_ is finished.
@@ -58,7 +58,7 @@ References
 .. _Pāli Dictionary: https://dictionary.sutta.org/
 .. _Pāli Tipiṭaka: https://tipitaka.sutta.org/
 .. _Go: https://golang.org/
-.. _Ubuntu 20.04: https://releases.ubuntu.com/20.04/
-.. _Go 1.17.1: https://golang.org/dl/
+.. _Ubuntu 22.04: https://releases.ubuntu.com/22.04/
+.. _Go 1.18.10: https://golang.org/dl/
 .. _GopherJS: http://www.gopherjs.org/
 .. _UNLICENSE: https://unlicense.org/

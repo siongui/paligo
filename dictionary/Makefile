@@ -1,7 +1,6 @@
 # cannot use relative path in GOROOT, otherwise 6g not found. For example,
 #   export GOROOT=../go  (=> 6g not found)
 # it is also not allowed to use relative path in GOPATH
-GO_VERSION=1.17.1
 PRJDIR=$(CURDIR)/../
 LOCALE_DIR=$(PRJDIR)/locale
 
@@ -265,8 +264,7 @@ po2mo:
 # Install Library #
 ###################
 install_gopherjs:
-	@echo "\033[92mInstalling GopherJS ...\033[0m"
-	go get -u github.com/gopherjs/gopherjs
+	@cd ..; make install_gopherjs
 ##########################
 # End of Install Library #
 ##########################
@@ -296,9 +294,4 @@ update_ubuntu:
 	@sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
 
 download_go:
-	@echo "\033[92mDownloading and Installing Go ...\033[0m"
-	@#wget https://storage.googleapis.com/golang/go$(GO_VERSION).linux-amd64.tar.gz
-	@wget https://golang.org/dl/go$(GO_VERSION).linux-amd64.tar.gz
-	@tar -xvzf go$(GO_VERSION).linux-amd64.tar.gz
-	@rm go$(GO_VERSION).linux-amd64.tar.gz
-	@mv go/ $(PRJDIR)
+	@cd ..; make download_go

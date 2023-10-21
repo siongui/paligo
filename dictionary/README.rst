@@ -28,8 +28,8 @@ language.
 
 Development Environment:
 
-  - `Ubuntu 20.04`_
-  - `Go 1.17.1`_
+  - `Ubuntu 22.04`_
+  - `Go 1.18.10`_
   - GopherJS_
 
 This directory contains implementation of `Pāli Dictionary`_.
@@ -272,8 +272,8 @@ References
 .. _Pāli Dictionary: https://dictionary.sutta.org/
 .. _Pāli Tipiṭaka: https://tipitaka.sutta.org/
 .. _Go: https://golang.org/
-.. _Ubuntu 20.04: https://releases.ubuntu.com/20.04/
-.. _Go 1.17.1: https://golang.org/dl/
+.. _Ubuntu 22.04: https://releases.ubuntu.com/22.04/
+.. _Go 1.18.10: https://golang.org/dl/
 .. _git clone: https://www.google.com/search?q=git+clone
 .. _pali repository: https://github.com/siongui/pali
 .. _data repository: https://github.com/siongui/data
