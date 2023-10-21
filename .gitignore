@@ -1,8 +1,7 @@
 data/
-dictionary/bin
-dictionary/pkg
 website/
 *.mo
 locale/zh_CN/
 go/
 *.pot
+go*linux-amd64.tar.gz

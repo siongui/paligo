@@ -10,8 +10,7 @@ export GODIR=$(PRJDIR)
 endif
 ifndef GOROOT
 export GOROOT=$(realpath $(GODIR)/go)
-export GOPATH=$(PRJDIR)/dictionary
-export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
+export PATH := $(GOROOT)/bin:$(PATH)
 endif
 
 HTML_TEMPLATE_DIR=$(CURDIR)/theme/template/

@@ -21,6 +21,6 @@ install_gopherjs:
 
 download_go:
 	@echo "\033[92mDownloading and Installing Go ...\033[0m"
-	@wget https://dl.google.com/go/go$(GO_VERSION).linux-amd64.tar.gz
+	@[ -f go$(GO_VERSION).linux-amd64.tar.gz ] || wget https://dl.google.com/go/go$(GO_VERSION).linux-amd64.tar.gz
 	@tar -xvzf go$(GO_VERSION).linux-amd64.tar.gz
-	@rm go$(GO_VERSION).linux-amd64.tar.gz
+	@#rm go$(GO_VERSION).linux-amd64.tar.gz
