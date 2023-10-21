@@ -5,9 +5,11 @@ endif
 
 GO_VERSION=1.18.10
 
+# mv go/ out of project dir and set GOROOT accordingly before running modinit and modtidy
 modinit:
 	go mod init github.com/siongui/paligo
 
+# mv go/ out of project dir and set GOROOT accordingly before running modinit and modtidy
 modtidy:
 	#go list -m all
 	go mod tidy
