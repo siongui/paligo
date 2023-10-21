@@ -3,8 +3,8 @@ github.com/andybalholm/cascadia v1.1.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9Pq
 github.com/chai2010/gettext-go v1.0.2 h1:1Lwwip6Q2QGsAdl/ZKPCwTe9fe0CjlUbqj5bFNSjIRk=
 github.com/chai2010/gettext-go v1.0.2/go.mod h1:y+wnP2cHYaVj19NZhYKAwEMH2CI1gNHeQQ+5AjwawxA=
 github.com/gopherjs/gopherjs v0.0.0-20200217142428-fce0ec30dd00/go.mod h1:wJfORRmW1u3UXTncJ5qlYoELFm8eSnnEO6hX4iZ3EWY=
-github.com/gopherjs/gopherjs v0.0.0-20210923143318-357ed63a84fb h1:K013k960s/L46vhogbwgk7A9fY42mn+X/7D9w5E+1uE=
-github.com/gopherjs/gopherjs v0.0.0-20210923143318-357ed63a84fb/go.mod h1:cz9oNYuRUWGdHmLF2IodMLkAhcPtXeULvcBNagUrxTI=
+github.com/gopherjs/gopherjs v1.18.0-beta3 h1:ucyHuthiLpjXxf1dseOTYk0Bd/kTCGSR1s/7Q0HEVkk=
+github.com/gopherjs/gopherjs v1.18.0-beta3/go.mod h1:mk8YaMAcqCnZCNHxJVG+k/qPiiqhBTM29Y7E4+gj4+A=
 github.com/siongui/go-succinct-data-structure-trie v0.0.0-20210926213055-1e96df0b792f h1:TywJ0HXb+GH70Uy9A67ls9Y1vGPxUrGLz/6TGvUGa+Y=
 github.com/siongui/go-succinct-data-structure-trie v0.0.0-20210926213055-1e96df0b792f/go.mod h1:wvL7jTvTEq+YDI1Csf/nEUMoidzZhtmYaLCbQl2rQ6Q=
 github.com/siongui/godom v0.0.0-20200920152407-31a6de96fdf6 h1:3vCspfEcxvAKO/T8QAKYMwYkd4YqIk63ZD5zGB5bNE8=
@@ -13,8 +13,8 @@ github.com/siongui/goef v0.0.0-20210610184109-d3b60554c5f3 h1:hoKS6myhAeCzgUl+2T
 github.com/siongui/goef v0.0.0-20210610184109-d3b60554c5f3/go.mod h1:zxy4/ELPSAYbcUW4AVpdeuxG/UoiD3K796jS0I71Xn4=
 github.com/siongui/gojianfan v0.0.0-20210926212422-2f175ac615de h1:1/P9CcR8iENN9ybbSRWohRd3rsPp9tEWlTS/7ygvjHE=
 github.com/siongui/gojianfan v0.0.0-20210926212422-2f175ac615de/go.mod h1:TRwEEJlrSIv+jc66k48huOZ2aKVBPL8V29ZcsjUIH70=
-github.com/siongui/gopalilib v0.0.0-20230325141852-d4accf4366e4 h1:SzKPQT5OgYBNR4gsHrsFCM0PJ8Jkkb7AOdXhwklqdaQ=
-github.com/siongui/gopalilib v0.0.0-20230325141852-d4accf4366e4/go.mod h1:dn7CWkxZy4E8Rb3FuzRS2HDKe/ebs5xLCCbtSSo9GLQ=
+github.com/siongui/gopalilib v0.0.0-20231021175325-3722d5bba829 h1:8sIJqpVRNvWef0NU9RwGpvSxfkH76hR6zKJu5yvgeVs=
+github.com/siongui/gopalilib v0.0.0-20231021175325-3722d5bba829/go.mod h1:Dh9PXuONFb8Io/Jr0zv1ZiY4yVeTOkr3O+iH7DZ/2Cc=
 github.com/siongui/gopaliwordvfs v0.0.0-20200117014540-dd746a8f51e6 h1:KwpZl6TSJhpIwOYgOZx3+DXAPL0zhxb18SGrsxq6YfI=
 github.com/siongui/gopaliwordvfs v0.0.0-20200117014540-dd746a8f51e6/go.mod h1:dPnvL50tlsd2KFyFJ8Ahj2lrQB1eBtpKXTgwSCS9WFU=
 github.com/siongui/gopherjs-input-suggest v0.0.0-20200723202201-f43790c91d84 h1:d63UP3JdACS/bjZNx0E6LrVSdqmYKamtascBYenFrrE=
@@ -28,9 +28,9 @@ github.com/winhtaikaung/Rabbit-Go v0.0.0-20190314045429-213403fa9212/go.mod h1:E
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/net v0.0.0-20180218175443-cbe0f9307d01/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
 golang.org/x/net v0.0.0-20200202094626-16171245cfb2/go.mod h1:z5CRVTTTmAJ677TzLLGU+0bjPO0LkuOLi4/5GtJWs/s=
-golang.org/x/net v0.7.0 h1:rJrUqqhjsgNp7KqAIc25s9pZnjU7TUcSY7HcVZjdn1g=
-golang.org/x/net v0.7.0/go.mod h1:2Tu9+aMcznHK/AK1HMvgo6xiTLG5rD5rZLDS+rp2Bjs=
+golang.org/x/net v0.17.0 h1:pVaXccu2ozPjCXewfr1S7xza/zcXTity9cCdXQYSjIM=
+golang.org/x/net v0.17.0/go.mod h1:NxSsAGuq816PNPmqtQdLE42eU2Fs7NoRIZrHJAlaCOE=
 golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
-golang.org/x/text v0.7.0 h1:4BRB4x83lYWy72KwLD/qYDuTu7q9PjSagHvijDw7cLo=
-golang.org/x/text v0.7.0/go.mod h1:mrYo+phRRbMaCq/xk9113O4dZlRixOauAjOtrjsXDZ8=
+golang.org/x/text v0.13.0 h1:ablQoSUd0tRdKxZewP80B+BaqeKJuVhuRxj/dkrun3k=
+golang.org/x/text v0.13.0/go.mod h1:TvPlkZtksWOMsz7fbANvkp4WM8x/WCo/om8BMLbz+aE=
