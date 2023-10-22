@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/siongui/godom v0.0.0-20200920152407-31a6de96fdf6
 	github.com/siongui/goef v0.0.0-20210610184109-d3b60554c5f3
-	github.com/siongui/gopalilib v0.0.0-20231021175325-3722d5bba829
+	github.com/siongui/gopalilib v0.0.0-20231022150405-7081cfddcf47
 	github.com/siongui/gopaliwordvfs v0.0.0-20200117014540-dd746a8f51e6
 	github.com/siongui/gopherjs-input-suggest v0.0.0-20200723202201-f43790c91d84
 	github.com/siongui/gtmpl v0.0.0-20200716010746-db0e14d247f9
