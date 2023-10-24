@@ -19,6 +19,8 @@ WEBSITE_DIR=$(CURDIR)/website
 TPK_BUILD_OPTIONS=-websiteDir=$(WEBSITE_DIR) -htmlTemplateDir=$(HTML_TEMPLATE_DIR) -localeDir=$(LOCALE_DIR)
 TIPITAKA_CONF_DIR=$(CURDIR)/config/
 TIPITAKA_XML_DIR=$(WEBSITE_DIR)/tpkxml/
+SUPPORTED_LOCALES="en_US,zh_TW,vi_VN,fr_FR"
+SYMLINK_OPTIONS=-websiteDir=$(WEBSITE_DIR) -supportedLocales=$(SUPPORTED_LOCALES)
 
 DATA_REPO_DIR=$(PRJDIR)/data
 
@@ -30,7 +32,7 @@ devserver: make-local
 
 make-common: dir extra js css
 make-local: fmt make-common html
-make-sutta: rmsite make-common htmlsutta cname-sutta
+make-sutta: rmsite make-common htmlsutta symlink cname-sutta
 rmsite:
 	@echo "\033[92mRemove $(WEBSITE_DIR)\033[0m"
 	rm -rf $(WEBSITE_DIR)
@@ -70,6 +72,10 @@ htmlsutta:
 html:
 	@echo "\033[92mGenerating HTML ...\033[0m"
 	@go run htmlspa.go -siteconf="$(TIPITAKA_CONF_DIR)/empty-siteurl.json" $(TPK_BUILD_OPTIONS)
+
+symlink:
+	@echo "\033[92mMaking symbolic link for static website ...\033[0m"
+	@go run symlink.go $(SYMLINK_OPTIONS)
 
 dir:
 	@echo "\033[92mCreate website directory if not exists ...\033[0m"
