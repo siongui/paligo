@@ -113,6 +113,7 @@ func main() {
 		sitelocale := si.Dataset().Get("locale").String()
 		tipitaka.SetSiteUrl(siteurl)
 		tipitaka.SetCurrentLocale(sitelocale)
+		checkIfPaliTextPage()
 
 		HideIsLoadingWebsite()
 	})
