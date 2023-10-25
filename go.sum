@@ -13,8 +13,8 @@ github.com/siongui/goef v0.0.0-20210610184109-d3b60554c5f3 h1:hoKS6myhAeCzgUl+2T
 github.com/siongui/goef v0.0.0-20210610184109-d3b60554c5f3/go.mod h1:zxy4/ELPSAYbcUW4AVpdeuxG/UoiD3K796jS0I71Xn4=
 github.com/siongui/gojianfan v0.0.0-20210926212422-2f175ac615de h1:1/P9CcR8iENN9ybbSRWohRd3rsPp9tEWlTS/7ygvjHE=
 github.com/siongui/gojianfan v0.0.0-20210926212422-2f175ac615de/go.mod h1:TRwEEJlrSIv+jc66k48huOZ2aKVBPL8V29ZcsjUIH70=
-github.com/siongui/gopalilib v0.0.0-20231025140931-783375eb10ef h1:cwaAQyCmCYJwR3BbNOlHbKfUju2NiXQPD67uvtQSEA0=
-github.com/siongui/gopalilib v0.0.0-20231025140931-783375eb10ef/go.mod h1:Dh9PXuONFb8Io/Jr0zv1ZiY4yVeTOkr3O+iH7DZ/2Cc=
+github.com/siongui/gopalilib v0.0.0-20231025151301-5a1af90f15b4 h1:aCYb1DzBoTkgUpIhjIc6SS8lv1emVl/WIGFZjLFYrt8=
+github.com/siongui/gopalilib v0.0.0-20231025151301-5a1af90f15b4/go.mod h1:Dh9PXuONFb8Io/Jr0zv1ZiY4yVeTOkr3O+iH7DZ/2Cc=
 github.com/siongui/gopaliwordvfs v0.0.0-20200117014540-dd746a8f51e6 h1:KwpZl6TSJhpIwOYgOZx3+DXAPL0zhxb18SGrsxq6YfI=
 github.com/siongui/gopaliwordvfs v0.0.0-20200117014540-dd746a8f51e6/go.mod h1:dPnvL50tlsd2KFyFJ8Ahj2lrQB1eBtpKXTgwSCS9WFU=
 github.com/siongui/gopherjs-input-suggest v0.0.0-20200723202201-f43790c91d84 h1:d63UP3JdACS/bjZNx0E6LrVSdqmYKamtascBYenFrrE=

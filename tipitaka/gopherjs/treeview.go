@@ -32,4 +32,7 @@ func checkIfPaliTextPage() {
 
 	//println(span.InnerHTML())
 	openTreeview(span)
+
+	action := span.Dataset().Get("action").String()
+	SetXmlMainview(action)
 }
